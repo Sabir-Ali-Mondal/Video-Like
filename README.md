@@ -36,9 +36,11 @@ The built-in AI works like your personal video director. It writes the code and 
 *   **Project Save/Load:** Download your project as a .json file or upload one to continue your work later.
 *   **Subtitles:** Turn on YouTube-style captions that match the voice narration perfectly.
 
+### SCENES
+
 **Rendering Attachment Rule:** Any canvas, WebGL, SVG, or generative renderer must be explicitly attached to its scene container and initialized only after the container’s size is resolved, so it always respects layout and overflow boundaries.
 
-**5. SCENE LIBRARY & INSPIRATION:**
+**SCENE LIBRARY & INSPIRATION:**
 *Usage: Documentary, explainer, education, cinematic narration, AI video generation.*
 *Core Actions: appear, highlight, point, zoom, pan, scroll, adjust, animate, exit.*
 
