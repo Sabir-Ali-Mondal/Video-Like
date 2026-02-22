@@ -1,0 +1,553 @@
+<div id="VisualContainer-notepad" class="visual-template">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        #VisualContainer-notepad {
+            font-family: 'Arial', sans-serif;
+            background-color: #131c11;
+            color: #5921ff;
+            padding: 1.5rem;
+            border-radius: 0;
+        }
+
+        #VisualContainer-notepad h2 {
+            color: black;
+            font-family: Arial;
+            font-weight: bold;
+            text-shadow: 2px 1px #ff0000;
+        }
+
+        .notepad-toolbar {
+            background-color: #08525c;
+            padding: 10px;
+            border-radius: 0;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .notepad-toolbar button {
+            margin-right: 5px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 0;
+        }
+
+        .notepad-toolbar button:hover {
+            background-color: #1976d2;
+        }
+
+        #notepad-notepad {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #90caf9;
+            background-color: white;
+            border-radius: 0;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            color: #000;
+            /* Ensure text is readable */
+        }
+
+        #notepad-lineNumbers {
+            height: 400px;
+            /* Adjusted to match notepad height */
+            overflow-y: hidden;
+            /* Prevent independent scrolling */
+            padding: 15px 10px 15px 0;
+            border-right: 1px solid #90caf9;
+            min-width: 40px;
+            text-align: right;
+            user-select: none;
+            color: #1ce302;
+            background-color: #212529;
+            /* Dark background for line numbers */
+        }
+
+        .notepad-highlight {
+            background-color: yellow;
+        }
+
+        #notepad-highlightOptions {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        #notepad-highlightOptions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #notepad-highlightOptions li {
+            cursor: pointer;
+            padding: 3px;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            color: #000;
+            /* Ensure text is readable */
+        }
+
+        #notepad-highlightOptions li:hover {
+            background-color: #f0f0f0;
+        }
+
+        #notepad-highlightOptions li span.notepad-color-swatch {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+
+        #notepad-savedNotesList {
+            list-style-type: none;
+            /* Removed decimal to avoid clash with accordion */
+            padding-left: 0;
+        }
+
+        .notepad-note-item {
+            margin-bottom: 10px;
+        }
+
+        .notepad-note-item .accordion-button {
+            background-color: #e0f7fa;
+            color: #000;
+        }
+
+        .notepad-note-item .accordion-body {
+            background-color: #f1fcff;
+            color: #000;
+        }
+
+        .notepad-note-title {
+            font-weight: bold;
+        }
+
+        .notepad-note-content {
+            word-break: break-word;
+        }
+
+        .notepad-note-actions {
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .notepad-note-actions button {
+            margin-left: 5px;
+            border-radius: 5px;
+        }
+
+        #notepad-clearAllButton {
+            margin-left: 10px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        #notepad-clearAllButton:hover {
+            background-color: #c82333;
+        }
+
+        /* Modal text color fix */
+        #VisualContainer-notepad .modal-content {
+            color: #000;
+        }
+    </style>
+
+    <!-- Toolbar -->
+    <div class="btn-toolbar mb-2 container notepad-toolbar" role="toolbar">
+        <div class="btn-group row me-2 w-100">
+            <div class="col-12 col-md-auto">
+                <button class="btn m-1" onclick="notepad_formatText('bold')"><i class="bi bi-type-bold"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('italic')"><i class="bi bi-type-italic"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('underline')"><i class="bi bi-type-underline"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('strikeThrough')"><i class="bi bi-type-strikethrough"></i></button>
+                <button class="btn m-1" onclick="notepad_createTaskListItem()"><i class="bi bi-check2-square"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('justifyLeft')"><i class="bi bi-text-left"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('justifyCenter')"><i class="bi bi-text-center"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('justifyRight')"><i class="bi bi-text-right"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('insertOrderedList')"><i class="bi bi-list-ol"></i></button>
+                <button class="btn m-1" onclick="notepad_formatText('insertUnorderedList')"><i class="bi bi-list-ul"></i></button>
+                <button class="btn m-1" onclick="notepad_changeFontSize('decrease')"><i class="bi bi-caret-down-fill"></i></button>
+                <button class="btn m-1" onclick="notepad_changeFontSize('increase')"><i class="bi bi-caret-up-fill"></i></button>
+                <button class="btn m-1" onclick="notepad_undo()"><i class="bi bi-arrow-counterclockwise"></i></button>
+                <button class="btn m-1" onclick="notepad_redo()"><i class="bi bi-arrow-clockwise"></i></button>
+                <button class="btn m-1" onclick="document.getElementById('notepad-imageInput').click()"><i class="bi bi-image"></i></button>
+                <input type="file" id="notepad-imageInput" accept="image/*" onchange="notepad_insertLocalImage()" style="display:none;">
+                <button class="btn m-1" onclick="notepad_clearNotepad()">Clear</button>
+                <button class="btn m-1" onclick="notepad_pastePlainText()">Paste</button>
+            </div>
+            <div class="col-12 col-md-auto d-flex align-items-center mt-2 mt-md-0">
+                <input class="m-1" type="color" id="notepad-textColor" value="#000000" onchange="notepad_changeTextColor(this.value)">
+                <select class="form-select m-1" id="notepad-fontSelect" onchange="notepad_changeFont(this.value)" style="width: auto;">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Helvetica">Helvetica</option>
+                </select>
+                <div style="position: relative;">
+                    <button class="btn m-1" id="notepad-toggleHighlight" onclick="notepad_toggleHighlightOptions()">Highlight</button>
+                    <div id="notepad-highlightOptions">
+                        <ul>
+                            <li class="text-danger" onclick="notepad_closeHighlightOptions()"><span><i class="bi bi-x-circle"></i></span> Close</li>
+                            <li onclick="notepad_setHighlightColor('transparent')"><span class="notepad-color-swatch" style="background-color: transparent;"></span>None</li>
+                            <li onclick="notepad_setHighlightColor('yellow')"><span class="notepad-color-swatch" style="background-color: yellow;"></span>Yellow</li>
+                            <li onclick="notepad_setHighlightColor('lightgreen')"><span class="notepad-color-swatch" style="background-color: lightgreen;"></span>Green</li>
+                            <li onclick="notepad_setHighlightColor('orange')"><span class="notepad-color-swatch" style="background-color: orange;"></span>Orange</li>
+                            <li onclick="notepad_setHighlightColor('pink')"><span class="notepad-color-swatch" style="background-color: pink;"></span>Pink</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span id="notepad-charCount" class="badge bg-secondary m-1">Characters: 0</span>
+    <button class="btn bg-warning p-1 text-white m-1" onclick="notepad_exportAsHTML()"><i class="bi bi-file-earmark-code"></i> Export HTML</button>
+    <button class="btn bg-success p-1 text-white m-1" id="notepad-saveOrUpdateButton" onclick="notepad_saveNote()"><i class="bi bi-save"></i> Save</button>
+    <div class="d-flex mb-2 mt-2">
+        <div id="notepad-lineNumbers"></div>
+        <div id="notepad-notepad" contenteditable="true" class="flex-grow-1"></div>
+    </div>
+    <hr style="border-color: #5921ff;">
+    <div id="notepad-noteSaver">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px;margin-bottom:20px;">
+            <h5 style="margin: 0;">Saved Notes</h5>
+            <button id="notepad-clearAllButton" class="btn btn-danger mb-2 p-1" onclick="notepad_clearAllNotes()">Clear All Notes</button>
+        </div>
+        <ul id="notepad-savedNotesList" class="accordion"></ul>
+    </div>
+    <p class="text-secondary mt-3">Developed by <strong>S. A. M.</strong></p>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="notepad-confirmationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Action</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="notepad-confirmationModalBody">Are you sure?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="notepad-confirmModalButton">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const container = document.getElementById('VisualContainer-notepad');
+            if (container.getAttribute('data-initialized')) return;
+            container.setAttribute('data-initialized', 'true');
+
+            let undoStack = [];
+            let redoStack = [];
+            let savedNotes = [];
+            let highlightEnabled = false;
+            let highlightColor = 'yellow';
+            let editingNoteIndex = -1;
+            let confirmationModal;
+
+            const notepadEl = container.querySelector('#notepad-notepad');
+            const lineNumbersEl = container.querySelector('#notepad-lineNumbers');
+            const charCountEl = container.querySelector('#notepad-charCount');
+            const saveOrUpdateButtonEl = container.querySelector('#notepad-saveOrUpdateButton');
+            const savedNotesListEl = container.querySelector('#notepad-savedNotesList');
+            const imageInputEl = container.querySelector('#notepad-imageInput');
+            const highlightOptionsEl = container.querySelector('#notepad-highlightOptions');
+            const toggleHighlightEl = container.querySelector('#notepad-toggleHighlight');
+            const fontSelectEl = container.querySelector('#notepad-fontSelect');
+            const textColorEl = container.querySelector('#notepad-textColor');
+
+            const db = {
+                instance: null,
+                init(callback) {
+                    const request = indexedDB.open('NotepadDB', 1);
+                    request.onupgradeneeded = e => {
+                        const dbInstance = e.target.result;
+                        if (!dbInstance.objectStoreNames.contains('notes')) {
+                            dbInstance.createObjectStore('notes', {
+                                keyPath: 'id',
+                                autoIncrement: true
+                            }).createIndex('timestamp', 'timestamp', {
+                                unique: false
+                            });
+                        }
+                    };
+                    request.onsuccess = e => {
+                        this.instance = e.target.result;
+                        if (callback) callback();
+                    };
+                    request.onerror = e => console.error('DB error:', e.target.errorCode);
+                },
+                _getStore(mode) {
+                    return this.instance.transaction('notes', mode).objectStore('notes');
+                },
+                add(note) {
+                    return new Promise((res, rej) => {
+                        const req = this._getStore('readwrite').add(note);
+                        req.onsuccess = () => res(req.result);
+                        req.onerror = () => rej(req.error);
+                    });
+                },
+                getAll() {
+                    return new Promise((res, rej) => {
+                        const req = this._getStore('readonly').getAll();
+                        req.onsuccess = () => res(req.result);
+                        req.onerror = () => rej(req.error);
+                    });
+                },
+                update(note) {
+                    return new Promise((res, rej) => {
+                        const req = this._getStore('readwrite').put(note);
+                        req.onsuccess = () => res(req.result);
+                        req.onerror = () => rej(req.error);
+                    });
+                },
+                delete(id) {
+                    return new Promise((res, rej) => {
+                        const req = this._getStore('readwrite').delete(id);
+                        req.onsuccess = () => res();
+                        req.onerror = () => rej(req.error);
+                    });
+                },
+                clear() {
+                    return new Promise((res, rej) => {
+                        const req = this._getStore('readwrite').clear();
+                        req.onsuccess = () => res();
+                        req.onerror = () => rej(req.error);
+                    });
+                }
+            };
+
+            window.notepad_showConfirmationModal = (message, onConfirm) => {
+                container.querySelector('#notepad-confirmationModalBody').textContent = message;
+                const confirmButton = container.querySelector('#notepad-confirmModalButton');
+                const newConfirmButton = confirmButton.cloneNode(true);
+                confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
+                newConfirmButton.addEventListener('click', () => {
+                    onConfirm();
+                    confirmationModal.hide();
+                }, {
+                    once: true
+                });
+                confirmationModal.show();
+            };
+
+            window.notepad_formatText = (cmd) => {
+                document.execCommand(cmd, false, null);
+                notepad_saveUndoState();
+            };
+            window.notepad_insertLocalImage = () => {
+                const file = imageInputEl.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100%';
+                    notepadEl.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+                notepad_saveUndoState();
+            };
+            window.notepad_changeFont = (font) => {
+                notepadEl.style.fontFamily = font;
+                notepad_saveUndoState();
+            };
+            window.notepad_changeFontSize = (action) => {
+                let size = parseInt(window.getComputedStyle(notepadEl).fontSize) || 16;
+                if (action === 'increase') size += 2;
+                else if (action === 'decrease' && size > 8) size -= 2;
+                notepadEl.style.fontSize = size + 'px';
+                notepad_saveUndoState();
+            };
+            window.notepad_changeTextColor = (color) => {
+                document.execCommand('foreColor', false, color);
+                notepad_saveUndoState();
+            };
+            const notepad_updateCharacterCount = () => charCountEl.innerText = `Characters: ${notepadEl.innerText.length}`;
+            window.notepad_createTaskListItem = () => {
+                document.execCommand('insertHTML', false, '<div><input type="checkbox"> Task</div>');
+                notepad_saveUndoState();
+            };
+            window.notepad_undo = () => {
+                if (undoStack.length > 1) {
+                    redoStack.push(undoStack.pop());
+                    notepadEl.innerHTML = undoStack[undoStack.length - 1];
+                    notepad_updateCharacterCount();
+                    notepad_displayLineNumbers();
+                }
+            };
+            window.notepad_redo = () => {
+                if (redoStack.length > 0) {
+                    undoStack.push(redoStack.pop());
+                    notepadEl.innerHTML = undoStack[undoStack.length - 1];
+                    notepad_updateCharacterCount();
+                    notepad_displayLineNumbers();
+                }
+            };
+            const notepad_saveUndoState = () => {
+                undoStack.push(notepadEl.innerHTML);
+                redoStack = [];
+            };
+            const notepad_displayLineNumbers = () => {
+                const lineCount = notepadEl.innerHTML.split(/<div>|<\/div>|<br>/).length;
+                let linesHtml = '';
+                for (let i = 1; i <= lineCount; i++) linesHtml += `<div>${i}</div>`;
+                lineNumbersEl.innerHTML = linesHtml;
+            };
+            window.notepad_exportAsHTML = () => {
+                const blob = new Blob([notepadEl.innerHTML], {
+                    type: 'text/html'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'note.html';
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+            window.notepad_pastePlainText = () => navigator.clipboard.readText().then(text => {
+                document.execCommand('insertText', false, text);
+                notepad_saveUndoState();
+                notepad_updateCharacterCount();
+            });
+            window.notepad_toggleHighlightOptions = () => {
+                highlightOptionsEl.style.display = highlightOptionsEl.style.display === 'block' ? 'none' : 'block';
+            };
+            window.notepad_setHighlightColor = (color) => {
+                highlightColor = color;
+                highlightOptionsEl.style.display = 'none';
+            };
+            const notepad_highlightIfSelected = () => {
+                if (highlightColor !== 'transparent' && window.getSelection().toString()) {
+                    document.execCommand('backColor', false, highlightColor);
+                    notepad_saveUndoState();
+                }
+            };
+            window.notepad_closeHighlightOptions = () => {
+                highlightOptionsEl.style.display = 'none';
+            };
+            window.notepad_clearNotepad = () => notepad_showConfirmationModal('Are you sure you want to clear the notepad?', () => {
+                notepadEl.innerHTML = '';
+                undoStack = [];
+                redoStack = [];
+                notepad_updateCharacterCount();
+                notepad_displayLineNumbers();
+            });
+            const notepad_generateTitle = (content) => {
+                const text = content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+                let title = text.split(' ').slice(0, 5).join(' ');
+                if (content.includes('<img')) title += ' (img)';
+                return title || 'Untitled Note';
+            };
+
+            window.notepad_saveNote = () => {
+                const content = notepadEl.innerHTML;
+                if (!content.trim()) return;
+                const note = {
+                    title: notepad_generateTitle(content),
+                    content,
+                    timestamp: Date.now()
+                };
+                if (editingNoteIndex !== -1) {
+                    note.id = savedNotes[editingNoteIndex].id;
+                    db.update(note).then(() => notepad_displaySavedNotes());
+                } else {
+                    db.add(note).then(() => notepad_displaySavedNotes());
+                }
+                editingNoteIndex = -1;
+                saveOrUpdateButtonEl.innerHTML = '<i class="bi bi-save"></i> Save';
+                notepadEl.innerHTML = '';
+                notepad_updateCharacterCount();
+                notepad_displayLineNumbers();
+            };
+
+            const notepad_displaySavedNotes = async () => {
+                savedNotesListEl.innerHTML = '';
+                savedNotes = await db.getAll();
+                savedNotes.sort((a, b) => b.timestamp - a.timestamp);
+                if (savedNotes.length === 0) {
+                    savedNotesListEl.innerHTML = '<p class="text-secondary text-center">No saved notes yet.</p>';
+                    return;
+                }
+                savedNotes.forEach((note, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'notepad-note-item accordion-item';
+                    li.innerHTML = `
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#notepad-collapse${index}">
+                            <span class="notepad-note-title">${note.title}</span>
+                        </button>
+                    </h2>
+                    <div id="notepad-collapse${index}" class="accordion-collapse collapse" data-bs-parent="#notepad-savedNotesList">
+                        <div class="accordion-body">
+                            <div class="notepad-note-content">${note.content}</div>
+                            <div class="notepad-note-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="notepad_editNote(${index})">Edit</button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="notepad_deleteNote(${index})">Delete</button>
+                                <button class="btn btn-sm btn-outline-success" onclick="notepad_exportNoteAsHTML(${index})">Export</button>
+                            </div>
+                        </div>
+                    </div>`;
+                    savedNotesListEl.appendChild(li);
+                });
+            };
+
+            window.notepad_editNote = (index) => {
+                const note = savedNotes[index];
+                notepadEl.innerHTML = note.content;
+                editingNoteIndex = index;
+                saveOrUpdateButtonEl.innerHTML = '<i class="bi bi-save"></i> Update';
+                notepadEl.focus();
+                window.scrollTo(0, 0);
+            };
+            window.notepad_deleteNote = (index) => {
+                const note = savedNotes[index];
+                notepad_showConfirmationModal(`Delete "${note.title}"?`, () => db.delete(note.id).then(notepad_displaySavedNotes));
+            };
+            window.notepad_clearAllNotes = () => notepad_showConfirmationModal('Clear ALL saved notes?', () => db.clear().then(notepad_displaySavedNotes));
+            window.notepad_exportNoteAsHTML = (index) => {
+                const note = savedNotes[index];
+                const blob = new Blob([note.content], {
+                    type: 'text/html'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${note.title.replace(/[^a-zA-Z0-9]/g, '_')}.html`;
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+
+            db.init(() => {
+                notepad_displaySavedNotes();
+            });
+            confirmationModal = new bootstrap.Modal(container.querySelector('#notepad-confirmationModal'));
+            notepad_updateCharacterCount();
+            notepad_displayLineNumbers();
+            notepad_saveUndoState();
+
+            notepadEl.addEventListener('input', () => {
+                notepad_saveUndoState();
+                notepad_displayLineNumbers();
+                notepad_updateCharacterCount();
+            });
+            notepadEl.addEventListener('scroll', () => {
+                lineNumbersEl.scrollTop = notepadEl.scrollTop;
+            });
+            notepadEl.addEventListener('mouseup', notepad_highlightIfSelected);
+        })();
+    </script>
+</div>
