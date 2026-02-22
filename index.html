@@ -401,8 +401,8 @@
                     <div class="flex items-center gap-4">
                         <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-400"><i class="bi bi-music-note"></i></div>
                         <div>
-                            <div class="font-bold text-sm">Cinematic Ambient</div>
-                            <div class="text-[10px] text-gray-400">Deep / Tech Focus</div>
+                            <div class="font-bold text-sm">Study Focus 1</div>
+                            <div class="text-[10px] text-gray-400">light</div>
                         </div>
                     </div>
                     <button onclick="Engine.audio.setTrack('https://res.cloudinary.com/dmttn34te/video/upload/v1771665377/music_no_copyright_gnhpmi.mp3')" class="px-4 py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-primary transition"><i class="bi bi-play-circle-fill mr-1"></i> LOAD</button>
@@ -412,8 +412,8 @@
                     <div class="flex items-center gap-4">
                         <div class="w-10 h-10 bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400"><i class="bi bi-music-note"></i></div>
                         <div>
-                            <div class="font-bold text-sm">Study Lo-Fi 1</div>
-                            <div class="text-[10px] text-gray-400">Chill / Ambient</div>
+                            <div class="font-bold text-sm">Cinematic 1</div>
+                            <div class="text-[10px] text-gray-400">Chill</div>
                         </div>
                     </div>
                     <button onclick="Engine.audio.setTrack('https://res.cloudinary.com/dmttn34te/video/upload/v1763065409/study-110111_at7lye.mp3')" class="px-4 py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-primary transition"><i class="bi bi-play-circle-fill mr-1"></i> LOAD</button>
@@ -424,7 +424,7 @@
                         <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400"><i class="bi bi-music-note"></i></div>
                         <div>
                             <div class="font-bold text-sm">Study Focus 2</div>
-                            <div class="text-[10px] text-gray-400">Piano / Soft</div>
+                            <div class="text-[10px] text-gray-400">Soft</div>
                         </div>
                     </div>
                     <button onclick="Engine.audio.setTrack('https://res.cloudinary.com/dmttn34te/video/upload/v1763064765/study-music-181044_jbuwpq.mp3')" class="px-4 py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-primary transition"><i class="bi bi-play-circle-fill mr-1"></i> LOAD</button>
@@ -458,8 +458,8 @@
                 <!-- Global Speed/Pitch -->
                 <div class="space-y-6 pt-2">
                     <div>
-                        <div class="flex justify-between mb-2"><label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">SPEED</label><span id="speed-val" class="text-primary text-xs font-mono">1.0x</span></div>
-                        <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('speed-val').innerText=this.value+'x'">
+                        <div class="flex justify-between mb-2"><label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">SPEED</label><span id="speed-val" class="text-primary text-xs font-mono">1.2x</span></div>
+                        <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('speed-val').innerText=this.value+'x'">
                     </div>
                     <div>
                         <div class="flex justify-between mb-2"><label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">PITCH</label><span id="pitch-val" class="text-primary text-xs font-mono">1.0</span></div>
@@ -478,8 +478,8 @@
                         <select id="s1-voice" class="w-full bg-black border border-white/10 rounded-lg p-2 text-xs mb-4" onchange="Engine.audio.updatePodcastSettings()"></select>
                         <div class="flex gap-4">
                             <div class="flex-1">
-                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>SPEED</span><span id="s1-speed-val">1.0</span></div>
-                                <input type="range" id="s1-speed" min="0.5" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('s1-speed-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>SPEED</span><span id="s1-speed-val">1.2</span></div>
+                                <input type="range" id="s1-speed" min="0.5" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('s1-speed-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>PITCH</span><span id="s1-pitch-val">1.0</span></div>
@@ -493,12 +493,12 @@
                         <select id="s2-voice" class="w-full bg-black border border-white/10 rounded-lg p-2 text-xs mb-4" onchange="Engine.audio.updatePodcastSettings()"></select>
                         <div class="flex gap-4">
                             <div class="flex-1">
-                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>SPEED</span><span id="s2-speed-val">1.0</span></div>
-                                <input type="range" id="s2-speed" min="0.5" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('s2-speed-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>SPEED</span><span id="s2-speed-val">1.2</span></div>
+                                <input type="range" id="s2-speed" min="0.5" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('s2-speed-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
                             </div>
                             <div class="flex-1">
-                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>PITCH</span><span id="s2-pitch-val">1.0</span></div>
-                                <input type="range" id="s2-pitch" min="0.1" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('s2-pitch-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>PITCH</span><span id="s2-pitch-val">1.2</span></div>
+                                <input type="range" id="s2-pitch" min="0.1" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('s2-pitch-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
                             </div>
                         </div>
                     </div>
@@ -512,15 +512,15 @@
     <!-- JSON MODAL -->
     <div id="modal-import" class="modal-overlay">
         <div class="modal-box w-[1000px] relative">
-            <h2 class="text-xl font-bold mb-4 italic">PROJECT JSON EDITOR</h2>
+            <h2 class="text-xl font-bold mb-4 italic">JSON EDITOR</h2>
             <div id="json-loader" class="absolute inset-0 bg-black/90 z-50 flex flex-col items-center justify-center rounded-2xl hidden">
                 <div class="loading-spinner mb-6"></div>
                 <div class="text-2xl font-bold italic tracking-tighter animate-pulse" id="json-loader-text">DIRECTOR IS WRITING SCRIPT...</div>
                 <div class="text-gray-500 text-xs mt-2 font-mono" id="json-loader-sub">Generating Scenes, Visuals, and Narration</div>
             </div>
             <div class="flex gap-4 mb-6">
-                <button onclick="Engine.io.downloadJSON()" class="flex-1 bg-blue-600/20 border border-blue-500/50 text-blue-400 font-bold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition"><i class="bi bi-download mr-2"></i> DOWNLOAD PROJECT</button>
-                <button onclick="document.getElementById('file-upload').click()" class="flex-1 bg-purple-600/20 border border-purple-500/50 text-purple-400 font-bold py-3 rounded-xl hover:bg-purple-600 hover:text-white transition"><i class="bi bi-upload mr-2"></i> UPLOAD JSON</button>
+                <button onclick="Engine.io.downloadJSON()" class="flex-1 bg-blue-600/20 border border-blue-500/50 text-blue-400 font-bold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition"><i class="bi bi-download mr-2"></i> DOWNLOAD</button>
+                <button onclick="document.getElementById('file-upload').click()" class="flex-1 bg-purple-600/20 border border-purple-500/50 text-purple-400 font-bold py-3 rounded-xl hover:bg-purple-600 hover:text-white transition"><i class="bi bi-upload mr-2"></i> UPLOAD</button>
                 <input type="file" id="file-upload" hidden accept=".json" onchange="Engine.io.uploadJSON(this)">
             </div>
             <div style="position:relative; width:100%;">
@@ -916,17 +916,476 @@ INSTRUCTIONS:
                 "podcast": "true"
             },
             "scenes": [{
-                "type": "INTRO_PREMIUM_INSTANT",
-                "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black perspective-[1000px]'>\n  <!-- 1. Background: Slow Cinematic Drift (Instant Visible) -->\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564\")] bg-cover bg-center opacity-40 scale-110 transition-transform duration-[20s] ease-linear' style='animation: drift 20s infinite alternate;'></div>\n  <style>@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n\n  <!-- 2. Atmosphere: Rotating Aurora -->\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-emerald-900/20 via-transparent to-stone-800/20 opacity-60 blur-3xl animate-[spin_30s_linear_infinite]'></div>\n  \n  <!-- 3. Texture -->\n  <div class='film-grain opacity-30 mix-blend-overlay'></div>\n\n  <!-- 4. Main Content -->\n  <div class='z-20 text-center px-[5cqw] relative'>\n    \n    <!-- Badge: Starts Hidden -->\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.2cqw] py-[0.6cqh] border border-emerald-500/30 rounded-full bg-black/60 backdrop-blur-md text-emerald-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,0.9rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(16,185,129,0.15)]'>\n        <span class='w-2 h-2 rounded-full bg-emerald-500 animate-pulse'></span> \n        REAL-TIME RENDER\n    </div>\n\n    <!-- Main Title: VISIBLE INSTANTLY + Glass Glow -->\n    <div class='relative'>\n        <!-- The Glow Layer (Behind) -->\n        <h1 class='absolute inset-0 text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-emerald-500/10 blur-xl select-none'>\n          VIDEO-LIKE\n        </h1>\n        <!-- The Sharp Layer (Front) -->\n        <h1 class='text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-600 tracking-tighter drop-shadow-2xl'>\n          VIDEO-LIKE\n        </h1>\n    </div>\n\n    <!-- Subtitle: Starts Hidden -->\n    <div class='mt-[3cqh] overflow-hidden'>\n        <p id='sub' class='text-[clamp(1rem,2.5cqw,2.5rem)] text-stone-300 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out delay-200'>\n          The end of pixel hallucination.\n        </p>\n    </div>\n  </div>\n\n  <!-- 5. Cinematic Vignette -->\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#000_120%)] pointer-events-none'></div>\n</div>",
-                "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'); } } }",
-                "steps": [{
-                    "narration": "What you are about to see is not a video file. It is a live execution of code, data, and logic.",
-                    "actions": [{
-                        "type": "custom",
-                        "fn": "Engine.state.activeScript.init()"
+                    "type": "INTRO_PREMIUM_INSTANT",
+                    "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black perspective-[1000px]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564\")] bg-cover bg-center opacity-40 scale-110 transition-transform duration-[20s] ease-linear' style='animation: drift 20s infinite alternate;'></div>\n  <style>@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-emerald-900/40 via-transparent to-rose-900/40 opacity-80 blur-3xl animate-[spin_30s_linear_infinite]'></div>\n  <div class='film-grain opacity-30 mix-blend-overlay'></div>\n  <div class='z-20 text-center px-[5cqw] relative'>\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.2cqw] py-[0.6cqh] border border-emerald-500/30 rounded-full bg-black/60 backdrop-blur-md text-emerald-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,0.9rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(16,185,129,0.15)]'>\n        <span class='w-2 h-2 rounded-full bg-emerald-500 animate-pulse'></span> \n        REAL-TIME RENDER\n    </div>\n    <div class='relative'>\n        <h1 class='absolute inset-0 text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-emerald-500/10 blur-xl select-none'>VIDEO-LIKE</h1>\n        <h1 class='text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-600 tracking-tighter drop-shadow-2xl'>VIDEO-LIKE</h1>\n    </div>\n    <div class='mt-[3cqh] overflow-hidden'>\n        <p id='sub' class='text-[clamp(1rem,2.5cqw,2.5rem)] text-stone-300 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out delay-200'>The end of pixel hallucination.</p>\n    </div>\n  </div>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#000_120%)] pointer-events-none'></div>\n</div>",
+                    "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'); } } }",
+                    "steps": [{
+                        "narration": "What you are seeing is not a video file. It is a live execution of code, data, and logic.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.init()"
+                        }]
                     }]
-                }]
-            }]
+                },
+                {
+                    "type": "CODE_TERMINAL",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,3.5cqmin,3rem)]'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/carbon-fibre.png\")] opacity-20'></div>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-emerald-500 to-rose-500'></div>\n  <div class='z-10 relative max-w-[90cqw] mx-auto w-full'>\n    <div id='hl-box' class='absolute left-[-2cqw] w-[104%] h-[1.5em] bg-emerald-900/20 border-l-[4px] border-emerald-500 opacity-0 transition-all duration-500 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-stone-400 leading-[1.8]'>\n      <div id='line-1' class='opacity-0 transition-opacity'><span class='text-stone-600'>1</span> <span class='text-rose-400'>import</span> <span class='text-white'>knowledge_base</span></div>\n      <div id='line-2' class='opacity-0 transition-opacity mt-[1cqh]'><span class='text-stone-600'>2</span> <span class='text-rose-400'>def</span> <span class='text-emerald-400'>start_documentary</span>(topic):</div>\n      <div id='line-3' class='opacity-0 transition-opacity'><span class='text-stone-600'>3</span> &nbsp;&nbsp;engine.<span class='text-amber-300'>render</span>(topic=<span class='text-emerald-400'>\"Silicon_War\"</span>)</div>\n    </div>\n  </div>\n  <div id='output-panel' class='absolute bottom-[5cqh] right-[5cqw] max-w-[80cqw] bg-black/80 border border-stone-700 rounded-xl p-[3cqw] translate-y-full opacity-0 transition-all duration-700 backdrop-blur-md shadow-2xl'>\n    <div class='text-emerald-500 font-mono'>SYSTEM_READY. INITIALIZING VISUALS...</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const highlightLine = (idx) => { const el = ctx.root.querySelector(`#line-${idx}`); const hl = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); hl.classList.remove('opacity-0'); hl.style.top = `${el.offsetTop}px`; hl.style.height = `${el.offsetHeight}px`; }; return { step1: () => highlightLine(1), step2: () => { highlightLine(2); setTimeout(()=>highlightLine(3), 500); }, showOut: () => ctx.root.querySelector('#output-panel').classList.remove('translate-y-full', 'opacity-0') } }",
+                    "steps": [{
+                            "narration": "Generative A I guesses pixels. We render facts. Let's demonstrate by building a documentary from scratch.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.step1()"
+                            }]
+                        },
+                        {
+                            "narration": "Executing script: The Silicon Veins. A deep dive into the global microchip war.",
+                            "actions": [{
+                                    "type": "custom",
+                                    "fn": "Engine.state.activeScript.step2()"
+                                },
+                                {
+                                    "type": "custom",
+                                    "fn": "setTimeout(()=>Engine.state.activeScript.showOut(), 1000)"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "DOC_TITLE",
+                    "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2670\")] bg-cover bg-center'></div>\n  <div class='absolute inset-0 bg-stone-950/80 backdrop-blur-[2px] mix-blend-multiply'></div>\n  <div class='absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-rose-900/40'></div>\n  <div class='z-10 text-center px-[5cqw] border-y-2 border-emerald-500/30 py-[5cqh] bg-black/20 backdrop-blur-md'>\n    <h2 id='doc-sub' class='text-rose-400 font-mono tracking-[0.5em] text-[clamp(0.8rem,1.5cqw,1.5rem)] opacity-0 -translate-y-4 transition-all duration-700 uppercase'>Global Report</h2>\n    <h1 id='doc-main' class='text-[clamp(3rem,9cqw,10rem)] font-black text-white italic tracking-tighter opacity-0 scale-110 blur-lg transition-all duration-[1.5s] ease-out mt-[2cqh] drop-shadow-2xl'>\n      THE SILICON VEINS\n    </h1>\n    <div class='h-[2px] w-0 bg-emerald-500 mx-auto mt-[3cqh] transition-all duration-1000' id='line'></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { start: () => { ctx.root.querySelector('#doc-sub').classList.remove('opacity-0', '-translate-y-4'); const t = ctx.root.querySelector('#doc-main'); t.classList.remove('opacity-0', 'scale-110', 'blur-lg'); ctx.root.querySelector('#line').style.width = '50%'; } } }",
+                    "steps": [{
+                            "narration": "It is the most complex object ever built by human hands. And it controls the fate of nations.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.start()"
+                            }]
+                        },
+                        {
+                            "narration": "I'm your host. Today, we're joined by our lead analyst to dismantle the machine that runs our world.",
+                            "actions": []
+                        }
+                    ]
+                },
+                {
+                    "type": "QUOTE_SCENE",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[8cqw] relative overflow-hidden text-stone-200'>\n  <div class='absolute inset-0 opacity-10 bg-[radial-gradient(#a8a29e_1px,transparent_1px)] bg-[size:20px_20px]'></div>\n  <div class='absolute inset-0 bg-gradient-to-br from-emerald-900/20 to-rose-900/20'></div>\n  <div class='relative z-10 max-w-5xl'>\n    <i class='bi bi-quote text-[8cqw] text-emerald-800/20 absolute -top-[4cqw] -left-[4cqw]'></i>\n    <p class='text-[clamp(1.5rem,4cqw,4rem)] font-serif leading-tight tracking-tight'>\n      Any sufficiently advanced technology is indistinguishable from \n      <span class='relative inline-block px-[0.5cqw]'>\n        <span id='hl-magic' class='absolute inset-0 bg-rose-600 mix-blend-overlay w-0 transition-all duration-700 ease-in-out'></span>\n        <span class='relative z-10 text-rose-400'>magic.</span>\n      </span>\n    </p>\n    <div class='mt-[5cqh] flex items-center gap-[2cqw] opacity-0 translate-y-4 transition-all duration-700' id='author'>\n      <div class='w-[6cqw] h-[6cqw] rounded-full bg-stone-700 overflow-hidden border-2 border-stone-500'>\n        <img src='https://images.unsplash.com/photo-1535905557558-afc4877a26fc?q=80&w=2000' class='w-full h-full object-cover grayscale'>\n      </div>\n      <div>\n        <p class='font-bold text-white text-[clamp(0.8rem,1.2cqw,1.5rem)]'>Arthur C. Clarke</p>\n      </div>\n    </div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                        "narration": "Clarke was right. But this magic isn't supernatural. It is manufactured.",
+                        "actions": [{
+                                "type": "custom",
+                                "fn": "document.getElementById('hl-magic').style.width = '100%'"
+                            },
+                            {
+                                "type": "reveal",
+                                "target": "#author"
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "type": "DNA_HELIX",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-dna' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent'></div>\n  <div class='z-10 text-center pointer-events-none bg-black/50 p-4 rounded-xl border border-stone-700 backdrop-blur-sm'>\n    <h1 class='text-white font-black text-[clamp(2rem,5cqw,4rem)] tracking-tight'>SILICON LATTICE</h1>\n    <p class='font-mono text-emerald-400 text-[clamp(0.8rem,1.2cqw,1.5rem)] tracking-[0.2em]'>PURE CRYSTAL</p>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let angle = 0; const particles = 150; const radius = 100; const length = 300; p.setup = () => { const container = ctx.root.querySelector('#p5-dna'); p.createCanvas(container.clientWidth, container.clientHeight, p.WEBGL); }; p.draw = () => { p.clear(); p.rotateY(angle); p.strokeWeight(3); for(let i = 0; i < particles; i++) { const y = p.map(i, 0, particles, -length, length); const phase = p.map(y, -length, length, 0, p.TWO_PI * 4); p.stroke('#10b981'); p.point(radius * p.cos(phase), y, radius * p.sin(phase)); p.stroke('#f43f5e'); p.point(radius * p.cos(phase + p.PI), y, radius * p.sin(phase + p.PI)); } angle += 0.01; }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-dna'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-dna'); return { remove: () => myP5.remove() } }",
+                    "steps": [{
+                        "narration": "All of this happens on a wafer of silicon so pure, it is the most perfect crystal structure in the known universe.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "PARALLAX_SCALE_ZOOM",
+                    "html": "<div class='w-full h-full relative overflow-hidden flex items-center justify-center perspective-[1500px] bg-black font-sans'>\n  <div id='parallax-group' class='absolute inset-0 w-full h-full transition-all duration-1000'>\n      <div id='para-bg' class='absolute inset-[-10%] bg-[url(\"https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=2574\")] bg-cover bg-center opacity-30 mix-blend-luminosity scale-110 grayscale'></div>\n      <div id='scan-beam' class='absolute top-0 bottom-0 w-[2px] bg-emerald-500/80 shadow-[0_0_40px_rgba(16,185,129,0.8)] mix-blend-screen opacity-50 blur-[2px]'></div>\n      <div id='para-text' class='absolute inset-0 flex flex-col items-center justify-center z-20'>\n        <h1 class='text-[20cqw] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-300 to-stone-600 tracking-tighter drop-shadow-2xl'>3nm</h1>\n        <div class='text-emerald-400 font-mono text-[1.2cqw] tracking-[1em] uppercase mt-[-2cqw] bg-black/50 backdrop-blur-md py-2 border-y border-emerald-500/30'>Fabrication Node</div>\n      </div>\n  </div>\n  <div id='comp-group' class='absolute inset-0 w-full h-full z-30 pointer-events-none opacity-0 transition-opacity duration-500 flex items-center justify-center'>\n      <div id='hair-strand' class='absolute w-[30cqw] h-[120%] bg-stone-800 rounded-full border-x-4 border-stone-950 flex items-center justify-center shadow-2xl transition-transform duration-[2000ms] ease-[cubic-bezier(0.7,0,0.3,1)] origin-center' style='background-image: url(\"https://www.transparenttextures.com/patterns/dark-leather.png\");'>\n          <div class='absolute -right-[15cqw] top-1/2 text-white font-bold text-[2cqw] whitespace-nowrap'>HUMAN HAIR (80,000nm)</div>\n          <div class='relative w-[0.5cqw] h-[0.5cqw] border-2 border-rose-500 rounded-full animate-ping'></div>\n          <div id='target-box' class='absolute w-[2cqw] h-[2cqw] border border-emerald-500/50 flex items-center justify-center'>\n              <div class='w-[1px] h-[10px] bg-emerald-500'></div><div class='h-[1px] w-[10px] bg-emerald-500 absolute'></div>\n          </div>\n      </div>\n      <div id='transistor-model' class='absolute w-[40cqw] h-[40cqw] opacity-0 scale-0 transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] delay-500'>\n          <div class='w-full h-full relative border border-emerald-500/30 bg-emerald-900/10 backdrop-blur-md rounded-xl flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.2)]'>\n              <div class='absolute inset-x-0 top-[30%] h-[40%] bg-emerald-500/20 border-y border-emerald-400 transform -skew-y-6'></div>\n              <div class='absolute inset-y-0 left-[40%] w-[20%] bg-emerald-400/30 border-x border-emerald-200'></div>\n              <div class='z-10 text-white font-mono text-[1cqw] bg-black/80 px-4 py-1 rounded border border-emerald-500'>GATE_ALL_AROUND</div>\n          </div>\n      </div>\n  </div>\n  <div class='absolute bottom-[5%] w-full px-[5%] flex justify-between z-40 font-mono text-emerald-500 text-[1cqw]'>\n      <div id='hud-scale'>SCALE: MACRO</div>\n      <div class='flex gap-4'>\n          <div>TEMP: 293K</div>\n          <div><span id='size-counter'>0.000000000</span> m</div>\n      </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { let time = 0; let frame; const bg = ctx.root.querySelector('#para-bg'); const txt = ctx.root.querySelector('#para-text'); const beam = ctx.root.querySelector('#scan-beam'); const counter = ctx.root.querySelector('#size-counter'); const loop = () => { time += 0.003; const x = Math.sin(time) * 20; if(bg) bg.style.transform = `translate(${x * 0.2}px, 0) scale(1.1)`; if(txt) txt.style.transform = `translate(${x * -0.5}px, 0)`; if(beam) beam.style.left = `${50 + Math.sin(time * 4) * 45}%`; frame = requestAnimationFrame(loop); }; loop(); return { remove: () => cancelAnimationFrame(frame), compareSizes: () => { ctx.root.querySelector('#parallax-group').style.opacity = '0.1'; ctx.root.querySelector('#parallax-group').style.filter = 'blur(10px)'; const comp = ctx.root.querySelector('#comp-group'); comp.classList.remove('opacity-0'); const hair = ctx.root.querySelector('#hair-strand'); const chip = ctx.root.querySelector('#transistor-model'); const hud = ctx.root.querySelector('#hud-scale'); setTimeout(() => { hair.style.transform = 'scale(50) rotate(5deg)'; hair.style.opacity = '0'; chip.classList.remove('opacity-0', 'scale-0'); chip.classList.add('scale-100'); hud.innerText = 'SCALE: NANO (10^-9)'; hud.classList.add('animate-pulse', 'text-rose-500'); let start = 80000; let end = 3; let duration = 2000; let startTime = null; const step = (ts) => { if (!startTime) startTime = ts; const progress = Math.min((ts - startTime) / duration, 1); const current = start - (progress * (start - end)); if(counter) counter.innerText = Math.max(end, Math.floor(current)) + ' nm'; if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }, 1500); } } }",
+                    "steps": [{
+                            "narration": "So, how small is '3 nanometers' really? It's a marketing term, but it represents a physical reality.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "Look at this human hair. It is 80,000 nanometers wide. To find a 3 n m transistor, you have to zoom in 20,000 times.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.compareSizes()"
+                            }]
+                        },
+                        {
+                            "narration": "We are no longer building machines. We are manipulating individual atoms.",
+                            "actions": []
+                        }
+                    ]
+                },
+                {
+                    "type": "EXPLODED_VIEW",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center perspective-[2000px] overflow-hidden'>\n  <div id='machine' class='relative w-[40cqw] h-[30cqw] transition-transform duration-[1.5s] ease-out' style='transform-style: preserve-3d; transform: rotateX(60deg) rotateZ(0deg);'>\n    <div class='absolute inset-0 bg-stone-800 border border-stone-600 flex items-center justify-center text-white font-bold transition-transform duration-1000' id='l1' style='transform: translateZ(0px)'>BASE FRAME</div>\n    <div class='absolute inset-0 bg-stone-700 border border-stone-500 flex items-center justify-center text-white font-bold transition-transform duration-1000' id='l2' style='transform: translateZ(40px)'>OPTICS MODULE</div>\n    <div class='absolute inset-0 bg-stone-600 border border-stone-400 flex items-center justify-center text-white font-bold transition-transform duration-1000' id='l3' style='transform: translateZ(80px)'>LIGHT SOURCE</div>\n    <div class='absolute inset-0 bg-emerald-900/50 border border-emerald-500 flex items-center justify-center text-emerald-400 font-bold transition-transform duration-1000 backdrop-blur-sm' id='l4' style='transform: translateZ(120px)'>WAFER STAGE</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { expand: () => { ctx.root.querySelector('#machine').style.transform = 'rotateX(60deg) rotateZ(45deg)'; ctx.root.querySelector('#l1').style.transform = 'translateZ(-100px)'; ctx.root.querySelector('#l2').style.transform = 'translateZ(0px)'; ctx.root.querySelector('#l3').style.transform = 'translateZ(100px)'; ctx.root.querySelector('#l4').style.transform = 'translateZ(200px)'; } } }",
+                    "steps": [{
+                            "narration": "To make these chips, you need a machine the size of a bus. The A S M L High N A E U V system.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "It contains over 100,000 parts from 5,000 suppliers. It is the single most critical piece of hardware on Earth.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.expand()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "PARTICLE_PHYSICS",
+                    "html": "<div class='w-full h-full bg-black flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-laser' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 bg-black/80 text-white p-4 border border-rose-500 rounded-lg backdrop-blur-sm'>\n    <div class='font-mono text-rose-400 text-sm tracking-widest'>EUV LITHOGRAPHY</div>\n    <div class='text-2xl font-bold'>TIN DROPLET TARGETING</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let droplet = {x: 0, y: 0, r: 0}; let laser = {active: false, x: 0, y: 0}; let debris = []; p.setup = () => { const c = ctx.root.querySelector('#p5-laser'); p.createCanvas(c.clientWidth, c.clientHeight); reset(); }; const reset = () => { droplet = {x: p.width/2, y: p.height/2, r: 40}; laser = {active: false}; debris = []; }; p.draw = () => { p.clear(); p.background(0); if(droplet.r > 0) { p.fill(200); p.noStroke(); p.circle(droplet.x, droplet.y, droplet.r * 2); } if(laser.active) { p.stroke('#ec4899'); p.strokeWeight(8); p.line(0, p.height, droplet.x, droplet.y); droplet.r -= 2; for(let i=0; i<10; i++) debris.push({x: droplet.x, y: droplet.y, vx: p.random(-5,5), vy: p.random(-5,5), life: 255}); } debris.forEach(d => { d.x += d.vx; d.y += d.vy; d.life -= 5; p.fill(236, 72, 153, d.life); p.noStroke(); p.circle(d.x, d.y, 4); }); }; p.fire = () => laser.active = true; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-laser'); return { remove: () => myP5.remove(), shoot: () => myP5.fire() } }",
+                    "steps": [{
+                            "narration": "It works by shooting a microscopic droplet of molten tin with a high-powered laser.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "This creates plasma that emits Extreme Ultraviolet light, which then etches the chip.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.shoot()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "LIQUID_WAVEFORM",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-wave' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 font-mono text-center'>\n    <div class='text-[clamp(0.6rem,1cqw,1rem)] text-rose-400 tracking-widest uppercase'>EUV WAVELENGTH</div>\n    <div id='amp-readout' class='text-[clamp(3rem,6cqw,6rem)] text-white font-black'>13.5nm</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let time = 0; let frequency = 2.0; p.setup = () => { const c = ctx.root.querySelector('#p5-wave'); p.createCanvas(c.clientWidth, c.clientHeight); }; p.draw = () => { p.clear(); p.stroke(244, 63, 94); p.strokeWeight(2); p.noFill(); p.beginShape(); for (let x = 0; x < p.width; x+=5) { const angle = time + p.map(x, 0, p.width, 0, p.TWO_PI * frequency); const y = p.height/2 + p.sin(angle) * 50; p.vertex(x, y); } p.endShape(); time += 0.1; }; p.tighten = () => frequency = 10.0; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-wave'); return { remove: () => myP5.remove(), trigger: () => myP5.tighten() } }",
+                    "steps": [{
+                            "narration": "Normal light is too 'blunt' to carve these features.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "We need a wavelength of exactly 13.5 nanometers. A frequency so tight it is absorbed by almost everything.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.trigger()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "UI_SIMULATION",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center font-mono'>\n  <div class='w-[60cqw] bg-stone-900 border border-stone-700 rounded-xl p-6 shadow-[0_0_30px_rgba(16,185,129,0.1)]'>\n    <div class='flex justify-between text-stone-500 mb-4'><span>LENS CONTROL</span><span>NA: 0.33</span></div>\n    <div class='flex gap-4 items-center mb-4'>\n      <div class='text-white'>FOCUS:</div>\n      <div class='flex-1 h-2 bg-stone-700 rounded overflow-hidden'><div id='focus-bar' class='h-full bg-emerald-500 w-[50%] transition-all duration-300'></div></div>\n    </div>\n    <div id='status' class='text-center text-amber-500 font-bold'>CALIBRATING...</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { calibrate: () => { ctx.root.querySelector('#focus-bar').style.width = '99%'; const s = ctx.root.querySelector('#status'); s.innerText = 'LOCKED'; s.classList.replace('text-amber-500', 'text-emerald-500'); } } }",
+                    "steps": [{
+                        "narration": "The mirrors inside must be perfectly flat. If the mirrors were the size of Germany, the biggest bump would be 1 millimeter high.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.calibrate()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "MAP_TOPOLOGY",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden font-mono text-white border-4 border-stone-800'>\n  <div id='map-world' class='absolute inset-0 z-0 opacity-60'></div>\n  <div class='absolute top-[5%] right-[5%] z-10 bg-black/80 p-4 border-l-4 border-emerald-500 backdrop-blur-md'>\n    <h1 class='text-emerald-500 font-bold tracking-widest mb-1 text-[clamp(0.8rem,1.2cqw,1.2rem)]'>SUPPLY CHAIN CHOKEPOINT</h1>\n    <div class='text-[clamp(0.6rem,0.8cqw,0.8rem)] text-stone-400'>REGION: <span class='text-white font-bold'>TAIWAN STRAIT</span></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const map = ctx.map('#map-world', { center: [20, 120], zoom: 3, zoomControl: false, attributionControl: false }); L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map); setTimeout(()=>map.invalidateSize(), 200); return { focus: () => map.flyTo([23.6978, 120.9605], 6, {duration: 3}) } }",
+                    "steps": [{
+                            "narration": "Where does this magic come from? Not Silicon Valley. Not Europe.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "92% of the world's most advanced logic chips come from this one small island. Taiwan.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.focus()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "DOUGHNUT_HOLO",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center p-[5cqw] relative overflow-hidden'>\n  <div class='relative w-[50cqmin] h-[50cqmin] z-10 perspective-[1000px]'>\n    <div class='absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none'>\n      <div class='text-stone-500 font-mono text-[clamp(0.6rem,1cqw,1rem)] tracking-widest uppercase mb-2'>T S M C MARKET SHARE</div>\n      <div class='text-white text-[clamp(2rem,5cqw,5rem)] font-black italic'>58%</div>\n    </div>\n    <div id='holo-container' class='w-full h-full drop-shadow-[0_0_50px_rgba(16,185,129,0.2)]'>\n      <div class='w-full h-full relative'><canvas id='chart-doughnut'></canvas></div>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const chart = ctx.chart('#chart-doughnut', { type: 'doughnut', data: { labels: ['TSMC', 'Others'], datasets: [{ data: [0, 100], backgroundColor: ['#10b981', '#44403c'], borderWidth: 0, cutout: '85%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' } } }); const container = ctx.root.querySelector('#holo-container'); let rotation = 0; let frameId; const spin = () => { rotation += 0.2; if(container) { container.style.transform = `rotateX(30deg) rotateZ(${rotation}deg)`; } frameId = window.requestAnimationFrame(spin); }; spin(); return { remove: () => { window.cancelAnimationFrame(frameId); chart.destroy(); }, fill: () => { chart.data.datasets[0].data = [58, 42]; chart.update(); } }; }",
+                    "steps": [{
+                        "narration": "If we look at the total foundry market, T S M C holds the majority. But in advanced nodes, that number jumps to near monopoly levels.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.fill()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "DETECTIVE_BOARD",
+                    "html": "<div class='w-full h-full bg-[#292524] relative flex items-center justify-center p-[4cqw] overflow-hidden'>\n  <div class='absolute inset-0 opacity-10 bg-[url(\"https://www.transparenttextures.com/patterns/wood-pattern.png\")]'></div>\n  <div class='relative w-full h-full bg-stone-900/50 border border-stone-700 shadow-2xl'>\n    <svg class='absolute inset-0 w-full h-full z-10 pointer-events-none' viewBox='0 0 100 100' preserveAspectRatio='none'>\n      <path id='con-1' d='M20,20 Q50,50 80,20' fill='none' stroke='#f59e0b' stroke-width='0.5' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000' />\n      <path id='con-2' d='M20,20 Q50,50 50,80' fill='none' stroke='#f59e0b' stroke-width='0.5' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 delay-300' />\n    </svg>\n    <div id='item-1' class='absolute top-[10%] left-[10%] w-[15%] bg-white p-1 rotate-[-2deg] opacity-0 scale-90 transition-all duration-500'>\n      <img src='https://images.unsplash.com/photo-1526304640152-d4619684e484?q=80&w=2000' class='w-full aspect-square object-cover grayscale'>\n      <div class='text-black text-[0.6cqw] font-bold text-center'>U S DESIGN</div>\n    </div>\n    <div id='item-2' class='absolute top-[10%] right-[10%] w-[15%] bg-white p-1 rotate-[3deg] opacity-0 scale-90 transition-all duration-500'>\n      <img src='https://images.unsplash.com/photo-1555664424-778a69022365?q=80&w=2000' class='w-full aspect-square object-cover grayscale'>\n      <div class='text-black text-[0.6cqw] font-bold text-center'>DUTCH MACHINES</div>\n    </div>\n    <div id='item-3' class='absolute bottom-[10%] left-[42%] w-[15%] bg-white p-1 rotate-[1deg] opacity-0 scale-90 transition-all duration-500'>\n      <div class='bg-emerald-600 aspect-square flex items-center justify-center text-white font-bold text-[2cqw]'>TSMC</div>\n      <div class='text-black text-[0.6cqw] font-bold text-center'>TAIWAN FAB</div>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { reveal: () => { ['item-1', 'item-2', 'item-3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); setTimeout(() => { ctx.root.querySelector('#con-1').style.strokeDashoffset = '0'; ctx.root.querySelector('#con-2').style.strokeDashoffset = '0'; }, 800); } } }",
+                    "steps": [{
+                            "narration": "The supply chain is a fragile web. Design from California, equipment from the Netherlands...",
+                            "actions": []
+                        },
+                        {
+                            "narration": "...all converging on the foundries of Taiwan.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.reveal()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "NETWORK_NODES",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-nodes' class='absolute inset-0 w-full h-full relative z-0'></div>\n  <div class='z-10 bg-black/80 backdrop-blur-sm px-[4cqw] py-[2cqh] rounded-full border border-stone-700 text-center pointer-events-none'>\n    <div class='text-[clamp(0.7rem,1.2cqw,1.2rem)] font-mono text-stone-300 tracking-widest uppercase'>Global Interdependence</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = (p) => { let particles = []; const num = 50; p.setup = () => { const container = ctx.root.querySelector('#p5-nodes'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<num; i++) particles.push({ x: p.random(p.width), y: p.random(p.height), vx: p.random(-1, 1), vy: p.random(-1, 1) }); }; p.draw = () => { p.clear(); particles.forEach((pt, i) => { pt.x += pt.vx; pt.y += pt.vy; if(pt.x < 0 || pt.x > p.width) pt.vx *= -1; if(pt.y < 0 || pt.y > p.height) pt.vy *= -1; p.noStroke(); p.fill('#10b981'); p.circle(pt.x, pt.y, 6); for(let j=i+1; j<num; j++) { const other = particles[j]; const d = p.dist(pt.x, pt.y, other.x, other.y); if(d < 100) { p.stroke(16, 185, 129, p.map(d, 0, 100, 150, 0)); p.strokeWeight(1); p.line(pt.x, pt.y, other.x, other.y); } } }); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-nodes'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-nodes'); return { remove: () => myP5.remove() } }",
+                    "steps": [{
+                        "narration": "No single country can build a chip alone. The network is too vast, too specialized.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "NEWS_TICKER",
+                    "html": "<div class='w-full h-full bg-stone-900 flex flex-col items-center justify-center relative overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2670\")] bg-cover opacity-20'></div>\n  <div class='z-10 text-white text-[10cqw] font-black italic tracking-tighter drop-shadow-lg mb-8'>BREAKING</div>\n  <div class='w-full h-[12cqh] bg-rose-600 flex items-center overflow-hidden border-y-4 border-white'>\n    <div class='whitespace-nowrap animate-[scroll_15s_linear_infinite] flex items-center gap-[5cqw] text-[3cqh] font-mono p-4 text-white font-bold'>\n      <span>U S IMPOSES EXPORT CONTROLS</span>\n      <span>CHIP ACT SIGNED INTO LAW</span>\n      <span>CHINA ACCELERATES DOMESTIC PRODUCTION</span>\n      <span>SUPPLY CHAIN FRACTURE IMMINENT</span>\n    </div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                            "narration": "Then, the geopolitics shifted. The Chip War began.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "Nations realized that without chips, their economies—and their militaries—would grind to a halt.",
+                            "actions": []
+                        }
+                    ]
+                },
+                {
+                    "type": "GLITCH_TEXT",
+                    "html": "<div class='w-full h-full bg-[#0a0a0a] flex items-center justify-center font-mono overflow-hidden'>\n  <div class='relative group w-full text-center'>\n    <h1 class='text-[clamp(2rem,8cqw,8rem)] font-bold text-rose-600 absolute top-0 left-0 w-full opacity-70 mix-blend-screen animate-pulse -translate-x-1' id='glitch-r'>EMBARGO</h1>\n    <h1 class='text-[clamp(2rem,8cqw,8rem)] font-bold text-emerald-600 absolute top-0 left-0 w-full opacity-70 mix-blend-screen animate-pulse translate-x-1' style='animation-duration: 0.2s' id='glitch-b'>EMBARGO</h1>\n    <h1 class='text-[clamp(2rem,8cqw,8rem)] font-bold text-white relative z-10' id='glitch-main'>EMBARGO</h1>\n  </div>\n</div>",
+                    "script": "(ctx) => { const main = ctx.root.querySelector('#glitch-main'); const red = ctx.root.querySelector('#glitch-r'); const blue = ctx.root.querySelector('#glitch-b'); const final = 'DECOUPLING'; const chars = '!@#$%^&*()'; return { decode: () => { let i = 0; const interval = setInterval(() => { main.innerText = final.split('').map((letter, index) => { if(index < i) return final[index]; return chars[Math.floor(Math.random() * chars.length)]; }).join(''); red.innerText = main.innerText; blue.innerText = main.innerText; if(i >= final.length) { clearInterval(interval); main.innerText = final; red.style.display = 'none'; blue.style.display = 'none'; } i += 1/3; }, 50); } } }",
+                    "steps": [{
+                            "narration": "The unified global market fractured. Sanctions. Bans. Embargoes.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "We entered the era of the Great Decoupling.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.decode()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "HEATMAP_PULSE",
+                    "html": "<div class='w-full h-full bg-stone-900 flex items-center justify-center p-[5cqw] relative overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg\")] bg-cover bg-center opacity-10 invert'></div>\n  <div class='grid grid-cols-10 grid-rows-10 w-[80cqmin] h-[80cqmin] gap-px relative z-10 border border-stone-800' id='heatmap-grid'></div>\n</div>",
+                    "script": "(ctx) => { const grid = ctx.root.querySelector('#heatmap-grid'); if(!grid.children.length) { for(let i=0; i<100; i++) { const cell = document.createElement('div'); cell.className = 'bg-stone-800/50 transition-colors duration-500'; cell.id = 'cell-' + i; grid.appendChild(cell); } } const runHeat = () => { for(let i=0; i<100; i++) { const cell = ctx.root.querySelector('#cell-'+i); if(cell) cell.style.backgroundColor = `rgba(244, 63, 94, ${Math.random() * 0.2})`; } }; setInterval(runHeat, 500); return { highlight: () => { [45, 46, 55, 56].forEach(i => { ctx.root.querySelector('#cell-'+i).style.backgroundColor = '#ef4444'; ctx.root.querySelector('#cell-'+i).style.boxShadow = '0 0 20px #ef4444'; }); } } }",
+                    "steps": [{
+                            "narration": "Heatmaps of trade activity show the lights going out in cross-border tech transfers.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "Specifically targeting high-end G P U clusters needed for A I development.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.highlight()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "SOCIAL_POST",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[5cqw]'>\n  <div class='bg-stone-800 w-full max-w-lg rounded-2xl border border-stone-600 p-6 text-white shadow-xl'>\n    <div class='flex items-start gap-4'>\n      <div class='w-12 h-12 rounded-full bg-stone-500'></div>\n      <div>\n        <div class='flex items-center gap-2'><p class='font-bold'>TechInsider</p><p class='text-stone-400 text-sm'>@TechInsider · 5m</p></div>\n        <p class='mt-2 text-[clamp(0.9rem,1.2cqw,1.2rem)] leading-snug'>Sources confirm: Major auto manufacturers are halting production lines due to E C U chip shortages. Wait times for new EVs extended to 18 months.</p>\n      </div>\n    </div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                        "narration": "The ripple effects were immediate. Leaked reports confirmed what everyone feared.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "CHAT_CONV",
+                    "html": "<div class='w-full h-full bg-[#e5e5e5] flex items-center justify-center p-[5cqw]'>\n  <div class='w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl flex flex-col h-[70cqh] overflow-hidden border border-stone-300'>\n    <div class='bg-stone-800 p-4 text-white font-bold flex items-center gap-3'><div class='w-8 h-8 bg-green-500 rounded-full'></div> Auto CEO Group</div>\n    <div id='chat-window' class='flex-1 p-4 flex flex-col gap-3 overflow-y-auto bg-stone-100'></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const chatWindow = ctx.root.querySelector('#chat-window'); const addMessage = (text, sender) => { const bubble = document.createElement('div'); bubble.innerText = text; bubble.className = sender === 'me' ? 'self-end bg-blue-500 text-white rounded-lg py-2 px-4 max-w-[80%] text-sm' : 'self-start bg-stone-200 text-black rounded-lg py-2 px-4 max-w-[80%] text-sm'; chatWindow.appendChild(bubble); chatWindow.scrollTop = chatWindow.scrollHeight; }; return { msg1: () => addMessage('We have 50,000 cars sitting in lots.', 'me'), msg2: () => addMessage('Why? What is missing?', 'other'), msg3: () => addMessage('A $1 chip for the window wipers. Line is stopped.', 'me') } }",
+                    "steps": [{
+                        "narration": "The impact was felt immediately in unexpected sectors. Like the auto industry.",
+                        "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.msg1()"
+                            },
+                            {
+                                "type": "custom",
+                                "fn": "setTimeout(()=>Engine.state.activeScript.msg2(), 1000)"
+                            },
+                            {
+                                "type": "custom",
+                                "fn": "setTimeout(()=>Engine.state.activeScript.msg3(), 2000)"
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "type": "NEON_DATA_CRASH",
+                    "html": "<div class='w-full h-full bg-stone-900 flex flex-col p-[5cqw] relative overflow-hidden font-mono'>\n  <div class='z-10 flex justify-between items-end mb-[4cqh] border-b border-stone-700 pb-4'>\n    <div><h2 class='text-stone-500 text-sm'>AUTO PRODUCTION</h2><h1 class='text-white text-4xl font-bold'>GLOBAL</h1></div>\n    <div class='text-emerald-400 text-4xl font-bold' id='val'>100%</div>\n  </div>\n  <div class='flex-1 relative bg-stone-800 rounded-xl p-4'><canvas id='chart-crash'></canvas></div>\n</div>",
+                    "script": "(ctx) => { const chart = ctx.chart('#chart-crash', { type: 'line', data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ data: [100, 98, 95, 96], borderColor: '#10b981', tension: 0.4 }] }, options: { maintainAspectRatio: false, scales: { y: { display: false } }, plugins: { legend: {display:false} } } }); return { crash: () => { chart.data.datasets[0].data = [100, 98, 40, 20]; chart.data.datasets[0].borderColor = '#ef4444'; chart.update(); ctx.root.querySelector('#val').innerText = '20%'; ctx.root.querySelector('#val').classList.replace('text-emerald-400', 'text-red-500'); } } }",
+                    "steps": [{
+                        "narration": "Production lines flatlined. Billions in revenue vanished because of shortages in legacy chips.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.crash()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "TIMELINE_SCROLL",
+                    "html": "<div class='w-full h-full bg-stone-200 flex flex-col justify-center relative overflow-hidden text-stone-900 font-sans'>\n  <div class='absolute w-full h-[2px] bg-stone-400 top-1/2 left-0 z-0'></div>\n  <div id='timeline' class='flex w-[300%] transition-transform duration-1000 relative z-10'>\n    <div class='w-1/3 flex flex-col items-center'><div class='text-[10cqw] font-black'>2025</div><div class='text-xl'>A I Explosion</div></div>\n    <div class='w-1/3 flex flex-col items-center'><div class='text-[10cqw] font-black'>2030</div><div class='text-xl'>Angstrom Era</div></div>\n    <div class='w-1/3 flex flex-col items-center'><div class='text-[10cqw] font-black'>2040</div><div class='text-xl'>Quantum Supremacy</div></div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                            "narration": "What comes next? We move from nanometers to Angstroms.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "document.getElementById('timeline').style.transform = 'translateX(-33%)'"
+                            }]
+                        },
+                        {
+                            "narration": "And eventually, beyond silicon entirely.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "document.getElementById('timeline').style.transform = 'translateX(-66%)'"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "PROCESS_STEPS",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex flex-col items-center justify-center p-[5cqw] text-white'>\n  <h1 class='text-[3cqw] font-black mb-8'>G A A F E T ARCHITECTURE</h1>\n  <div class='flex gap-8 items-center'>\n    <div id='s1' class='bg-stone-800 p-4 rounded-xl border border-stone-600 opacity-50'><i class='bi bi-layers text-[2cqw] text-emerald-500'></i><p>NANOSHEET</p></div>\n    <i class='bi bi-arrow-right text-stone-500'></i>\n    <div id='s2' class='bg-stone-800 p-4 rounded-xl border border-stone-600 opacity-50'><i class='bi bi-box text-[2cqw] text-emerald-500'></i><p>GATE</p></div>\n    <i class='bi bi-arrow-right text-stone-500'></i>\n    <div id='s3' class='bg-stone-800 p-4 rounded-xl border border-stone-600 opacity-50'><i class='bi bi-cpu text-[2cqw] text-emerald-500'></i><p>CONTACT</p></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { step: () => { ctx.root.querySelector('#s1').style.opacity = 1; setTimeout(()=>ctx.root.querySelector('#s2').style.opacity = 1, 500); setTimeout(()=>ctx.root.querySelector('#s3').style.opacity = 1, 1000); } } }",
+                    "steps": [{
+                        "narration": "To keep Moore's Law alive, we are reinventing the shape of the transistor itself. Gate-All-Around.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.step()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "SPLIT_COMPARISON",
+                    "html": "<div class='w-full h-full bg-stone-900 flex flex-col items-center justify-center relative font-black text-white uppercase text-[8cqw] tracking-tighter overflow-hidden'>\n  <div class='absolute inset-0 flex items-center justify-center bg-stone-800'><h1>FIN F E T</h1></div>\n  <div id='comp-left' class='absolute inset-0 w-1/2 h-full bg-emerald-900 overflow-hidden border-r-4 border-white'><div class='w-screen h-full flex items-center justify-center'><h1>G A A F E T</h1></div></div>\n</div>",
+                    "script": "(ctx) => { return { slide: () => ctx.root.querySelector('#comp-left').style.width = '80%' } }",
+                    "steps": [{
+                        "narration": "Replacing the Fin F E T fin with stacked nanosheets for better control.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.slide()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "CAROUSEL_3D",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center overflow-hidden' style='perspective: 1000px;'>\n  <div id='carousel' class='relative w-[30cqmin] h-[45cqmin]' style='transform-style: preserve-3d; transition: transform 1s ease-in-out;'>\n    <div class='absolute inset-0 border border-stone-700 bg-stone-800 flex items-center justify-center' style='transform: rotateY(0deg) translateZ(30cqmin);'><div class='text-white text-[2cqw] font-bold'>C P U</div></div>\n    <div class='absolute inset-0 border border-stone-700 bg-stone-800 flex items-center justify-center' style='transform: rotateY(120deg) translateZ(30cqmin);'><div class='text-white text-[2cqw] font-bold'>G P U</div></div>\n    <div class='absolute inset-0 border border-stone-700 bg-stone-800 flex items-center justify-center' style='transform: rotateY(240deg) translateZ(30cqmin);'><div class='text-white text-[2cqw] font-bold'>N P U</div></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { let angle = 0; const c = ctx.root.querySelector('#carousel'); return { rotate: () => { angle -= 120; c.style.transform = `rotateY(${angle}deg)`; } } }",
+                    "steps": [{
+                        "narration": "Chips are also becoming specialized. Central Processing, Graphics Processing, and now Neural Processing for A I.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.rotate()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "QUIZ_GAME",
+                    "html": "<div class='w-full h-full bg-emerald-900 flex items-center justify-center p-[5cqw] text-white'>\n  <div class='w-full max-w-3xl text-center'>\n    <h2 class='text-[clamp(1.5rem,3cqw,2.5rem)] font-bold mb-[6cqh]'>Which material is replacing Silicon?</h2>\n    <div class='grid grid-cols-2 gap-4'>\n      <div class='bg-white/10 p-4 rounded-xl' id='o1'>Graphene</div><div class='bg-white/10 p-4 rounded-xl' id='o2'>Gallium Nitride</div>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { reveal: () => ctx.root.querySelector('#o2').style.background = '#10b981' } }",
+                    "steps": [{
+                        "narration": "For power electronics, we are already moving to Gallium Nitride.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.reveal()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "PPT_SLIDE",
+                    "html": "<div class='w-full h-full bg-[#f5f5f4] flex p-[5cqw] text-stone-800 relative overflow-hidden'>\n  <div class='w-[40%] flex flex-col justify-center z-10'>\n    <h1 class='text-[4cqw] font-serif font-black mb-6 text-stone-900 leading-none'>MOORE'S<br><span class='text-amber-600'>LAW</span></h1>\n    <ul class='list-disc pl-6 space-y-4 text-[1.5cqw] font-medium text-stone-700'>\n      <li>Observation by Gordon Moore (1965)</li>\n      <li>Transistors double every <span class='bg-amber-200 px-1'>2 years</span></li>\n      <li>Cost halves simultaneously</li>\n    </ul>\n  </div>\n  <div class='w-[60%] flex items-center justify-center z-10'>\n    <div class='bg-white p-4 shadow-xl rotate-2 border border-stone-200 w-full h-[60%]'><canvas id='chart-moore'></canvas></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const chart = ctx.chart('#chart-moore', { type: 'line', data: { labels: ['70', '80', '90', '00', '10', '20'], datasets: [{ label: 'Transistor Count', data: [2300, 134000, 1200000, 42000000, 2300000000, 50000000000], borderColor: '#d97706', backgroundColor: 'rgba(217, 119, 6, 0.1)', fill: true, tension: 0.4 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'logarithmic', grid: {display:false} } }, plugins: { legend: {display:false} } } }); return { remove: () => chart.destroy() } }",
+                    "steps": [{
+                        "narration": "For fifty years, this industry was governed by a single prophecy: Moore's Law.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "FIXED_TREE_DIAGRAM",
+                    "html": "<div class='w-full h-full bg-[#fdfbf5] flex items-center justify-center p-4 md:p-8 relative font-sans text-stone-800 overflow-hidden'>\n  <div class='film-grain opacity-20'></div>\n  <div class='relative w-full max-w-5xl aspect-video'>\n    <svg class='absolute inset-0 w-full h-full z-0 overflow-visible' viewBox='0 0 100 100' preserveAspectRatio='none' id='tree-svg'>\n      <path id='line-1' d='M50,15 C50,35 25,35 25,50' stroke='#0d9488' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out'/>\n      <path id='line-2' d='M50,15 C50,35 75,35 75,50' stroke='#0d9488' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out delay-[200ms]'/>\n      <path id='line-3' d='M25,58 C25,75 15,75 15,85' stroke='#0ea5e9' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out delay-[400ms]'/>\n      <path id='line-4' d='M25,58 C25,75 35,75 35,85' stroke='#0ea5e9' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out delay-[600ms]'/>\n    </svg>\n    <div id='n1' class='absolute top-[15%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-teal-600 rounded-xl px-4 py-2 text-stone-800 text-[clamp(0.7rem,1.5cqw,1.2rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-md z-10 whitespace-nowrap'>BOTTLENECKS</div>\n    <div id='n2' class='absolute top-[50%] left-[25%] -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-teal-500 rounded-xl px-4 py-2 text-stone-700 text-[clamp(0.6rem,1.2cqw,1rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-md z-10 whitespace-nowrap'>Lithography</div>\n    <div id='n3' class='absolute top-[50%] left-[75%] -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-teal-500 rounded-xl px-4 py-2 text-stone-700 text-[clamp(0.6rem,1.2cqw,1rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-md z-10 whitespace-nowrap'>Packaging</div>\n    <div id='n4' class='absolute top-[85%] left-[15%] -translate-x-1/2 -translate-y-1/2 bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-stone-600 text-[clamp(0.5rem,1cqw,0.9rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-sm z-10 whitespace-nowrap'>E U V Power</div>\n    <div id='n5' class='absolute top-[85%] left-[35%] -translate-x-1/2 -translate-y-1/2 bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-stone-600 text-[clamp(0.5rem,1cqw,0.9rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-sm z-10 whitespace-nowrap'>Lenses</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { showTier1: () => ctx.root.querySelector('#n1').classList.remove('opacity-0', 'scale-90'), showTier2: () => { ['n2', 'n3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); ctx.root.querySelector('#line-1').style.strokeDashoffset = '0'; ctx.root.querySelector('#line-2').style.strokeDashoffset = '0'; }, showTier3: () => { ['n4', 'n5'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); ctx.root.querySelector('#line-3').style.strokeDashoffset = '0'; ctx.root.querySelector('#line-4').style.strokeDashoffset = '0'; } } }",
+                    "steps": [{
+                            "narration": "But the bottlenecks remain. Scaling is getting harder.",
+                            "actions": [{
+                                    "type": "custom",
+                                    "fn": "Engine.state.activeScript.showTier1()"
+                                },
+                                {
+                                    "type": "custom",
+                                    "fn": "setTimeout(()=>Engine.state.activeScript.showTier2(), 500)"
+                                }
+                            ]
+                        },
+                        {
+                            "narration": "Powering the E U V lasers and manufacturing perfect lenses are pushing engineering to the breaking point.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.showTier3()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "PROS_CONS",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[5cqw] text-white'>\n  <div class='grid grid-cols-2 gap-[5cqw] w-full max-w-5xl'>\n    <div>\n      <div class='border-b-2 border-emerald-500 pb-4 mb-6'><h2 class='text-2xl font-bold'>GLOBALIZATION</h2></div>\n      <ul id='pro-list' class='space-y-4 text-stone-300'><li><i class='bi bi-check text-emerald-500'></i> Lowest Cost</li><li><i class='bi bi-check text-emerald-500'></i> Rapid Innovation</li></ul>\n    </div>\n    <div>\n      <div class='border-b-2 border-amber-500 pb-4 mb-6'><h2 class='text-2xl font-bold'>SOVEREIGNTY</h2></div>\n      <ul id='con-list' class='space-y-4 text-stone-300'><li><i class='bi bi-shield text-amber-500'></i> Supply Security</li><li><i class='bi bi-shield text-amber-500'></i> Higher Prices</li></ul>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { show: () => { ctx.root.querySelectorAll('li').forEach((li, i) => { li.style.opacity = 0; li.style.transform = 'translateX(-10px)'; setTimeout(() => { li.style.opacity = 1; li.style.transform = 'translateX(0)'; li.style.transition = 'all 0.5s'; }, i * 200); }); } } }",
+                    "steps": [{
+                        "narration": "We are now trading efficiency for security. The era of globalization is ending.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.show()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "SWARM_AI",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-swarm' class='absolute inset-0 w-full h-full'></div>\n  <div class='z-10 text-center font-mono text-stone-400'>NEURAL NETWORKS</div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let flock = []; let target; class Boid { constructor() { this.pos = p.createVector(p.random(p.width), p.random(p.height)); this.vel = p5.Vector.random2D(); this.vel.setMag(p.random(2, 4)); this.acc = p.createVector(); this.maxForce = 0.2; this.maxSpeed = 4; } edges() { if(this.pos.x > p.width) this.pos.x=0; else if (this.pos.x < 0) this.pos.x=p.width; if(this.pos.y > p.height) this.pos.y=0; else if(this.pos.y < 0) this.pos.y=p.height;} flock(boids) { let alignment = p.createVector(); let cohesion = p.createVector(); let separation = p.createVector(); let total = 0; for (let other of boids) { let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y); if (other != this && d < 50) { alignment.add(other.vel); cohesion.add(other.pos); let diff = p5.Vector.sub(this.pos, other.pos); diff.div(d*d); separation.add(diff); total++; } } if(total > 0) { alignment.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); cohesion.div(total).sub(this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); separation.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); } this.acc.add(alignment); this.acc.add(cohesion); this.acc.add(separation.mult(1.5)); } update() { this.pos.add(this.vel); this.vel.add(this.acc); this.vel.limit(this.maxSpeed); this.acc.mult(0); } show() { p.stroke('#10b981'); p.strokeWeight(4); p.point(this.pos.x, this.pos.y); } seek(target) { if(target){ let force = p5.Vector.sub(target, this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce*2); this.acc.add(force); }} } p.setup = () => { const container = ctx.root.querySelector('#p5-swarm'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<150; i++) flock.push(new Boid()); }; p.draw = () => { p.clear(); for (let boid of flock) { boid.edges(); boid.flock(flock); boid.seek(target); boid.update(); boid.show(); } }; p.setTarget = (x,y) => target = p.createVector(x,y); p.windowResized = () => { const container = ctx.root.querySelector('#p5-swarm'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-swarm'); return { remove: () => myP5.remove(), directSwarm: () => myP5.setTarget(ctx.root.clientWidth / 2, ctx.root.clientHeight / 2) }; }",
+                    "steps": [{
+                        "narration": "Ultimately, these chips power the A I swarms that will design the next generation of chips.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.directSwarm()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "MATRIX_RAIN",
+                    "html": "<div class='w-full h-full bg-[#051005] relative'><div id='p5-matrix' class='absolute inset-0 w-full h-full'></div></div>",
+                    "script": "(ctx) => { const sketch = p => { let streams = []; const symbolSize = 16; class Symbol { constructor(x, y, speed, first) { this.x = x; this.y = y; this.value; this.speed = speed; this.first = first; this.switchInterval = p.round(p.random(2, 20)); } setToRandomSymbol() { if (p.frameCount % this.switchInterval == 0) this.value = String.fromCharCode(0x30A0 + p.round(p.random(0, 96))); } rain() { this.y = (this.y >= p.height) ? 0 : this.y + this.speed; } } class Stream { constructor() { this.symbols = []; this.totalSymbols = p.round(p.random(5, 30)); this.speed = p.random(2, 7); } generateSymbols(x, y) { let first = p.round(p.random(0, 4)) == 1; for (let i=0; i<=this.totalSymbols; i++) { let symbol = new Symbol(x, y, this.speed, first); symbol.setToRandomSymbol(); this.symbols.push(symbol); y -= symbolSize; first = false; } } render() { this.symbols.forEach(symbol => { if (symbol.first) p.fill(180, 255, 180); else p.fill(0, 255, 70); p.text(symbol.value, symbol.x, symbol.y); symbol.rain(); symbol.setToRandomSymbol(); }); } } p.setup = () => { const container = ctx.root.querySelector('#p5-matrix'); p.createCanvas(container.clientWidth, container.clientHeight); let x = 0; for (let i = 0; i <= p.width / symbolSize; i++) { let stream = new Stream(); stream.generateSymbols(x, p.random(-1000, 0)); streams.push(stream); x += symbolSize; } p.textFont('monospace'); p.textSize(symbolSize); }; p.draw = () => { p.background(5, 20, 5, 150); streams.forEach(stream => stream.render()); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-matrix'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-matrix'); return { remove: () => myP5.remove() }; }",
+                    "steps": [{
+                        "narration": "A recursive loop of intelligence building intelligence.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "BLACK_HOLE",
+                    "html": "<div class='w-full h-full bg-black relative flex items-center justify-center'><div id='p5-bh' class='absolute inset-0'></div><div class='z-10 text-white font-mono bg-black/50 p-2'>THE LIMIT</div></div>",
+                    "script": "(ctx) => { const sketch = p => { p.setup = () => { const c = ctx.root.querySelector('#p5-bh'); p.createCanvas(c.clientWidth, c.clientHeight); }; p.draw = () => { p.background(0, 20); p.translate(p.width/2, p.height/2); p.noFill(); p.stroke(255, 50); for(let i=0; i<50; i++) { p.rotate(p.frameCount * 0.001); p.ellipse(0, 0, 100 + i*5 + p.sin(p.frameCount*0.05)*20, 100 + i*2); } }; }; const myP5 = ctx.p5(sketch, '#p5-bh'); return { remove: () => myP5.remove() } }",
+                    "steps": [{
+                        "narration": "Until we hit the physical limit. The point where electrons no longer behave.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "OUTRO",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,_#365314_0%,_#000_100%)] opacity-40'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <h1 id='final' class='text-[clamp(3rem,8cqw,10rem)] leading-none font-black text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-stone-600 tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      SILICON VEINS\n    </h1>\n    <p class='mt-[4cqh] text-stone-500 tracking-widest uppercase opacity-0 transition-opacity duration-1000 delay-500' id='final-sub'>End of Report</p>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); } } }",
+                    "steps": [{
+                            "narration": "The world runs on these veins. And the blood that flows through them is logic.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.reveal()"
+                            }]
+                        },
+                        {
+                            "narration": "Rendered by Video-Like.",
+                            "actions": []
+                        }
+                    ]
+                }
+            ]
         };
     </script>
     <script>
@@ -1694,6 +2153,416 @@ INSTRUCTIONS:
                 }, 1000);
             }, 3000); // Intro displays for 3 seconds before fading
         });
+    </script>
+    <!-- ========================================================================= -->
+    <!-- PRODUCTION RENDER ENGINE (12MBPS + SOFT SUBS + PERFECT CROP)              -->
+    <!-- ========================================================================= -->
+    <script>
+        const RenderStudio = {
+            recorder: null,
+            stream: null,
+            videoObj: null,
+            canvas: null,
+            ctx: null,
+            chunks: [],
+            isRecording: false,
+            rafId: null,
+            checkInterval: null,
+            escListener: null,
+            lastDrawTime: 0,
+
+            // Subtitle Logic
+            srtLines: [],
+            subInterval: null,
+            lastSubText: "",
+            recordingStartTime: 0,
+            currentSubtitleIndex: 1,
+
+            isMobile: () => {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+            },
+
+            init: () => {
+                if (RenderStudio.isMobile() || !navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) return;
+
+                // 1. Inject CSS
+                const style = document.createElement('style');
+                style.innerHTML = `
+                #render-overlay {
+                    position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+                    backdrop-filter: blur(20px); z-index: 10000;
+                    display: none; flex-direction: column; align-items: center;
+                    justify-content: center; color: white; font-family: 'Inter', sans-serif;
+                }
+                #render-overlay.active { display: flex; }
+                .render-box { background: #09090b; border: 1px solid #27272a; padding: 40px; border-radius: 4px; max-width: 500px; text-align: center; box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8); }
+                .render-box h2 { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #ef4444; text-transform: uppercase; letter-spacing: 2px; }
+                .render-box p { color: #a1a1aa; margin-bottom: 20px; line-height: 1.6; font-size: 13px; text-align: left; }
+                .render-btn { background: #ef4444; color: white; border: none; padding: 16px; font-size: 14px; font-weight: 700; letter-spacing: 1px; border-radius: 4px; cursor: pointer; width: 100%; transition: 0.2s; margin-top: 10px; text-transform: uppercase; }
+                .render-btn:hover { background: #dc2626; }
+                .render-cancel { background: transparent; color: #52525b; border: none; margin-top: 15px; font-size: 12px; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+                .render-cancel:hover { color: white; }
+                
+                #countdown-overlay {
+                    position: fixed; inset: 0; background: #000; z-index: 11000;
+                    display: none; align-items: center; justify-content: center; flex-direction: column;
+                    font-family: 'Inter', sans-serif;
+                }
+                #countdown-overlay.active { display: flex; }
+                #cd-val { font-size: 120px; font-weight: 900; color: #fff; line-height: 1; }
+                .countdown-sub { font-size: 14px; color: #555; margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; animation: pulse 1s infinite; }
+                @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+                /* FORCE HIDE CURSOR DURING RENDER */
+                body.is-rendering, body.is-rendering * { cursor: none !important; }
+            `;
+                document.head.appendChild(style);
+
+                // 2. Inject Menu Button
+                const systemMenu = document.getElementById('system-menu');
+                const divider = document.createElement('div');
+                divider.className = 'h-[1px] bg-white/10 my-1';
+                systemMenu.appendChild(divider);
+
+                const renderMenuBtn = document.createElement('div');
+                renderMenuBtn.className = 'p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3 text-red-400 font-bold';
+                renderMenuBtn.innerHTML = `<i class="bi bi-camera-reels-fill"></i> Render HD Video`;
+                renderMenuBtn.onclick = () => {
+                    document.getElementById('system-menu').classList.remove('open');
+                    document.getElementById('menu-btn').classList.remove('active');
+                    if (!Engine.state.paused) {
+                        Engine.togglePlay();
+                    }
+                    RenderStudio.showPreflight();
+                };
+                systemMenu.appendChild(renderMenuBtn);
+
+                // 3. Inject Modal
+                const overlay = document.createElement('div');
+                overlay.id = 'render-overlay';
+                overlay.innerHTML = `
+                <div class="render-box">
+                    <h2><i class="bi bi-broadcast"></i> Render Configuration</h2>
+                    <p>
+                        <i class="bi bi-display-fill text-white"></i>&nbsp; Select <b>"Entire Screen"</b>.<br>
+                        <i class="bi bi-volume-up-fill text-white"></i>&nbsp; Enable <b>"Share System Audio"</b>.<br>
+                        <i class="bi bi-arrows-fullscreen text-white"></i>&nbsp; App enters <b>Fullscreen</b> automatically.<br>
+                        <i class="bi bi-clock-fill text-white"></i>&nbsp; <b>10s</b> Stabilization Delay.
+                    </p>
+                    <div style="background: rgba(239,68,68,0.05); border-left: 2px solid #ef4444; padding: 15px; margin-bottom: 20px; color: #fca5a5; font-size: 12px; text-align: left;">
+                        <i class="bi bi-cc-circle"></i> Subtitles will be saved as a <b>Soft Track (.SRT)</b> matching the video.
+                    </div>
+                    <button class="render-btn" onclick="RenderStudio.startCapture()">Start Engine</button>
+                    <button class="render-cancel" onclick="document.getElementById('render-overlay').classList.remove('active')">Cancel</button>
+                </div>
+            `;
+                document.body.appendChild(overlay);
+
+                // 4. Inject Countdown
+                const cd = document.createElement('div');
+                cd.id = 'countdown-overlay';
+                cd.innerHTML = `<span id="cd-val">10</span><div class="countdown-sub">Stabilizing System...</div>`;
+                document.body.appendChild(cd);
+
+                // 5. Global Fullscreen Listener for Safety
+                document.addEventListener('fullscreenchange', () => {
+                    if (!document.fullscreenElement && RenderStudio.isRecording) {
+                        RenderStudio.stopCapture();
+                    }
+                });
+            },
+
+            showPreflight: () => {
+                if (!Engine.data) return Engine.ui.notify("Load a video first!", "error");
+                document.getElementById('render-overlay').classList.add('active');
+            },
+
+            startCapture: async () => {
+                document.getElementById('render-overlay').classList.remove('active');
+
+                try {
+                    // 1. Get Permission (Windowed)
+                    RenderStudio.stream = await navigator.mediaDevices.getDisplayMedia({
+                        video: {
+                            displaySurface: "monitor",
+                            frameRate: {
+                                ideal: 30
+                            }
+                        },
+                        audio: {
+                            echoCancellation: false,
+                            noiseSuppression: false,
+                            autoGainControl: false
+                        }
+                    });
+
+                    if (RenderStudio.stream.getAudioTracks().length === 0) {
+                        RenderStudio.stream.getTracks().forEach(t => t.stop());
+                        return Engine.ui.notify("FAILED: No System Audio", "error");
+                    }
+
+                    // 2. Force Fullscreen
+                    if (!document.fullscreenElement) {
+                        await document.body.requestFullscreen().catch(e => console.warn("Fullscreen blocked:", e));
+                    }
+
+                    // 3. Countdown
+                    setTimeout(() => {
+                        RenderStudio.beginCountdown();
+                    }, 1000);
+
+                } catch (err) {
+                    if (document.fullscreenElement) document.exitFullscreen();
+                    Engine.ui.notify("Render Cancelled", "error");
+                }
+            },
+
+            beginCountdown: () => {
+                const cd = document.getElementById('countdown-overlay');
+                const val = document.getElementById('cd-val');
+                cd.classList.add('active');
+
+                // Hide UI
+                document.body.classList.add('is-rendering');
+                document.getElementById('main-ui').style.display = 'none';
+                document.getElementById('notification-area').style.display = 'none';
+                document.getElementById('subtitle-layer').style.display = 'none'; // Hide HTML subs from screen (recorded separately)
+
+                let count = 10;
+                val.innerText = count;
+
+                const timer = setInterval(() => {
+                    count--;
+                    val.innerText = count;
+                    if (count <= 0) {
+                        clearInterval(timer);
+                        cd.classList.remove('active');
+                        RenderStudio.setupCanvasPipeline();
+                    }
+                }, 1000);
+            },
+
+            setupCanvasPipeline: async () => {
+                RenderStudio.videoObj = document.createElement('video');
+                RenderStudio.videoObj.muted = true;
+                RenderStudio.videoObj.srcObject = RenderStudio.stream;
+                await RenderStudio.videoObj.play();
+
+                RenderStudio.canvas = document.createElement('canvas');
+                const isPortrait = document.getElementById('stage-content').classList.contains('portrait');
+                RenderStudio.canvas.width = isPortrait ? 1080 : 1920;
+                RenderStudio.canvas.height = isPortrait ? 1920 : 1080;
+                RenderStudio.ctx = RenderStudio.canvas.getContext('2d', {
+                    alpha: false
+                });
+
+                const canvasStream = RenderStudio.canvas.captureStream(30);
+                const audioTrack = RenderStudio.stream.getAudioTracks()[0];
+                canvasStream.addTrack(audioTrack);
+
+                // 12 Mbps - High Quality, Stable
+                RenderStudio.recorder = new MediaRecorder(canvasStream, {
+                    mimeType: 'video/webm; codecs=vp9',
+                    videoBitsPerSecond: 12000000
+                });
+
+                RenderStudio.chunks = [];
+                RenderStudio.recorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) RenderStudio.chunks.push(e.data);
+                };
+                RenderStudio.recorder.onstop = RenderStudio.finalizeVideo;
+
+                // Reset Engine
+                Engine.tts.cancel();
+                Engine.audioEl.pause();
+                Engine.audioEl.currentTime = 0;
+                Engine.state.scene = 0;
+                Engine.state.step = 0;
+                Engine.state.paused = false;
+                Engine.render(0);
+
+                // Init SRT Recorder
+                RenderStudio.initSrtRecorder();
+
+                // Start
+                RenderStudio.isRecording = true;
+                RenderStudio.recorder.start();
+                RenderStudio.drawLoop();
+
+                setTimeout(() => {
+                    Engine.audioEl.play().catch(e => console.log(e));
+                    Engine.playStep();
+                }, 500);
+
+                // ESC Listener - The Critical Part
+                RenderStudio.escListener = (e) => {
+                    if (e.key === "Escape") {
+                        e.preventDefault();
+                        if (RenderStudio.isRecording) RenderStudio.stopCapture();
+                    }
+                };
+                window.addEventListener('keydown', RenderStudio.escListener);
+
+                // Auto-Stop Monitor
+                RenderStudio.checkInterval = setInterval(() => {
+                    if (Engine.state.paused && Engine.state.scene === Engine.data.scenes.length - 1 && Engine.state.step === Engine.data.scenes[Engine.state.scene].steps.length - 1) {
+                        setTimeout(() => {
+                            if (RenderStudio.isRecording) RenderStudio.stopCapture();
+                        }, 3000);
+                    }
+                }, 1000);
+            },
+
+            // --- SUBTITLE LOGIC ---
+            initSrtRecorder: () => {
+                RenderStudio.srtLines = [];
+                RenderStudio.currentSubtitleIndex = 1;
+                RenderStudio.recordingStartTime = Date.now();
+                RenderStudio.lastSubText = "";
+
+                // Check for subtitle text changes every 100ms
+                RenderStudio.subInterval = setInterval(() => {
+                    const el = document.getElementById('subtitle-text');
+                    const text = el ? el.innerText : "";
+                    if (text !== RenderStudio.lastSubText && text.trim().length > 0) {
+                        RenderStudio.lastSubText = text;
+                        RenderStudio.logSubtitle(text);
+                    }
+                }, 100);
+            },
+
+            logSubtitle: (text) => {
+                const now = Date.now() - RenderStudio.recordingStartTime;
+                if (RenderStudio.srtLines.length > 0) {
+                    RenderStudio.srtLines[RenderStudio.srtLines.length - 1].end = now;
+                }
+                RenderStudio.srtLines.push({
+                    id: RenderStudio.currentSubtitleIndex++,
+                    start: now,
+                    end: now + 5000,
+                    text: text.replace(/\n/g, ' ')
+                });
+            },
+
+            formatTime: (ms) => {
+                const date = new Date(ms);
+                const h = String(Math.floor(ms / 3600000)).padStart(2, '0');
+                const m = String(date.getUTCMinutes()).padStart(2, '0');
+                const s = String(date.getUTCSeconds()).padStart(2, '0');
+                const msStr = String(date.getUTCMilliseconds()).padStart(3, '0');
+                return `${h}:${m}:${s},${msStr}`;
+            },
+
+            generateSrtFile: () => {
+                if (RenderStudio.srtLines.length > 0) {
+                    const now = Date.now() - RenderStudio.recordingStartTime;
+                    if (RenderStudio.srtLines[RenderStudio.srtLines.length - 1].end > now) {
+                        RenderStudio.srtLines[RenderStudio.srtLines.length - 1].end = now;
+                    }
+                }
+                let srtContent = "";
+                RenderStudio.srtLines.forEach(line => {
+                    srtContent += `${line.id}\n${RenderStudio.formatTime(line.start)} --> ${RenderStudio.formatTime(line.end)}\n${line.text}\n\n`;
+                });
+                return srtContent;
+            },
+            // ----------------------
+
+            drawLoop: (timestamp) => {
+                if (!RenderStudio.isRecording) return;
+
+                if (timestamp - RenderStudio.lastDrawTime >= 33.3) {
+                    const stage = document.getElementById('stage-content');
+                    const rect = stage.getBoundingClientRect();
+                    const scaleX = RenderStudio.videoObj.videoWidth / window.innerWidth;
+                    const scaleY = RenderStudio.videoObj.videoHeight / window.innerHeight;
+
+                    RenderStudio.ctx.drawImage(
+                        RenderStudio.videoObj,
+                        rect.left * scaleX, rect.top * scaleY, rect.width * scaleX, rect.height * scaleY,
+                        0, 0, RenderStudio.canvas.width, RenderStudio.canvas.height
+                    );
+                    RenderStudio.lastDrawTime = timestamp;
+                }
+                RenderStudio.rafId = requestAnimationFrame(RenderStudio.drawLoop);
+            },
+
+            stopCapture: () => {
+                // 1. Mark as stopped to prevent loops
+                RenderStudio.isRecording = false;
+
+                // 2. STOP RECORDER FIRST (Important: Do this before exiting FS)
+                if (RenderStudio.recorder && RenderStudio.recorder.state !== 'inactive') {
+                    RenderStudio.recorder.stop();
+                }
+
+                // 3. Cleanup logic
+                clearInterval(RenderStudio.checkInterval);
+                clearInterval(RenderStudio.subInterval);
+                cancelAnimationFrame(RenderStudio.rafId);
+                window.removeEventListener('keydown', RenderStudio.escListener);
+
+                // 4. Stop Stream (kills the "Sharing" browser bar)
+                if (RenderStudio.stream) RenderStudio.stream.getTracks().forEach(track => track.stop());
+
+                // 5. Pause Engine
+                Engine.togglePlay();
+
+                // 6. NOW Exit Fullscreen (Safe because recording has stopped)
+                if (document.fullscreenElement) document.exitFullscreen().catch(e => console.log(e));
+
+                // 7. Restore UI
+                document.body.classList.remove('is-rendering');
+                document.getElementById('main-ui').style.display = 'flex';
+                document.getElementById('notification-area').style.display = 'flex';
+                document.getElementById('subtitle-layer').style.display = '';
+
+                Engine.ui.notify("Saving High Quality Video...", "info");
+            },
+
+            finalizeVideo: () => {
+                let safeTitle = "Video_Render";
+                if (Engine.data && Engine.data.meta && Engine.data.meta.title) {
+                    safeTitle = Engine.data.meta.title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+                }
+
+                // DOWNLOAD VIDEO
+                const blob = new Blob(RenderStudio.chunks, {
+                    type: 'video/webm'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${safeTitle}.webm`;
+                document.body.appendChild(a);
+                a.click();
+
+                // DOWNLOAD SRT (Identical filename)
+                const srtContent = RenderStudio.generateSrtFile();
+                const srtBlob = new Blob([srtContent], {
+                    type: 'text/srt'
+                });
+                const srtUrl = URL.createObjectURL(srtBlob);
+                const srtA = document.createElement('a');
+                srtA.style.display = 'none';
+                srtA.href = srtUrl;
+                srtA.download = `${safeTitle}.srt`;
+                document.body.appendChild(srtA);
+                srtA.click();
+
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    document.body.removeChild(srtA);
+                    URL.revokeObjectURL(url);
+                    URL.revokeObjectURL(srtUrl);
+                }, 100);
+
+                Engine.ui.notify("Video & Subtitles Downloaded!", "success");
+            }
+        };
+
+        window.addEventListener('load', () => setTimeout(RenderStudio.init, 1000));
     </script>
 </body>
 
