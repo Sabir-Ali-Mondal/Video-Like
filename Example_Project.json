@@ -7,6 +7,22 @@
   },
   "scenes": [
     {
+      "type": "INTRO_PREMIUM_INSTANT",
+      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black perspective-[1000px]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564\")] bg-cover bg-center opacity-40 scale-110 transition-transform duration-[20s] ease-linear' style='animation: drift 20s infinite alternate;'></div>\n  <style>@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-emerald-900/40 via-transparent to-rose-900/40 opacity-80 blur-3xl animate-[spin_30s_linear_infinite]'></div>\n  <div class='film-grain opacity-30 mix-blend-overlay'></div>\n  <div class='z-20 text-center px-[5cqw] relative'>\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.2cqw] py-[0.6cqh] border border-emerald-500/30 rounded-full bg-black/60 backdrop-blur-md text-emerald-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,0.9rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(16,185,129,0.15)]'>\n        <span class='w-2 h-2 rounded-full bg-emerald-500 animate-pulse'></span> \n        REAL-TIME RENDER\n    </div>\n    <div class='relative'>\n        <h1 class='absolute inset-0 text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-emerald-500/10 blur-xl select-none'>VIDEO-LIKE</h1>\n        <h1 class='text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-600 tracking-tighter drop-shadow-2xl'>VIDEO-LIKE</h1>\n    </div>\n    <div class='mt-[3cqh] overflow-hidden'>\n        <p id='sub' class='text-[clamp(1rem,2.5cqw,2.5rem)] text-stone-300 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out delay-200'>The end of pixel hallucination.</p>\n    </div>\n  </div>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#000_120%)] pointer-events-none'></div>\n</div>",
+      "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'); } } }",
+      "steps": [
+        {
+          "narration": "Generative A I guesses pixels. We render facts. Let's demonstrate by building a documentary from scratch.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.init()"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "type": "INTRO_TITLE_CINEMATIC",
       "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670\")] bg-cover bg-center opacity-40 scale-110' style='animation: slowPan 20s infinite alternate linear;'></div>\n  <style>@keyframes slowPan { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-90'></div>\n  <div class='z-20 text-center px-[5cqw]'>\n    <div class='inline-block mb-[3cqh] opacity-0 translate-y-4 transition-all duration-1000' id='tag'>\n        <span class='bg-emerald-500 text-black font-bold px-[1cqw] py-[0.5cqw] text-[clamp(0.6rem,1cqw,1.2rem)] tracking-[0.3em] uppercase'>Original Documentary</span>\n    </div>\n    <h1 id='title-main' class='text-[clamp(4rem,12cqw,14rem)] leading-[0.85] font-black text-white tracking-tighter mix-blend-screen opacity-0 scale-90 blur-lg transition-all duration-[2s] ease-out'>\n      SILICON<br><span class='text-transparent bg-clip-text bg-gradient-to-b from-stone-200 to-stone-600'>BLUEPRINT</span>\n    </h1>\n    <div id='line' class='h-[2px] bg-emerald-500 mx-auto mt-[6cqh] w-0 transition-all duration-[1.5s] ease-in-out shadow-[0_0_20px_#10b981]'></div>\n  </div>\n</div>",
       "script": "(ctx) => { return { play: () => { ctx.root.querySelector('#tag').classList.remove('opacity-0', 'translate-y-4'); setTimeout(() => ctx.root.querySelector('#title-main').classList.remove('opacity-0', 'scale-90', 'blur-lg'), 800); setTimeout(() => ctx.root.querySelector('#line').style.width = '30%', 1500); } } }",
