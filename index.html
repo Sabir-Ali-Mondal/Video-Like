@@ -37,6 +37,27 @@
             flex-direction: column;
         }
 
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #343c45;
+            border-radius: 50px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+            transition: background-color 0.2s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #94a3b8;
+        }
+
         /* SPLASH SCREEN */
         #splash-screen {
             position: fixed;
@@ -368,6 +389,12 @@
         <div class="relative">
             <button class="btn-ui" onclick="Engine.ui.toggleMenu()" id="menu-btn"><i class="bi bi-grid-fill"></i></button>
             <div id="system-menu">
+                <div class="text-center md:hidden mt-2 px-3 py-2 rounded-md bg-blue-500/10 border border-blue-400/30 text-blue-300 text-[10px] leading-tight sm:text-xs">
+                    <div class="font-semibold text-blue-200 mb-1">Export Guide</div>
+                    <div>Screen Record (Media On)</div>
+                    <div class="text-blue-400/70">↓</div>
+                    <div>Crop in Photos</div>
+                </div>
                 <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('ai')"><i class="bi bi-robot text-purple-400"></i> AI Architect</div>
                 <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('import')"><i class="bi bi-code-slash text-green-400"></i> Project JSON</div>
                 <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('audio')"><i class="bi bi-music-note-beamed text-pink-400"></i> Background Music</div>
@@ -375,6 +402,7 @@
                 <div class="h-[1px] bg-white/10 my-1"></div>
                 <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.toggleSubtitles()"><i class="bi bi-card-text text-yellow-400"></i> Toggle Subtitles</div>
                 <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.toggleRatio()"><i class="bi bi-phone"></i> Toggle Portrait</div>
+
             </div>
         </div>
         <button class="btn-ui" title="Previous Scene (Left Arrow)" onclick="Engine.prev()"><i class="bi bi-skip-start-fill"></i></button>
@@ -386,7 +414,7 @@
     <!-- AUDIO MODAL -->
     <div id="modal-audio" class="modal-overlay">
         <div class="modal-box w-[600px]">
-            <h2 class="text-3xl font-black mb-8 italic tracking-tighter">BACKGROUND MUSIC</h2>
+            <h2 class="text-xl font-black mb-8 italic tracking-tighter">BACKGROUND MUSIC</h2>
             <div class="mb-8">
                 <div class="flex justify-between mb-2">
                     <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">MUSIC VOLUME</label>
@@ -439,7 +467,7 @@
     <!-- SETTINGS MODAL -->
     <div id="modal-settings" class="modal-overlay">
         <div class="modal-box">
-            <h2 class="text-3xl font-black mb-6 italic tracking-tighter">STUDIO SETTINGS</h2>
+            <h2 class="text-xl font-black mb-6 italic tracking-tighter">STUDIO SETTINGS</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Global Voice settings -->
@@ -623,7 +651,7 @@
         <div class="modal-box relative">
 
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-4xl font-black italic tracking-tighter">ARCHITECT</h2>
+                <h2 class="text-xl font-black italic tracking-tighter">ARCHITECT</h2>
                 <button onclick="Engine.ui.copyPrompt()" class="text-sm font-semibold tracking-widest bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 px-3 md:px-4 py-2 rounded-lg text-yellow-400 transition">
                     <i class="bi bi-copy mr-1"></i> <span class="hidden md:inline">Research </span>Prompt
                 </button>
@@ -2355,7 +2383,7 @@ INSTRUCTIONS:
                 document.getElementById('notification-area').style.display = 'none';
                 document.getElementById('subtitle-layer').style.display = 'none'; // Hide HTML subs
 
-                let count = 15;
+                let count = 10;
                 val.innerText = count;
 
                 const timer = setInterval(() => {
