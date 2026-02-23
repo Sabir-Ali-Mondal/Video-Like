@@ -27,7 +27,7 @@ Video-Like is a browser-based rendering engine designed for structured visual le
 
 Want to know exactly how the rendering pipeline works, view the full list of scene possibilities, or understand the underlying JavaScript architecture? 
 
-**[Click here to read the Full PROJECT OVERVIEW & Technical Specification](https://github.com/Sabir-Ali-Mondal/VIDEO-LIKE/blob/main/PROJECT_OVERVIEW.md)**
+**[Click here to read the Full PROJECT OVERVIEW & Technical Specification](https://github.com/Sabir-Ali-Mondal/Video-Like/blob/main/PROJECT_OVERVIEW.md)**
 
 *The guide above serves as the complete manual for developers and users, breaking down every core function, the AI prompting strategy, the UI/UX philosophy, and how the engine translates raw code into cinematic video.*
 
