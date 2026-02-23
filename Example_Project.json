@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "title": "The Silicon Blueprint",
+    "audio": "https://res.cloudinary.com/dmttn34te/video/upload/v1763065409/study-110111_at7lye.mp3",
+    "lang": "en-US",
+    "podcast": "true"
+  },
+  "scenes": [
+    {
+      "type": "INTRO_TITLE_CINEMATIC",
+      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670\")] bg-cover bg-center opacity-40 scale-110' style='animation: slowPan 20s infinite alternate linear;'></div>\n  <style>@keyframes slowPan { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-90'></div>\n  <div class='z-20 text-center px-[5cqw]'>\n    <div class='inline-block mb-[3cqh] opacity-0 translate-y-4 transition-all duration-1000' id='tag'>\n        <span class='bg-emerald-500 text-black font-bold px-[1cqw] py-[0.5cqw] text-[clamp(0.6rem,1cqw,1.2rem)] tracking-[0.3em] uppercase'>Original Documentary</span>\n    </div>\n    <h1 id='title-main' class='text-[clamp(4rem,12cqw,14rem)] leading-[0.85] font-black text-white tracking-tighter mix-blend-screen opacity-0 scale-90 blur-lg transition-all duration-[2s] ease-out'>\n      SILICON<br><span class='text-transparent bg-clip-text bg-gradient-to-b from-stone-200 to-stone-600'>BLUEPRINT</span>\n    </h1>\n    <div id='line' class='h-[2px] bg-emerald-500 mx-auto mt-[6cqh] w-0 transition-all duration-[1.5s] ease-in-out shadow-[0_0_20px_#10b981]'></div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { play: () => { ctx.root.querySelector('#tag').classList.remove('opacity-0', 'translate-y-4'); setTimeout(() => ctx.root.querySelector('#title-main').classList.remove('opacity-0', 'scale-90', 'blur-lg'), 800); setTimeout(() => ctx.root.querySelector('#line').style.width = '30%', 1500); } } }",
+      "steps": [
+        {
+          "narration": "It is the most complex object ever built by human hands.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.play()"
+            }
+          ]
+        },
+        {
+          "narration": "It controls your bank, your car, your phone, and your military.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "CODE_TERMINAL_LOGIC",
+      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,3cqmin,2.5rem)]'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/carbon-fibre.png\")] opacity-10'></div>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-emerald-500 to-blue-600'></div>\n  <div class='z-10 relative max-w-[90cqw] mx-auto w-full'>\n    <div id='hl-box' class='absolute left-[-2cqw] w-[104%] h-[1.5em] bg-emerald-900/20 border-l-[4px] border-emerald-500 opacity-0 transition-all duration-300 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-stone-400 leading-[1.8]'>\n      <div id='line-1' class='opacity-0 transition-opacity'><span class='text-purple-400'>import</span> <span class='text-white'>global_infrastructure</span></div>\n      <div id='line-2' class='opacity-0 transition-opacity mt-[1cqh]'><span class='text-blue-400'>const</span> <span class='text-yellow-200'>foundation</span> = <span class='text-emerald-400'>\"Silicon\"</span></div>\n      <div id='line-3' class='opacity-0 transition-opacity'><span class='text-purple-400'>if</span> <span class='text-blue-300'>foundation</span> == <span class='text-red-400'>NULL</span>:</div>\n      <div id='line-4' class='opacity-0 transition-opacity'>&nbsp;&nbsp;system.<span class='text-red-500'>collapse()</span></div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { const highlightLine = (idx) => { const el = ctx.root.querySelector(`#line-${idx}`); const hl = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); hl.classList.remove('opacity-0'); hl.style.top = `${el.offsetTop}px`; hl.style.height = `${el.offsetHeight}px`; }; return { step1: () => highlightLine(1), step2: () => { highlightLine(2); }, step3: () => { highlightLine(3); setTimeout(()=>highlightLine(4), 400); } } }",
+      "steps": [
+        {
+          "narration": "Modern civilization rests on a foundation of pure logic.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.step1()"
+            },
+            {
+              "type": "custom",
+              "fn": "setTimeout(()=>Engine.state.activeScript.step2(), 1000)"
+            }
+          ]
+        },
+        {
+          "narration": "If the silicon stops, the world stops.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.step3()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "PARALLAX_SCALE_ZOOM",
+      "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center font-mono'>\n  <div class='absolute inset-0 opacity-20' style='background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px;'></div>\n  <div id='layer-hair' class='absolute w-[30cqw] h-[120%] bg-stone-800 border-x-4 border-black flex items-center justify-center transition-all duration-[2000ms] ease-[cubic-bezier(0.7,0,0.3,1)] z-10 origin-center'>\n    <div class='text-white -rotate-90 text-[3cqw] font-bold whitespace-nowrap opacity-50'>HUMAN HAIR (80,000nm)</div>\n  </div>\n  <div id='layer-chip' class='absolute w-[40cqw] h-[40cqw] border-2 border-emerald-500/50 bg-emerald-900/10 backdrop-blur-md rounded-xl flex flex-col items-center justify-center opacity-0 scale-0 transition-all duration-[2000ms] ease-[cubic-bezier(0.7,0,0.3,1)] z-20 shadow-[0_0_100px_rgba(16,185,129,0.2)]'>\n     <div class='text-emerald-400 text-[5cqw] font-black'>3nm</div>\n     <div class='text-emerald-200 text-[1.5cqw]'>GATE WIDTH</div>\n  </div>\n  <div class='absolute bottom-[10%] w-full text-center z-30'>\n     <div class='text-stone-500 text-[1.2cqw]'>MAGNIFICATION</div>\n     <div id='zoom-val' class='text-white text-[3cqw] font-bold font-mono'>1x</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { zoom: () => { ctx.root.querySelector('#layer-hair').style.transform = 'scale(60) translateX(-20%)'; ctx.root.querySelector('#layer-hair').style.opacity = '0'; ctx.root.querySelector('#layer-chip').classList.remove('opacity-0', 'scale-0'); ctx.root.querySelector('#layer-chip').classList.add('scale-100'); let v = 1; const t = setInterval(() => { v += 1000; ctx.root.querySelector('#zoom-val').innerText = v + 'x'; if(v >= 20000) { clearInterval(t); ctx.root.querySelector('#zoom-val').innerText = '20,000x'; ctx.root.querySelector('#zoom-val').classList.add('text-emerald-500'); } }, 10); } } }",
+      "steps": [
+        {
+          "narration": "To understand the stakes, we must change our perspective.",
+          "actions": []
+        },
+        {
+          "narration": "This is a human hair. To find a modern transistor, we must zoom in twenty thousand times.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.zoom()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "EXPLODED_VIEW_ASML",
+      "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center perspective-[2000px] overflow-hidden relative'>\n  <div class='absolute top-[5%] left-[5%] font-mono text-emerald-500 tracking-widest z-20 text-[1.5cqw] border-l-4 border-emerald-500 pl-4'>\n    <div class='text-white font-bold'>ASML HIGH-NA EUV</div>\n    <div class='text-stone-400 text-[1cqw]'>PRICE: $380,000,000</div>\n  </div>\n  <div id='machine' class='relative w-[40cqw] h-[30cqw] transition-transform duration-[2s] ease-[cubic-bezier(0.25,1,0.5,1)]' style='transform-style: preserve-3d; transform: rotateX(60deg) rotateZ(0deg);'>\n    <div class='absolute inset-0 bg-stone-900 border-2 border-stone-600 flex items-center justify-center text-white font-bold transition-transform duration-[1.5s] shadow-[0_20px_50px_rgba(0,0,0,0.8)]' id='l1' style='transform: translateZ(0px)'>BASE FRAME</div>\n    <div class='absolute inset-0 bg-stone-800 border-2 border-stone-500 flex items-center justify-center text-white font-bold transition-transform duration-[1.5s] shadow-[0_20px_50px_rgba(0,0,0,0.8)]' id='l2' style='transform: translateZ(20px)'>OPTICS (ZEISS)</div>\n    <div class='absolute inset-0 bg-stone-700 border-2 border-stone-400 flex items-center justify-center text-white font-bold transition-transform duration-[1.5s] shadow-[0_20px_50px_rgba(0,0,0,0.8)]' id='l3' style='transform: translateZ(40px)'>LASER SOURCE</div>\n    <div class='absolute inset-0 bg-emerald-900/60 border-2 border-emerald-400 flex items-center justify-center text-emerald-300 font-black transition-transform duration-[1.5s] backdrop-blur-md shadow-[0_0_60px_rgba(16,185,129,0.4)]' id='l4' style='transform: translateZ(60px)'>WAFER STAGE</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { expand: () => { ctx.root.querySelector('#machine').style.transform = 'rotateX(60deg) rotateZ(45deg) scale(0.8)'; ctx.root.querySelector('#l1').style.transform = 'translateZ(-150px)'; ctx.root.querySelector('#l2').style.transform = 'translateZ(0px)'; ctx.root.querySelector('#l3').style.transform = 'translateZ(150px)'; ctx.root.querySelector('#l4').style.transform = 'translateZ(300px)'; } } }",
+      "steps": [
+        {
+          "narration": "To print at this scale, we need the most advanced machine ever built. The A S M L High N A system.",
+          "actions": []
+        },
+        {
+          "narration": "It contains one hundred thousand components. It costs three hundred eighty million dollars per unit.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.expand()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "PARTICLE_PHYSICS",
+      "html": "<div class='w-full h-full bg-black flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-laser' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 bg-black/80 text-white p-4 border-l-4 border-rose-500 rounded backdrop-blur-md absolute top-[10cqh] left-[5cqw]'>\n    <div class='font-mono text-rose-400 text-[1cqw] tracking-widest'>EUV LITHOGRAPHY</div>\n    <div class='text-[2cqw] font-bold'>TIN DROPLET VAPORIZATION</div>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let droplet = {x: 0, y: 0, r: 0}; let laser = {active: false}; let debris = []; p.setup = () => { const c = ctx.root.querySelector('#p5-laser'); p.createCanvas(c.clientWidth, c.clientHeight); reset(); }; const reset = () => { droplet = {x: p.width/2, y: p.height/2, r: 60}; laser = {active: false}; debris = []; }; p.draw = () => { p.clear(); p.background(0); if(droplet.r > 0) { p.fill(150); p.noStroke(); p.circle(droplet.x, droplet.y, droplet.r * 2); p.fill(200); p.circle(droplet.x - 10, droplet.y - 10, droplet.r); } if(laser.active) { p.stroke('#ec4899'); p.strokeWeight(12); p.line(0, p.height, droplet.x, droplet.y); p.stroke('#fbcfe8'); p.strokeWeight(4); p.line(0, p.height, droplet.x, droplet.y); droplet.r -= 3; for(let i=0; i<15; i++) debris.push({x: droplet.x, y: droplet.y, vx: p.random(-8,8), vy: p.random(-8,8), life: 255}); } debris.forEach(d => { d.x += d.vx; d.y += d.vy; d.life -= 8; p.fill(236, 72, 153, d.life); p.noStroke(); p.circle(d.x, d.y, p.random(2,6)); }); }; p.fire = () => laser.active = true; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-laser'); return { remove: () => myP5.remove(), shoot: () => myP5.fire() } }",
+      "steps": [
+        {
+          "narration": "Inside, a laser strikes a droplet of molten tin fifty thousand times per second.",
+          "actions": []
+        },
+        {
+          "narration": "This creates plasma warmer than the surface of the sun, generating the light needed to etch the chip.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.shoot()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CHART_HOLO_DOUGHNUT",
+      "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center p-[5cqw] relative overflow-hidden'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,#10b98110_0%,transparent_50%)]'></div>\n  <div class='relative w-[50cqmin] h-[50cqmin] z-10 perspective-[1000px]'>\n    <div class='absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none'>\n      <div class='text-stone-500 font-mono text-[clamp(0.6rem,1cqw,1rem)] tracking-widest uppercase mb-2'>TSMC MARKET SHARE</div>\n      <div class='text-white text-[clamp(2rem,5cqw,5rem)] font-black italic drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]'>92%</div>\n      <div class='text-emerald-500 text-[1cqw] tracking-widest'>ADVANCED NODES (<10nm)</div>\n    </div>\n    <div id='holo-container' class='w-full h-full drop-shadow-[0_0_50px_rgba(16,185,129,0.3)]'>\n      <div class='w-full h-full relative'><canvas id='chart-doughnut'></canvas></div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { const chart = ctx.chart('#chart-doughnut', { type: 'doughnut', data: { labels: ['TSMC Advanced', 'Rest of World'], datasets: [{ data: [0, 100], backgroundColor: ['#10b981', '#1c1917'], borderWidth: 0, cutout: '85%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' } } }); const container = ctx.root.querySelector('#holo-container'); let rotation = 0; let frameId; const spin = () => { rotation += 0.2; if(container) { container.style.transform = `rotateX(40deg) rotateZ(${rotation}deg)`; } frameId = window.requestAnimationFrame(spin); }; spin(); return { remove: () => { window.cancelAnimationFrame(frameId); chart.destroy(); }, fill: () => { chart.data.datasets[0].data = [92, 8]; chart.update(); } }; }",
+      "steps": [
+        {
+          "narration": "This extreme difficulty creates a monopoly. For advanced chips, one company, TSMC, controls ninety-two percent of the market.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.fill()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MAP_TOPOLOGY_PAN",
+      "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden font-mono text-white border-4 border-stone-800'>\n  <div id='map-world' class='absolute inset-0 z-0 opacity-80'></div>\n  <div class='absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.9)] z-10'></div>\n  <div class='absolute top-[5%] right-[5%] z-20 bg-black/80 p-4 border-l-4 border-emerald-500 backdrop-blur-md shadow-2xl'>\n    <h1 class='text-emerald-500 font-bold tracking-widest mb-1 text-[clamp(0.8rem,1.2cqw,1.2rem)]'>STRATEGIC CHOKEPOINT</h1>\n    <div class='text-[clamp(0.6rem,0.8cqw,0.8rem)] text-stone-400'>TARGET: <span class='text-white font-bold'>TAIWAN STRAIT</span></div>\n  </div>\n  <div id='marker-pulse' class='absolute w-[4cqw] h-[4cqw] bg-rose-500 rounded-full mix-blend-screen opacity-0 scale-0 transition-all duration-500 z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none' style='top:50%; left:50%;'>\n     <div class='w-full h-full bg-rose-500 rounded-full animate-ping opacity-75'></div>\n  </div>\n</div>",
+      "script": "(ctx) => { const map = ctx.map('#map-world', { center: [37.7749, -122.4194], zoom: 3, zoomControl: false, attributionControl: false }); L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map); setTimeout(()=>map.invalidateSize(), 200); return { focus: () => { map.flyTo([23.6978, 120.9605], 6, {duration: 3, easeLinearity: 0.25}); setTimeout(() => { ctx.root.querySelector('#marker-pulse').classList.remove('opacity-0', 'scale-0'); }, 3000); } } }",
+      "steps": [
+        {
+          "narration": "Where is this critical infrastructure? Not in America. Not in Europe.",
+          "actions": []
+        },
+        {
+          "narration": "It is here. Sitting on one of the most volatile geopolitical fault lines on Earth.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.focus()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SVG_DETECTIVE_BOARD",
+      "html": "<div class='w-full h-full bg-[#292524] relative flex items-center justify-center p-[4cqw] overflow-hidden'>\n  <div class='absolute inset-0 opacity-10 bg-[url(\"https://www.transparenttextures.com/patterns/wood-pattern.png\")]'></div>\n  <div class='relative w-full h-full bg-stone-900/50 border border-stone-700 shadow-2xl overflow-hidden rounded-xl'>\n    <svg class='absolute inset-0 w-full h-full z-10 pointer-events-none' viewBox='0 0 100 100' preserveAspectRatio='none'>\n      <path id='con-1' d='M20,20 Q50,50 80,20' fill='none' stroke='#f59e0b' stroke-width='0.4' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-[1500ms] ease-in-out' />\n      <path id='con-2' d='M20,20 Q40,50 50,80' fill='none' stroke='#f59e0b' stroke-width='0.4' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-[1500ms] ease-in-out delay-300' />\n      <path id='con-3' d='M80,20 Q60,50 50,80' fill='none' stroke='#f59e0b' stroke-width='0.4' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-[1500ms] ease-in-out delay-500' />\n    </svg>\n    <div id='item-1' class='absolute top-[10%] left-[10%] w-[18%] bg-white p-2 rotate-[-3deg] opacity-0 scale-90 transition-all duration-500 shadow-lg'>\n      <img src='https://images.unsplash.com/photo-1526304640152-d4619684e484?q=80&w=2000' class='w-full aspect-video object-cover grayscale'>\n      <div class='text-black text-[1cqw] font-bold text-center mt-1'>US DESIGN</div>\n    </div>\n    <div id='item-2' class='absolute top-[10%] right-[10%] w-[18%] bg-white p-2 rotate-[2deg] opacity-0 scale-90 transition-all duration-500 shadow-lg'>\n      <img src='https://images.unsplash.com/photo-1555664424-778a69022365?q=80&w=2000' class='w-full aspect-video object-cover grayscale'>\n      <div class='text-black text-[1cqw] font-bold text-center mt-1'>EU EQUIPMENT</div>\n    </div>\n    <div id='item-3' class='absolute bottom-[10%] left-[41%] w-[18%] bg-white p-2 rotate-[-1deg] opacity-0 scale-90 transition-all duration-500 shadow-xl border-4 border-red-500'>\n      <div class='bg-emerald-800 aspect-video flex items-center justify-center text-white font-black text-[3cqw]'>FAB</div>\n      <div class='text-black text-[1cqw] font-bold text-center mt-1'>TAIWAN</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ['item-1', 'item-2', 'item-3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); setTimeout(() => { ctx.root.querySelector('#con-1').style.strokeDashoffset = '0'; ctx.root.querySelector('#con-2').style.strokeDashoffset = '0'; ctx.root.querySelector('#con-3').style.strokeDashoffset = '0'; }, 800); } } }",
+      "steps": [
+        {
+          "narration": "The supply chain is a fragile web. Designs from California. Lasers from Germany.",
+          "actions": []
+        },
+        {
+          "narration": "All converging on a single point of failure. If this link breaks, the system crashes.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "NEON_DATA_CRASH",
+      "html": "<div class='w-full h-full bg-stone-900 flex flex-col p-[5cqw] relative overflow-hidden font-mono'>\n  <div class='z-10 flex justify-between items-end mb-[4cqh] border-b border-stone-700 pb-4'>\n    <div><h2 class='text-stone-500 text-sm'>GLOBAL REVENUE</h2><h1 class='text-white text-4xl font-bold'>TECH SECTOR</h1></div>\n    <div class='text-emerald-400 text-4xl font-bold' id='val'>STABLE</div>\n  </div>\n  <div class='flex-1 relative bg-stone-800 rounded-xl p-4'><canvas id='chart-crash'></canvas></div>\n</div>",
+      "script": "(ctx) => { const chart = ctx.chart('#chart-crash', { type: 'line', data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ data: [100, 98, 95, 96], borderColor: '#10b981', tension: 0.4 }] }, options: { maintainAspectRatio: false, scales: { y: { display: false } }, plugins: { legend: {display:false} } } }); return { crash: () => { chart.data.datasets[0].data = [100, 98, 40, 20]; chart.data.datasets[0].borderColor = '#ef4444'; chart.update(); ctx.root.querySelector('#val').innerText = 'CRITICAL'; ctx.root.querySelector('#val').classList.replace('text-emerald-400', 'text-red-500'); } } }",
+      "steps": [
+        {
+          "narration": "When a one-dollar chip goes missing, billion-dollar industries grind to a halt.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.crash()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "NEWS_HIGHLIGHT_SLIDE",
+      "html": "<div class='w-full h-full bg-[#1e3a8a] relative flex items-center justify-start p-[8cqw] font-sans overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2670\")] bg-cover opacity-20 mix-blend-luminosity grayscale'></div>\n  <div class='absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-900/80 to-transparent'></div>\n  <div class='z-10 flex flex-col items-start gap-3 max-w-[85cqw] relative'>\n    <div class='bg-white text-blue-900 font-black tracking-widest px-[1cqw] py-[0.5cqw] text-[clamp(0.8rem,1.5cqw,2rem)] shadow-lg border-l-4 border-yellow-400 opacity-0 -translate-y-4 transition-all duration-500' id='news-tag'>GLOBAL DISPATCH</div>\n    <div class='relative overflow-hidden inline-block'>\n      <div id='hl-1' class='absolute inset-0 bg-yellow-400 z-0 -translate-x-full transition-transform duration-[600ms] ease-out'></div>\n      <div class='relative z-10 text-transparent font-black text-[clamp(2rem,5.5cqw,6rem)] leading-none px-[1cqw] py-[0.5cqw] transition-colors duration-300 delay-[400ms]' id='text-1'>US signs sweeping 10% global</div>\n    </div>\n    <div class='relative overflow-hidden inline-block'>\n      <div id='hl-2' class='absolute inset-0 bg-yellow-400 z-0 -translate-x-full transition-transform duration-[600ms] ease-out'></div>\n      <div class='relative z-10 text-transparent font-black text-[clamp(2rem,5.5cqw,6rem)] leading-none px-[1cqw] py-[0.5cqw] transition-colors duration-300 delay-[400ms]' id='text-2'>tariffs after shredding global</div>\n    </div>\n    <div class='relative overflow-hidden inline-block'>\n      <div id='hl-3' class='absolute inset-0 bg-yellow-400 z-0 -translate-x-full transition-transform duration-[600ms] ease-out'></div>\n      <div class='relative z-10 text-transparent font-black text-[clamp(2rem,5.5cqw,6rem)] leading-none px-[1cqw] py-[0.5cqw] transition-colors duration-300 delay-[400ms]' id='text-3'>trade agreements</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#news-tag').classList.remove('opacity-0', '-translate-y-4'); setTimeout(() => { ctx.root.querySelector('#hl-1').style.transform = 'translateX(0)'; ctx.root.querySelector('#text-1').style.color = '#000'; }, 100); setTimeout(() => { ctx.root.querySelector('#hl-2').style.transform = 'translateX(0)'; ctx.root.querySelector('#text-2').style.color = '#000'; }, 400); setTimeout(() => { ctx.root.querySelector('#hl-3').style.transform = 'translateX(0)'; ctx.root.querySelector('#text-3').style.color = '#000'; }, 700); } } }",
+      "steps": [
+        {
+          "narration": "Governments have realized this danger.",
+          "actions": []
+        },
+        {
+          "narration": "Overnight, the supply chain has been weaponized. Export bans are now tearing up global trade.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SWARM_AI",
+      "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-swarm' class='absolute inset-0 w-full h-full'></div>\n  <div class='z-10 text-center font-mono text-stone-400'>NEURAL NETWORKS</div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let flock = []; let target; class Boid { constructor() { this.pos = p.createVector(p.random(p.width), p.random(p.height)); this.vel = p5.Vector.random2D(); this.vel.setMag(p.random(2, 4)); this.acc = p.createVector(); this.maxForce = 0.2; this.maxSpeed = 4; } edges() { if(this.pos.x > p.width) this.pos.x=0; else if (this.pos.x < 0) this.pos.x=p.width; if(this.pos.y > p.height) this.pos.y=0; else if(this.pos.y < 0) this.pos.y=p.height;} flock(boids) { let alignment = p.createVector(); let cohesion = p.createVector(); let separation = p.createVector(); let total = 0; for (let other of boids) { let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y); if (other != this && d < 50) { alignment.add(other.vel); cohesion.add(other.pos); let diff = p5.Vector.sub(this.pos, other.pos); diff.div(d*d); separation.add(diff); total++; } } if(total > 0) { alignment.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); cohesion.div(total).sub(this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); separation.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); } this.acc.add(alignment); this.acc.add(cohesion); this.acc.add(separation.mult(1.5)); } update() { this.pos.add(this.vel); this.vel.add(this.acc); this.vel.limit(this.maxSpeed); this.acc.mult(0); } show() { p.stroke('#10b981'); p.strokeWeight(4); p.point(this.pos.x, this.pos.y); } seek(target) { if(target){ let force = p5.Vector.sub(target, this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce*2); this.acc.add(force); }} } p.setup = () => { const container = ctx.root.querySelector('#p5-swarm'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<150; i++) flock.push(new Boid()); }; p.draw = () => { p.clear(); for (let boid of flock) { boid.edges(); boid.flock(flock); boid.seek(target); boid.update(); boid.show(); } }; p.setTarget = (x,y) => target = p.createVector(x,y); p.windowResized = () => { const container = ctx.root.querySelector('#p5-swarm'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-swarm'); return { remove: () => myP5.remove(), directSwarm: () => myP5.setTarget(ctx.root.clientWidth / 2, ctx.root.clientHeight / 2) }; }",
+      "steps": [
+        {
+          "narration": "What is the end game? We use these chips to train Artificial Intelligence.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.directSwarm()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MATRIX_RAIN",
+      "html": "<div class='w-full h-full bg-[#051005] relative'><div id='p5-matrix' class='absolute inset-0 w-full h-full z-0'></div><div class='absolute inset-0 flex items-center justify-center z-10 pointer-events-none'><h1 class='text-white text-[8cqw] font-black tracking-tighter mix-blend-overlay opacity-80'>RECURSION</h1></div></div>",
+      "script": "(ctx) => { const sketch = p => { let streams = []; const symbolSize = 20; class Symbol { constructor(x, y, speed, first) { this.x = x; this.y = y; this.value; this.speed = speed; this.first = first; this.switchInterval = p.round(p.random(2, 20)); } setToRandomSymbol() { if (p.frameCount % this.switchInterval == 0) this.value = String.fromCharCode(0x30A0 + p.round(p.random(0, 96))); } rain() { this.y = (this.y >= p.height) ? 0 : this.y + this.speed; } } class Stream { constructor() { this.symbols = []; this.totalSymbols = p.round(p.random(5, 30)); this.speed = p.random(3, 8); } generateSymbols(x, y) { let first = p.round(p.random(0, 4)) == 1; for (let i=0; i<=this.totalSymbols; i++) { let symbol = new Symbol(x, y, this.speed, first); symbol.setToRandomSymbol(); this.symbols.push(symbol); y -= symbolSize; first = false; } } render() { this.symbols.forEach(symbol => { if (symbol.first) p.fill(180, 255, 180); else p.fill(0, 255, 70); p.text(symbol.value, symbol.x, symbol.y); symbol.rain(); symbol.setToRandomSymbol(); }); } } p.setup = () => { const container = ctx.root.querySelector('#p5-matrix'); p.createCanvas(container.clientWidth, container.clientHeight); let x = 0; for (let i = 0; i <= p.width / symbolSize; i++) { let stream = new Stream(); stream.generateSymbols(x, p.random(-1000, 0)); streams.push(stream); x += symbolSize; } p.textFont('monospace'); p.textSize(symbolSize); }; p.draw = () => { p.background(5, 20, 5, 180); streams.forEach(stream => stream.render()); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-matrix'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-matrix'); return { remove: () => myP5.remove() }; }",
+      "steps": [
+        {
+          "narration": "To design the next generation of chips. A perfect recursive loop of intelligence building intelligence.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "OUTRO",
+      "html": "<div class='w-full h-full bg-[#0c0a09] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,_#365314_0%,_#000_100%)] opacity-40'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <h1 id='final' class='text-[clamp(3rem,8cqw,10rem)] leading-none font-black text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-stone-600 tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      THE SILICON BLUEPRINT\n    </h1>\n    <div class='h-[1px] w-0 bg-emerald-500 mx-auto mt-[3cqh] transition-all duration-[1.5s] ease-out' id='final-line'></div>\n    <p class='mt-[2cqh] text-stone-500 tracking-widest uppercase opacity-0 transition-opacity duration-1000 delay-500 font-mono text-[1cqw]' id='final-sub'>Generated by Video-Like Engine</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-line').style.width = '60%'; ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "The world runs on these veins. And the blood that flows through them, is absolute logic.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
