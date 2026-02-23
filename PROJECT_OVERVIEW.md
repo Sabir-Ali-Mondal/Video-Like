@@ -36,6 +36,7 @@ The application does not just use an LLM; it enforces strict architectural rules
 ### Want to see prompts?
 * **Go for [https://github.com/Sabir-Ali-Mondal/VIDEO-LIKE/blob/main/All_Prompt.js](https://github.com/Sabir-Ali-Mondal/VIDEO-LIKE/blob/main/All_Prompt.js)**
 
+### Summary :
 *   **`SCRIPT_PROMPT` (The Researcher):** Instructs the AI to act as a Vox-level documentary director. It outputs structured text (Analogies, Data Vaults, Visual Lexicons) rather than code, serving as a creative brief.
 *   **`DIRECTOR_PROMPT_TEMPLATE` (The JSON Architect):** The core engine prompt. It enforces strict technical constraints:
     *   Must use Tailwind Container Queries.
@@ -43,6 +44,11 @@ The application does not just use an LLM; it enforces strict architectural rules
     *   Must wrap canvas/WebGL in relative containers.
     *   Must return a `remove()` method in the JavaScript to prevent memory leaks when scenes change.
 *   **`IMPROVE_PROMPT_TEMPLATE` (The Iterative Editor):** Accepts the user's current working JSON as context. It allows the AI to surgically update pacing, design, or data points without breaking the existing DOM/JS structure.
+
+###  Manual Workflow :
+
+* **`Manual Workflow` button is given to copy prompts and download demo json to do chat with ai models and generate the video manually.**
+* **[This process will give very high quality output of video ]** 
 
 ---
 
@@ -55,7 +61,7 @@ The application does not just use an LLM; it enforces strict architectural rules
 4. The script returns an object with custom functions (e.g., `triggerExplosion()`).
 5. Steps execute these functions via string evaluation: `Engine.state.activeScript.triggerExplosion()`.
 
-**Demonstrated Scene Archetypes:**
+**Scene Archetypes:**
 *   **Data Vis:** 3D Doughnut Charts, Dynamic Line Crashes, Bar Races.
 *   **Generative Art:** DNA Helixes, Swarm/Boid logic, Matrix Digital Rain, Liquid Sine Waveforms.
 *   **Geospatial:** Leaflet maps flying to exact lat/long coordinates.
