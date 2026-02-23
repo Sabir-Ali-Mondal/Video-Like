@@ -33,6 +33,8 @@ The interface is built for "stealth" operation and complete responsiveness, ensu
 ## 3. The Prompting Engine
 
 The application does not just use an LLM; it enforces strict architectural rules via heavily engineered prompt templates stored as JavaScript constants.
+### Want to see prompts?
+* **Go for [https://github.com/Sabir-Ali-Mondal/VIDEO-LIKE/blob/main/All_Prompt.js](https://github.com/Sabir-Ali-Mondal/VIDEO-LIKE/blob/main/All_Prompt.js)**
 
 *   **`SCRIPT_PROMPT` (The Researcher):** Instructs the AI to act as a Vox-level documentary director. It outputs structured text (Analogies, Data Vaults, Visual Lexicons) rather than code, serving as a creative brief.
 *   **`DIRECTOR_PROMPT_TEMPLATE` (The JSON Architect):** The core engine prompt. It enforces strict technical constraints:
