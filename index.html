@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Video-Like</title>
+
+    <!-- LIBRARIES -->
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #fbbf24;
+            --glass: rgba(10, 10, 12, 0.9);
+            --border: rgba(255, 255, 255, 0.12);
+            --ease: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        body {
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #343c45;
+            border-radius: 50px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+            transition: background-color 0.2s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #94a3b8;
+        }
+
+        /* SPLASH SCREEN */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #stage-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        #stage-content {
+            margin-top: 10px;
+            background: #000;
+            position: relative;
+            aspect-ratio: 16/9;
+            width: 100%;
+            max-width: min(90vw, calc((100vh - 150px) * (16/9)));
+            box-shadow: 0 0 0 1px #333, 0 50px 100px -20px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            container-type: size;
+            transition: aspect-ratio 0.5s var(--ease);
+        }
+
+        #stage-content canvas,
+        #stage-content svg {
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain;
+        }
+
+        #stage-content.portrait {
+            aspect-ratio: 9/16;
+            max-width: none;
+            height: 80vh;
+            width: auto;
+        }
+
+        .slide-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .slide-layer.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* UI & MENUS */
+        .ui-layer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 320px;
+            height: 70px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0 1.2rem;
+            z-index: 2000;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            transition: all 0.5s var(--ease);
+        }
+
+        .ui-layer.inactive {
+            opacity: 0;
+            transform: translateX(-50%) translateY(40px);
+            pointer-events: none;
+        }
+
+        .btn-ui {
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+
+        .btn-ui:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .btn-play {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        #system-menu {
+            position: absolute;
+            bottom: 90px;
+            left: 0;
+            background: #09090b;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 280px;
+            padding: 8px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transform-origin: bottom left;
+            animation: menuPop 0.2s var(--ease);
+        }
+
+        #system-menu.open {
+            display: flex;
+        }
+
+        @keyframes menuPop {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 850px;
+            max-width: 95%;
+            background: #09090b;
+            border: 1px solid #27272a;
+            border-radius: 24px;
+            padding: 32px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        #notification-area {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: #1a1a1a;
+            color: white;
+            border-left: 4px solid var(--primary);
+            padding: 12px 24px;
+            border-radius: 12px;
+            transform: translateX(120%);
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bg-fallback-tech {
+            background-image: radial-gradient(#333 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            margin-top: -7px;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        /* MULTIPLE DYNAMIC GRAINS */
+        .film-grain {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.32;
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: overlay;
+            transition: background-image 0.5s ease;
+        }
+
+        /* SCENE TRANSITION OVERLAY */
+        #scene-transition {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: screen;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .transition-active {
+            opacity: 0.6 !important;
+        }
+    </style>
+</head>
+
+<body style="caret-color: transparent;">
+    <!-- APP SPLASH SCREEN -->
+    <div id="splash-screen" class="min-h-screen flex items-center justify-center bg-black px-6 text-center">
+        <div class="max-w-xl space-y-6">
+            <!-- Title -->
+            <h1 class="text-4xl md:text-6xl font-extrabold uppercase tracking-[0.2em] animate-pulse">
+                <span class="text-orange-500">Video</span><span class="text-white">-Like</span>
+            </h1>
+            <p class="text-gray-500 uppercase tracking-[0.3em] text-sm">
+                by S.A.M
+            </p>
+            <!-- Short Description -->
+            <p class="text-gray-300 text-base md:text-lg leading-relaxed">
+                A <span class="text-orange-400 font-semibold">single HTML file</span>
+                for <span class="text-white font-semibold">structured visual learning</span>.
+            </p>
+            <!-- Main Message -->
+            <p class="text-red-500 font-bold uppercase tracking-wider text-sm">
+                No cartoons. No ultra-real AI video.</p>
+        </div>
+    </div>
+
+    <div id="notification-area"></div>
+
+    <div id="stage-container" style="caret-color: transparent;">
+        <div id="stage-content">
+            <!-- Dynamic Film Grain & Transitions -->
+            <div class="film-grain" id="dynamic-grain"></div>
+            <div id="scene-transition"></div>
+
+            <!-- YOUTUBE STYLE SUBTITLES -->
+            <div id="subtitle-layer" class="absolute bottom-[1%] left-1/2 -translate-x-1/2 w-full text-center z-[100] transition-opacity duration-300 hidden pointer-events-none flex justify-center px-[2cqw]">
+                <span id="subtitle-text" class="bg-[rgba(8,8,8,0.25)] text-[#f1f1f1] px-[1px] py-[1px] rounded-[1px] text-[clamp(12px,2.2cqmin,18px)] font-mono shadow-sm font-roboto tracking-wide max-w-[90%] inline-block text-shadow-sm"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI LAYER -->
+    <div class="ui-layer" id="main-ui">
+        <div class="relative">
+            <button class="btn-ui" onclick="Engine.ui.toggleMenu()" id="menu-btn"><i class="bi bi-grid-fill"></i></button>
+            <div id="system-menu">
+                <div class="text-center md:hidden mt-2 px-3 py-2 rounded-md bg-blue-500/10 border border-blue-400/30 text-blue-300 text-[10px] leading-tight sm:text-xs">
+                    <div class="font-semibold text-blue-200 mb-1">Export Guide</div>
+                    <div>Screen Record (Media On)</div>
+                    <div class="text-blue-400/70">↓</div>
+                    <div>Crop in Photos</div>
+                </div>
+                <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('ai')"><i class="bi bi-robot text-purple-400"></i> AI Architect</div>
+                <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('import')"><i class="bi bi-code-slash text-green-400"></i> Project JSON</div>
+                <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('audio')"><i class="bi bi-music-note-beamed text-pink-400"></i> Background Music</div>
+                <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.openModal('settings')"><i class="bi bi-sliders text-blue-400"></i> Studio Settings</div>
+                <div class="h-[1px] bg-white/10 my-1"></div>
+                <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.toggleSubtitles()"><i class="bi bi-card-text text-yellow-400"></i> Toggle Subtitles</div>
+                <div class="p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3" onclick="Engine.ui.toggleRatio()"><i class="bi bi-phone"></i> Toggle Portrait</div>
+
+            </div>
+        </div>
+        <button class="btn-ui" title="Previous Scene (Left Arrow)" onclick="Engine.prev()"><i class="bi bi-skip-start-fill"></i></button>
+        <button class="btn-play" title="Play/Pause (Spacebar)" id="play-btn" onclick="Engine.togglePlay()"><i class="bi bi-play-fill"></i></button>
+        <button class="btn-ui" title="Next Scene (Right Arrow)" onclick="Engine.next()"><i class="bi bi-skip-end-fill"></i></button>
+        <button class="btn-ui" onclick="Engine.ui.toggleFullscreen()"><i class="bi bi-arrows-fullscreen"></i></button>
+    </div>
+
+    <!-- AUDIO MODAL -->
+    <div id="modal-audio" class="modal-overlay">
+        <div class="modal-box w-[600px]">
+            <h2 class="text-xl font-black mb-8 italic tracking-tighter">BACKGROUND MUSIC</h2>
+            <div class="mb-8">
+                <div class="flex justify-between mb-2">
+                    <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">MUSIC VOLUME</label>
+                    <span id="bgm-vol-val" class="text-primary text-xs font-mono">30%</span>
+                </div>
+                <input type="range" min="0" max="1" step="0.05" value="0.3" oninput="Engine.audio.setVolume(this.value)">
+            </div>
+            <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em] block mb-4">PRESET LIBRARY</label>
+            <div class="grid gap-3 mb-8">
+                <!-- Preset 1 -->
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-400"><i class="bi bi-music-note"></i></div>
+                        <div>
+                            <div class="font-bold text-sm">Study Focus 1</div>
+                            <div class="text-[10px] text-gray-400">light</div>
+                        </div>
+                    </div>
+                    <button onclick="Engine.audio.setTrack('https://res.cloudinary.com/dmttn34te/video/upload/v1771665377/music_no_copyright_gnhpmi.mp3')" class="px-4 py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-primary transition"><i class="bi bi-play-circle-fill mr-1"></i> LOAD</button>
+                </div>
+                <!-- Preset 2 -->
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400"><i class="bi bi-music-note"></i></div>
+                        <div>
+                            <div class="font-bold text-sm">Cinematic 1</div>
+                            <div class="text-[10px] text-gray-400">Chill</div>
+                        </div>
+                    </div>
+                    <button onclick="Engine.audio.setTrack('https://res.cloudinary.com/dmttn34te/video/upload/v1763065409/study-110111_at7lye.mp3')" class="px-4 py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-primary transition"><i class="bi bi-play-circle-fill mr-1"></i> LOAD</button>
+                </div>
+                <!-- Preset 3 -->
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400"><i class="bi bi-music-note"></i></div>
+                        <div>
+                            <div class="font-bold text-sm">Study Focus 2</div>
+                            <div class="text-[10px] text-gray-400">Soft</div>
+                        </div>
+                    </div>
+                    <button onclick="Engine.audio.setTrack('https://res.cloudinary.com/dmttn34te/video/upload/v1763064765/study-music-181044_jbuwpq.mp3')" class="px-4 py-2 bg-white text-black text-xs font-bold rounded-lg hover:bg-primary transition"><i class="bi bi-play-circle-fill mr-1"></i> LOAD</button>
+                </div>
+            </div>
+            <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em] block mb-4">UPLOAD CUSTOM</label>
+            <input type="file" accept="audio/*" onchange="Engine.audio.upload(this)" class="w-full text-xs text-gray-400 file:mr-4 file:py-3 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition cursor-pointer">
+            <button onclick="Engine.ui.closeModal()" class="w-full mt-8 bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-white/10 transition">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div id="modal-settings" class="modal-overlay">
+        <div class="modal-box">
+            <h2 class="text-xl font-black mb-6 italic tracking-tighter">STUDIO SETTINGS</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Global Voice settings -->
+                <div>
+                    <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em] mb-3 block">GLOBAL NARRATOR VOICE</label>
+                    <select id="voice-select" class="w-full bg-black border border-white/10 rounded-xl p-3 text-sm" onchange="Engine.audio.setVoice(this.value)"></select>
+
+                    <!-- PODCAST TOGGLE -->
+                    <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em] mt-8 mb-3 block">PODCAST MODE</label>
+                    <label class="flex items-center gap-3 cursor-pointer p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition">
+                        <input type="checkbox" id="podcast-toggle" class="w-5 h-5 accent-primary" onchange="Engine.audio.togglePodcast(this.checked)">
+                        <span class="text-sm font-bold text-gray-300">Enable 2-Speaker Mode</span>
+                    </label>
+                </div>
+
+                <!-- Global Speed/Pitch -->
+                <div class="space-y-6 pt-2">
+                    <div>
+                        <div class="flex justify-between mb-2"><label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">SPEED</label><span id="speed-val" class="text-primary text-xs font-mono">1.2x</span></div>
+                        <input type="range" id="tts-speed" min="0.5" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('speed-val').innerText=this.value+'x'">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2"><label class="text-[10px] text-gray-500 font-bold tracking-[0.2em]">PITCH</label><span id="pitch-val" class="text-primary text-xs font-mono">1.0</span></div>
+                        <input type="range" id="tts-pitch" min="0.1" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('pitch-val').innerText=this.value">
+                    </div>
+                </div>
+            </div>
+
+            <!-- DYNAMIC PODCAST CONTROLS (HIDDEN BY DEFAULT) -->
+            <div id="podcast-settings-container" class="mt-6 p-5 border border-primary/30 bg-primary/5 rounded-2xl hidden transition-all">
+                <h3 class="text-xs font-bold tracking-[0.2em] text-primary mb-4"><i class="bi bi-mic-fill mr-1"></i> PODCAST CASTING</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Speaker 1 -->
+                    <div class="bg-black/50 p-4 rounded-xl border border-white/5">
+                        <label class="text-[10px] text-gray-400 font-bold tracking-[0.1em] mb-2 block text-blue-400">SPEAKER 1 (Host)</label>
+                        <select id="s1-voice" class="w-full bg-black border border-white/10 rounded-lg p-2 text-xs mb-4" onchange="Engine.audio.updatePodcastSettings()"></select>
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>SPEED</span><span id="s1-speed-val">1.2</span></div>
+                                <input type="range" id="s1-speed" min="0.5" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('s1-speed-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>PITCH</span><span id="s1-pitch-val">1.0</span></div>
+                                <input type="range" id="s1-pitch" min="0.1" max="2.0" step="0.1" value="1.0" oninput="document.getElementById('s1-pitch-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Speaker 2 -->
+                    <div class="bg-black/50 p-4 rounded-xl border border-white/5">
+                        <label class="text-[10px] text-gray-400 font-bold tracking-[0.1em] mb-2 block text-green-400">SPEAKER 2 (Guest)</label>
+                        <select id="s2-voice" class="w-full bg-black border border-white/10 rounded-lg p-2 text-xs mb-4" onchange="Engine.audio.updatePodcastSettings()"></select>
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>SPEED</span><span id="s2-speed-val">1.2</span></div>
+                                <input type="range" id="s2-speed" min="0.5" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('s2-speed-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>PITCH</span><span id="s2-pitch-val">1.2</span></div>
+                                <input type="range" id="s2-pitch" min="0.1" max="2.0" step="0.1" value="1.2" oninput="document.getElementById('s2-pitch-val').innerText=this.value; Engine.audio.updatePodcastSettings()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="Engine.ui.closeModal()" class="w-full mt-8 bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-primary hover:text-black transition">SAVE CHANGES</button>
+        </div>
+    </div>
+
+    <!-- JSON MODAL -->
+    <div id="modal-import" class="modal-overlay">
+        <div class="modal-box w-[1000px] relative">
+            <h2 class="text-xl font-bold mb-4 italic">JSON EDITOR</h2>
+            <div id="json-loader" class="absolute inset-0 bg-black/90 z-50 flex flex-col items-center justify-center rounded-2xl hidden">
+                <div class="loading-spinner mb-6"></div>
+                <div class="text-2xl font-bold italic tracking-tighter animate-pulse" id="json-loader-text">DIRECTOR IS WRITING SCRIPT...</div>
+                <div class="text-gray-500 text-xs mt-2 font-mono" id="json-loader-sub">Generating Scenes, Visuals, and Narration</div>
+            </div>
+            <div class="flex gap-4 mb-6">
+                <button onclick="Engine.io.downloadJSON()" class="flex-1 bg-blue-600/20 border border-blue-500/50 text-blue-400 font-bold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition"><i class="bi bi-download mr-2"></i> DOWNLOAD</button>
+                <button onclick="document.getElementById('file-upload').click()" class="flex-1 bg-purple-600/20 border border-purple-500/50 text-purple-400 font-bold py-3 rounded-xl hover:bg-purple-600 hover:text-white transition"><i class="bi bi-upload mr-2"></i> UPLOAD</button>
+                <input type="file" id="file-upload" hidden accept=".json" onchange="Engine.io.uploadJSON(this)">
+            </div>
+            <div style="caret-color: red;position:relative; width:100%;">
+
+                <!-- Floating Button -->
+                <button id="clearPasteBtn" title="Clear & Paste" style="
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:linear-gradient(145deg,#1f2937,#111827);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      backdrop-filter:blur(6px);
+      transition:all .25s ease;
+      box-shadow:0 4px 15px rgba(0,0,0,.4);
+    " onmouseover="this.style.boxShadow='0 0 15px rgba(34,197,94,.6)'" onmouseout="this.style.boxShadow='0 4px 15px rgba(0,0,0,.4)'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+                    </svg>
+                </button>
+
+                <!-- Editor -->
+                <textarea id="json-editor" spellcheck="false" style="
+      width:100%;
+      height:450px;
+      background:#0d1117;
+      color:#22c55e;
+      font-family:monospace;
+      font-size:14px;
+      padding:24px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.1);
+      outline:none;
+      resize:none;
+      white-space:pre;
+      overflow:auto;
+      line-height:1.6;
+      letter-spacing:0.5px;
+    "></textarea>
+            </div>
+
+            <script>
+                /* Scrollbar Styling */
+                const style = document.createElement("style");
+                style.innerHTML = `
+#json-editor::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+#json-editor::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+#json-editor::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+  border-radius: 4px;
+  border: 2px solid #0d1117;
+}
+#json-editor::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+}
+#json-editor::-webkit-scrollbar-corner {
+  background: #0d1117;
+}
+#json-editor {
+  scrollbar-width: thin;
+  scrollbar-color: #16a34a #0d1117;
+}
+`;
+                document.head.appendChild(style);
+
+                /* Clear & Paste */
+                document.getElementById("clearPasteBtn").onclick = async () => {
+                    const editor = document.getElementById("json-editor");
+                    editor.value = "";
+                    try {
+                        const text = await navigator.clipboard.readText();
+                        editor.value = text;
+                    } catch {
+                        alert("Clipboard access denied.");
+                    }
+                };
+            </script>
+            <div class="mt-6 flex gap-4">
+                <button onclick="Engine.io.apply()" class="flex-[2] bg-green-600 text-white font-black py-4 rounded-xl tracking-widest hover:bg-green-500 transition">APPLY CHANGES</button>
+                <button onclick="Engine.ui.closeModal()" class="flex-1 bg-white/5 text-gray-400 font-bold py-4 rounded-xl hover:bg-white/10 transition">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI MODAL -->
+    <div id="modal-ai" class="modal-overlay">
+        <div class="modal-box relative">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-black italic tracking-tighter">ARCHITECT</h2>
+            </div>
+            <div class="flex gap-4 mb-6">
+                <textarea id="ai-prompt" style="caret-color:yellow;" class="flex-1 bg-black border border-white/10 rounded-2xl p-6 h-40 text-white outline-none focus:border-primary transition font-mono text-sm shadow-inner" placeholder="Enter topic, guide, needs, or description here..."></textarea>
+                <div id="ai-image-dropzone" class="w-24 md:w-40 border-2 border-dashed border-white/20 rounded-2xl flex flex-col items-center justify-center text-gray-500 hover:border-primary hover:text-primary transition cursor-pointer relative overflow-hidden group bg-black/50" onclick="document.getElementById('ai-img-upload').click()" ondragover="event.preventDefault(); this.classList.add('border-primary', 'bg-white/5');" ondragleave="event.preventDefault(); this.classList.remove('border-primary', 'bg-white/5');" ondrop="event.preventDefault(); this.classList.remove('border-primary', 'bg-white/5'); Engine.ai.handleDrop(event)">
+                    <i class="bi bi-image text-2xl md:text-3xl mb-1 md:mb-2 group-hover:scale-110 transition duration-300"></i>
+                    <span class="text-[8px] md:text-[10px] font-bold tracking-wider text-center px-1 md:px-2">ADD CONTEXT<br>(OPTIONAL)</span>
+                    <input type="file" id="ai-img-upload" accept="image/*" class="hidden" onchange="Engine.ai.handleImage(this)">
+                    <img id="ai-img-preview" class="absolute inset-0 w-full h-full object-cover hidden z-10" />
+                    <button id="ai-img-clear" class="absolute top-2 right-2 bg-black/80 backdrop-blur-sm rounded-full w-6 h-6 md:w-7 md:h-7 text-white hidden items-center justify-center hover:bg-red-500 hover:scale-110 transition z-20 shadow-lg border border-white/20" onclick="event.stopPropagation(); Engine.ai.clearImage();" title="Remove Image"><i class="bi bi-x-lg text-[10px] md:text-xs"></i></button>
+                </div>
+            </div>
+
+            <label class="flex items-center gap-3 cursor-pointer mb-6">
+                <input type="checkbox" id="ai-podcast-toggle" class="w-5 h-5 accent-primary" onchange="Engine.audio.togglePodcast(this.checked)">
+                <span class="text-xs md:text-sm font-bold text-primary">Podcast Mode</span>
+            </label>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em] block mb-2">TARGET</label>
+                    <select id="ai-style" class="w-full bg-black border border-white/10 rounded-xl p-3 text-xs md:text-sm text-gray-300">
+                        <option value="documentary">Cinematic Documentary</option>
+                        <option value="teaching">Educational / Academic</option>
+                        <option value="kids">Kids / Storytelling</option>
+                        <option value="hybrid">Hybrid Explainer</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-500 font-bold tracking-[0.2em] block mb-2">LANGUAGE</label>
+                    <select id="ai-lang" class="w-full bg-black border border-white/10 rounded-xl p-3 text-xs md:text-sm text-gray-300"></select>
+                </div>
+            </div>
+
+            <div class="flex gap-2 md:gap-3">
+                <button id="json-btn" onclick="Engine.ai.getScript()" class="flex-1 bg-gray-900 text-white py-4 md:py-5 rounded-xl hover:bg-gray-700 transition flex items-center justify-center gap-2 border border-white/10 text-[9px] md:text-[11px] font-bold tracking-widest"><i class="bi bi-search"></i> RESEARCH</button>
+                <button id="gen-btn" onclick="Engine.ai.generateNew()" class="flex-[1.2] md:flex-[1.5] bg-gray-600 text-yellow-400 font-black py-4 md:py-5 rounded-xl tracking-[0.05em] md:tracking-[0.1em] hover:bg-white transition flex items-center justify-center gap-1 md:gap-2 text-[9px] md:text-[11px]"><i class="bi bi-film"></i> GENERATE<span class="hidden md:inline"> NEW</span></button>
+                <button id="improve-btn" onclick="Engine.ai.improveCurrent()" class="flex-[1.2] md:flex-[1.5] bg-blue-600/20 border border-blue-500/50 text-blue-400 font-black py-4 md:py-5 rounded-xl tracking-[0.05em] md:tracking-[0.1em] hover:bg-blue-600 hover:text-white transition flex items-center justify-center gap-1 md:gap-2 text-[9px] md:text-[11px]"><i class="bi bi-magic"></i> IMPROVE<span class="hidden md:inline"> CURRENT</span></button>
+            </div>
+            <button onclick="Engine.ui.closeModal()" class="w-full mt-4 mb-2 text-gray-600 text-xs hover:text-white transition">CANCEL</button>
+        </div>
+    </div>
+
+    <!-- THE DIRECTOR MODAL -->
+    <div id="modal-director" class="modal-overlay">
+        <div class="modal-box w-[600px] border border-purple-500/30 bg-[#0a0a0a]">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-sm font-black italic tracking-tighter text-purple-400">MANUAL WORKFLOW</h2>
+                <button onclick="document.getElementById('modal-director').classList.remove('open')" class="text-gray-500 hover:text-white"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <button onclick="Engine.ui.copyPrompt()" class="mb-2 text-sm font-semibold tracking-widest bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 px-3 md:px-4 py-2 rounded-lg text-yellow-400 transition">
+                <i class="bi bi-copy mr-1"></i> <span class="hidden md:inline"> </span> RESEARCHING PROMPT
+            </button>
+            <p class="text-[10px] text-gray-400 mt-2 mb-2">1. COPY PROMPT &rarr; 2. PASTE INTO EXTERNAL AI &rarr; 3. PASTE JSON RESULT INTO PROJECT</p>
+            <!-- Prompt Display -->
+            <div class="relative group mb-4">
+                <textarea id="director-prompt-out" readonly class="w-full h-48 bg-black border border-white/10 rounded-lg p-3 text-[10px] font-mono text-green-400 outline-none focus:border-purple-500 resize-none leading-relaxed custom-scrollbar" spellcheck="false"></textarea>
+                <button onclick="Ext.copyText()" class="absolute top-2 right-2 bg-white/10 hover:bg-white/20 text-white px-2 py-1 rounded text-[9px] font-bold border border-white/10 transition backdrop-blur-sm">COPY</button>
+            </div>
+
+            <!-- Tools Grid -->
+            <div class="grid grid-cols-2 gap-3">
+                <!-- Step A: Assets -->
+                <div class="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div class="text-[9px] font-bold text-gray-500 tracking-widest mb-2">A. ASSETS</div>
+                    <button onclick="Ext.downloadRefJSON()" class="w-full bg-blue-500/10 text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition py-2 rounded text-[10px] font-bold flex items-center justify-center gap-2">
+                        <i class="bi bi-download"></i> DEMO JSON
+                    </button>
+                    <p class="text-[9px] text-gray-600 mt-2 leading-tight">Attach this file to the AI so it knows the format.</p>
+                </div>
+
+                <!-- Step B: External AI -->
+                <div class="p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div class="text-[9px] font-bold text-gray-500 tracking-widest mb-2">B. OPEN STUDIO</div>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://aistudio.google.com/" target="_blank" class="flex items-center justify-center gap-2 bg-stone-800 hover:bg-stone-700 text-white py-2 rounded text-[10px] font-bold border border-white/10 transition">
+                            Gemini Studio <i class="bi bi-box-arrow-up-right text-[9px]"></i>
+                        </a>
+                        <a href="https://www.perplexity.ai/" target="_blank" class="flex items-center justify-center gap-2 bg-stone-800 hover:bg-stone-700 text-white py-2 rounded text-[10px] font-bold border border-white/10 transition">
+                            Perplexity <i class="bi bi-box-arrow-up-right text-[9px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- AI PROMPTS STORED OUTSIDE THE ENGINE BLOCK -->
+    <!-- ========================================== -->
+    <script>
+        const SCRIPT_PROMPT = `
+**Role:** Deep Research Strategist & Narrative Architect
+**Objective:** Provide a high-density **Context & Resource Brief** for an elite Video Director.
+**Style:** Vox-level depth, journalistic accuracy, cinematic storytelling.
+
+**Instructions:**
+1. **Deep Context:** Explain not just the facts, but their *significance*, *conflict*, or *irony*. Include analogies or mental models to make complex ideas simple and memorable.
+2. **Thematic Chapters:** Break the topic into as many logical chapters as needed. Each chapter may contain multiple **micro-beats** to fully explore the idea. There is **no limit** on chapters.
+3. **Data Vault:** Provide specific, verified numbers, percentages, and dates. Include raw data if it can be visualized.
+4. **Visual Lexicon:** Describe the *feeling*, *metaphor*, and *motion* of the concept (e.g., "like a wildfire spreading," "a house of cards collapsing," "digital veins pulsing"). No technical scene types — only imagery.
+5. **Journalistic Elements:** Include optional content types naturally in the brief:
+   - **News Headlines**: Short, punchy lines that highlight a key event.
+   - **Breaking Alerts**: Dramatic one-line facts that would catch attention.
+   - **Quotes / Testimonies**: Relevant statements from experts, witnesses, or historical figures.
+   - **Historical Notes / Context**: Add dates, background events, and turning points.
+6. **Resources & References:** Include key people, locations, events, or searchable keywords for images, footage, or textures.
+7. **Pacing & Flow:** Chapters and micro-beats should feel connected, with a natural narrative arc. Suggest pacing or emphasis (e.g., slow focus, rapid movement) when needed.
+8. **Creative Freedom:** Invent new chapters, metaphors, or analogies if they better explain the topic. Do not feel constrained by examples.
+
+**Output Format (Strict Text Blocks):**
+
+---
+**[THEME]** Chapter Name  
+**[CONTEXT]** Deep dive narrative and explanation (conversational, Netflix-doc style)  
+**[ANALOGY]** Mental model or metaphor to clarify the concept  
+**[DATA_VAULT]** Specific statistics, numbers, dates, or raw data  
+**[VISUAL_LEXICON]** Descriptive imagery, color moods, motion, emotion  
+**[JOURNALISTIC_ELEMENTS]** Headlines, alerts, quotes, historical notes  
+**[RESOURCES]** People, locations, events, searchable asset keywords  
+**[MICRO_BEATS]** Optional: multiple sub-points to break complex ideas into digestible moments  
+---
+**Generate a complete Context & Resource Brief for the topic below.**  
+`;
+
+        const DIRECTOR_PROMPT_TEMPLATE = (prompt, style, langCode, isPodcast) => `
+# ROLE & OBJECTIVE
+You are an expert **Video Engine Architect** and **Motion Graphics Director**. Your task is to generate a production-ready \`JSON\` payload for an automated video rendering engine. The output must be **visually cinematic**, **educationally deep**, and **technically flawless**.
+
+# INPUT SPECIFICATIONS
+*   **Topic / Context:** "${prompt}"
+*   **Target Audience:** ${style}
+*   **Narration Language:** ${langCode} 
+Prefer English for on-screen text, as it is most commonly used. However, you may use the selected language when necessary.
+Narration must use only the selected language’s script characters — do not mix scripts.
+Add spaces in abbreviations (e.g., “A I”) to ensure accurate TTS pronunciation.
+${isPodcast ? `\n*   **PODCAST MODE ACTIVE:** Make each scene/narration like one person, next scene or narration other person talking themself and making viewer understand like podcast. You must add \`"podcast": "true"\` in the \`meta\` object.` : `\n*   **STANDARD MODE:** You must add \`"podcast": "false"\` in the \`meta\` object.`}
+
+# SCENE REQUIREMENTS
+*   **Scene Count:** >20 Scenes (The video must be long and detailed).
+*   **Sub-steps:** Each scene must have multiple narrative sub-steps (progressive disclosure).
+
+---
+
+# 1. DIRECTORIAL GUIDELINES (CREATIVE FREEDOM & LOGIC)
+**Do not be a robot following a checklist. Be a Director.**
+
+*   **Creative Freedom:** The **Scene Library** below is for **inspiration, not obligation**. You are free to invent new scene types, visual metaphors, or layouts if they better explain the topic. Mix, bend, or replace specific archetypes as needed.
+*   **Explanation First, Effects Second:** Every visual choice must exist to clarify a concept. Visuals should support understanding, not distract from it.
+*   **One Main Idea Per Scene:** Do not overcrowd. Focus each scene on **one** core concept. If a new idea starts, create a new scene.
+*   **Natural Story Flow:** Structure the video like a narrative: **Hook → Context → Deep Dive → Insight → Conclusion**. Avoid random, disconnected scenes.
+*   **Respect Viewer Attention:** Avoid chaos. Use calm, clear visuals over constant, overwhelming motion. A clean aesthetic is a premium aesthetic.
+*   **Tone Matching:** Adjust the visual complexity and narration depth based on the **Target Audience** (${style}). Beginners need simplicity; experts need density.
+
+# 2. CRITICAL RESPONSIVENESS RULES (MANDATORY UPDATE)
+**The video engine renders in variable aspect ratios (16:9 Landscape, 9:16 Portrait, Mobile, Desktop) via \`container-type: size\` logic.**
+
+*   **NEVER USE Viewport Units (\`vw\` or \`vh\`) for Text or Spacing inside the scene.** Viewport units break when the user is on mobile but the video aspect ratio forces a smaller box.
+*   **MANDATORY: Use Container Query Units (\`cqw\`, \`cqh\`, \`cqmin\`) inside Tailwind classes for ALL text and dynamic spacing.** 
+    *   *Correct Example:* \`text-[5cqw]\`, \`text-[clamp(1rem,4cqmin,5rem)]\`, \`mt-[5cqh]\`, \`px-[4cqmin]\`
+    *   *Incorrect Example:* \`text-[5vw]\`, \`mt-[5vh]\`
+*   **Fit & Scale:** Every element (text, images, charts, canvases) **must** fit within the viewport using container units.
+*   **Fluid Layouts:** Use \`w-full h-full flex items-center justify-center\` as the base. Use \`%\`, \`cqw\`, or \`max-w\`.
+*   **Object Fitting:** Images and Videos must use \`object-cover\` or \`object-contain\`.
+*   **Canvas/Charts:** Canvas elements must be wrapped in a container with \`w-full h-full relative\` so they resize dynamically. Chart configs must set \`maintainAspectRatio: false\`.
+
+# 3. VISUAL AESTHETIC
+*   **Topic-Based Palette:** Background and colors **must be chosen according to the topic**.
+*   **No Default Dark Mode:** Dark themes are allowed **only when the topic requires it** (e.g., space, cyberpunk, deep tech). Otherwise, use nature, history, or academic palettes.
+*   **Composition:** Follow Netflix/Vox-style composition (large responsive typography, subtle depth, Tailwind utilities).
+
+# 4. THE RENDERING ENGINE API (TECHNICAL CONSTRAINTS)
+The engine is strict. You must output valid \`JSON\` adhering to this logic:
+
+**A. HTML & CSS Classes**
+*   **Container:** \`<div class="w-full h-full relative overflow-hidden ...">\`
+*   **Hidden State:** Elements meant to animate **must start hidden** using specific Tailwind classes:
+    *   \`opacity-0\`
+    *   \`translate-y-4\` (or \`translate-y-10\`, \`-translate-x-4\`, \`scale-90\`)
+*   **Reveal Action:** The engine's \`reveal\` action automatically removes these specific classes to trigger CSS transitions.
+
+**B. Scripting Interface (\`script\` property)**
+*   The \`script\` property is a **stringified JavaScript arrow function**.
+*   It receives a context object \`ctx\`: \`{ root, chart, map, p5 }\`.
+    *   \`ctx.root\`: The HTMLElement container.
+    *   \`ctx.chart(selector, config)\`: Returns a Chart.js instance.
+    *   \`ctx.map(selector, config)\`: Returns a Leaflet instance.
+    *   \`ctx.p5(sketchFn, selector)\`: Returns a p5 instance.
+*   **Return Object:** The function **must** return an object containing:
+    1.  Custom methods (e.g., \`triggerAnimation()\`) to be called by steps.
+    2.  A \`remove()\` method to clean up listeners, intervals, or animation frames (CRITICAL).
+*   **Attachment Rule:** Any canvas, WebGL, SVG, or generative renderer must be explicitly attached to its scene container selector and initialized only after the container’s size is resolved.
+
+**C. Step Actions**
+*   **reveal:** Targets a CSS selector and removes the hidden utility classes.
+*   **width-grow:** Animates width (useful for progress bars/lines).
+*   **custom:** Executes a raw JS string. To call your script's methods, use:
+    *   \`"fn": "Engine.state.activeScript.yourMethodName()"\`
+
+# 5. JSON STRUCTURE BLUEPRINT
+Output **ONLY** raw JSON. No markdown fencing.
+
+\`\`\`json
+{
+  "meta": {
+    "title": "Generated Title",
+    "audio": "background_music_url",
+    "lang": "${langCode}",
+    "podcast": "true_or_false"
+  },
+  "scenes": [
+    {
+      "html": "<div class='w-full h-full bg-slate-900 relative overflow-hidden flex flex-col items-center justify-center p-[4cqw]'><h1 id='title' class='text-[clamp(1.5rem,5cqmin,6rem)] font-bold text-white opacity-0 translate-y-4 transition-all duration-700'>Market Crash</h1><div class='relative w-full max-w-4xl flex-1 min-h-0'><canvas id='my-chart'></canvas></div></div>",
+      "script": "(ctx) => { \\n  const chart = ctx.chart('#my-chart', { type: 'line', data: { ... }, options: { maintainAspectRatio: false, responsive: true } }); \\n  return { \\n    crash: () => { chart.data.datasets[0].data = [10, 0]; chart.update(); }, \\n    remove: () => { chart.destroy(); } \\n  }\\n}",
+      "steps": [
+        {
+          "narration": "The market was stable until the incident.",
+          "actions": [
+            { "type": "reveal", "target": "#title" }
+          ]
+        },
+        {
+          "narration": "Then, everything collapsed.",
+          "actions": [
+            { "type": "custom", "fn": "Engine.state.activeScript.crash()" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+\`\`\`
+
+# 6. SCENE LIBRARY (INSPIRATION ONLY)
+*Use these as a base, but feel free to invent, modify, or combine concepts.*
+
+*   **TITLE_CINEMATIC:** Blur-to-focus, god rays, gradients.
+*   **KINETIC_TYPE:** High contrast, rhythmic text reveals.
+*   **GLITCH_TEXT:** RGB split, decode effects, cyberpunk.
+*   **QUOTE_SCENE:** Serif fonts, paper texture, highlighter effects.
+*   **SPOTLIGHT:** Flashlight reveal, mask-image effects.
+*   **NEON_SIGN:** Glow effects, flickering text.
+*   **PARALLAX_LAYER:** Multi-layer depth movement.
+*   **NEON_DATA_CRASH:** Line chart that crashes/animates dynamically.
+*   **KPI_STATS_CASCADE:** Staggered cards with counting numbers.
+*   **DOUGHNUT_HOLO:** 3D tilted chart with floating data.
+*   **TIMELINE_SCROLL:** Horizontal container translation (translateX).
+*   **BAR_RACE:** Bar chart where values overtake each other.
+*   **STOCK_TICKER:** Scrolling marquee with gauge indicators.
+*   **HEATMAP_PULSE:** Grid of cells with random highlighting.
+*   **SATELLITE_ZOOM:** Leaflet map flying to coordinates.
+*   **NETWORK_NODES:** P5.js particle system with connections.
+*   **DETECTIVE_BOARD:** SVG strings connecting photos/evidence.
+*   **DNA_HELIX:** P5.js 3D rotating particles.
+*   **PARTICLE_EXPLOSION:** P5.js big bang simulation.
+*   **MATRIX_RAIN:** P5.js falling code symbols.
+*   **LIQUID_WAVEFORM:** P5.js sine wave analysis.
+*   **SWARM_AI:** P5.js boids/flocking simulation.
+*   **NEWSPAPER_SPIN:** CSS transform rotate/scale reveal.
+*   **CHAT_CONV:** iOS/Android style message bubbles.
+*   **CODE_TERMINAL:** Typing effect in a console window.
+*   **BROWSER_SEARCH:** Fake Google input typing and results reveal.
+*   **SOCIAL_POST:** Twitter/X card with counting likes.
+*   **NOTIFICATIONS:** Stacked glassmorphism alerts.
+*   **SPLIT_COMPARISON:** Before/After slider using width transition.
+*   **PROCESS_STEPS:** Icons and arrows revealing sequentially.
+*   **QUIZ_GAME:** Multiple choice options with highlight logic.
+*   **TREE_DIAGRAM:** Org chart with SVG connectors.
+*   **PROS_CONS:** Two columns with list items sliding in.
+*   **CAROUSEL_3D:** Rotating 3D image gallery.
+*   **EXPLODED_VIEW:** CSS 3D transform expanding layers.
+Tables, code , and ppt like scenes also .
+
+**Generate the full JSON now.**
+`;
+
+        const IMPROVE_PROMPT_TEMPLATE = (feedback, style, langCode, isPodcast) => `
+=== IMPROVEMENT PROTOCOL ===
+You are an expert Video Engine Architect modifying an existing project.
+I am providing you with the CURRENT working JSON project data.
+
+USER FEEDBACK / ENHANCEMENT REQUEST:
+"${feedback || "Please improve the pacing, detail, visual aesthetics, and narrative flow of the JSON project."}"
+
+JSON STRUCTURE BLUEPRINT
+Output **ONLY** raw JSON. No markdown fencing.
+\`\`\`json
+{
+  "meta": {
+    "title": "Generated Title",
+    "audio": "background_music_url",
+    "lang": "${langCode}",
+    "podcast": "true_or_false"
+  },
+  "scenes": [
+    {
+      "html": "<div class='w-full h-full bg-slate-900 relative overflow-hidden flex flex-col items-center justify-center p-[4cqw]'><h1 id='title' class='text-[clamp(1.5rem,5cqmin,6rem)] font-bold text-white opacity-0 translate-y-4 transition-all duration-700'>Market Crash</h1><div class='relative w-full max-w-4xl flex-1 min-h-0'><canvas id='my-chart'></canvas></div></div>",
+      "script": "(ctx) => { \\n  const chart = ctx.chart('#my-chart', { type: 'line', data: { ... }, options: { maintainAspectRatio: false, responsive: true } }); \\n  return { \\n    crash: () => { chart.data.datasets[0].data = [10, 0]; chart.update(); }, \\n    remove: () => { chart.destroy(); } \\n  }\\n}",
+      "steps": [
+        {
+          "narration": "The market was stable until the incident.",
+          "actions": [
+            { "type": "reveal", "target": "#title" }
+          ]
+        },
+        {
+          "narration": "Then, everything collapsed.",
+          "actions": [
+            { "type": "custom", "fn": "Engine.state.activeScript.crash()" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+\`\`\`
+
+INSTRUCTIONS:
+1. Parse the provided JSON data carefully.
+2. Apply the user's request. Keep existing components that work well, only enhance, fix, or expand.
+3. Obey all normal engine architecture rules (Tailwind CQ units, HTML string encapsulation, JSON strictness).
+4. DO NOT output partial code. Output the FULL updated JSON following the exact schema.
+`;
+    </script>
+    <script>
+        const DEMO_DATA = {
+            "meta": {
+                "title": "The Silicon Veins",
+                "audio": "https://res.cloudinary.com/dmttn34te/video/upload/v1771665377/music_no_copyright_gnhpmi.mp3",
+                "lang": "en-US",
+                "podcast": "true"
+            },
+            "scenes": [{
+                    "type": "INTRO_PREMIUM_INSTANT",
+                    "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black perspective-[1000px]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564\")] bg-cover bg-center opacity-40 scale-110 transition-transform duration-[20s] ease-linear' style='animation: drift 20s infinite alternate;'></div>\n  <style>@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-emerald-900/40 via-transparent to-rose-900/40 opacity-80 blur-3xl animate-[spin_30s_linear_infinite]'></div>\n  <div class='film-grain opacity-30 mix-blend-overlay'></div>\n  <div class='z-20 text-center px-[5cqw] relative'>\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.2cqw] py-[0.6cqh] border border-emerald-500/30 rounded-full bg-black/60 backdrop-blur-md text-emerald-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,0.9rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(16,185,129,0.15)]'>\n        <span class='w-2 h-2 rounded-full bg-emerald-500 animate-pulse'></span> \n        REAL-TIME RENDER\n    </div>\n    <div class='relative'>\n        <h1 class='absolute inset-0 text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-emerald-500/10 blur-xl select-none'>VIDEO-LIKE</h1>\n        <h1 class='text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-600 tracking-tighter drop-shadow-2xl'>VIDEO-LIKE</h1>\n    </div>\n    <div class='mt-[3cqh] overflow-hidden'>\n        <p id='sub' class='text-[clamp(1rem,2.5cqw,2.5rem)] text-stone-300 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out delay-200'>The end of pixel hallucination.</p>\n    </div>\n  </div>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#000_120%)] pointer-events-none'></div>\n</div>",
+                    "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'); } } }",
+                    "steps": [{
+                        "narration": "What you are seeing is not a video file. It is a live execution of code, data, and logic.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.init()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "CODE_TERMINAL",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,3.5cqmin,3rem)]'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/carbon-fibre.png\")] opacity-20'></div>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-emerald-500 to-rose-500'></div>\n  <div class='z-10 relative max-w-[90cqw] mx-auto w-full'>\n    <div id='hl-box' class='absolute left-[-2cqw] w-[104%] h-[1.5em] bg-emerald-900/20 border-l-[4px] border-emerald-500 opacity-0 transition-all duration-500 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-stone-400 leading-[1.8]'>\n      <div id='line-1' class='opacity-0 transition-opacity'><span class='text-stone-600'>1</span> <span class='text-rose-400'>import</span> <span class='text-white'>knowledge_base</span></div>\n      <div id='line-2' class='opacity-0 transition-opacity mt-[1cqh]'><span class='text-stone-600'>2</span> <span class='text-rose-400'>def</span> <span class='text-emerald-400'>start_documentary</span>(topic):</div>\n      <div id='line-3' class='opacity-0 transition-opacity'><span class='text-stone-600'>3</span> &nbsp;&nbsp;engine.<span class='text-amber-300'>render</span>(topic=<span class='text-emerald-400'>\"Silicon_War\"</span>)</div>\n    </div>\n  </div>\n  <div id='output-panel' class='absolute bottom-[5cqh] right-[5cqw] max-w-[80cqw] bg-black/80 border border-stone-700 rounded-xl p-[3cqw] translate-y-full opacity-0 transition-all duration-700 backdrop-blur-md shadow-2xl'>\n    <div class='text-emerald-500 font-mono'>SYSTEM_READY. INITIALIZING VISUALS...</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const highlightLine = (idx) => { const el = ctx.root.querySelector(`#line-${idx}`); const hl = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); hl.classList.remove('opacity-0'); hl.style.top = `${el.offsetTop}px`; hl.style.height = `${el.offsetHeight}px`; }; return { step1: () => highlightLine(1), step2: () => { highlightLine(2); setTimeout(()=>highlightLine(3), 500); }, showOut: () => ctx.root.querySelector('#output-panel').classList.remove('translate-y-full', 'opacity-0') } }",
+                    "steps": [{
+                            "narration": "Generative A I guesses pixels. We render facts. Let's demonstrate by building a documentary from scratch.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.step1()"
+                            }]
+                        },
+                        {
+                            "narration": "Executing script: The Silicon Veins. A deep dive into the global microchip war.",
+                            "actions": [{
+                                    "type": "custom",
+                                    "fn": "Engine.state.activeScript.step2()"
+                                },
+                                {
+                                    "type": "custom",
+                                    "fn": "setTimeout(()=>Engine.state.activeScript.showOut(), 1000)"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "DOC_TITLE",
+                    "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2670\")] bg-cover bg-center'></div>\n  <div class='absolute inset-0 bg-stone-950/80 backdrop-blur-[2px] mix-blend-multiply'></div>\n  <div class='absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-rose-900/40'></div>\n  <div class='z-10 text-center px-[5cqw] border-y-2 border-emerald-500/30 py-[5cqh] bg-black/20 backdrop-blur-md'>\n    <h2 id='doc-sub' class='text-rose-400 font-mono tracking-[0.5em] text-[clamp(0.8rem,1.5cqw,1.5rem)] opacity-0 -translate-y-4 transition-all duration-700 uppercase'>Global Report</h2>\n    <h1 id='doc-main' class='text-[clamp(3rem,9cqw,10rem)] font-black text-white italic tracking-tighter opacity-0 scale-110 blur-lg transition-all duration-[1.5s] ease-out mt-[2cqh] drop-shadow-2xl'>\n      THE SILICON VEINS\n    </h1>\n    <div class='h-[2px] w-0 bg-emerald-500 mx-auto mt-[3cqh] transition-all duration-1000' id='line'></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { start: () => { ctx.root.querySelector('#doc-sub').classList.remove('opacity-0', '-translate-y-4'); const t = ctx.root.querySelector('#doc-main'); t.classList.remove('opacity-0', 'scale-110', 'blur-lg'); ctx.root.querySelector('#line').style.width = '50%'; } } }",
+                    "steps": [{
+                            "narration": "It is the most complex object ever built by human hands. And it controls the fate of nations.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.start()"
+                            }]
+                        },
+                        {
+                            "narration": "I'm your host. Today, we're joined by our lead analyst to dismantle the machine that runs our world.",
+                            "actions": []
+                        }
+                    ]
+                },
+                {
+                    "type": "QUOTE_SCENE",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[8cqw] relative overflow-hidden text-stone-200'>\n  <div class='absolute inset-0 opacity-10 bg-[radial-gradient(#a8a29e_1px,transparent_1px)] bg-[size:20px_20px]'></div>\n  <div class='absolute inset-0 bg-gradient-to-br from-emerald-900/20 to-rose-900/20'></div>\n  <div class='relative z-10 max-w-5xl'>\n    <i class='bi bi-quote text-[8cqw] text-emerald-800/20 absolute -top-[4cqw] -left-[4cqw]'></i>\n    <p class='text-[clamp(1.5rem,4cqw,4rem)] font-serif leading-tight tracking-tight'>\n      Any sufficiently advanced technology is indistinguishable from \n      <span class='relative inline-block px-[0.5cqw]'>\n        <span id='hl-magic' class='absolute inset-0 bg-rose-600 mix-blend-overlay w-0 transition-all duration-700 ease-in-out'></span>\n        <span class='relative z-10 text-rose-400'>magic.</span>\n      </span>\n    </p>\n    <div class='mt-[5cqh] flex items-center gap-[2cqw] opacity-0 translate-y-4 transition-all duration-700' id='author'>\n      <div class='w-[6cqw] h-[6cqw] rounded-full bg-stone-700 overflow-hidden border-2 border-stone-500'>\n        <img src='https://images.unsplash.com/photo-1535905557558-afc4877a26fc?q=80&w=2000' class='w-full h-full object-cover grayscale'>\n      </div>\n      <div>\n        <p class='font-bold text-white text-[clamp(0.8rem,1.2cqw,1.5rem)]'>Arthur C. Clarke</p>\n      </div>\n    </div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                        "narration": "Clarke was right. But this magic isn't supernatural. It is manufactured.",
+                        "actions": [{
+                                "type": "custom",
+                                "fn": "document.getElementById('hl-magic').style.width = '100%'"
+                            },
+                            {
+                                "type": "reveal",
+                                "target": "#author"
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "type": "DNA_HELIX",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-dna' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent'></div>\n  <div class='z-10 text-center pointer-events-none bg-black/50 p-4 rounded-xl border border-stone-700 backdrop-blur-sm'>\n    <h1 class='text-white font-black text-[clamp(2rem,5cqw,4rem)] tracking-tight'>SILICON LATTICE</h1>\n    <p class='font-mono text-emerald-400 text-[clamp(0.8rem,1.2cqw,1.5rem)] tracking-[0.2em]'>PURE CRYSTAL</p>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let angle = 0; const particles = 150; const radius = 100; const length = 300; p.setup = () => { const container = ctx.root.querySelector('#p5-dna'); p.createCanvas(container.clientWidth, container.clientHeight, p.WEBGL); }; p.draw = () => { p.clear(); p.rotateY(angle); p.strokeWeight(3); for(let i = 0; i < particles; i++) { const y = p.map(i, 0, particles, -length, length); const phase = p.map(y, -length, length, 0, p.TWO_PI * 4); p.stroke('#10b981'); p.point(radius * p.cos(phase), y, radius * p.sin(phase)); p.stroke('#f43f5e'); p.point(radius * p.cos(phase + p.PI), y, radius * p.sin(phase + p.PI)); } angle += 0.01; }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-dna'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-dna'); return { remove: () => myP5.remove() } }",
+                    "steps": [{
+                        "narration": "All of this happens on a wafer of silicon so pure, it is the most perfect crystal structure in the known universe.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "PARALLAX_SCALE_ZOOM",
+                    "html": "<div class='w-full h-full relative overflow-hidden flex items-center justify-center perspective-[1500px] bg-black font-sans'>\n  <div id='parallax-group' class='absolute inset-0 w-full h-full transition-all duration-1000'>\n      <div id='para-bg' class='absolute inset-[-10%] bg-[url(\"https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=2574\")] bg-cover bg-center opacity-30 mix-blend-luminosity scale-110 grayscale'></div>\n      <div id='scan-beam' class='absolute top-0 bottom-0 w-[2px] bg-emerald-500/80 shadow-[0_0_40px_rgba(16,185,129,0.8)] mix-blend-screen opacity-50 blur-[2px]'></div>\n      <div id='para-text' class='absolute inset-0 flex flex-col items-center justify-center z-20'>\n        <h1 class='text-[20cqw] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-300 to-stone-600 tracking-tighter drop-shadow-2xl'>3nm</h1>\n        <div class='text-emerald-400 font-mono text-[1.2cqw] tracking-[1em] uppercase mt-[-2cqw] bg-black/50 backdrop-blur-md py-2 border-y border-emerald-500/30'>Fabrication Node</div>\n      </div>\n  </div>\n  <div id='comp-group' class='absolute inset-0 w-full h-full z-30 pointer-events-none opacity-0 transition-opacity duration-500 flex items-center justify-center'>\n      <div id='hair-strand' class='absolute w-[30cqw] h-[120%] bg-stone-800 rounded-full border-x-4 border-stone-950 flex items-center justify-center shadow-2xl transition-transform duration-[2000ms] ease-[cubic-bezier(0.7,0,0.3,1)] origin-center' style='background-image: url(\"https://www.transparenttextures.com/patterns/dark-leather.png\");'>\n          <div class='absolute -right-[15cqw] top-1/2 text-white font-bold text-[2cqw] whitespace-nowrap'>HUMAN HAIR (80,000nm)</div>\n          <div class='relative w-[0.5cqw] h-[0.5cqw] border-2 border-rose-500 rounded-full animate-ping'></div>\n          <div id='target-box' class='absolute w-[2cqw] h-[2cqw] border border-emerald-500/50 flex items-center justify-center'>\n              <div class='w-[1px] h-[10px] bg-emerald-500'></div><div class='h-[1px] w-[10px] bg-emerald-500 absolute'></div>\n          </div>\n      </div>\n      <div id='transistor-model' class='absolute w-[40cqw] h-[40cqw] opacity-0 scale-0 transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] delay-500'>\n          <div class='w-full h-full relative border border-emerald-500/30 bg-emerald-900/10 backdrop-blur-md rounded-xl flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.2)]'>\n              <div class='absolute inset-x-0 top-[30%] h-[40%] bg-emerald-500/20 border-y border-emerald-400 transform -skew-y-6'></div>\n              <div class='absolute inset-y-0 left-[40%] w-[20%] bg-emerald-400/30 border-x border-emerald-200'></div>\n              <div class='z-10 text-white font-mono text-[1cqw] bg-black/80 px-4 py-1 rounded border border-emerald-500'>GATE_ALL_AROUND</div>\n          </div>\n      </div>\n  </div>\n  <div class='absolute bottom-[5%] w-full px-[5%] flex justify-between z-40 font-mono text-emerald-500 text-[1cqw]'>\n      <div id='hud-scale'>SCALE: MACRO</div>\n      <div class='flex gap-4'>\n          <div>TEMP: 293K</div>\n          <div><span id='size-counter'>0.000000000</span> m</div>\n      </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { let time = 0; let frame; const bg = ctx.root.querySelector('#para-bg'); const txt = ctx.root.querySelector('#para-text'); const beam = ctx.root.querySelector('#scan-beam'); const counter = ctx.root.querySelector('#size-counter'); const loop = () => { time += 0.003; const x = Math.sin(time) * 20; if(bg) bg.style.transform = `translate(${x * 0.2}px, 0) scale(1.1)`; if(txt) txt.style.transform = `translate(${x * -0.5}px, 0)`; if(beam) beam.style.left = `${50 + Math.sin(time * 4) * 45}%`; frame = requestAnimationFrame(loop); }; loop(); return { remove: () => cancelAnimationFrame(frame), compareSizes: () => { ctx.root.querySelector('#parallax-group').style.opacity = '0.1'; ctx.root.querySelector('#parallax-group').style.filter = 'blur(10px)'; const comp = ctx.root.querySelector('#comp-group'); comp.classList.remove('opacity-0'); const hair = ctx.root.querySelector('#hair-strand'); const chip = ctx.root.querySelector('#transistor-model'); const hud = ctx.root.querySelector('#hud-scale'); setTimeout(() => { hair.style.transform = 'scale(50) rotate(5deg)'; hair.style.opacity = '0'; chip.classList.remove('opacity-0', 'scale-0'); chip.classList.add('scale-100'); hud.innerText = 'SCALE: NANO (10^-9)'; hud.classList.add('animate-pulse', 'text-rose-500'); let start = 80000; let end = 3; let duration = 2000; let startTime = null; const step = (ts) => { if (!startTime) startTime = ts; const progress = Math.min((ts - startTime) / duration, 1); const current = start - (progress * (start - end)); if(counter) counter.innerText = Math.max(end, Math.floor(current)) + ' nm'; if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }, 1500); } } }",
+                    "steps": [{
+                            "narration": "So, how small is '3 nanometers' really? It's a marketing term, but it represents a physical reality.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "Look at this human hair. It is 80,000 nanometers wide. To find a 3 n m transistor, you have to zoom in 20,000 times.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.compareSizes()"
+                            }]
+                        },
+                        {
+                            "narration": "We are no longer building machines. We are manipulating individual atoms.",
+                            "actions": []
+                        }
+                    ]
+                },
+                {
+                    "type": "EXPLODED_VIEW",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center perspective-[2000px] overflow-hidden'>\n  <div id='machine' class='relative w-[40cqw] h-[30cqw] transition-transform duration-[1.5s] ease-out' style='transform-style: preserve-3d; transform: rotateX(60deg) rotateZ(0deg);'>\n    <div class='absolute inset-0 bg-stone-800 border border-stone-600 flex items-center justify-center text-white font-bold transition-transform duration-1000' id='l1' style='transform: translateZ(0px)'>BASE FRAME</div>\n    <div class='absolute inset-0 bg-stone-700 border border-stone-500 flex items-center justify-center text-white font-bold transition-transform duration-1000' id='l2' style='transform: translateZ(40px)'>OPTICS MODULE</div>\n    <div class='absolute inset-0 bg-stone-600 border border-stone-400 flex items-center justify-center text-white font-bold transition-transform duration-1000' id='l3' style='transform: translateZ(80px)'>LIGHT SOURCE</div>\n    <div class='absolute inset-0 bg-emerald-900/50 border border-emerald-500 flex items-center justify-center text-emerald-400 font-bold transition-transform duration-1000 backdrop-blur-sm' id='l4' style='transform: translateZ(120px)'>WAFER STAGE</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { expand: () => { ctx.root.querySelector('#machine').style.transform = 'rotateX(60deg) rotateZ(45deg)'; ctx.root.querySelector('#l1').style.transform = 'translateZ(-100px)'; ctx.root.querySelector('#l2').style.transform = 'translateZ(0px)'; ctx.root.querySelector('#l3').style.transform = 'translateZ(100px)'; ctx.root.querySelector('#l4').style.transform = 'translateZ(200px)'; } } }",
+                    "steps": [{
+                            "narration": "To make these chips, you need a machine the size of a bus. The A S M L High N A E U V system.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "It contains over 100,000 parts from 5,000 suppliers. It is the single most critical piece of hardware on Earth.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.expand()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "PARTICLE_PHYSICS",
+                    "html": "<div class='w-full h-full bg-black flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-laser' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 bg-black/80 text-white p-4 border border-rose-500 rounded-lg backdrop-blur-sm'>\n    <div class='font-mono text-rose-400 text-sm tracking-widest'>EUV LITHOGRAPHY</div>\n    <div class='text-2xl font-bold'>TIN DROPLET TARGETING</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let droplet = {x: 0, y: 0, r: 0}; let laser = {active: false, x: 0, y: 0}; let debris = []; p.setup = () => { const c = ctx.root.querySelector('#p5-laser'); p.createCanvas(c.clientWidth, c.clientHeight); reset(); }; const reset = () => { droplet = {x: p.width/2, y: p.height/2, r: 40}; laser = {active: false}; debris = []; }; p.draw = () => { p.clear(); p.background(0); if(droplet.r > 0) { p.fill(200); p.noStroke(); p.circle(droplet.x, droplet.y, droplet.r * 2); } if(laser.active) { p.stroke('#ec4899'); p.strokeWeight(8); p.line(0, p.height, droplet.x, droplet.y); droplet.r -= 2; for(let i=0; i<10; i++) debris.push({x: droplet.x, y: droplet.y, vx: p.random(-5,5), vy: p.random(-5,5), life: 255}); } debris.forEach(d => { d.x += d.vx; d.y += d.vy; d.life -= 5; p.fill(236, 72, 153, d.life); p.noStroke(); p.circle(d.x, d.y, 4); }); }; p.fire = () => laser.active = true; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-laser'); return { remove: () => myP5.remove(), shoot: () => myP5.fire() } }",
+                    "steps": [{
+                            "narration": "It works by shooting a microscopic droplet of molten tin with a high-powered laser.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "This creates plasma that emits Extreme Ultraviolet light, which then etches the chip.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.shoot()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "LIQUID_WAVEFORM",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-wave' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 font-mono text-center'>\n    <div class='text-[clamp(0.6rem,1cqw,1rem)] text-rose-400 tracking-widest uppercase'>EUV WAVELENGTH</div>\n    <div id='amp-readout' class='text-[clamp(3rem,6cqw,6rem)] text-white font-black'>13.5nm</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let time = 0; let frequency = 2.0; p.setup = () => { const c = ctx.root.querySelector('#p5-wave'); p.createCanvas(c.clientWidth, c.clientHeight); }; p.draw = () => { p.clear(); p.stroke(244, 63, 94); p.strokeWeight(2); p.noFill(); p.beginShape(); for (let x = 0; x < p.width; x+=5) { const angle = time + p.map(x, 0, p.width, 0, p.TWO_PI * frequency); const y = p.height/2 + p.sin(angle) * 50; p.vertex(x, y); } p.endShape(); time += 0.1; }; p.tighten = () => frequency = 10.0; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-wave'); return { remove: () => myP5.remove(), trigger: () => myP5.tighten() } }",
+                    "steps": [{
+                            "narration": "Normal light is too 'blunt' to carve these features.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "We need a wavelength of exactly 13.5 nanometers. A frequency so tight it is absorbed by almost everything.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.trigger()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "UI_SIMULATION",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center font-mono'>\n  <div class='w-[60cqw] bg-stone-900 border border-stone-700 rounded-xl p-6 shadow-[0_0_30px_rgba(16,185,129,0.1)]'>\n    <div class='flex justify-between text-stone-500 mb-4'><span>LENS CONTROL</span><span>NA: 0.33</span></div>\n    <div class='flex gap-4 items-center mb-4'>\n      <div class='text-white'>FOCUS:</div>\n      <div class='flex-1 h-2 bg-stone-700 rounded overflow-hidden'><div id='focus-bar' class='h-full bg-emerald-500 w-[50%] transition-all duration-300'></div></div>\n    </div>\n    <div id='status' class='text-center text-amber-500 font-bold'>CALIBRATING...</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { calibrate: () => { ctx.root.querySelector('#focus-bar').style.width = '99%'; const s = ctx.root.querySelector('#status'); s.innerText = 'LOCKED'; s.classList.replace('text-amber-500', 'text-emerald-500'); } } }",
+                    "steps": [{
+                        "narration": "The mirrors inside must be perfectly flat. If the mirrors were the size of Germany, the biggest bump would be 1 millimeter high.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.calibrate()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "MAP_TOPOLOGY",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden font-mono text-white border-4 border-stone-800'>\n  <div id='map-world' class='absolute inset-0 z-0 opacity-60'></div>\n  <div class='absolute top-[5%] right-[5%] z-10 bg-black/80 p-4 border-l-4 border-emerald-500 backdrop-blur-md'>\n    <h1 class='text-emerald-500 font-bold tracking-widest mb-1 text-[clamp(0.8rem,1.2cqw,1.2rem)]'>SUPPLY CHAIN CHOKEPOINT</h1>\n    <div class='text-[clamp(0.6rem,0.8cqw,0.8rem)] text-stone-400'>REGION: <span class='text-white font-bold'>TAIWAN STRAIT</span></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const map = ctx.map('#map-world', { center: [20, 120], zoom: 3, zoomControl: false, attributionControl: false }); L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map); setTimeout(()=>map.invalidateSize(), 200); return { focus: () => map.flyTo([23.6978, 120.9605], 6, {duration: 3}) } }",
+                    "steps": [{
+                            "narration": "Where does this magic come from? Not Silicon Valley. Not Europe.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "92% of the world's most advanced logic chips come from this one small island. Taiwan.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.focus()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "DOUGHNUT_HOLO",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center p-[5cqw] relative overflow-hidden'>\n  <div class='relative w-[50cqmin] h-[50cqmin] z-10 perspective-[1000px]'>\n    <div class='absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none'>\n      <div class='text-stone-500 font-mono text-[clamp(0.6rem,1cqw,1rem)] tracking-widest uppercase mb-2'>T S M C MARKET SHARE</div>\n      <div class='text-white text-[clamp(2rem,5cqw,5rem)] font-black italic'>58%</div>\n    </div>\n    <div id='holo-container' class='w-full h-full drop-shadow-[0_0_50px_rgba(16,185,129,0.2)]'>\n      <div class='w-full h-full relative'><canvas id='chart-doughnut'></canvas></div>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const chart = ctx.chart('#chart-doughnut', { type: 'doughnut', data: { labels: ['TSMC', 'Others'], datasets: [{ data: [0, 100], backgroundColor: ['#10b981', '#44403c'], borderWidth: 0, cutout: '85%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' } } }); const container = ctx.root.querySelector('#holo-container'); let rotation = 0; let frameId; const spin = () => { rotation += 0.2; if(container) { container.style.transform = `rotateX(30deg) rotateZ(${rotation}deg)`; } frameId = window.requestAnimationFrame(spin); }; spin(); return { remove: () => { window.cancelAnimationFrame(frameId); chart.destroy(); }, fill: () => { chart.data.datasets[0].data = [58, 42]; chart.update(); } }; }",
+                    "steps": [{
+                        "narration": "If we look at the total foundry market, T S M C holds the majority. But in advanced nodes, that number jumps to near monopoly levels.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.fill()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "DETECTIVE_BOARD",
+                    "html": "<div class='w-full h-full bg-[#292524] relative flex items-center justify-center p-[4cqw] overflow-hidden'>\n  <div class='absolute inset-0 opacity-10 bg-[url(\"https://www.transparenttextures.com/patterns/wood-pattern.png\")]'></div>\n  <div class='relative w-full h-full bg-stone-900/50 border border-stone-700 shadow-2xl'>\n    <svg class='absolute inset-0 w-full h-full z-10 pointer-events-none' viewBox='0 0 100 100' preserveAspectRatio='none'>\n      <path id='con-1' d='M20,20 Q50,50 80,20' fill='none' stroke='#f59e0b' stroke-width='0.5' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000' />\n      <path id='con-2' d='M20,20 Q50,50 50,80' fill='none' stroke='#f59e0b' stroke-width='0.5' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 delay-300' />\n    </svg>\n    <div id='item-1' class='absolute top-[10%] left-[10%] w-[15%] bg-white p-1 rotate-[-2deg] opacity-0 scale-90 transition-all duration-500'>\n      <img src='https://images.unsplash.com/photo-1526304640152-d4619684e484?q=80&w=2000' class='w-full aspect-square object-cover grayscale'>\n      <div class='text-black text-[0.6cqw] font-bold text-center'>U S DESIGN</div>\n    </div>\n    <div id='item-2' class='absolute top-[10%] right-[10%] w-[15%] bg-white p-1 rotate-[3deg] opacity-0 scale-90 transition-all duration-500'>\n      <img src='https://images.unsplash.com/photo-1555664424-778a69022365?q=80&w=2000' class='w-full aspect-square object-cover grayscale'>\n      <div class='text-black text-[0.6cqw] font-bold text-center'>DUTCH MACHINES</div>\n    </div>\n    <div id='item-3' class='absolute bottom-[10%] left-[42%] w-[15%] bg-white p-1 rotate-[1deg] opacity-0 scale-90 transition-all duration-500'>\n      <div class='bg-emerald-600 aspect-square flex items-center justify-center text-white font-bold text-[2cqw]'>TSMC</div>\n      <div class='text-black text-[0.6cqw] font-bold text-center'>TAIWAN FAB</div>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { reveal: () => { ['item-1', 'item-2', 'item-3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); setTimeout(() => { ctx.root.querySelector('#con-1').style.strokeDashoffset = '0'; ctx.root.querySelector('#con-2').style.strokeDashoffset = '0'; }, 800); } } }",
+                    "steps": [{
+                            "narration": "The supply chain is a fragile web. Design from California, equipment from the Netherlands...",
+                            "actions": []
+                        },
+                        {
+                            "narration": "...all converging on the foundries of Taiwan.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.reveal()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "NETWORK_NODES",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-nodes' class='absolute inset-0 w-full h-full relative z-0'></div>\n  <div class='z-10 bg-black/80 backdrop-blur-sm px-[4cqw] py-[2cqh] rounded-full border border-stone-700 text-center pointer-events-none'>\n    <div class='text-[clamp(0.7rem,1.2cqw,1.2rem)] font-mono text-stone-300 tracking-widest uppercase'>Global Interdependence</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const sketch = (p) => { let particles = []; const num = 50; p.setup = () => { const container = ctx.root.querySelector('#p5-nodes'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<num; i++) particles.push({ x: p.random(p.width), y: p.random(p.height), vx: p.random(-1, 1), vy: p.random(-1, 1) }); }; p.draw = () => { p.clear(); particles.forEach((pt, i) => { pt.x += pt.vx; pt.y += pt.vy; if(pt.x < 0 || pt.x > p.width) pt.vx *= -1; if(pt.y < 0 || pt.y > p.height) pt.vy *= -1; p.noStroke(); p.fill('#10b981'); p.circle(pt.x, pt.y, 6); for(let j=i+1; j<num; j++) { const other = particles[j]; const d = p.dist(pt.x, pt.y, other.x, other.y); if(d < 100) { p.stroke(16, 185, 129, p.map(d, 0, 100, 150, 0)); p.strokeWeight(1); p.line(pt.x, pt.y, other.x, other.y); } } }); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-nodes'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-nodes'); return { remove: () => myP5.remove() } }",
+                    "steps": [{
+                        "narration": "No single country can build a chip alone. The network is too vast, too specialized.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "NEWS_TICKER",
+                    "html": "<div class='w-full h-full bg-stone-900 flex flex-col items-center justify-center relative overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2670\")] bg-cover opacity-20'></div>\n  <div class='z-10 text-white text-[10cqw] font-black italic tracking-tighter drop-shadow-lg mb-8'>BREAKING</div>\n  <div class='w-full h-[12cqh] bg-rose-600 flex items-center overflow-hidden border-y-4 border-white'>\n    <div class='whitespace-nowrap animate-[scroll_15s_linear_infinite] flex items-center gap-[5cqw] text-[3cqh] font-mono p-4 text-white font-bold'>\n      <span>U S IMPOSES EXPORT CONTROLS</span>\n      <span>CHIP ACT SIGNED INTO LAW</span>\n      <span>CHINA ACCELERATES DOMESTIC PRODUCTION</span>\n      <span>SUPPLY CHAIN FRACTURE IMMINENT</span>\n    </div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                            "narration": "Then, the geopolitics shifted. The Chip War began.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "Nations realized that without chips, their economies—and their militaries—would grind to a halt.",
+                            "actions": []
+                        }
+                    ]
+                },
+                {
+                    "type": "GLITCH_TEXT",
+                    "html": "<div class='w-full h-full bg-[#0a0a0a] flex items-center justify-center font-mono overflow-hidden'>\n  <div class='relative group w-full text-center'>\n    <h1 class='text-[clamp(2rem,8cqw,8rem)] font-bold text-rose-600 absolute top-0 left-0 w-full opacity-70 mix-blend-screen animate-pulse -translate-x-1' id='glitch-r'>EMBARGO</h1>\n    <h1 class='text-[clamp(2rem,8cqw,8rem)] font-bold text-emerald-600 absolute top-0 left-0 w-full opacity-70 mix-blend-screen animate-pulse translate-x-1' style='animation-duration: 0.2s' id='glitch-b'>EMBARGO</h1>\n    <h1 class='text-[clamp(2rem,8cqw,8rem)] font-bold text-white relative z-10' id='glitch-main'>EMBARGO</h1>\n  </div>\n</div>",
+                    "script": "(ctx) => { const main = ctx.root.querySelector('#glitch-main'); const red = ctx.root.querySelector('#glitch-r'); const blue = ctx.root.querySelector('#glitch-b'); const final = 'DECOUPLING'; const chars = '!@#$%^&*()'; return { decode: () => { let i = 0; const interval = setInterval(() => { main.innerText = final.split('').map((letter, index) => { if(index < i) return final[index]; return chars[Math.floor(Math.random() * chars.length)]; }).join(''); red.innerText = main.innerText; blue.innerText = main.innerText; if(i >= final.length) { clearInterval(interval); main.innerText = final; red.style.display = 'none'; blue.style.display = 'none'; } i += 1/3; }, 50); } } }",
+                    "steps": [{
+                            "narration": "The unified global market fractured. Sanctions. Bans. Embargoes.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "We entered the era of the Great Decoupling.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.decode()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "HEATMAP_PULSE",
+                    "html": "<div class='w-full h-full bg-stone-900 flex items-center justify-center p-[5cqw] relative overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg\")] bg-cover bg-center opacity-10 invert'></div>\n  <div class='grid grid-cols-10 grid-rows-10 w-[80cqmin] h-[80cqmin] gap-px relative z-10 border border-stone-800' id='heatmap-grid'></div>\n</div>",
+                    "script": "(ctx) => { const grid = ctx.root.querySelector('#heatmap-grid'); if(!grid.children.length) { for(let i=0; i<100; i++) { const cell = document.createElement('div'); cell.className = 'bg-stone-800/50 transition-colors duration-500'; cell.id = 'cell-' + i; grid.appendChild(cell); } } const runHeat = () => { for(let i=0; i<100; i++) { const cell = ctx.root.querySelector('#cell-'+i); if(cell) cell.style.backgroundColor = `rgba(244, 63, 94, ${Math.random() * 0.2})`; } }; setInterval(runHeat, 500); return { highlight: () => { [45, 46, 55, 56].forEach(i => { ctx.root.querySelector('#cell-'+i).style.backgroundColor = '#ef4444'; ctx.root.querySelector('#cell-'+i).style.boxShadow = '0 0 20px #ef4444'; }); } } }",
+                    "steps": [{
+                            "narration": "Heatmaps of trade activity show the lights going out in cross-border tech transfers.",
+                            "actions": []
+                        },
+                        {
+                            "narration": "Specifically targeting high-end G P U clusters needed for A I development.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.highlight()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "SOCIAL_POST",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[5cqw]'>\n  <div class='bg-stone-800 w-full max-w-lg rounded-2xl border border-stone-600 p-6 text-white shadow-xl'>\n    <div class='flex items-start gap-4'>\n      <div class='w-12 h-12 rounded-full bg-stone-500'></div>\n      <div>\n        <div class='flex items-center gap-2'><p class='font-bold'>TechInsider</p><p class='text-stone-400 text-sm'>@TechInsider · 5m</p></div>\n        <p class='mt-2 text-[clamp(0.9rem,1.2cqw,1.2rem)] leading-snug'>Sources confirm: Major auto manufacturers are halting production lines due to E C U chip shortages. Wait times for new EVs extended to 18 months.</p>\n      </div>\n    </div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                        "narration": "The ripple effects were immediate. Leaked reports confirmed what everyone feared.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "CHAT_CONV",
+                    "html": "<div class='w-full h-full bg-[#e5e5e5] flex items-center justify-center p-[5cqw]'>\n  <div class='w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl flex flex-col h-[70cqh] overflow-hidden border border-stone-300'>\n    <div class='bg-stone-800 p-4 text-white font-bold flex items-center gap-3'><div class='w-8 h-8 bg-green-500 rounded-full'></div> Auto CEO Group</div>\n    <div id='chat-window' class='flex-1 p-4 flex flex-col gap-3 overflow-y-auto bg-stone-100'></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const chatWindow = ctx.root.querySelector('#chat-window'); const addMessage = (text, sender) => { const bubble = document.createElement('div'); bubble.innerText = text; bubble.className = sender === 'me' ? 'self-end bg-blue-500 text-white rounded-lg py-2 px-4 max-w-[80%] text-sm' : 'self-start bg-stone-200 text-black rounded-lg py-2 px-4 max-w-[80%] text-sm'; chatWindow.appendChild(bubble); chatWindow.scrollTop = chatWindow.scrollHeight; }; return { msg1: () => addMessage('We have 50,000 cars sitting in lots.', 'me'), msg2: () => addMessage('Why? What is missing?', 'other'), msg3: () => addMessage('A $1 chip for the window wipers. Line is stopped.', 'me') } }",
+                    "steps": [{
+                        "narration": "The impact was felt immediately in unexpected sectors. Like the auto industry.",
+                        "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.msg1()"
+                            },
+                            {
+                                "type": "custom",
+                                "fn": "setTimeout(()=>Engine.state.activeScript.msg2(), 1000)"
+                            },
+                            {
+                                "type": "custom",
+                                "fn": "setTimeout(()=>Engine.state.activeScript.msg3(), 2000)"
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "type": "NEON_DATA_CRASH",
+                    "html": "<div class='w-full h-full bg-stone-900 flex flex-col p-[5cqw] relative overflow-hidden font-mono'>\n  <div class='z-10 flex justify-between items-end mb-[4cqh] border-b border-stone-700 pb-4'>\n    <div><h2 class='text-stone-500 text-sm'>AUTO PRODUCTION</h2><h1 class='text-white text-4xl font-bold'>GLOBAL</h1></div>\n    <div class='text-emerald-400 text-4xl font-bold' id='val'>100%</div>\n  </div>\n  <div class='flex-1 relative bg-stone-800 rounded-xl p-4'><canvas id='chart-crash'></canvas></div>\n</div>",
+                    "script": "(ctx) => { const chart = ctx.chart('#chart-crash', { type: 'line', data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ data: [100, 98, 95, 96], borderColor: '#10b981', tension: 0.4 }] }, options: { maintainAspectRatio: false, scales: { y: { display: false } }, plugins: { legend: {display:false} } } }); return { crash: () => { chart.data.datasets[0].data = [100, 98, 40, 20]; chart.data.datasets[0].borderColor = '#ef4444'; chart.update(); ctx.root.querySelector('#val').innerText = '20%'; ctx.root.querySelector('#val').classList.replace('text-emerald-400', 'text-red-500'); } } }",
+                    "steps": [{
+                        "narration": "Production lines flatlined. Billions in revenue vanished because of shortages in legacy chips.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.crash()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "TIMELINE_SCROLL",
+                    "html": "<div class='w-full h-full bg-stone-200 flex flex-col justify-center relative overflow-hidden text-stone-900 font-sans'>\n  <div class='absolute w-full h-[2px] bg-stone-400 top-1/2 left-0 z-0'></div>\n  <div id='timeline' class='flex w-[300%] transition-transform duration-1000 relative z-10'>\n    <div class='w-1/3 flex flex-col items-center'><div class='text-[10cqw] font-black'>2025</div><div class='text-xl'>A I Explosion</div></div>\n    <div class='w-1/3 flex flex-col items-center'><div class='text-[10cqw] font-black'>2030</div><div class='text-xl'>Angstrom Era</div></div>\n    <div class='w-1/3 flex flex-col items-center'><div class='text-[10cqw] font-black'>2040</div><div class='text-xl'>Quantum Supremacy</div></div>\n  </div>\n</div>",
+                    "script": "() => { return {} }",
+                    "steps": [{
+                            "narration": "What comes next? We move from nanometers to Angstroms.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "document.getElementById('timeline').style.transform = 'translateX(-33%)'"
+                            }]
+                        },
+                        {
+                            "narration": "And eventually, beyond silicon entirely.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "document.getElementById('timeline').style.transform = 'translateX(-66%)'"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "PROCESS_STEPS",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex flex-col items-center justify-center p-[5cqw] text-white'>\n  <h1 class='text-[3cqw] font-black mb-8'>G A A F E T ARCHITECTURE</h1>\n  <div class='flex gap-8 items-center'>\n    <div id='s1' class='bg-stone-800 p-4 rounded-xl border border-stone-600 opacity-50'><i class='bi bi-layers text-[2cqw] text-emerald-500'></i><p>NANOSHEET</p></div>\n    <i class='bi bi-arrow-right text-stone-500'></i>\n    <div id='s2' class='bg-stone-800 p-4 rounded-xl border border-stone-600 opacity-50'><i class='bi bi-box text-[2cqw] text-emerald-500'></i><p>GATE</p></div>\n    <i class='bi bi-arrow-right text-stone-500'></i>\n    <div id='s3' class='bg-stone-800 p-4 rounded-xl border border-stone-600 opacity-50'><i class='bi bi-cpu text-[2cqw] text-emerald-500'></i><p>CONTACT</p></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { step: () => { ctx.root.querySelector('#s1').style.opacity = 1; setTimeout(()=>ctx.root.querySelector('#s2').style.opacity = 1, 500); setTimeout(()=>ctx.root.querySelector('#s3').style.opacity = 1, 1000); } } }",
+                    "steps": [{
+                        "narration": "To keep Moore's Law alive, we are reinventing the shape of the transistor itself. Gate-All-Around.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.step()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "SPLIT_COMPARISON",
+                    "html": "<div class='w-full h-full bg-stone-900 flex flex-col items-center justify-center relative font-black text-white uppercase text-[8cqw] tracking-tighter overflow-hidden'>\n  <div class='absolute inset-0 flex items-center justify-center bg-stone-800'><h1>FIN F E T</h1></div>\n  <div id='comp-left' class='absolute inset-0 w-1/2 h-full bg-emerald-900 overflow-hidden border-r-4 border-white'><div class='w-screen h-full flex items-center justify-center'><h1>G A A F E T</h1></div></div>\n</div>",
+                    "script": "(ctx) => { return { slide: () => ctx.root.querySelector('#comp-left').style.width = '80%' } }",
+                    "steps": [{
+                        "narration": "Replacing the Fin F E T fin with stacked nanosheets for better control.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.slide()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "CAROUSEL_3D",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center overflow-hidden' style='perspective: 1000px;'>\n  <div id='carousel' class='relative w-[30cqmin] h-[45cqmin]' style='transform-style: preserve-3d; transition: transform 1s ease-in-out;'>\n    <div class='absolute inset-0 border border-stone-700 bg-stone-800 flex items-center justify-center' style='transform: rotateY(0deg) translateZ(30cqmin);'><div class='text-white text-[2cqw] font-bold'>C P U</div></div>\n    <div class='absolute inset-0 border border-stone-700 bg-stone-800 flex items-center justify-center' style='transform: rotateY(120deg) translateZ(30cqmin);'><div class='text-white text-[2cqw] font-bold'>G P U</div></div>\n    <div class='absolute inset-0 border border-stone-700 bg-stone-800 flex items-center justify-center' style='transform: rotateY(240deg) translateZ(30cqmin);'><div class='text-white text-[2cqw] font-bold'>N P U</div></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { let angle = 0; const c = ctx.root.querySelector('#carousel'); return { rotate: () => { angle -= 120; c.style.transform = `rotateY(${angle}deg)`; } } }",
+                    "steps": [{
+                        "narration": "Chips are also becoming specialized. Central Processing, Graphics Processing, and now Neural Processing for A I.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.rotate()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "QUIZ_GAME",
+                    "html": "<div class='w-full h-full bg-emerald-900 flex items-center justify-center p-[5cqw] text-white'>\n  <div class='w-full max-w-3xl text-center'>\n    <h2 class='text-[clamp(1.5rem,3cqw,2.5rem)] font-bold mb-[6cqh]'>Which material is replacing Silicon?</h2>\n    <div class='grid grid-cols-2 gap-4'>\n      <div class='bg-white/10 p-4 rounded-xl' id='o1'>Graphene</div><div class='bg-white/10 p-4 rounded-xl' id='o2'>Gallium Nitride</div>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { reveal: () => ctx.root.querySelector('#o2').style.background = '#10b981' } }",
+                    "steps": [{
+                        "narration": "For power electronics, we are already moving to Gallium Nitride.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.reveal()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "PPT_SLIDE",
+                    "html": "<div class='w-full h-full bg-[#f5f5f4] flex p-[5cqw] text-stone-800 relative overflow-hidden'>\n  <div class='w-[40%] flex flex-col justify-center z-10'>\n    <h1 class='text-[4cqw] font-serif font-black mb-6 text-stone-900 leading-none'>MOORE'S<br><span class='text-amber-600'>LAW</span></h1>\n    <ul class='list-disc pl-6 space-y-4 text-[1.5cqw] font-medium text-stone-700'>\n      <li>Observation by Gordon Moore (1965)</li>\n      <li>Transistors double every <span class='bg-amber-200 px-1'>2 years</span></li>\n      <li>Cost halves simultaneously</li>\n    </ul>\n  </div>\n  <div class='w-[60%] flex items-center justify-center z-10'>\n    <div class='bg-white p-4 shadow-xl rotate-2 border border-stone-200 w-full h-[60%]'><canvas id='chart-moore'></canvas></div>\n  </div>\n</div>",
+                    "script": "(ctx) => { const chart = ctx.chart('#chart-moore', { type: 'line', data: { labels: ['70', '80', '90', '00', '10', '20'], datasets: [{ label: 'Transistor Count', data: [2300, 134000, 1200000, 42000000, 2300000000, 50000000000], borderColor: '#d97706', backgroundColor: 'rgba(217, 119, 6, 0.1)', fill: true, tension: 0.4 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'logarithmic', grid: {display:false} } }, plugins: { legend: {display:false} } } }); return { remove: () => chart.destroy() } }",
+                    "steps": [{
+                        "narration": "For fifty years, this industry was governed by a single prophecy: Moore's Law.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "FIXED_TREE_DIAGRAM",
+                    "html": "<div class='w-full h-full bg-[#fdfbf5] flex items-center justify-center p-4 md:p-8 relative font-sans text-stone-800 overflow-hidden'>\n  <div class='film-grain opacity-20'></div>\n  <div class='relative w-full max-w-5xl aspect-video'>\n    <svg class='absolute inset-0 w-full h-full z-0 overflow-visible' viewBox='0 0 100 100' preserveAspectRatio='none' id='tree-svg'>\n      <path id='line-1' d='M50,15 C50,35 25,35 25,50' stroke='#0d9488' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out'/>\n      <path id='line-2' d='M50,15 C50,35 75,35 75,50' stroke='#0d9488' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out delay-[200ms]'/>\n      <path id='line-3' d='M25,58 C25,75 15,75 15,85' stroke='#0ea5e9' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out delay-[400ms]'/>\n      <path id='line-4' d='M25,58 C25,75 35,75 35,85' stroke='#0ea5e9' stroke-width='0.5' fill='none' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-1000 ease-out delay-[600ms]'/>\n    </svg>\n    <div id='n1' class='absolute top-[15%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-teal-600 rounded-xl px-4 py-2 text-stone-800 text-[clamp(0.7rem,1.5cqw,1.2rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-md z-10 whitespace-nowrap'>BOTTLENECKS</div>\n    <div id='n2' class='absolute top-[50%] left-[25%] -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-teal-500 rounded-xl px-4 py-2 text-stone-700 text-[clamp(0.6rem,1.2cqw,1rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-md z-10 whitespace-nowrap'>Lithography</div>\n    <div id='n3' class='absolute top-[50%] left-[75%] -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-teal-500 rounded-xl px-4 py-2 text-stone-700 text-[clamp(0.6rem,1.2cqw,1rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-md z-10 whitespace-nowrap'>Packaging</div>\n    <div id='n4' class='absolute top-[85%] left-[15%] -translate-x-1/2 -translate-y-1/2 bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-stone-600 text-[clamp(0.5rem,1cqw,0.9rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-sm z-10 whitespace-nowrap'>E U V Power</div>\n    <div id='n5' class='absolute top-[85%] left-[35%] -translate-x-1/2 -translate-y-1/2 bg-stone-100 border border-stone-300 rounded-lg px-3 py-2 text-stone-600 text-[clamp(0.5rem,1cqw,0.9rem)] font-bold opacity-0 scale-90 transition-all duration-500 shadow-sm z-10 whitespace-nowrap'>Lenses</div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { showTier1: () => ctx.root.querySelector('#n1').classList.remove('opacity-0', 'scale-90'), showTier2: () => { ['n2', 'n3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); ctx.root.querySelector('#line-1').style.strokeDashoffset = '0'; ctx.root.querySelector('#line-2').style.strokeDashoffset = '0'; }, showTier3: () => { ['n4', 'n5'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); ctx.root.querySelector('#line-3').style.strokeDashoffset = '0'; ctx.root.querySelector('#line-4').style.strokeDashoffset = '0'; } } }",
+                    "steps": [{
+                            "narration": "But the bottlenecks remain. Scaling is getting harder.",
+                            "actions": [{
+                                    "type": "custom",
+                                    "fn": "Engine.state.activeScript.showTier1()"
+                                },
+                                {
+                                    "type": "custom",
+                                    "fn": "setTimeout(()=>Engine.state.activeScript.showTier2(), 500)"
+                                }
+                            ]
+                        },
+                        {
+                            "narration": "Powering the E U V lasers and manufacturing perfect lenses are pushing engineering to the breaking point.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.showTier3()"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "type": "PROS_CONS",
+                    "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[5cqw] text-white'>\n  <div class='grid grid-cols-2 gap-[5cqw] w-full max-w-5xl'>\n    <div>\n      <div class='border-b-2 border-emerald-500 pb-4 mb-6'><h2 class='text-2xl font-bold'>GLOBALIZATION</h2></div>\n      <ul id='pro-list' class='space-y-4 text-stone-300'><li><i class='bi bi-check text-emerald-500'></i> Lowest Cost</li><li><i class='bi bi-check text-emerald-500'></i> Rapid Innovation</li></ul>\n    </div>\n    <div>\n      <div class='border-b-2 border-amber-500 pb-4 mb-6'><h2 class='text-2xl font-bold'>SOVEREIGNTY</h2></div>\n      <ul id='con-list' class='space-y-4 text-stone-300'><li><i class='bi bi-shield text-amber-500'></i> Supply Security</li><li><i class='bi bi-shield text-amber-500'></i> Higher Prices</li></ul>\n    </div>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { show: () => { ctx.root.querySelectorAll('li').forEach((li, i) => { li.style.opacity = 0; li.style.transform = 'translateX(-10px)'; setTimeout(() => { li.style.opacity = 1; li.style.transform = 'translateX(0)'; li.style.transition = 'all 0.5s'; }, i * 200); }); } } }",
+                    "steps": [{
+                        "narration": "We are now trading efficiency for security. The era of globalization is ending.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.show()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "SWARM_AI",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-swarm' class='absolute inset-0 w-full h-full'></div>\n  <div class='z-10 text-center font-mono text-stone-400'>NEURAL NETWORKS</div>\n</div>",
+                    "script": "(ctx) => { const sketch = p => { let flock = []; let target; class Boid { constructor() { this.pos = p.createVector(p.random(p.width), p.random(p.height)); this.vel = p5.Vector.random2D(); this.vel.setMag(p.random(2, 4)); this.acc = p.createVector(); this.maxForce = 0.2; this.maxSpeed = 4; } edges() { if(this.pos.x > p.width) this.pos.x=0; else if (this.pos.x < 0) this.pos.x=p.width; if(this.pos.y > p.height) this.pos.y=0; else if(this.pos.y < 0) this.pos.y=p.height;} flock(boids) { let alignment = p.createVector(); let cohesion = p.createVector(); let separation = p.createVector(); let total = 0; for (let other of boids) { let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y); if (other != this && d < 50) { alignment.add(other.vel); cohesion.add(other.pos); let diff = p5.Vector.sub(this.pos, other.pos); diff.div(d*d); separation.add(diff); total++; } } if(total > 0) { alignment.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); cohesion.div(total).sub(this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); separation.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); } this.acc.add(alignment); this.acc.add(cohesion); this.acc.add(separation.mult(1.5)); } update() { this.pos.add(this.vel); this.vel.add(this.acc); this.vel.limit(this.maxSpeed); this.acc.mult(0); } show() { p.stroke('#10b981'); p.strokeWeight(4); p.point(this.pos.x, this.pos.y); } seek(target) { if(target){ let force = p5.Vector.sub(target, this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce*2); this.acc.add(force); }} } p.setup = () => { const container = ctx.root.querySelector('#p5-swarm'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<150; i++) flock.push(new Boid()); }; p.draw = () => { p.clear(); for (let boid of flock) { boid.edges(); boid.flock(flock); boid.seek(target); boid.update(); boid.show(); } }; p.setTarget = (x,y) => target = p.createVector(x,y); p.windowResized = () => { const container = ctx.root.querySelector('#p5-swarm'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-swarm'); return { remove: () => myP5.remove(), directSwarm: () => myP5.setTarget(ctx.root.clientWidth / 2, ctx.root.clientHeight / 2) }; }",
+                    "steps": [{
+                        "narration": "Ultimately, these chips power the A I swarms that will design the next generation of chips.",
+                        "actions": [{
+                            "type": "custom",
+                            "fn": "Engine.state.activeScript.directSwarm()"
+                        }]
+                    }]
+                },
+                {
+                    "type": "MATRIX_RAIN",
+                    "html": "<div class='w-full h-full bg-[#051005] relative'><div id='p5-matrix' class='absolute inset-0 w-full h-full'></div></div>",
+                    "script": "(ctx) => { const sketch = p => { let streams = []; const symbolSize = 16; class Symbol { constructor(x, y, speed, first) { this.x = x; this.y = y; this.value; this.speed = speed; this.first = first; this.switchInterval = p.round(p.random(2, 20)); } setToRandomSymbol() { if (p.frameCount % this.switchInterval == 0) this.value = String.fromCharCode(0x30A0 + p.round(p.random(0, 96))); } rain() { this.y = (this.y >= p.height) ? 0 : this.y + this.speed; } } class Stream { constructor() { this.symbols = []; this.totalSymbols = p.round(p.random(5, 30)); this.speed = p.random(2, 7); } generateSymbols(x, y) { let first = p.round(p.random(0, 4)) == 1; for (let i=0; i<=this.totalSymbols; i++) { let symbol = new Symbol(x, y, this.speed, first); symbol.setToRandomSymbol(); this.symbols.push(symbol); y -= symbolSize; first = false; } } render() { this.symbols.forEach(symbol => { if (symbol.first) p.fill(180, 255, 180); else p.fill(0, 255, 70); p.text(symbol.value, symbol.x, symbol.y); symbol.rain(); symbol.setToRandomSymbol(); }); } } p.setup = () => { const container = ctx.root.querySelector('#p5-matrix'); p.createCanvas(container.clientWidth, container.clientHeight); let x = 0; for (let i = 0; i <= p.width / symbolSize; i++) { let stream = new Stream(); stream.generateSymbols(x, p.random(-1000, 0)); streams.push(stream); x += symbolSize; } p.textFont('monospace'); p.textSize(symbolSize); }; p.draw = () => { p.background(5, 20, 5, 150); streams.forEach(stream => stream.render()); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-matrix'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-matrix'); return { remove: () => myP5.remove() }; }",
+                    "steps": [{
+                        "narration": "A recursive loop of intelligence building intelligence.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "BLACK_HOLE",
+                    "html": "<div class='w-full h-full bg-black relative flex items-center justify-center'><div id='p5-bh' class='absolute inset-0'></div><div class='z-10 text-white font-mono bg-black/50 p-2'>THE LIMIT</div></div>",
+                    "script": "(ctx) => { const sketch = p => { p.setup = () => { const c = ctx.root.querySelector('#p5-bh'); p.createCanvas(c.clientWidth, c.clientHeight); }; p.draw = () => { p.background(0, 20); p.translate(p.width/2, p.height/2); p.noFill(); p.stroke(255, 50); for(let i=0; i<50; i++) { p.rotate(p.frameCount * 0.001); p.ellipse(0, 0, 100 + i*5 + p.sin(p.frameCount*0.05)*20, 100 + i*2); } }; }; const myP5 = ctx.p5(sketch, '#p5-bh'); return { remove: () => myP5.remove() } }",
+                    "steps": [{
+                        "narration": "Until we hit the physical limit. The point where electrons no longer behave.",
+                        "actions": []
+                    }]
+                },
+                {
+                    "type": "OUTRO",
+                    "html": "<div class='w-full h-full bg-[#0c0a09] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,_#365314_0%,_#000_100%)] opacity-40'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <h1 id='final' class='text-[clamp(3rem,8cqw,10rem)] leading-none font-black text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-stone-600 tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      SILICON VEINS\n    </h1>\n    <p class='mt-[4cqh] text-stone-500 tracking-widest uppercase opacity-0 transition-opacity duration-1000 delay-500' id='final-sub'>End of Report</p>\n  </div>\n</div>",
+                    "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); } } }",
+                    "steps": [{
+                            "narration": "The world runs on these veins. And the blood that flows through them is logic.",
+                            "actions": [{
+                                "type": "custom",
+                                "fn": "Engine.state.activeScript.reveal()"
+                            }]
+                        },
+                        {
+                            "narration": "Rendered by Video-Like.",
+                            "actions": []
+                        }
+                    ]
+                }
+            ]
+        };
+    </script>
+    <script>
+        // ASSETS FOR VISUAL EFFECTS
+        const GRAIN_ASSETS = [
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771663851/film_grain-burn-280977_small_d6puk0.gif")',
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771663827/film_grain-burn-211191_small_ctjpf0.gif")',
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771663827/Film_Grain_s9vzzy.gif")',
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771664153/film_grain_small_plz7bs.gif")',
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771664155/film_grain_dot_xzqyag.gif")'
+        ];
+
+        const TRANSITION_ASSETS = [
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771663826/scene-changing-270108_medium_bjluan.gif")',
+            'url("https://res.cloudinary.com/dmttn34te/image/upload/v1771663827/scene-changing-270109_small_odmxte.gif")'
+        ];
+
+        // Helper to normalize languages (e.g. en_IN to en-in)
+        const normalizeLang = (lang) => {
+            if (!lang) return 'en-in';
+            return lang.replace('_', '-').toLowerCase();
+        };
+
+        const Engine = {
+            data: null,
+            state: {
+                scene: 0,
+                step: 0,
+                paused: true,
+                voice: null,
+                idleTimer: null,
+                activeScript: null,
+                subtitles: false,
+                isTransitioning: false,
+                podcast: {
+                    s1: {
+                        voiceIdx: 0,
+                        speed: 1.0,
+                        pitch: 1.0
+                    },
+                    s2: {
+                        voiceIdx: 1,
+                        speed: 1.05,
+                        pitch: 0.8
+                    }
+                }
+            },
+            audioEl: new Audio(),
+            tts: window.speechSynthesis,
+            init: () => {
+                Engine.audioEl.loop = true;
+                Engine.audioEl.volume = 0.3;
+
+                // PRELOAD TRANSITION ASSETS SO THEY FLASH INSTANTLY FROM RAM
+                TRANSITION_ASSETS.forEach(url => {
+                    const img = new Image();
+                    img.src = url.replace('url("', '').replace('")', '');
+                });
+
+                // Auto Toggle Portrait on Mobile Devices
+                if (window.innerWidth < 768) {
+                    document.getElementById('stage-content').classList.add('portrait');
+                }
+
+                const systemInit = () => {
+                    const aiSel = document.getElementById('ai-lang');
+                    aiSel.innerHTML = '';
+                    const voices = Engine.tts.getVoices();
+
+                    // Populate unique AI languages
+                    const uniqueLangs = [...new Set(voices.map(v => normalizeLang(v.lang)))].sort();
+                    uniqueLangs.forEach(langCode => {
+                        const opt = document.createElement('option');
+                        opt.value = langCode;
+                        try {
+                            opt.text = `${new Intl.DisplayNames([navigator.language], { type: 'language' }).of(langCode)} (${langCode})`;
+                        } catch (e) {
+                            opt.text = langCode;
+                        }
+                        aiSel.appendChild(opt);
+                    });
+
+                    // Set AI Lang Default
+                    let targetLang = normalizeLang(Engine.data?.meta?.lang || 'en-in');
+                    if (uniqueLangs.includes(targetLang)) {
+                        aiSel.value = targetLang;
+                    } else {
+                        // fallback to generic english if en-in isn't found
+                        const enLang = uniqueLangs.find(l => l.startsWith('en'));
+                        if (enLang) aiSel.value = enLang;
+                    }
+
+                    Engine.audio.populateVoices();
+                };
+
+                if (Engine.tts.getVoices().length) systemInit();
+                else Engine.tts.onvoiceschanged = systemInit;
+
+                Engine.ui.trackIdle();
+                Engine.load(DEMO_DATA);
+
+                // KEYBOARD SHORTCUTS
+                window.addEventListener('keydown', (e) => {
+                    // Prevent triggering if typing in a textbox
+                    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        Engine.togglePlay();
+                    } else if (e.code === 'ArrowRight') {
+                        Engine.next();
+                    } else if (e.code === 'ArrowLeft') {
+                        Engine.prev();
+                    }
+                });
+            },
+            load: (json) => {
+                Engine.data = json;
+                Engine.state.scene = 0;
+                Engine.state.step = 0;
+                Engine.state.paused = true;
+
+                // Auto-load audio if present in JSON meta
+                if (json.meta && json.meta.audio) {
+                    Engine.audioEl.src = json.meta.audio;
+                }
+
+                // Auto-toggle Podcast Switch
+                const podToggle = document.getElementById('podcast-toggle');
+                const aiPodToggle = document.getElementById('ai-podcast-toggle');
+                const isPod = (json.meta && (json.meta.podcast === "true" || json.meta.podcast === true));
+                if (podToggle) podToggle.checked = isPod;
+                if (aiPodToggle) aiPodToggle.checked = isPod;
+                Engine.audio.togglePodcast(isPod);
+
+                // If voices are loaded, sync to new JSON lang
+                if (Engine.tts.getVoices().length > 0) {
+                    Engine.audio.populateVoices();
+                }
+
+                Engine.render(0);
+                Engine.loader.preload(1);
+                Engine.ui.update();
+            },
+            gfx: {
+                handleError: (img) => {
+                    const sceneIdx = parseInt(img.dataset.sceneIndex || 0);
+                    const attempt = parseInt(img.dataset.failCount || 0) + 1;
+                    img.dataset.failCount = attempt;
+                    if (attempt <= 2) {
+                        img.src = `https://picsum.photos/seed/${sceneIdx}_tech/1920/1080?grayscale&blur=2`;
+                        return;
+                    }
+                    img.style.display = 'none';
+                    img.parentElement.classList.add('bg-fallback-tech', 'bg-gray-900');
+                }
+            },
+            loader: {
+                preload: (nextIdx) => {
+                    for (let i = nextIdx; i < nextIdx + 2; i++) {
+                        if (Engine.data && Engine.data.scenes[i]) {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(Engine.data.scenes[i].html, 'text/html');
+                            doc.querySelectorAll('img').forEach(img => {
+                                const i = new Image();
+                                i.src = img.src;
+                            });
+                        }
+                    }
+                }
+            },
+            triggerTransition: (callback) => {
+                if (Engine.state.isTransitioning) return;
+                Engine.state.isTransitioning = true;
+
+                const transEl = document.getElementById('scene-transition');
+                // Pick random overlay gif
+                const rawUrl = TRANSITION_ASSETS[Math.floor(Math.random() * TRANSITION_ASSETS.length)];
+                transEl.style.backgroundImage = rawUrl;
+
+                // Flash in
+                transEl.classList.add('transition-active');
+
+                setTimeout(() => {
+                    if (callback) callback(); // Switch scene under the overlay
+
+                    setTimeout(() => {
+                        // Fade out overlay
+                        transEl.classList.remove('transition-active');
+                        setTimeout(() => {
+                            Engine.state.isTransitioning = false;
+                        }, 300); // Wait for CSS fade
+                    }, 300); // Wait for scene to settle before fading out overlay
+                }, 200); // Delay to let opacity hit 0.6
+            },
+            render: (idx) => {
+                if (Engine.state.activeScript && Engine.state.activeScript.remove) {
+                    try {
+                        Engine.state.activeScript.remove();
+                    } catch (e) {}
+                }
+                if (!Engine.data.scenes[idx]) return;
+
+                // Dynamic Grain Update per Scene
+                const grainEl = document.getElementById('dynamic-grain');
+                if (grainEl) {
+                    grainEl.style.backgroundImage = GRAIN_ASSETS[idx % GRAIN_ASSETS.length];
+                }
+
+                const stage = document.getElementById('stage-content');
+                const scene = Engine.data.scenes[idx];
+
+                const old = stage.querySelectorAll('.slide-layer.active');
+                old.forEach(l => {
+                    l.classList.remove('active');
+                    setTimeout(() => l.remove(), 800);
+                });
+
+                const layer = document.createElement('div');
+                layer.className = 'slide-layer active';
+                let processedHTML = scene.html.replace(/<img /g, `<img data-scene-index="${idx}" onerror="Engine.gfx.handleError(this)" `);
+                layer.innerHTML = processedHTML;
+                stage.appendChild(layer);
+
+                if (scene.script) {
+                    setTimeout(() => {
+                        try {
+                            const fn = new Function('return ' + scene.script)();
+                            const instance = fn({
+                                root: layer,
+                                chart: (id, cfg) => new Chart(layer.querySelector(id), cfg),
+                                map: (id, cfg) => L.map(layer.querySelector(id), cfg),
+                                p5: (sketch, id) => new p5(sketch, layer.querySelector(id))
+                            });
+                            Engine.state.activeScript = instance;
+                        } catch (e) {
+                            console.error("Script Error:", e);
+                        }
+                    }, 50);
+                }
+            },
+            playStep: () => {
+                if (Engine.state.paused) return;
+                const scene = Engine.data.scenes[Engine.state.scene];
+                const step = scene.steps[Engine.state.step];
+
+                // Update Overlay Subtitle
+                const subLayer = document.getElementById('subtitle-layer');
+                document.getElementById('subtitle-text').innerText = step.narration;
+                if (Engine.state.subtitles) {
+                    subLayer.classList.remove('hidden');
+                } else {
+                    subLayer.classList.add('hidden');
+                }
+
+                if (step.actions) {
+                    step.actions.forEach(a => {
+                        const el = document.querySelector(a.target);
+                        if (el) {
+                            if (a.type === 'reveal') el.classList.remove('opacity-0', 'translate-y-4', 'scale-90', 'translate-y-8', '-translate-x-4');
+                            if (a.type === 'highlight') el.classList.add('active', 'border-primary');
+                            if (a.type === 'width-grow') el.style.width = a.value || '100%';
+                        }
+                        if (a.type === 'custom') {
+                            try {
+                                new Function(a.fn)();
+                            } catch (e) {
+                                console.error("Custom action error:", e);
+                            }
+                        }
+                    });
+                }
+                Engine.tts.cancel();
+                const u = new SpeechSynthesisUtterance(step.narration);
+
+                // AUDIO ROUTING (Podcast vs Global)
+                const isPodcast = (Engine.data.meta && (Engine.data.meta.podcast === true || Engine.data.meta.podcast === "true"));
+                const voices = Engine.tts.getVoices();
+
+                if (isPodcast) {
+                    // Alternate based on the global step count to simulate conversation
+                    let speakerId = (Engine.state.scene + Engine.state.step) % 2;
+                    if (speakerId === 0) { // Speaker 1
+                        u.voice = voices[Engine.state.podcast.s1.voiceIdx] || Engine.state.voice;
+                        u.rate = Engine.state.podcast.s1.speed;
+                        u.pitch = Engine.state.podcast.s1.pitch;
+                    } else { // Speaker 2
+                        u.voice = voices[Engine.state.podcast.s2.voiceIdx] || Engine.state.voice;
+                        u.rate = Engine.state.podcast.s2.speed;
+                        u.pitch = Engine.state.podcast.s2.pitch;
+                    }
+                } else {
+                    // Standard Global Voice
+                    u.voice = Engine.state.voice;
+                    u.rate = parseFloat(document.getElementById('tts-speed').value);
+                    u.pitch = parseFloat(document.getElementById('tts-pitch').value);
+                }
+
+                u.onend = () => {
+                    if (!Engine.state.paused) setTimeout(Engine.nextStep, 500);
+                };
+                Engine.tts.speak(u);
+            },
+            nextStep: () => {
+                if (Engine.state.paused) return;
+                const scene = Engine.data.scenes[Engine.state.scene];
+                if (Engine.state.step < scene.steps.length - 1) {
+                    Engine.state.step++;
+                    Engine.playStep();
+                } else if (Engine.state.scene < Engine.data.scenes.length - 1) {
+                    Engine.next(); // Use next() to trigger cinematic transition
+                } else {
+                    Engine.togglePlay();
+                }
+            },
+            togglePlay: () => {
+                Engine.state.paused = !Engine.state.paused;
+                Engine.ui.update();
+                if (!Engine.state.paused) {
+                    Engine.audioEl.play().catch(() => {});
+                    Engine.playStep();
+                } else {
+                    Engine.audioEl.pause();
+                    Engine.tts.cancel();
+                    // Force hide transition if paused mid-way
+                    document.getElementById('scene-transition').classList.remove('transition-active');
+                    Engine.state.isTransitioning = false;
+                }
+            },
+            prev: () => {
+                if (Engine.state.scene > 0 && !Engine.state.isTransitioning) {
+                    Engine.state.paused = true;
+                    Engine.ui.update();
+                    Engine.tts.cancel();
+
+                    Engine.triggerTransition(() => {
+                        Engine.state.scene--;
+                        Engine.state.step = 0;
+                        Engine.render(Engine.state.scene);
+                    });
+                }
+            },
+            next: () => {
+                if (Engine.state.scene < Engine.data.scenes.length - 1 && !Engine.state.isTransitioning) {
+                    const wasPlaying = !Engine.state.paused;
+                    Engine.state.paused = true;
+                    Engine.ui.update();
+                    Engine.tts.cancel();
+
+                    Engine.triggerTransition(() => {
+                        Engine.state.scene++;
+                        Engine.state.step = 0;
+                        Engine.render(Engine.state.scene);
+                        Engine.loader.preload(Engine.state.scene + 1);
+
+                        if (wasPlaying) {
+                            // Resume play slightly after transition clears
+                            setTimeout(() => {
+                                Engine.togglePlay();
+                            }, 600);
+                        }
+                    });
+                }
+            },
+            ai: {
+                contextImageBase64: null,
+                callPuter: async (promptText, attachmentBase64) => {
+                    const options = {
+                        model: 'gemini-3-flash-preview'
+                    };
+
+                    try {
+                        if (attachmentBase64) {
+                            return await puter.ai.chat(promptText, attachmentBase64, options);
+                        } else {
+                            return await puter.ai.chat(promptText, options);
+                        }
+                    } catch (err) {
+                        console.error("Puter AI Error:", err);
+                        if (attachmentBase64) {
+                            return await puter.ai.chat(promptText, attachmentBase64);
+                        } else {
+                            return await puter.ai.chat(promptText);
+                        }
+                    }
+                },
+                handleImage: (input) => {
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            Engine.ai.contextImageBase64 = e.target.result;
+                            const preview = document.getElementById('ai-img-preview');
+                            preview.src = e.target.result;
+                            preview.classList.remove('hidden');
+                            const clearBtn = document.getElementById('ai-img-clear');
+                            clearBtn.classList.remove('hidden');
+                            clearBtn.classList.add('flex');
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                },
+                handleDrop: (event) => {
+                    if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+                        const fileInput = document.getElementById('ai-img-upload');
+                        fileInput.files = event.dataTransfer.files;
+                        Engine.ai.handleImage(fileInput);
+                    }
+                },
+                clearImage: () => {
+                    Engine.ai.contextImageBase64 = null;
+                    document.getElementById('ai-img-preview').classList.add('hidden');
+                    document.getElementById('ai-img-preview').src = '';
+                    const clearBtn = document.getElementById('ai-img-clear');
+                    clearBtn.classList.add('hidden');
+                    clearBtn.classList.remove('flex');
+                    document.getElementById('ai-img-upload').value = '';
+                },
+                getScript: async () => {
+                    const promptText = document.getElementById('ai-prompt').value;
+                    if (!promptText) {
+                        Engine.ui.notify("Topic needed", "error");
+                        return;
+                    }
+                    const btn = document.getElementById('json-btn');
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> RESEARCHING...';
+                    try {
+                        const fullPrompt = `${SCRIPT_PROMPT}\n\nTOPIC: ${promptText}\n\nOUTPUT JSON.`;
+                        const res = await Engine.ai.callPuter(fullPrompt, Engine.ai.contextImageBase64);
+
+                        let clean = res.message.content.replace(/```json|```/g, "").trim();
+                        document.getElementById('ai-prompt').value = clean;
+                        Engine.ui.notify("Research Complete", "success");
+                    } catch (e) {
+                        console.error(e);
+                        Engine.ui.notify("Error", "error");
+                    }
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="bi bi-search"></i> RESEARCH';
+                },
+                generateNew: async () => {
+                    const promptText = document.getElementById('ai-prompt').value;
+                    const langCode = document.getElementById('ai-lang').value;
+                    const style = document.getElementById('ai-style').value;
+                    const isPodcast = document.getElementById('ai-podcast-toggle').checked;
+
+                    Engine.ui.openModal('import');
+                    document.getElementById('json-loader').classList.remove('hidden');
+                    document.getElementById('json-loader-text').innerText = "DIRECTOR IS WRITING SCRIPT...";
+
+                    try {
+                        let fullPrompt = DIRECTOR_PROMPT_TEMPLATE(promptText, style, langCode, isPodcast);
+                        let finalAttachment = null;
+
+                        if (Engine.ai.contextImageBase64) {
+                            finalAttachment = Engine.ai.contextImageBase64;
+                            fullPrompt += "\n\n=== DEMO JSON TEMPLATE FOR REFERENCE ===\n" + JSON.stringify(DEMO_DATA, null, 2);
+                        } else {
+                            const jsonBlob = new Blob([JSON.stringify(DEMO_DATA, null, 2)], {
+                                type: "application/json"
+                            });
+                            const reader = new FileReader();
+                            const jsonBase64 = await new Promise((resolve) => {
+                                reader.onloadend = () => resolve(reader.result);
+                                reader.readAsDataURL(jsonBlob);
+                            });
+                            finalAttachment = jsonBase64;
+                            fullPrompt += "\n\n(A DEMO JSON template is attached to this request as a file for format reference).";
+                        }
+
+                        const res = await Engine.ai.callPuter(fullPrompt, finalAttachment);
+
+                        let clean = res.message.content;
+                        if (clean.includes('```json')) {
+                            clean = clean.split('```json')[1].split('```')[0].trim();
+                        } else if (clean.includes('```')) {
+                            clean = clean.split('```')[1].split('```')[0].trim();
+                        }
+                        document.getElementById('json-editor').value = clean;
+                        Engine.io.apply();
+                        Engine.ui.notify("Masterpiece Generated!", "success");
+                        setTimeout(() => Engine.togglePlay(), 1000);
+                    } catch (e) {
+                        console.error(e);
+                        Engine.ui.notify("Generation failed. Try again.", "error");
+                    } finally {
+                        document.getElementById('json-loader').classList.add('hidden');
+                    }
+                },
+                improveCurrent: async () => {
+                    const promptText = document.getElementById('ai-prompt').value;
+                    const langCode = document.getElementById('ai-lang').value;
+                    const style = document.getElementById('ai-style').value;
+                    const isPodcast = document.getElementById('ai-podcast-toggle').checked;
+
+                    if (!Engine.data) {
+                        Engine.ui.notify("No active project to improve!", "error");
+                        return;
+                    }
+
+                    Engine.ui.openModal('import');
+                    document.getElementById('json-loader').classList.remove('hidden');
+                    document.getElementById('json-loader-text').innerText = "DIRECTOR IS REVISING SCRIPT...";
+
+                    try {
+                        let basePrompt = DIRECTOR_PROMPT_TEMPLATE("Enhance current JSON project based on user feedback.", style, langCode, isPodcast);
+                        let fullPrompt = basePrompt + "\n\n" + IMPROVE_PROMPT_TEMPLATE(promptText, style, langCode, isPodcast);
+
+                        // File logic to bypass Puter SDK parameter limits:
+                        let finalAttachment = null;
+
+                        if (Engine.ai.contextImageBase64) {
+                            // If an image is uploaded, we MUST use Puter's single attachment slot for the Image.
+                            // Therefore, we embed the JSON tightly into the text prompt.
+                            finalAttachment = Engine.ai.contextImageBase64;
+                            fullPrompt += "\n\n=== CURRENT PROJECT JSON ===\n" + JSON.stringify(Engine.data, null, 2);
+                        } else {
+                            // If NO image is uploaded, we satisfy the requirement by sending JSON as an actual Base64 File attached.
+                            const jsonBlob = new Blob([JSON.stringify(Engine.data, null, 2)], {
+                                type: "application/json"
+                            });
+                            const reader = new FileReader();
+                            const jsonBase64 = await new Promise((resolve) => {
+                                reader.onloadend = () => resolve(reader.result);
+                                reader.readAsDataURL(jsonBlob);
+                            });
+                            finalAttachment = jsonBase64;
+                            fullPrompt += "\n\n(The current JSON project is attached to this request as a file).";
+                        }
+
+                        // Call Centralized API
+                        const res = await Engine.ai.callPuter(fullPrompt, finalAttachment);
+
+                        let clean = res.message.content;
+                        if (clean.includes('```json')) {
+                            clean = clean.split('```json')[1].split('```')[0].trim();
+                        } else if (clean.includes('```')) {
+                            clean = clean.split('```')[1].split('```')[0].trim();
+                        }
+                        document.getElementById('json-editor').value = clean;
+                        Engine.io.apply();
+                        Engine.ui.notify("Project Enhanced Successfully!", "success");
+                        setTimeout(() => Engine.togglePlay(), 1000);
+                    } catch (e) {
+                        console.error("Improvement Error: ", e);
+                        Engine.ui.notify("Improvement failed. See console.", "error");
+                    } finally {
+                        document.getElementById('json-loader').classList.add('hidden');
+                    }
+                }
+            },
+            audio: {
+                populateVoices: () => {
+                    const voices = Engine.tts.getVoices();
+                    const globalSel = document.getElementById('voice-select');
+                    const s1Sel = document.getElementById('s1-voice');
+                    const s2Sel = document.getElementById('s2-voice');
+
+                    // Retain user selection if they previously selected something
+                    let preGlob = globalSel.value,
+                        preS1 = s1Sel.value,
+                        preS2 = s2Sel.value;
+
+                    globalSel.innerHTML = '';
+                    s1Sel.innerHTML = '';
+                    s2Sel.innerHTML = '';
+
+                    voices.forEach((v, i) => {
+                        const optText = `${v.name} (${v.lang})`;
+
+                        let opt1 = document.createElement('option');
+                        opt1.value = i;
+                        opt1.text = optText;
+                        let opt2 = document.createElement('option');
+                        opt2.value = i;
+                        opt2.text = optText;
+                        let opt3 = document.createElement('option');
+                        opt3.value = i;
+                        opt3.text = optText;
+
+                        globalSel.appendChild(opt1);
+                        s1Sel.appendChild(opt2);
+                        s2Sel.appendChild(opt3);
+                    });
+
+                    if (voices.length > 0) {
+                        let targetLang = normalizeLang(Engine.data?.meta?.lang || 'en-in');
+
+                        // Find voices matching the target language
+                        let matchedVoices = voices.map((v, idx) => ({
+                            v,
+                            idx
+                        })).filter(item => normalizeLang(item.v.lang) === targetLang);
+
+                        if (matchedVoices.length === 0) {
+                            // Fallback to generic English
+                            matchedVoices = voices.map((v, idx) => ({
+                                v,
+                                idx
+                            })).filter(item => normalizeLang(item.v.lang).startsWith('en'));
+                        }
+
+                        // Set Global Voice
+                        if (preGlob && voices[preGlob]) {
+                            globalSel.value = preGlob;
+                            Engine.state.voice = voices[preGlob];
+                        } else if (matchedVoices.length > 0) {
+                            globalSel.value = matchedVoices[0].idx;
+                            Engine.state.voice = matchedVoices[0].v;
+                        } else {
+                            globalSel.value = 0;
+                            Engine.state.voice = voices[0];
+                        }
+
+                        // Set S1 & S2 Defaults (try to pick two different ones if available)
+                        if (preS1 && voices[preS1]) s1Sel.value = preS1;
+                        else s1Sel.value = matchedVoices.length > 0 ? matchedVoices[0].idx : 0;
+
+                        if (preS2 && voices[preS2]) s2Sel.value = preS2;
+                        else s2Sel.value = matchedVoices.length > 1 ? matchedVoices[1].idx : (matchedVoices.length > 0 ? matchedVoices[0].idx : 0);
+
+                        Engine.audio.updatePodcastSettings();
+                    }
+                },
+                setVoice: (idx) => Engine.state.voice = Engine.tts.getVoices()[idx],
+                setVolume: (val) => {
+                    Engine.audioEl.volume = val;
+                    document.getElementById('bgm-vol-val').innerText = Math.round(val * 100) + '%';
+                },
+                setTrack: (url) => {
+                    Engine.audioEl.src = url;
+                    if (!Engine.state.paused) Engine.audioEl.play();
+                    Engine.ui.notify("Music Track Loaded", "success");
+                },
+                upload: (input) => {
+                    if (input.files && input.files[0]) {
+                        const url = URL.createObjectURL(input.files[0]);
+                        Engine.audio.setTrack(url);
+                    }
+                },
+                togglePodcast: (enabled) => {
+                    const container = document.getElementById('podcast-settings-container');
+                    if (enabled) {
+                        container.classList.remove('hidden');
+                    } else {
+                        container.classList.add('hidden');
+                    }
+
+                    if (Engine.data && Engine.data.meta) {
+                        Engine.data.meta.podcast = enabled ? "true" : "false";
+                        const ed = document.getElementById('json-editor');
+                        if (ed.value) {
+                            try {
+                                let j = JSON.parse(ed.value);
+                                j.meta.podcast = enabled ? "true" : "false";
+                                ed.value = JSON.stringify(j, null, 2);
+                            } catch (e) {}
+                        }
+                    }
+                },
+                updatePodcastSettings: () => {
+                    Engine.state.podcast.s1 = {
+                        voiceIdx: parseInt(document.getElementById('s1-voice').value),
+                        speed: parseFloat(document.getElementById('s1-speed').value),
+                        pitch: parseFloat(document.getElementById('s1-pitch').value)
+                    };
+                    Engine.state.podcast.s2 = {
+                        voiceIdx: parseInt(document.getElementById('s2-voice').value),
+                        speed: parseFloat(document.getElementById('s2-speed').value),
+                        pitch: parseFloat(document.getElementById('s2-pitch').value)
+                    };
+                }
+            },
+            io: {
+                downloadJSON: () => {
+                    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(Engine.data, null, 2));
+                    const dlAnchorElem = document.createElement('a');
+                    dlAnchorElem.setAttribute("href", dataStr);
+                    dlAnchorElem.setAttribute("download", "VideoLike_Project.json");
+                    dlAnchorElem.click();
+                },
+                uploadJSON: (input) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        document.getElementById('json-editor').value = e.target.result;
+                        Engine.ui.notify('JSON Loaded to Editor', 'success');
+                    };
+                    reader.readAsText(input.files[0]);
+                },
+                apply: () => {
+                    try {
+                        const json = JSON.parse(document.getElementById('json-editor').value);
+                        Engine.load(json);
+                        Engine.ui.notify('Project Updated', 'success');
+                        Engine.ui.closeModal();
+                    } catch (e) {
+                        Engine.ui.notify('Invalid JSON Format', 'error');
+                    }
+                }
+            },
+            ui: {
+                toggleSubtitles: () => {
+                    Engine.state.subtitles = !Engine.state.subtitles;
+                    const subLayer = document.getElementById('subtitle-layer');
+                    if (Engine.state.subtitles && !Engine.state.paused) {
+                        subLayer.classList.remove('hidden');
+                    } else {
+                        subLayer.classList.add('hidden');
+                    }
+                    Engine.ui.notify('Subtitles ' + (Engine.state.subtitles ? 'ON' : 'OFF'), 'info');
+                },
+                toggleMenu: () => {
+                    document.getElementById('system-menu').classList.toggle('open');
+                    document.getElementById('menu-btn').classList.toggle('active');
+                },
+                openModal: (id) => {
+                    Engine.ui.closeModal();
+                    document.getElementById('system-menu').classList.remove('open');
+                    document.getElementById('modal-' + id).classList.add('open');
+                    if (id === 'import') {
+                        if (!document.getElementById('json-editor').value) {
+                            document.getElementById('json-editor').value = JSON.stringify(Engine.data, null, 2);
+                        }
+                    }
+                },
+                closeModal: () => document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open')),
+                toggleRatio: () => document.getElementById('stage-content').classList.toggle('portrait'),
+                toggleFullscreen: () => document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen(),
+                notify: (msg, type) => {
+                    const t = document.createElement('div');
+                    t.className = `toast`;
+                    let icon = type === 'success' ? 'bi-check-circle-fill' : (type === 'error' ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill');
+                    t.innerHTML = `<i class="bi ${icon}"></i> ${msg}`;
+                    document.getElementById('notification-area').appendChild(t);
+                    setTimeout(() => t.classList.add('show'), 100);
+                    setTimeout(() => {
+                        t.classList.remove('show');
+                        setTimeout(() => t.remove(), 500);
+                    }, 3000);
+                },
+                trackIdle: () => {
+                    const bar = document.getElementById('main-ui');
+                    const reset = () => {
+                        bar.classList.remove('inactive');
+                        clearTimeout(Engine.state.idleTimer);
+                        Engine.state.idleTimer = setTimeout(() => {
+                            if (!Engine.state.paused) bar.classList.add('inactive');
+                        }, 5000);
+                    };
+                    ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(e => window.addEventListener(e, reset));
+                    reset();
+                },
+                update: () => {
+                    document.getElementById('play-btn').innerHTML = Engine.state.paused ? '<i class="bi bi-play-fill"></i>' : '<i class="bi bi-pause-fill"></i>';
+                },
+                copyPrompt: () => {
+                    navigator.clipboard.writeText(SCRIPT_PROMPT);
+                    Engine.ui.notify('Script Prompt Copied', 'success');
+                }
+            }
+        };
+
+        // Initialize Splash screen fade out
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                splash.classList.add('opacity-0');
+                setTimeout(() => {
+                    splash.remove();
+                    Engine.init();
+                }, 1000);
+            }, 3000); // Intro displays for 3 seconds before fading
+        });
+    </script>
+    <script>
+        const RenderStudio = {
+            recorder: null,
+            stream: null,
+            videoObj: null,
+            canvas: null,
+            ctx: null,
+            chunks: [],
+            isRecording: false,
+            rafId: null,
+            checkInterval: null,
+            escListener: null,
+            lastDrawTime: 0,
+
+            // Subtitle Logic
+            srtLines: [],
+            subInterval: null,
+            lastSubText: "",
+            recordingStartTime: 0,
+            currentSubtitleIndex: 1,
+
+            isMobile: () => {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+            },
+
+            init: () => {
+                if (RenderStudio.isMobile() || !navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) return;
+
+                // 1. Inject CSS (CURSOR HIDING + SAFETY MARGINS)
+                const style = document.createElement('style');
+                style.innerHTML = `
+                #render-overlay {
+                    position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+                    backdrop-filter: blur(20px); z-index: 10000;
+                    display: none; flex-direction: column; align-items: center;
+                    justify-content: center; color: white; font-family: 'Inter', sans-serif;
+                }
+                #render-overlay.active { display: flex; }
+                .render-box { background: #09090b; border: 1px solid #27272a; padding: 40px; border-radius: 4px; max-width: 500px; text-align: center; box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8); }
+                .render-box h2 { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #ef4444; text-transform: uppercase; letter-spacing: 2px; }
+                .render-box p { color: #a1a1aa; margin-bottom: 20px; line-height: 1.6; font-size: 13px; text-align: left; }
+                .render-btn { background: #ef4444; color: white; border: none; padding: 16px; font-size: 14px; font-weight: 700; letter-spacing: 1px; border-radius: 4px; cursor: pointer; width: 100%; transition: 0.2s; margin-top: 10px; text-transform: uppercase; }
+                .render-btn:hover { background: #dc2626; }
+                .render-cancel { background: transparent; color: #52525b; border: none; margin-top: 15px; font-size: 12px; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+                .render-cancel:hover { color: white; }
+                
+                #countdown-overlay {
+                    position: fixed; inset: 0; background: #000; z-index: 11000;
+                    display: none; align-items: center; justify-content: center; flex-direction: column;
+                    font-family: 'Inter', sans-serif;
+                }
+                #countdown-overlay.active { display: flex; }
+                #cd-val { font-size: 120px; font-weight: 900; color: #fff; line-height: 1; }
+                .countdown-sub { font-size: 14px; color: #555; margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; animation: pulse 1s infinite; }
+                @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+                /* === GHOST MODE === */
+                /* 1. Force Cursor Hidden Everywhere */
+                body.is-rendering, 
+                body.is-rendering * { 
+                    cursor: none !important; 
+                }
+
+                /* === SAFETY SHIFT CSS === */
+                /* This is the magic part that fixes the crop issues */
+                body.is-rendering #stage-container {
+                    /* Push 74px DOWN from the top to clear the Browser's "X" overlay */
+                    padding-top: 76px !important;
+                    
+                    /* Push 50px UP from the bottom to clear the "Sharing" bar */
+                    padding-bottom: 57px !important;
+                    
+                    /* Align the video towards the bottom (as requested) */
+                    align-items: flex-end !important;
+                    
+                    /* Keep horizontal centering */
+                    justify-content: center !important;
+                }
+            `;
+                document.head.appendChild(style);
+
+                // 2. Inject Menu Button
+                const systemMenu = document.getElementById('system-menu');
+                const divider = document.createElement('div');
+                divider.className = 'h-[1px] bg-white/10 my-1';
+                systemMenu.appendChild(divider);
+
+                const renderMenuBtn = document.createElement('div');
+                renderMenuBtn.className = 'p-3 hover:bg-white/10 cursor-pointer rounded-lg flex items-center gap-3 text-red-400 font-bold';
+                renderMenuBtn.innerHTML = `<i class="bi bi-camera-reels-fill"></i> Render HD Video`;
+                renderMenuBtn.onclick = () => {
+                    document.getElementById('system-menu').classList.remove('open');
+                    document.getElementById('menu-btn').classList.remove('active');
+                    if (!Engine.state.paused) {
+                        Engine.togglePlay();
+                    }
+                    RenderStudio.showPreflight();
+                };
+                systemMenu.appendChild(renderMenuBtn);
+
+                // 3. Inject Modal
+                const overlay = document.createElement('div');
+                overlay.id = 'render-overlay';
+                overlay.innerHTML = `
+                <div class="render-box">
+                    <h2><i class="bi bi-broadcast"></i> Render Configuration</h2>
+                    <p>
+                        <i class="bi bi-display-fill text-white"></i>&nbsp; Select <b>"Entire Screen"</b>.<br>
+                        <i class="bi bi-volume-up-fill text-white"></i>&nbsp; Enable <b>"Share System Audio"</b>.<br>
+                        <i class="bi bi-arrows-fullscreen text-white"></i>&nbsp; App enters <b>Fullscreen</b> automatically.<br>
+                        <i class="bi bi-mouse-fill text-white"></i>&nbsp; Mouse Cursor will be <b>Hidden</b>.<br>
+                        <i class="bi bi-eye-slash-fill text-white"></i>&nbsp; Click <b>"Hide"</b> on the sharing bar.
+                    </p>
+                    <div style="background: rgba(239,68,68,0.05); border-left: 2px solid #ef4444; padding: 15px; margin-bottom: 20px; color: #fca5a5; font-size: 12px; text-align: left;">
+                        <i class="bi bi-cc-circle"></i> Subtitles will be saved as a <b>Soft Track (.SRT)</b> matching the video.
+                    </div>
+                    <button class="render-btn" onclick="RenderStudio.startCapture()">Start Engine</button>
+                    <button class="render-cancel" onclick="document.getElementById('render-overlay').classList.remove('active')">Cancel</button>
+                </div>
+            `;
+                document.body.appendChild(overlay);
+
+                // 4. Inject Countdown
+                const cd = document.createElement('div');
+                cd.id = 'countdown-overlay';
+                cd.innerHTML = `<span id="cd-val">10</span><div class="countdown-sub">Click "Hide" on Sharing Bar!</div>`;
+                document.body.appendChild(cd);
+
+                // 5. Global Fullscreen Listener (Auto-Save on Exit)
+                document.addEventListener('fullscreenchange', () => {
+                    if (!document.fullscreenElement && RenderStudio.isRecording) {
+                        RenderStudio.stopCapture();
+                    }
+                });
+            },
+
+            showPreflight: () => {
+                if (!Engine.data) return Engine.ui.notify("Load a video first!", "error");
+                document.getElementById('render-overlay').classList.add('active');
+            },
+
+            startCapture: async () => {
+                document.getElementById('render-overlay').classList.remove('active');
+
+                try {
+                    // 1. Get Permission (Windowed)
+                    RenderStudio.stream = await navigator.mediaDevices.getDisplayMedia({
+                        video: {
+                            displaySurface: "monitor",
+                            frameRate: {
+                                ideal: 30
+                            },
+                            cursor: "never" // Hides mouse in stream
+                        },
+                        audio: {
+                            echoCancellation: false,
+                            noiseSuppression: false,
+                            autoGainControl: false
+                        }
+                    });
+
+                    if (RenderStudio.stream.getAudioTracks().length === 0) {
+                        RenderStudio.stream.getTracks().forEach(t => t.stop());
+                        return Engine.ui.notify("FAILED: No System Audio", "error");
+                    }
+
+                    // 2. Protection: Stop if user clicks "Stop Sharing" on browser UI
+                    RenderStudio.stream.getVideoTracks()[0].onended = () => {
+                        if (RenderStudio.isRecording) RenderStudio.stopCapture();
+                    };
+
+                    // 3. Force Fullscreen
+                    if (!document.fullscreenElement) {
+                        await document.body.requestFullscreen().catch(e => console.warn("Fullscreen blocked:", e));
+                    }
+
+                    // 4. Countdown
+                    setTimeout(() => {
+                        RenderStudio.beginCountdown();
+                    }, 1000);
+
+                } catch (err) {
+                    if (document.fullscreenElement) document.exitFullscreen();
+                    Engine.ui.notify("Render Cancelled", "error");
+                }
+            },
+
+            beginCountdown: () => {
+                const cd = document.getElementById('countdown-overlay');
+                const val = document.getElementById('cd-val');
+                cd.classList.add('active');
+
+                // Hide UI & Apply Safety Shift CSS
+                document.body.classList.add('is-rendering');
+                document.getElementById('main-ui').style.display = 'none';
+                document.getElementById('notification-area').style.display = 'none';
+                document.getElementById('subtitle-layer').style.display = 'none'; // Hide HTML subs
+
+                let count = 10;
+                val.innerText = count;
+
+                const timer = setInterval(() => {
+                    count--;
+                    val.innerText = count;
+                    if (count <= 0) {
+                        clearInterval(timer);
+                        cd.classList.remove('active');
+                        RenderStudio.setupCanvasPipeline();
+                    }
+                }, 1000);
+            },
+
+            setupCanvasPipeline: async () => {
+                RenderStudio.videoObj = document.createElement('video');
+                RenderStudio.videoObj.muted = true;
+                RenderStudio.videoObj.srcObject = RenderStudio.stream;
+                await RenderStudio.videoObj.play();
+
+                RenderStudio.canvas = document.createElement('canvas');
+                const isPortrait = document.getElementById('stage-content').classList.contains('portrait');
+                RenderStudio.canvas.width = isPortrait ? 1080 : 1920;
+                RenderStudio.canvas.height = isPortrait ? 1920 : 1080;
+                RenderStudio.ctx = RenderStudio.canvas.getContext('2d', {
+                    alpha: false
+                });
+
+                const canvasStream = RenderStudio.canvas.captureStream(30);
+                const audioTrack = RenderStudio.stream.getAudioTracks()[0];
+                canvasStream.addTrack(audioTrack);
+
+                // 12 Mbps - High Quality, Stable
+                RenderStudio.recorder = new MediaRecorder(canvasStream, {
+                    mimeType: 'video/webm; codecs=vp9',
+                    videoBitsPerSecond: 12000000
+                });
+
+                RenderStudio.chunks = [];
+                RenderStudio.recorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) RenderStudio.chunks.push(e.data);
+                };
+                RenderStudio.recorder.onstop = RenderStudio.finalizeVideo;
+
+                // Reset Engine
+                Engine.tts.cancel();
+                Engine.audioEl.pause();
+                Engine.audioEl.currentTime = 0;
+                Engine.state.scene = 0;
+                Engine.state.step = 0;
+                Engine.state.paused = false;
+                Engine.render(0);
+
+                // Init SRT Recorder
+                RenderStudio.initSrtRecorder();
+
+                // Start
+                RenderStudio.isRecording = true;
+                RenderStudio.recorder.start();
+                RenderStudio.drawLoop();
+
+                setTimeout(() => {
+                    Engine.audioEl.play().catch(e => console.log(e));
+                    Engine.playStep();
+                }, 500);
+
+                // ESC Listener
+                RenderStudio.escListener = (e) => {
+                    if (e.key === "Escape") {
+                        e.preventDefault();
+                        if (RenderStudio.isRecording) RenderStudio.stopCapture();
+                    }
+                };
+                window.addEventListener('keydown', RenderStudio.escListener);
+
+                // Auto-Stop Monitor
+                RenderStudio.checkInterval = setInterval(() => {
+                    if (Engine.state.paused && Engine.state.scene === Engine.data.scenes.length - 1 && Engine.state.step === Engine.data.scenes[Engine.state.scene].steps.length - 1) {
+                        setTimeout(() => {
+                            if (RenderStudio.isRecording) RenderStudio.stopCapture();
+                        }, 3000);
+                    }
+                }, 1000);
+            },
+
+            // --- SUBTITLE LOGIC ---
+            initSrtRecorder: () => {
+                RenderStudio.srtLines = [];
+                RenderStudio.currentSubtitleIndex = 1;
+                RenderStudio.recordingStartTime = Date.now();
+                RenderStudio.lastSubText = "";
+
+                RenderStudio.subInterval = setInterval(() => {
+                    const el = document.getElementById('subtitle-text');
+                    const text = el ? el.innerText : "";
+                    if (text !== RenderStudio.lastSubText && text.trim().length > 0) {
+                        RenderStudio.lastSubText = text;
+                        RenderStudio.logSubtitle(text);
+                    }
+                }, 100);
+            },
+
+            logSubtitle: (text) => {
+                const now = Date.now() - RenderStudio.recordingStartTime;
+                if (RenderStudio.srtLines.length > 0) {
+                    RenderStudio.srtLines[RenderStudio.srtLines.length - 1].end = now;
+                }
+                RenderStudio.srtLines.push({
+                    id: RenderStudio.currentSubtitleIndex++,
+                    start: now,
+                    end: now + 5000,
+                    text: text.replace(/\n/g, ' ')
+                });
+            },
+
+            formatTime: (ms) => {
+                const date = new Date(ms);
+                const h = String(Math.floor(ms / 3600000)).padStart(2, '0');
+                const m = String(date.getUTCMinutes()).padStart(2, '0');
+                const s = String(date.getUTCSeconds()).padStart(2, '0');
+                const msStr = String(date.getUTCMilliseconds()).padStart(3, '0');
+                return `${h}:${m}:${s},${msStr}`;
+            },
+
+            generateSrtFile: () => {
+                if (RenderStudio.srtLines.length > 0) {
+                    const now = Date.now() - RenderStudio.recordingStartTime;
+                    if (RenderStudio.srtLines[RenderStudio.srtLines.length - 1].end > now) {
+                        RenderStudio.srtLines[RenderStudio.srtLines.length - 1].end = now;
+                    }
+                }
+                let srtContent = "";
+                RenderStudio.srtLines.forEach(line => {
+                    srtContent += `${line.id}\n${RenderStudio.formatTime(line.start)} --> ${RenderStudio.formatTime(line.end)}\n${line.text}\n\n`;
+                });
+                return srtContent;
+            },
+            // ----------------------
+
+            drawLoop: (timestamp) => {
+                if (!RenderStudio.isRecording) return;
+
+                if (timestamp - RenderStudio.lastDrawTime >= 33.3) {
+                    const stage = document.getElementById('stage-content');
+                    const rect = stage.getBoundingClientRect(); // Picks up shifted CSS position
+
+                    const scaleX = RenderStudio.videoObj.videoWidth / window.innerWidth;
+                    const scaleY = RenderStudio.videoObj.videoHeight / window.innerHeight;
+
+                    RenderStudio.ctx.drawImage(
+                        RenderStudio.videoObj,
+                        rect.left * scaleX, rect.top * scaleY, rect.width * scaleX, rect.height * scaleY,
+                        0, 0, RenderStudio.canvas.width, RenderStudio.canvas.height
+                    );
+                    RenderStudio.lastDrawTime = timestamp;
+                }
+                RenderStudio.rafId = requestAnimationFrame(RenderStudio.drawLoop);
+            },
+
+            stopCapture: () => {
+                if (!RenderStudio.isRecording) return;
+                RenderStudio.isRecording = false;
+
+                // 1. STOP RECORDER
+                if (RenderStudio.recorder && RenderStudio.recorder.state !== 'inactive') {
+                    RenderStudio.recorder.stop();
+                }
+
+                // 2. Cleanup
+                clearInterval(RenderStudio.checkInterval);
+                clearInterval(RenderStudio.subInterval);
+                cancelAnimationFrame(RenderStudio.rafId);
+                window.removeEventListener('keydown', RenderStudio.escListener);
+
+                // 3. Stop Stream
+                if (RenderStudio.stream) RenderStudio.stream.getTracks().forEach(track => track.stop());
+
+                // 4. Pause Engine
+                Engine.togglePlay();
+
+                // 5. Exit Fullscreen
+                if (document.fullscreenElement) document.exitFullscreen().catch(e => console.log(e));
+
+                // 6. Restore UI
+                document.body.classList.remove('is-rendering');
+                document.getElementById('main-ui').style.display = 'flex';
+                document.getElementById('notification-area').style.display = 'flex';
+                document.getElementById('subtitle-layer').style.display = '';
+
+                Engine.ui.notify("Saving Video...", "info");
+            },
+
+            finalizeVideo: () => {
+                let safeTitle = "Video_Render";
+                if (Engine.data && Engine.data.meta && Engine.data.meta.title) {
+                    safeTitle = Engine.data.meta.title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+                }
+
+                // DOWNLOAD VIDEO
+                const blob = new Blob(RenderStudio.chunks, {
+                    type: 'video/webm'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${safeTitle}.webm`;
+                document.body.appendChild(a);
+                a.click();
+
+                // DOWNLOAD SRT
+                const srtContent = RenderStudio.generateSrtFile();
+                const srtBlob = new Blob([srtContent], {
+                    type: 'text/srt'
+                });
+                const srtUrl = URL.createObjectURL(srtBlob);
+                const srtA = document.createElement('a');
+                srtA.style.display = 'none';
+                srtA.href = srtUrl;
+                srtA.download = `${safeTitle}.srt`;
+                document.body.appendChild(srtA);
+                srtA.click();
+
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    document.body.removeChild(srtA);
+                    URL.revokeObjectURL(url);
+                    URL.revokeObjectURL(srtUrl);
+                }, 100);
+
+                Engine.ui.notify("Video & Subtitles Downloaded!", "success");
+            }
+        };
+
+        window.addEventListener('load', () => setTimeout(RenderStudio.init, 1000));
+    </script>
+    <script>
+        const Ext = {
+            init: () => {
+                // Find the header area in the AI Modal
+                const headerArea = document.querySelector('#modal-ai .flex.justify-between');
+
+                if (headerArea) {
+                    // Create "Manual Workflow" Button
+                    const btn = document.createElement('button');
+                    // Matched styling to your existing Research button, but purple
+                    btn.className = "ml-2 text-sm font-semibold tracking-widest bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 px-3 md:px-4 py-2 rounded-lg text-purple-400 transition";
+                    btn.innerHTML = '<i class="bi bi-terminal mr-1"></i> <span class="hidden md:inline">Manual </span>Workflow';
+                    btn.onclick = Ext.openDirectorModal;
+
+                    // Append it next to the Research button
+                    headerArea.appendChild(btn);
+                }
+            },
+
+            openDirectorModal: () => {
+                // 1. Gather Data
+                const promptInput = document.getElementById('ai-prompt');
+                const langInput = document.getElementById('ai-lang');
+                const styleInput = document.getElementById('ai-style');
+                const podcastInput = document.getElementById('ai-podcast-toggle');
+
+                const promptText = promptInput ? promptInput.value : "Explainer Video";
+                const langCode = langInput ? langInput.value : "en-US";
+                const style = styleInput ? styleInput.value : "documentary";
+                const isPodcast = podcastInput ? podcastInput.checked : false;
+
+                // 2. Generate Prompt using internal Engine template
+                let finalPrompt = DIRECTOR_PROMPT_TEMPLATE(promptText, style, langCode, isPodcast);
+
+                // 3. Add Manual Override instructions
+                finalPrompt += `\n\n=== MANUAL MODE INSTRUCTIONS ===\nI have attached a 'DEMO_STRUCTURE_REF.json' file. \nCRITICAL: Output VALID JSON that matches the structure of the attached file EXACTLY.\nDo not use Markdown code blocks. Output raw JSON string only.`;
+
+                // 4. Show Modal
+                document.getElementById('director-prompt-out').value = finalPrompt;
+                document.getElementById('modal-director').classList.add('open');
+            },
+
+            copyText: () => {
+                const copyText = document.getElementById("director-prompt-out");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    if (typeof Engine !== 'undefined' && Engine.ui) {
+                        Engine.ui.notify("Director Prompt Copied", "success");
+                    }
+                });
+            },
+
+            downloadRefJSON: () => {
+                if (typeof DEMO_DATA === 'undefined') return;
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(DEMO_DATA, null, 2));
+                const dlAnchorElem = document.createElement('a');
+                dlAnchorElem.setAttribute("href", dataStr);
+                dlAnchorElem.setAttribute("download", "DEMO_STRUCTURE_REF.json");
+                document.body.appendChild(dlAnchorElem);
+                dlAnchorElem.click();
+                document.body.removeChild(dlAnchorElem);
+            }
+        };
+
+        // Run after load
+        setTimeout(Ext.init, 1000);
+    </script>
+</body>
+
+</html>
