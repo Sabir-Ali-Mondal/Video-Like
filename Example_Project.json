@@ -1,34 +1,18 @@
 {
   "meta": {
-    "title": "The Silicon Blueprint",
-    "audio": "https://res.cloudinary.com/dmttn34te/video/upload/v1763065409/study-110111_at7lye.mp3",
-    "lang": "en-US",
+    "title": "TCP vs UDP — Two Philosophies of Transport",
+    "audio": "",
+    "lang": "en-in",
     "podcast": "true"
   },
   "scenes": [
     {
-      "type": "INTRO_PREMIUM_INSTANT",
-      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black perspective-[1000px]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564\")] bg-cover bg-center opacity-40 scale-110 transition-transform duration-[20s] ease-linear' style='animation: drift 20s infinite alternate;'></div>\n  <style>@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-emerald-900/40 via-transparent to-rose-900/40 opacity-80 blur-3xl animate-[spin_30s_linear_infinite]'></div>\n  <div class='film-grain opacity-30 mix-blend-overlay'></div>\n  <div class='z-20 text-center px-[5cqw] relative'>\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.2cqw] py-[0.6cqh] border border-emerald-500/30 rounded-full bg-black/60 backdrop-blur-md text-emerald-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,0.9rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(16,185,129,0.15)]'>\n        <span class='w-2 h-2 rounded-full bg-emerald-500 animate-pulse'></span> \n        REAL-TIME RENDER\n    </div>\n    <div class='relative'>\n        <h1 class='absolute inset-0 text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-emerald-500/10 blur-xl select-none'>VIDEO-LIKE</h1>\n        <h1 class='text-[clamp(4rem,13cqw,16rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-600 tracking-tighter drop-shadow-2xl'>VIDEO-LIKE</h1>\n    </div>\n    <div class='mt-[3cqh] overflow-hidden'>\n        <p id='sub' class='text-[clamp(1rem,2.5cqw,2.5rem)] text-stone-300 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out delay-200'>The end of pixel hallucination.</p>\n    </div>\n  </div>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#000_120%)] pointer-events-none'></div>\n</div>",
-      "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'); } } }",
-      "steps": [
-        {
-          "narration": "Generative A I guesses pixels. We render facts. Let's demonstrate by building a documentary from scratch.",
-          "actions": [
-            {
-              "type": "custom",
-              "fn": "Engine.state.activeScript.init()"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "type": "INTRO_TITLE_CINEMATIC",
-      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-black'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670\")] bg-cover bg-center opacity-40 scale-110' style='animation: slowPan 20s infinite alternate linear;'></div>\n  <style>@keyframes slowPan { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-90'></div>\n  <div class='z-20 text-center px-[5cqw]'>\n    <div class='inline-block mb-[3cqh] opacity-0 translate-y-4 transition-all duration-1000' id='tag'>\n        <span class='bg-emerald-500 text-black font-bold px-[1cqw] py-[0.5cqw] text-[clamp(0.6rem,1cqw,1.2rem)] tracking-[0.3em] uppercase'>Original Documentary</span>\n    </div>\n    <h1 id='title-main' class='text-[clamp(4rem,12cqw,14rem)] leading-[0.85] font-black text-white tracking-tighter mix-blend-screen opacity-0 scale-90 blur-lg transition-all duration-[2s] ease-out'>\n      SILICON<br><span class='text-transparent bg-clip-text bg-gradient-to-b from-stone-200 to-stone-600'>BLUEPRINT</span>\n    </h1>\n    <div id='line' class='h-[2px] bg-emerald-500 mx-auto mt-[6cqh] w-0 transition-all duration-[1.5s] ease-in-out shadow-[0_0_20px_#10b981]'></div>\n  </div>\n</div>",
-      "script": "(ctx) => { return { play: () => { ctx.root.querySelector('#tag').classList.remove('opacity-0', 'translate-y-4'); setTimeout(() => ctx.root.querySelector('#title-main').classList.remove('opacity-0', 'scale-90', 'blur-lg'), 800); setTimeout(() => ctx.root.querySelector('#line').style.width = '30%', 1500); } } }",
+      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-[#020617]'>\n  <div class='absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/40 via-[#020617] to-[#020617] opacity-80 animate-pulse duration-[10s]'></div>\n  <div class='absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent shadow-[0_0_20px_#3b82f6]'></div>\n  <div class='absolute bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-pink-500 to-transparent shadow-[0_0_20px_#ec4899]'></div>\n  <div class='z-20 text-center px-[5cqw]'>\n    <div class='inline-block mb-[3cqh] opacity-0 translate-y-4 transition-all duration-1000' id='tag'>\n        <span class='bg-blue-950 border border-blue-500/50 text-blue-300 font-bold px-[1.5cqw] py-[0.5cqw] text-[clamp(0.6rem,1.2cqw,1.5rem)] tracking-[0.3em] uppercase rounded-full shadow-[0_0_15px_rgba(59,130,246,0.3)]'>SYSTEM ARCHITECTURE</span>\n    </div>\n    <h1 id='title-main' class='text-[clamp(3rem,8cqw,10rem)] leading-[1.1] font-black text-white tracking-tighter opacity-0 scale-90 blur-lg transition-all duration-[2s] ease-out mt-[2cqh]'>\n      TCP vs <span class='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400'>UDP</span>\n    </h1>\n    <p id='sub' class='text-[clamp(1rem,2cqw,2.5rem)] text-slate-400 font-mono mt-[3cqh] opacity-0 transition-opacity duration-1000 delay-500'>Two Philosophies of Transport</p>\n    <div id='line' class='h-[2px] bg-gradient-to-r from-blue-500 to-pink-500 mx-auto mt-[6cqh] w-0 transition-all duration-[1.5s] ease-in-out'></div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { play: () => { ctx.root.querySelector('#tag').classList.remove('opacity-0', 'translate-y-4'); setTimeout(() => ctx.root.querySelector('#title-main').classList.remove('opacity-0', 'scale-90', 'blur-lg'), 600); setTimeout(() => ctx.root.querySelector('#sub').classList.remove('opacity-0'), 1200); setTimeout(() => ctx.root.querySelector('#line').style.width = '40%', 1500); } } }",
       "steps": [
         {
-          "narration": "It is the most complex object ever built by human hands.",
+          "narration": "Welcome back to the system design deep dive. Today, we are exploring the transport layer. The invisible rules that govern every single byte of data on the internet.",
           "actions": [
             {
               "type": "custom",
@@ -37,147 +21,249 @@
           ]
         },
         {
-          "narration": "It controls your bank, your car, your phone, and your military.",
+          "narration": "Exactly. Whether you are streaming this video, loading a webpage, or playing a competitive game, it all boils down to two distinct protocols.",
           "actions": []
         }
       ]
     },
     {
-      "type": "CODE_TERMINAL_LOGIC",
-      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,3cqmin,2.5rem)]'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/carbon-fibre.png\")] opacity-10'></div>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-emerald-500 to-blue-600'></div>\n  <div class='z-10 relative max-w-[90cqw] mx-auto w-full'>\n    <div id='hl-box' class='absolute left-[-2cqw] w-[104%] h-[1.5em] bg-emerald-900/20 border-l-[4px] border-emerald-500 opacity-0 transition-all duration-300 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-stone-400 leading-[1.8]'>\n      <div id='line-1' class='opacity-0 transition-opacity'><span class='text-purple-400'>import</span> <span class='text-white'>global_infrastructure</span></div>\n      <div id='line-2' class='opacity-0 transition-opacity mt-[1cqh]'><span class='text-blue-400'>const</span> <span class='text-yellow-200'>foundation</span> = <span class='text-emerald-400'>\"Silicon\"</span></div>\n      <div id='line-3' class='opacity-0 transition-opacity'><span class='text-purple-400'>if</span> <span class='text-blue-300'>foundation</span> == <span class='text-red-400'>NULL</span>:</div>\n      <div id='line-4' class='opacity-0 transition-opacity'>&nbsp;&nbsp;system.<span class='text-red-500'>collapse()</span></div>\n    </div>\n  </div>\n</div>",
-      "script": "(ctx) => { const highlightLine = (idx) => { const el = ctx.root.querySelector(`#line-${idx}`); const hl = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); hl.classList.remove('opacity-0'); hl.style.top = `${el.offsetTop}px`; hl.style.height = `${el.offsetHeight}px`; }; return { step1: () => highlightLine(1), step2: () => { highlightLine(2); }, step3: () => { highlightLine(3); setTimeout(()=>highlightLine(4), 400); } } }",
+      "type": "SPLIT_PHILOSOPHY",
+      "html": "<div class='w-full h-full flex relative overflow-hidden font-sans bg-[#0f172a] text-white'>\n  <div id='left-panel' class='w-1/2 h-full bg-blue-950/30 border-r border-blue-500/30 flex flex-col items-center justify-center relative -translate-x-full transition-transform duration-1000 ease-out'>\n    <div class='absolute inset-0 opacity-10 bg-[linear-gradient(rgba(59,130,246,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.5)_1px,transparent_1px)] bg-[size:40px_40px]'></div>\n    <h1 class='text-[clamp(4rem,10cqw,12rem)] font-black text-blue-400 tracking-widest z-10 drop-shadow-[0_0_30px_rgba(59,130,246,0.8)]'>TCP</h1>\n    <p class='text-[clamp(1rem,2cqw,2.5rem)] text-blue-200 mt-[2cqh] font-mono tracking-widest z-10 uppercase'>Reliable & Ordered</p>\n  </div>\n  <div id='right-panel' class='w-1/2 h-full bg-pink-950/30 flex flex-col items-center justify-center relative translate-x-full transition-transform duration-1000 ease-out'>\n    <div class='absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(236,72,153,0.8)_2px,transparent_2px)] bg-[size:30px_30px]'></div>\n    <h1 class='text-[clamp(4rem,10cqw,12rem)] font-black text-pink-500 tracking-widest z-10 drop-shadow-[0_0_30px_rgba(236,72,153,0.8)]'>UDP</h1>\n    <p class='text-[clamp(1rem,2cqw,2.5rem)] text-pink-200 mt-[2cqh] font-mono tracking-widest z-10 uppercase'>Fast & Connectionless</p>\n  </div>\n  <div id='vs' class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 border-2 border-slate-700 text-white font-black text-[clamp(1.5rem,3cqw,4rem)] p-[2cqw] rounded-full z-20 scale-0 opacity-0 transition-all duration-500 delay-1000'>VS</div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#left-panel').classList.remove('-translate-x-full'); ctx.root.querySelector('#right-panel').classList.remove('translate-x-full'); ctx.root.querySelector('#vs').classList.remove('scale-0', 'opacity-0'); } } }",
       "steps": [
         {
-          "narration": "Modern civilization rests on a foundation of pure logic.",
+          "narration": "At the transport layer, the network divides into two major philosophies of moving data.",
           "actions": [
             {
               "type": "custom",
-              "fn": "Engine.state.activeScript.step1()"
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        },
+        {
+          "narration": "On one side, we have T C P, the Transmission Control Protocol. It is structured, reliable, and strict. On the other side, U D P. The User Datagram Protocol. It is chaotic, connectionless, and blindingly fast.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "HISTORY_1983",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex flex-col items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/black-paper.png\")] opacity-20'></div>\n  <div class='absolute top-[5cqh] left-[5cqw] w-[10cqw] h-[10cqw] border-t-2 border-l-2 border-slate-700'></div>\n  <div class='absolute bottom-[5cqh] right-[5cqw] w-[10cqw] h-[10cqw] border-b-2 border-r-2 border-slate-700'></div>\n  \n  <div class='z-10 text-center'>\n    <div id='date' class='text-emerald-500 text-[clamp(2rem,6cqw,8rem)] font-bold tracking-widest mb-[2cqh] opacity-0 blur-md transition-all duration-1000'>01 . 01 . 1983</div>\n    <div id='title' class='text-white text-[clamp(1.5rem,4cqw,5rem)] font-black uppercase bg-red-600 inline-block px-[2cqw] py-[1cqh] skew-x-[-10deg] opacity-0 scale-110 transition-all duration-700 delay-500 shadow-2xl'>\"FLAG DAY\"</div>\n    <div id='desc' class='mt-[4cqh] text-slate-400 text-[clamp(1rem,2cqw,3rem)] max-w-[70cqw] leading-relaxed mx-auto opacity-0 translate-y-4 transition-all duration-700 delay-1000'>ARPANET successfully transitions to TCP/IP. Standardized by the I.E.T.F. in RFC 793 and RFC 768. The modern internet is born.</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#date').classList.remove('opacity-0', 'blur-md'); ctx.root.querySelector('#title').classList.remove('opacity-0', 'scale-110'); ctx.root.querySelector('#desc').classList.remove('opacity-0', 'translate-y-4'); } } }",
+      "steps": [
+        {
+          "narration": "Before we compare them, we need to look back at history.",
+          "actions": []
+        },
+        {
+          "narration": "January first, nineteen eighty three. Known in computer science as Flag Day. The military ARPANET network officially transitioned to the TCP IP standard.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.init()"
+            }
+          ]
+        },
+        {
+          "narration": "This was the exact moment the modern internet, as we know it today, was born.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "ANALOGY_TCP_COURIER",
+      "html": "<div class='w-full h-full bg-[#0f172a] relative overflow-hidden flex items-center justify-center p-[5cqw] font-sans'>\n  <div class='absolute inset-0 flex items-center justify-center opacity-5'>\n    <svg viewBox='0 0 100 100' class='w-full h-full animate-[spin_60s_linear_infinite]'><path fill='none' stroke='#3b82f6' stroke-width='2' d='M50 10 A40 40 0 1 0 50 90 A40 40 0 1 0 50 10 Z' stroke-dasharray='10 5' /></svg>\n  </div>\n  <div class='relative z-10 w-[60cqw] bg-slate-900 border border-slate-700 rounded-2xl p-[4cqw] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center gap-[4cqw]'>\n    <div class='w-[20cqw] h-[20cqw] bg-slate-800 rounded-xl flex items-center justify-center border-2 border-blue-500/50 relative'>\n      <svg class='w-[10cqw] h-[10cqw] text-blue-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'></path></svg>\n      <div id='stamp' class='absolute right-[-2cqw] top-[-2cqw] w-[8cqw] h-[8cqw] bg-emerald-500 text-slate-900 rounded-full flex items-center justify-center font-black text-[1.5cqw] rotate-[15deg] scale-0 opacity-0 transition-all duration-500 border-4 border-[#0f172a] shadow-lg'>ACK</div>\n    </div>\n    <div class='flex-1'>\n      <h2 class='text-blue-400 font-mono text-[clamp(1rem,1.5cqw,2rem)] tracking-widest uppercase mb-[1cqh]'>Analogy Model</h2>\n      <h1 class='text-white text-[clamp(2rem,4cqw,5rem)] font-bold leading-tight mb-[2cqh]'>The Registered Courier</h1>\n      <ul class='text-slate-400 text-[clamp(1rem,1.8cqw,2.5rem)] space-y-[1.5cqh]'>\n        <li class='flex items-center gap-[1cqw] opacity-0 -translate-x-4 transition-all duration-300' id='l1'><span class='text-blue-500'>✔</span> Tracking Number Assigned</li>\n        <li class='flex items-center gap-[1cqw] opacity-0 -translate-x-4 transition-all duration-300 delay-100' id='l2'><span class='text-blue-500'>✔</span> Sequential Delivery Guarantee</li>\n        <li class='flex items-center gap-[1cqw] opacity-0 -translate-x-4 transition-all duration-300 delay-200' id='l3'><span class='text-blue-500'>✔</span> Signature Required (ACK)</li>\n      </ul>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { showList: () => { ['l1','l2','l3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', '-translate-x-4')); }, stamp: () => { ctx.root.querySelector('#stamp').classList.remove('scale-0', 'opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "To understand the difference, let us use a real world analogy. Think of T C P as a registered courier service.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.showList()"
+            }
+          ]
+        },
+        {
+          "narration": "When you send a package, it gets a tracking number. It is guaranteed to arrive in the correct order, and most importantly, the receiver must sign for it.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.stamp()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ANALOGY_UDP_RADIO",
+      "html": "<div class='w-full h-full bg-[#181116] relative overflow-hidden flex flex-col items-center justify-center p-[5cqw] font-sans'>\n  <div class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>\n    <div id='ring1' class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[20cqw] h-[20cqw] rounded-full border border-pink-500/80 opacity-0 scale-50 transition-all duration-[1.5s] ease-out'></div>\n    <div id='ring2' class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40cqw] h-[40cqw] rounded-full border border-pink-500/50 opacity-0 scale-50 transition-all duration-[1.5s] ease-out delay-[200ms]'></div>\n    <div id='ring3' class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60cqw] h-[60cqw] rounded-full border border-pink-500/30 opacity-0 scale-50 transition-all duration-[1.5s] ease-out delay-[400ms]'></div>\n    <div id='ring4' class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80cqw] h-[80cqw] rounded-full border border-pink-500/10 opacity-0 scale-50 transition-all duration-[1.5s] ease-out delay-[600ms]'></div>\n  </div>\n  <div class='z-10 bg-slate-900/80 backdrop-blur-md p-[3cqw] rounded-2xl border border-pink-500/30 text-center max-w-[70cqw] shadow-[0_0_50px_rgba(236,72,153,0.1)]'>\n      <h2 class='text-pink-400 font-mono text-[clamp(1rem,1.5cqw,2rem)] tracking-widest uppercase mb-[1cqh]'>Analogy Model</h2>\n      <h1 class='text-white text-[clamp(2.5rem,5cqw,6rem)] font-bold mb-[2cqh]'>The Radio Broadcast</h1>\n      <p class='text-slate-300 text-[clamp(1.2rem,2cqw,2.5rem)] leading-relaxed'>No tracking. No signatures. Just a raw, continuous blast of data to anyone listening. If you miss a packet, it is gone forever.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { let interval; return { pulse: () => { const r1 = ctx.root.querySelector('#ring1'); const r2 = ctx.root.querySelector('#ring2'); const r3 = ctx.root.querySelector('#ring3'); const r4 = ctx.root.querySelector('#ring4'); const trigger = () => { [r1,r2,r3,r4].forEach(r => { r.classList.remove('opacity-0', 'scale-50'); r.classList.add('scale-150', 'opacity-0'); setTimeout(() => { r.classList.remove('transition-all', 'duration-[1.5s]', 'scale-150'); r.classList.add('scale-50'); setTimeout(() => r.classList.add('transition-all', 'duration-[1.5s]'), 50); }, 1500); }); }; trigger(); interval = setInterval(trigger, 2000); }, remove: () => clearInterval(interval) } }",
+      "steps": [
+        {
+          "narration": "U D P, on the other hand, is like a live FM radio broadcast.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.pulse()"
+            }
+          ]
+        },
+        {
+          "narration": "It blasts the signal out to the world at maximum speed. There is no tracking. No signatures. If a listener drives into a tunnel and misses a word, the radio station does not stop to repeat it.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "TCP_HANDSHAKE_DIAGRAM",
+      "html": "<div class='w-full h-full bg-[#020617] flex flex-col items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <h2 class='absolute top-[5cqh] text-slate-400 text-[clamp(1.5rem,2.5cqw,3rem)] tracking-widest uppercase'>TCP Connection Establishment</h2>\n  <div class='w-[80cqw] h-[40cqh] relative flex justify-between items-center mt-[10cqh]'>\n    <div class='w-[15cqw] h-[30cqh] bg-slate-800 border-2 border-slate-600 rounded-xl flex items-center justify-center text-white text-[2cqw] font-bold z-10 relative shadow-[0_0_30px_#000]'>CLIENT<div class='absolute -bottom-[3cqw] text-[1cqw] text-slate-500'>192.168.1.5</div></div>\n    <div class='w-[15cqw] h-[30cqh] bg-blue-900 border-2 border-blue-500 rounded-xl flex items-center justify-center text-white text-[2cqw] font-bold z-10 relative shadow-[0_0_30px_#000]'>SERVER<div class='absolute -bottom-[3cqw] text-[1cqw] text-slate-500'>10.0.0.99</div></div>\n    \n    <div class='absolute top-[20%] left-[15cqw] right-[15cqw] h-[2px] border-t-2 border-dashed border-slate-700 -z-0'></div>\n    <div class='absolute top-[50%] left-[15cqw] right-[15cqw] h-[2px] border-t-2 border-dashed border-slate-700 -z-0'></div>\n    <div class='absolute top-[80%] left-[15cqw] right-[15cqw] h-[2px] border-t-2 border-dashed border-slate-700 -z-0'></div>\n\n    <div id='arr1' class='absolute top-[18%] left-[16cqw] flex items-center opacity-0 transition-transform duration-700 ease-in-out'>\n      <span class='text-blue-400 text-[1.5cqw] absolute -top-[2cqw] left-[50%] -translate-x-[50%]'>SYN (SEQ=100)</span>\n      <div class='w-[48cqw] h-[4px] bg-blue-500 relative'><div class='absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-blue-500'></div></div>\n    </div>\n\n    <div id='arr2' class='absolute top-[48%] right-[16cqw] flex items-center opacity-0 transition-transform duration-700 ease-in-out'>\n      <span class='text-purple-400 text-[1.5cqw] absolute -top-[2cqw] left-[50%] -translate-x-[50%] whitespace-nowrap'>SYN-ACK (SEQ=300, ACK=101)</span>\n      <div class='w-[48cqw] h-[4px] bg-purple-500 relative'><div class='absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-purple-500'></div></div>\n    </div>\n\n    <div id='arr3' class='absolute top-[78%] left-[16cqw] flex items-center opacity-0 transition-transform duration-700 ease-in-out'>\n      <span class='text-emerald-400 text-[1.5cqw] absolute -top-[2cqw] left-[50%] -translate-x-[50%]'>ACK (ACK=301)</span>\n      <div class='w-[48cqw] h-[4px] bg-emerald-500 relative'><div class='absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-emerald-500'></div></div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { s1: () => { const a1 = ctx.root.querySelector('#arr1'); a1.classList.remove('opacity-0'); a1.style.transform = 'translateX(0)'; }, s2: () => { const a2 = ctx.root.querySelector('#arr2'); a2.classList.remove('opacity-0'); a2.style.transform = 'translateX(0)'; }, s3: () => { const a3 = ctx.root.querySelector('#arr3'); a3.classList.remove('opacity-0'); a3.style.transform = 'translateX(0)'; } } }",
+      "steps": [
+        {
+          "narration": "Let's dive deeper into T C P first. Before a single piece of actual data is sent, it performs a strict ritual. The three-way handshake.",
+          "actions": []
+        },
+        {
+          "narration": "First, the client sends a Synchronize packet, or SYN, asking to open a connection.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
+        },
+        {
+          "narration": "The server replies with a SYN-ACK, acknowledging the request and synchronizing its own sequence numbers.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
+            }
+          ]
+        },
+        {
+          "narration": "Finally, the client replies with an ACK. Only now is the connection established and data can flow. This costs one full round-trip time.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s3()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TCP_HEADER_INSPECT",
+      "html": "<div class='w-full h-full bg-[#0f172a] p-[5cqw] flex items-center justify-center relative overflow-hidden font-mono'>\n  <div class='absolute right-[5%] top-[5%] text-right'>\n    <div class='text-blue-400 text-[2cqw] tracking-widest'>TCP OVERHEAD</div>\n    <div class='text-white text-[4cqw] font-bold'>20-60 BYTES</div>\n  </div>\n  <div class='w-[70cqw] grid grid-cols-4 gap-[0.5cqw] p-[2cqw] bg-slate-900 border-2 border-slate-700 rounded-xl shadow-2xl relative' id='grid'>\n    <div class='col-span-2 bg-blue-900/50 border border-blue-500/50 p-[1cqw] text-center text-blue-200 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300' id='b1'>Source Port (16 bit)</div>\n    <div class='col-span-2 bg-blue-900/50 border border-blue-500/50 p-[1cqw] text-center text-blue-200 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-75' id='b2'>Destination Port (16 bit)</div>\n    <div class='col-span-4 bg-purple-900/50 border border-purple-500/50 p-[1cqw] text-center text-purple-200 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-150' id='b3'>Sequence Number (32 bit)</div>\n    <div class='col-span-4 bg-emerald-900/50 border border-emerald-500/50 p-[1cqw] text-center text-emerald-200 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-200' id='b4'>Acknowledgment Number (32 bit)</div>\n    <div class='col-span-1 bg-slate-800 border border-slate-600 p-[1cqw] text-center text-slate-300 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-300' id='b5'>Offset/Res</div>\n    <div class='col-span-1 bg-red-900/50 border border-red-500/50 p-[1cqw] text-center text-red-200 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-400' id='b6'>Flags (SYN,ACK...)</div>\n    <div class='col-span-2 bg-slate-800 border border-slate-600 p-[1cqw] text-center text-slate-300 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-500' id='b7'>Window Size (16 bit)</div>\n    <div class='col-span-2 bg-orange-900/50 border border-orange-500/50 p-[1cqw] text-center text-orange-200 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-600' id='b8'>Checksum (16 bit)</div>\n    <div class='col-span-2 bg-slate-800 border border-slate-600 p-[1cqw] text-center text-slate-300 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-700' id='b9'>Urgent Pointer (16 bit)</div>\n    <div class='col-span-4 bg-slate-800/50 border border-slate-600/50 p-[1cqw] text-center text-slate-400 text-[1.2cqw] opacity-0 scale-90 transition-all duration-300 delay-[800ms]' id='b10'>Options & Padding (0-40 bytes)</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { for(let i=1; i<=10; i++) { ctx.root.querySelector(`#b${i}`).classList.remove('opacity-0', 'scale-90'); } } } }",
+      "steps": [
+        {
+          "narration": "Because of this extreme reliability, T C P is heavy. Every single packet carries a massive header.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        },
+        {
+          "narration": "It contains sequence numbers, acknowledgement numbers, flags, and window sizes. This adds twenty to sixty bytes of overhead to every piece of data you send.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "CODE_TERMINAL_TCP_SERVER",
+      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,2.5cqmin,2rem)]'>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-blue-500 to-purple-600'></div>\n  <div class='absolute top-[2cqh] right-[5cqw] text-slate-500 text-[1.5cqw]'>server.py (TCP)</div>\n  <div class='z-10 relative max-w-[80cqw] mx-auto w-full bg-[#0a0a0a] border border-slate-800 p-[3cqw] rounded-lg shadow-[0_0_30px_rgba(0,0,0,0.8)]'>\n    <div id='hl-box' class='absolute left-[-1cqw] w-[102%] h-[1.5em] bg-blue-900/30 border-l-[4px] border-blue-500 opacity-0 transition-all duration-300 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-slate-300 leading-[1.8]'>\n      <div id='l1' class='opacity-0'><span class='text-purple-400'>import</span> socket</div>\n      <div id='l2' class='opacity-0 mt-[1cqh]'>server = socket.<span class='text-blue-400'>socket</span>(socket.AF_INET, socket.<span class='text-emerald-400 font-bold'>SOCK_STREAM</span>)</div>\n      <div id='l3' class='opacity-0'>server.<span class='text-blue-400'>bind</span>((<span class='text-orange-300'>\"0.0.0.0\"</span>, <span class='text-yellow-300'>5000</span>))</div>\n      <div id='l4' class='opacity-0'>server.<span class='text-blue-400'>listen</span>(<span class='text-yellow-300'>1</span>)</div>\n      <div id='l5' class='opacity-0 mt-[1cqh]'>print(<span class='text-orange-300'>\"Waiting for connection...\"</span>)</div>\n      <div id='l6' class='opacity-0'>conn, addr = server.<span class='text-red-400 font-bold'>accept()</span></div>\n      <div id='l7' class='opacity-0 mt-[1cqh]'>data = conn.<span class='text-blue-400'>recv</span>(<span class='text-yellow-300'>1024</span>)</div>\n      <div id='l8' class='opacity-0'>conn.<span class='text-blue-400'>sendall</span>(<span class='text-orange-300'>b\"Acknowledged\"</span>)</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { const hl = (idx) => { const el = ctx.root.querySelector(`#l${idx}`); const box = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); box.classList.remove('opacity-0'); box.style.top = `${el.offsetTop}px`; box.style.height = `${el.offsetHeight}px`; }; return { s1: () => { hl(1); setTimeout(()=>hl(2), 500); }, s2: () => { hl(3); setTimeout(()=>hl(4), 500); }, s3: () => { hl(5); setTimeout(()=>hl(6), 800); }, s4: () => { hl(7); setTimeout(()=>hl(8), 500); } } }",
+      "steps": [
+        {
+          "narration": "What does this look like in code? Here is a standard T C P server written in Python.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
+        },
+        {
+          "narration": "Notice the argument 'SOCK STREAM'. This tells the operating system kernel we want a reliable, ordered stream of bytes.",
+          "actions": []
+        },
+        {
+          "narration": "The server binds to port 5000 and starts listening. Then, crucially, it calls 'accept'.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
             },
             {
               "type": "custom",
-              "fn": "setTimeout(()=>Engine.state.activeScript.step2(), 1000)"
+              "fn": "setTimeout(()=>Engine.state.activeScript.s3(), 1500)"
             }
           ]
         },
         {
-          "narration": "If the silicon stops, the world stops.",
+          "narration": "This function blocks execution. The server literally pauses, holding the line open, waiting for that three-way handshake to complete before it can receive data.",
           "actions": [
             {
               "type": "custom",
-              "fn": "Engine.state.activeScript.step3()"
+              "fn": "Engine.state.activeScript.s4()"
             }
           ]
         }
       ]
     },
     {
-      "type": "PARALLAX_SCALE_ZOOM",
-      "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center font-mono'>\n  <div class='absolute inset-0 opacity-20' style='background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px;'></div>\n  <div id='layer-hair' class='absolute w-[30cqw] h-[120%] bg-stone-800 border-x-4 border-black flex items-center justify-center transition-all duration-[2000ms] ease-[cubic-bezier(0.7,0,0.3,1)] z-10 origin-center'>\n    <div class='text-white -rotate-90 text-[3cqw] font-bold whitespace-nowrap opacity-50'>HUMAN HAIR (80,000nm)</div>\n  </div>\n  <div id='layer-chip' class='absolute w-[40cqw] h-[40cqw] border-2 border-emerald-500/50 bg-emerald-900/10 backdrop-blur-md rounded-xl flex flex-col items-center justify-center opacity-0 scale-0 transition-all duration-[2000ms] ease-[cubic-bezier(0.7,0,0.3,1)] z-20 shadow-[0_0_100px_rgba(16,185,129,0.2)]'>\n     <div class='text-emerald-400 text-[5cqw] font-black'>3nm</div>\n     <div class='text-emerald-200 text-[1.5cqw]'>GATE WIDTH</div>\n  </div>\n  <div class='absolute bottom-[10%] w-full text-center z-30'>\n     <div class='text-stone-500 text-[1.2cqw]'>MAGNIFICATION</div>\n     <div id='zoom-val' class='text-white text-[3cqw] font-bold font-mono'>1x</div>\n  </div>\n</div>",
-      "script": "(ctx) => { return { zoom: () => { ctx.root.querySelector('#layer-hair').style.transform = 'scale(60) translateX(-20%)'; ctx.root.querySelector('#layer-hair').style.opacity = '0'; ctx.root.querySelector('#layer-chip').classList.remove('opacity-0', 'scale-0'); ctx.root.querySelector('#layer-chip').classList.add('scale-100'); let v = 1; const t = setInterval(() => { v += 1000; ctx.root.querySelector('#zoom-val').innerText = v + 'x'; if(v >= 20000) { clearInterval(t); ctx.root.querySelector('#zoom-val').innerText = '20,000x'; ctx.root.querySelector('#zoom-val').classList.add('text-emerald-500'); } }, 10); } } }",
+      "type": "CODE_TERMINAL_TCP_CLIENT",
+      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,2.5cqmin,2rem)]'>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-blue-400 to-cyan-500'></div>\n  <div class='absolute top-[2cqh] right-[5cqw] text-slate-500 text-[1.5cqw]'>client.py (TCP)</div>\n  <div class='z-10 relative max-w-[80cqw] mx-auto w-full bg-[#0a0a0a] border border-slate-800 p-[3cqw] rounded-lg shadow-[0_0_30px_rgba(0,0,0,0.8)]'>\n    <div id='hl-box' class='absolute left-[-1cqw] w-[102%] h-[1.5em] bg-cyan-900/30 border-l-[4px] border-cyan-500 opacity-0 transition-all duration-300 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-slate-300 leading-[1.8]'>\n      <div id='l1' class='opacity-0'>client = socket.<span class='text-blue-400'>socket</span>(socket.AF_INET, socket.<span class='text-emerald-400'>SOCK_STREAM</span>)</div>\n      <div id='l2' class='opacity-0 mt-[1cqh]'>client.<span class='text-red-400 font-bold'>connect</span>((<span class='text-orange-300'>\"127.0.0.1\"</span>, <span class='text-yellow-300'>5000</span>))</div>\n      <div id='l3' class='opacity-0 mt-[1cqh]'>client.<span class='text-blue-400'>sendall</span>(<span class='text-orange-300'>b\"Hello Server\"</span>)</div>\n      <div id='l4' class='opacity-0'>data = client.<span class='text-blue-400'>recv</span>(<span class='text-yellow-300'>1024</span>)</div>\n      <div id='l5' class='opacity-0 mt-[1cqh]'>print(<span class='text-orange-300'>\"Server says:\"</span>, data.<span class='text-blue-400'>decode</span>())</div>\n      <div id='l6' class='opacity-0'>client.<span class='text-blue-400'>close</span>()</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { const hl = (idx) => { const el = ctx.root.querySelector(`#l${idx}`); const box = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); box.classList.remove('opacity-0'); box.style.top = `${el.offsetTop}px`; box.style.height = `${el.offsetHeight}px`; }; return { s1: () => hl(1), s2: () => hl(2), s3: () => { hl(3); setTimeout(()=>hl(4), 500); }, s4: () => { hl(5); setTimeout(()=>hl(6), 500); } } }",
       "steps": [
         {
-          "narration": "To understand the stakes, we must change our perspective.",
+          "narration": "The client script reflects this structured approach.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
+        },
+        {
+          "narration": "It calls 'connect', aiming at the server's IP address and port. Under the hood, this single line of code triggers the entire SYN and ACK handshake process over the network.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
+            }
+          ]
+        },
+        {
+          "narration": "Once connected, it guarantees the payload is delivered, waits for a response, and gracefully closes the connection.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s3()"
+            },
+            {
+              "type": "custom",
+              "fn": "setTimeout(()=>Engine.state.activeScript.s4(), 1000)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "UDP_SPEED_DEMON",
+      "html": "<div class='w-full h-full bg-[#180a10] flex items-center justify-center p-[5cqw] relative overflow-hidden font-sans text-white'>\n  <div id='p5-warp' class='absolute inset-0 z-0'></div>\n  <div class='z-10 text-center relative mix-blend-screen'>\n    <h2 class='text-pink-500 font-mono tracking-[0.5em] text-[clamp(1rem,2cqw,3rem)] mb-[2cqh] uppercase opacity-0 translate-y-4 transition-all duration-700' id='sub'>Strip Away The Overhead</h2>\n    <h1 class='text-[clamp(5rem,15cqw,20rem)] font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-500 to-purple-500 leading-none italic pr-4 opacity-0 scale-50 transition-all duration-[1000ms] ease-[cubic-bezier(0.175,0.885,0.32,1.275)]' id='title'>UDP</h1>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let stars = []; p.setup = () => { const c = ctx.root.querySelector('#p5-warp'); p.createCanvas(c.clientWidth, c.clientHeight); for(let i=0; i<400; i++) stars.push({x: p.random(-p.width, p.width), y: p.random(-p.height, p.height), z: p.random(p.width), pz: p.random(p.width)}); }; p.draw = () => { p.clear(); p.translate(p.width/2, p.height/2); p.fill(255); p.noStroke(); stars.forEach(star => { star.z -= 40; if(star.z < 1) { star.z = p.width; star.x = p.random(-p.width, p.width); star.y = p.random(-p.height, p.height); star.pz = star.z; } let sx = p.map(star.x / star.z, 0, 1, 0, p.width); let sy = p.map(star.y / star.z, 0, 1, 0, p.height); let r = p.map(star.z, 0, p.width, 8, 0); p.circle(sx, sy, r); let px = p.map(star.x / star.pz, 0, 1, 0, p.width); let py = p.map(star.y / star.pz, 0, 1, 0, p.height); p.stroke(236, 72, 153, 100); p.strokeWeight(2); p.line(px, py, sx, sy); star.pz = star.z; }); }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-warp'); return { reveal: () => { ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-4'); setTimeout(() => { ctx.root.querySelector('#title').classList.remove('opacity-0', 'scale-50'); }, 400); }, remove: () => myP5.remove() } }",
+      "steps": [
+        {
+          "narration": "Now, let us completely strip away the overhead. No handshakes. No tracking. No rules.",
           "actions": []
         },
         {
-          "narration": "This is a human hair. To find a modern transistor, we must zoom in twenty thousand times.",
-          "actions": [
-            {
-              "type": "custom",
-              "fn": "Engine.state.activeScript.zoom()"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "EXPLODED_VIEW_ASML",
-      "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center perspective-[2000px] overflow-hidden relative'>\n  <div class='absolute top-[5%] left-[5%] font-mono text-emerald-500 tracking-widest z-20 text-[1.5cqw] border-l-4 border-emerald-500 pl-4'>\n    <div class='text-white font-bold'>ASML HIGH-NA EUV</div>\n    <div class='text-stone-400 text-[1cqw]'>PRICE: $380,000,000</div>\n  </div>\n  <div id='machine' class='relative w-[40cqw] h-[30cqw] transition-transform duration-[2s] ease-[cubic-bezier(0.25,1,0.5,1)]' style='transform-style: preserve-3d; transform: rotateX(60deg) rotateZ(0deg);'>\n    <div class='absolute inset-0 bg-stone-900 border-2 border-stone-600 flex items-center justify-center text-white font-bold transition-transform duration-[1.5s] shadow-[0_20px_50px_rgba(0,0,0,0.8)]' id='l1' style='transform: translateZ(0px)'>BASE FRAME</div>\n    <div class='absolute inset-0 bg-stone-800 border-2 border-stone-500 flex items-center justify-center text-white font-bold transition-transform duration-[1.5s] shadow-[0_20px_50px_rgba(0,0,0,0.8)]' id='l2' style='transform: translateZ(20px)'>OPTICS (ZEISS)</div>\n    <div class='absolute inset-0 bg-stone-700 border-2 border-stone-400 flex items-center justify-center text-white font-bold transition-transform duration-[1.5s] shadow-[0_20px_50px_rgba(0,0,0,0.8)]' id='l3' style='transform: translateZ(40px)'>LASER SOURCE</div>\n    <div class='absolute inset-0 bg-emerald-900/60 border-2 border-emerald-400 flex items-center justify-center text-emerald-300 font-black transition-transform duration-[1.5s] backdrop-blur-md shadow-[0_0_60px_rgba(16,185,129,0.4)]' id='l4' style='transform: translateZ(60px)'>WAFER STAGE</div>\n  </div>\n</div>",
-      "script": "(ctx) => { return { expand: () => { ctx.root.querySelector('#machine').style.transform = 'rotateX(60deg) rotateZ(45deg) scale(0.8)'; ctx.root.querySelector('#l1').style.transform = 'translateZ(-150px)'; ctx.root.querySelector('#l2').style.transform = 'translateZ(0px)'; ctx.root.querySelector('#l3').style.transform = 'translateZ(150px)'; ctx.root.querySelector('#l4').style.transform = 'translateZ(300px)'; } } }",
-      "steps": [
-        {
-          "narration": "To print at this scale, we need the most advanced machine ever built. The A S M L High N A system.",
-          "actions": []
-        },
-        {
-          "narration": "It contains one hundred thousand components. It costs three hundred eighty million dollars per unit.",
-          "actions": [
-            {
-              "type": "custom",
-              "fn": "Engine.state.activeScript.expand()"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "PARTICLE_PHYSICS",
-      "html": "<div class='w-full h-full bg-black flex items-center justify-center relative overflow-hidden'>\n  <div id='p5-laser' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 bg-black/80 text-white p-4 border-l-4 border-rose-500 rounded backdrop-blur-md absolute top-[10cqh] left-[5cqw]'>\n    <div class='font-mono text-rose-400 text-[1cqw] tracking-widest'>EUV LITHOGRAPHY</div>\n    <div class='text-[2cqw] font-bold'>TIN DROPLET VAPORIZATION</div>\n  </div>\n</div>",
-      "script": "(ctx) => { const sketch = p => { let droplet = {x: 0, y: 0, r: 0}; let laser = {active: false}; let debris = []; p.setup = () => { const c = ctx.root.querySelector('#p5-laser'); p.createCanvas(c.clientWidth, c.clientHeight); reset(); }; const reset = () => { droplet = {x: p.width/2, y: p.height/2, r: 60}; laser = {active: false}; debris = []; }; p.draw = () => { p.clear(); p.background(0); if(droplet.r > 0) { p.fill(150); p.noStroke(); p.circle(droplet.x, droplet.y, droplet.r * 2); p.fill(200); p.circle(droplet.x - 10, droplet.y - 10, droplet.r); } if(laser.active) { p.stroke('#ec4899'); p.strokeWeight(12); p.line(0, p.height, droplet.x, droplet.y); p.stroke('#fbcfe8'); p.strokeWeight(4); p.line(0, p.height, droplet.x, droplet.y); droplet.r -= 3; for(let i=0; i<15; i++) debris.push({x: droplet.x, y: droplet.y, vx: p.random(-8,8), vy: p.random(-8,8), life: 255}); } debris.forEach(d => { d.x += d.vx; d.y += d.vy; d.life -= 8; p.fill(236, 72, 153, d.life); p.noStroke(); p.circle(d.x, d.y, p.random(2,6)); }); }; p.fire = () => laser.active = true; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-laser'); return { remove: () => myP5.remove(), shoot: () => myP5.fire() } }",
-      "steps": [
-        {
-          "narration": "Inside, a laser strikes a droplet of molten tin fifty thousand times per second.",
-          "actions": []
-        },
-        {
-          "narration": "This creates plasma warmer than the surface of the sun, generating the light needed to etch the chip.",
-          "actions": [
-            {
-              "type": "custom",
-              "fn": "Engine.state.activeScript.shoot()"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "CHART_HOLO_DOUGHNUT",
-      "html": "<div class='w-full h-full bg-[#0c0a09] flex items-center justify-center p-[5cqw] relative overflow-hidden'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,#10b98110_0%,transparent_50%)]'></div>\n  <div class='relative w-[50cqmin] h-[50cqmin] z-10 perspective-[1000px]'>\n    <div class='absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none'>\n      <div class='text-stone-500 font-mono text-[clamp(0.6rem,1cqw,1rem)] tracking-widest uppercase mb-2'>TSMC MARKET SHARE</div>\n      <div class='text-white text-[clamp(2rem,5cqw,5rem)] font-black italic drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]'>92%</div>\n      <div class='text-emerald-500 text-[1cqw] tracking-widest'>ADVANCED NODES (<10nm)</div>\n    </div>\n    <div id='holo-container' class='w-full h-full drop-shadow-[0_0_50px_rgba(16,185,129,0.3)]'>\n      <div class='w-full h-full relative'><canvas id='chart-doughnut'></canvas></div>\n    </div>\n  </div>\n</div>",
-      "script": "(ctx) => { const chart = ctx.chart('#chart-doughnut', { type: 'doughnut', data: { labels: ['TSMC Advanced', 'Rest of World'], datasets: [{ data: [0, 100], backgroundColor: ['#10b981', '#1c1917'], borderWidth: 0, cutout: '85%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, animation: { animateRotate: true, duration: 2000, easing: 'easeOutQuart' } } }); const container = ctx.root.querySelector('#holo-container'); let rotation = 0; let frameId; const spin = () => { rotation += 0.2; if(container) { container.style.transform = `rotateX(40deg) rotateZ(${rotation}deg)`; } frameId = window.requestAnimationFrame(spin); }; spin(); return { remove: () => { window.cancelAnimationFrame(frameId); chart.destroy(); }, fill: () => { chart.data.datasets[0].data = [92, 8]; chart.update(); } }; }",
-      "steps": [
-        {
-          "narration": "This extreme difficulty creates a monopoly. For advanced chips, one company, TSMC, controls ninety-two percent of the market.",
-          "actions": [
-            {
-              "type": "custom",
-              "fn": "Engine.state.activeScript.fill()"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "MAP_TOPOLOGY_PAN",
-      "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden font-mono text-white border-4 border-stone-800'>\n  <div id='map-world' class='absolute inset-0 z-0 opacity-80'></div>\n  <div class='absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.9)] z-10'></div>\n  <div class='absolute top-[5%] right-[5%] z-20 bg-black/80 p-4 border-l-4 border-emerald-500 backdrop-blur-md shadow-2xl'>\n    <h1 class='text-emerald-500 font-bold tracking-widest mb-1 text-[clamp(0.8rem,1.2cqw,1.2rem)]'>STRATEGIC CHOKEPOINT</h1>\n    <div class='text-[clamp(0.6rem,0.8cqw,0.8rem)] text-stone-400'>TARGET: <span class='text-white font-bold'>TAIWAN STRAIT</span></div>\n  </div>\n  <div id='marker-pulse' class='absolute w-[4cqw] h-[4cqw] bg-rose-500 rounded-full mix-blend-screen opacity-0 scale-0 transition-all duration-500 z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none' style='top:50%; left:50%;'>\n     <div class='w-full h-full bg-rose-500 rounded-full animate-ping opacity-75'></div>\n  </div>\n</div>",
-      "script": "(ctx) => { const map = ctx.map('#map-world', { center: [37.7749, -122.4194], zoom: 3, zoomControl: false, attributionControl: false }); L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map); setTimeout(()=>map.invalidateSize(), 200); return { focus: () => { map.flyTo([23.6978, 120.9605], 6, {duration: 3, easeLinearity: 0.25}); setTimeout(() => { ctx.root.querySelector('#marker-pulse').classList.remove('opacity-0', 'scale-0'); }, 3000); } } }",
-      "steps": [
-        {
-          "narration": "Where is this critical infrastructure? Not in America. Not in Europe.",
-          "actions": []
-        },
-        {
-          "narration": "It is here. Sitting on one of the most volatile geopolitical fault lines on Earth.",
-          "actions": [
-            {
-              "type": "custom",
-              "fn": "Engine.state.activeScript.focus()"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "SVG_DETECTIVE_BOARD",
-      "html": "<div class='w-full h-full bg-[#292524] relative flex items-center justify-center p-[4cqw] overflow-hidden'>\n  <div class='absolute inset-0 opacity-10 bg-[url(\"https://www.transparenttextures.com/patterns/wood-pattern.png\")]'></div>\n  <div class='relative w-full h-full bg-stone-900/50 border border-stone-700 shadow-2xl overflow-hidden rounded-xl'>\n    <svg class='absolute inset-0 w-full h-full z-10 pointer-events-none' viewBox='0 0 100 100' preserveAspectRatio='none'>\n      <path id='con-1' d='M20,20 Q50,50 80,20' fill='none' stroke='#f59e0b' stroke-width='0.4' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-[1500ms] ease-in-out' />\n      <path id='con-2' d='M20,20 Q40,50 50,80' fill='none' stroke='#f59e0b' stroke-width='0.4' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-[1500ms] ease-in-out delay-300' />\n      <path id='con-3' d='M80,20 Q60,50 50,80' fill='none' stroke='#f59e0b' stroke-width='0.4' stroke-dasharray='100' stroke-dashoffset='100' class='transition-all duration-[1500ms] ease-in-out delay-500' />\n    </svg>\n    <div id='item-1' class='absolute top-[10%] left-[10%] w-[18%] bg-white p-2 rotate-[-3deg] opacity-0 scale-90 transition-all duration-500 shadow-lg'>\n      <img src='https://images.unsplash.com/photo-1526304640152-d4619684e484?q=80&w=2000' class='w-full aspect-video object-cover grayscale'>\n      <div class='text-black text-[1cqw] font-bold text-center mt-1'>US DESIGN</div>\n    </div>\n    <div id='item-2' class='absolute top-[10%] right-[10%] w-[18%] bg-white p-2 rotate-[2deg] opacity-0 scale-90 transition-all duration-500 shadow-lg'>\n      <img src='https://images.unsplash.com/photo-1555664424-778a69022365?q=80&w=2000' class='w-full aspect-video object-cover grayscale'>\n      <div class='text-black text-[1cqw] font-bold text-center mt-1'>EU EQUIPMENT</div>\n    </div>\n    <div id='item-3' class='absolute bottom-[10%] left-[41%] w-[18%] bg-white p-2 rotate-[-1deg] opacity-0 scale-90 transition-all duration-500 shadow-xl border-4 border-red-500'>\n      <div class='bg-emerald-800 aspect-video flex items-center justify-center text-white font-black text-[3cqw]'>FAB</div>\n      <div class='text-black text-[1cqw] font-bold text-center mt-1'>TAIWAN</div>\n    </div>\n  </div>\n</div>",
-      "script": "(ctx) => { return { reveal: () => { ['item-1', 'item-2', 'item-3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-90')); setTimeout(() => { ctx.root.querySelector('#con-1').style.strokeDashoffset = '0'; ctx.root.querySelector('#con-2').style.strokeDashoffset = '0'; ctx.root.querySelector('#con-3').style.strokeDashoffset = '0'; }, 800); } } }",
-      "steps": [
-        {
-          "narration": "The supply chain is a fragile web. Designs from California. Lasers from Germany.",
-          "actions": []
-        },
-        {
-          "narration": "All converging on a single point of failure. If this link breaks, the system crashes.",
+          "narration": "Enter U D P. User Datagram Protocol. The absolute speed demon of the internet.",
           "actions": [
             {
               "type": "custom",
@@ -188,81 +274,265 @@
       ]
     },
     {
-      "type": "NEON_DATA_CRASH",
-      "html": "<div class='w-full h-full bg-stone-900 flex flex-col p-[5cqw] relative overflow-hidden font-mono'>\n  <div class='z-10 flex justify-between items-end mb-[4cqh] border-b border-stone-700 pb-4'>\n    <div><h2 class='text-stone-500 text-sm'>GLOBAL REVENUE</h2><h1 class='text-white text-4xl font-bold'>TECH SECTOR</h1></div>\n    <div class='text-emerald-400 text-4xl font-bold' id='val'>STABLE</div>\n  </div>\n  <div class='flex-1 relative bg-stone-800 rounded-xl p-4'><canvas id='chart-crash'></canvas></div>\n</div>",
-      "script": "(ctx) => { const chart = ctx.chart('#chart-crash', { type: 'line', data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ data: [100, 98, 95, 96], borderColor: '#10b981', tension: 0.4 }] }, options: { maintainAspectRatio: false, scales: { y: { display: false } }, plugins: { legend: {display:false} } } }); return { crash: () => { chart.data.datasets[0].data = [100, 98, 40, 20]; chart.data.datasets[0].borderColor = '#ef4444'; chart.update(); ctx.root.querySelector('#val').innerText = 'CRITICAL'; ctx.root.querySelector('#val').classList.replace('text-emerald-400', 'text-red-500'); } } }",
+      "type": "UDP_HEADER_MINIMAL",
+      "html": "<div class='w-full h-full bg-[#180a10] p-[5cqw] flex items-center justify-center relative overflow-hidden font-mono'>\n  <div class='absolute right-[5%] top-[5%] text-right'>\n    <div class='text-pink-400 text-[2cqw] tracking-widest'>UDP OVERHEAD</div>\n    <div class='text-white text-[4cqw] font-bold'>8 BYTES</div>\n  </div>\n  <div class='w-[60cqw] grid grid-cols-2 gap-[1cqw] p-[3cqw] bg-[#2a0e19] border-2 border-pink-500/30 rounded-xl shadow-[0_0_50px_rgba(236,72,153,0.2)] relative translate-y-[-100cqh] transition-transform duration-[800ms] ease-bounce' id='grid'>\n    <div class='col-span-1 bg-pink-900/40 border border-pink-500/50 p-[2cqw] flex items-center justify-center text-center text-pink-200 text-[1.5cqw]'>Source Port<br><span class='text-[1cqw] text-slate-400'>(16 bit)</span></div>\n    <div class='col-span-1 bg-pink-900/40 border border-pink-500/50 p-[2cqw] flex items-center justify-center text-center text-pink-200 text-[1.5cqw]'>Destination Port<br><span class='text-[1cqw] text-slate-400'>(16 bit)</span></div>\n    <div class='col-span-1 bg-rose-900/40 border border-rose-500/50 p-[2cqw] flex items-center justify-center text-center text-rose-200 text-[1.5cqw]'>Length<br><span class='text-[1cqw] text-slate-400'>(16 bit)</span></div>\n    <div class='col-span-1 bg-purple-900/40 border border-purple-500/50 p-[2cqw] flex items-center justify-center text-center text-purple-200 text-[1.5cqw]'>Checksum<br><span class='text-[1cqw] text-slate-400'>(16 bit)</span></div>\n    <div class='col-span-2 bg-slate-900 border border-slate-700 p-[3cqw] flex items-center justify-center text-center text-slate-500 text-[2cqw] font-bold mt-[2cqh] border-dashed'>PAYLOAD DATA</div>\n  </div>\n  <style>.ease-bounce { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }</style>\n</div>",
+      "script": "(ctx) => { return { drop: () => { ctx.root.querySelector('#grid').classList.remove('translate-y-[-100cqh]'); } } }",
       "steps": [
         {
-          "narration": "When a one-dollar chip goes missing, billion-dollar industries grind to a halt.",
+          "narration": "U D P is incredibly lightweight. Compared to T C P's massive structure, U D P has a microscopic header.",
           "actions": [
             {
               "type": "custom",
-              "fn": "Engine.state.activeScript.crash()"
+              "fn": "Engine.state.activeScript.drop()"
+            }
+          ]
+        },
+        {
+          "narration": "It is exactly eight bytes. Source port, destination port, length, and a simple checksum. That is all. No sequence numbers, no acknowledgements. Just pure payload delivery.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "CODE_TERMINAL_UDP_SERVER",
+      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,2.5cqmin,2rem)]'>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-pink-500 to-rose-600'></div>\n  <div class='absolute top-[2cqh] right-[5cqw] text-slate-500 text-[1.5cqw]'>server.py (UDP)</div>\n  <div class='z-10 relative max-w-[80cqw] mx-auto w-full bg-[#0a0a0a] border border-slate-800 p-[3cqw] rounded-lg shadow-[0_0_30px_rgba(236,72,153,0.2)]'>\n    <div id='hl-box' class='absolute left-[-1cqw] w-[102%] h-[1.5em] bg-pink-900/30 border-l-[4px] border-pink-500 opacity-0 transition-all duration-300 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-slate-300 leading-[1.8]'>\n      <div id='l1' class='opacity-0'><span class='text-purple-400'>import</span> socket</div>\n      <div id='l2' class='opacity-0 mt-[1cqh]'>server = socket.<span class='text-blue-400'>socket</span>(socket.AF_INET, socket.<span class='text-pink-400 font-bold'>SOCK_DGRAM</span>)</div>\n      <div id='l3' class='opacity-0'>server.<span class='text-blue-400'>bind</span>((<span class='text-orange-300'>\"0.0.0.0\"</span>, <span class='text-yellow-300'>5001</span>))</div>\n      <div id='l4' class='opacity-0 mt-[1cqh]'>print(<span class='text-orange-300'>\"UDP Server listening...\"</span>)</div>\n      <div id='l5' class='opacity-0'>data, addr = server.<span class='text-red-400 font-bold'>recvfrom</span>(<span class='text-yellow-300'>1024</span>)</div>\n      <div id='l6' class='opacity-0 mt-[1cqh]'>server.<span class='text-blue-400'>sendto</span>(<span class='text-orange-300'>b\"Acknowledged\"</span>, addr)</div>\n    </div>\n    <div class='absolute right-[2cqw] top-[2cqw] text-red-500 font-bold text-[1.5cqw] opacity-0 rotate-12 transition-all duration-500' id='stamp'>NO LISTEN()<br>NO ACCEPT()</div>\n  </div>\n</div>",
+      "script": "(ctx) => { const hl = (idx) => { const el = ctx.root.querySelector(`#l${idx}`); const box = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); box.classList.remove('opacity-0'); box.style.top = `${el.offsetTop}px`; box.style.height = `${el.offsetHeight}px`; }; return { s1: () => { hl(1); setTimeout(()=>hl(2), 500); }, s2: () => { hl(3); setTimeout(()=>hl(4), 500); }, s3: () => { ctx.root.querySelector('#stamp').classList.remove('opacity-0', 'rotate-12'); ctx.root.querySelector('#stamp').classList.add('-rotate-12', 'scale-110'); hl(5); setTimeout(()=>hl(6), 1000); } } }",
+      "steps": [
+        {
+          "narration": "In code, the difference is stark. We use 'SOCK DGRAM' to declare a Datagram socket.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
+        },
+        {
+          "narration": "The server binds to a port, but notice what is missing.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
+            }
+          ]
+        },
+        {
+          "narration": "There is no 'listen'. There is no 'accept'. The server just hangs open, using 'recvfrom' to catch any raw packet thrown at that port, regardless of who sent it.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s3()"
             }
           ]
         }
       ]
     },
     {
-      "type": "NEWS_HIGHLIGHT_SLIDE",
-      "html": "<div class='w-full h-full bg-[#1e3a8a] relative flex items-center justify-start p-[8cqw] font-sans overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2670\")] bg-cover opacity-20 mix-blend-luminosity grayscale'></div>\n  <div class='absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-900/80 to-transparent'></div>\n  <div class='z-10 flex flex-col items-start gap-3 max-w-[85cqw] relative'>\n    <div class='bg-white text-blue-900 font-black tracking-widest px-[1cqw] py-[0.5cqw] text-[clamp(0.8rem,1.5cqw,2rem)] shadow-lg border-l-4 border-yellow-400 opacity-0 -translate-y-4 transition-all duration-500' id='news-tag'>GLOBAL DISPATCH</div>\n    <div class='relative overflow-hidden inline-block'>\n      <div id='hl-1' class='absolute inset-0 bg-yellow-400 z-0 -translate-x-full transition-transform duration-[600ms] ease-out'></div>\n      <div class='relative z-10 text-transparent font-black text-[clamp(2rem,5.5cqw,6rem)] leading-none px-[1cqw] py-[0.5cqw] transition-colors duration-300 delay-[400ms]' id='text-1'>US signs sweeping 10% global</div>\n    </div>\n    <div class='relative overflow-hidden inline-block'>\n      <div id='hl-2' class='absolute inset-0 bg-yellow-400 z-0 -translate-x-full transition-transform duration-[600ms] ease-out'></div>\n      <div class='relative z-10 text-transparent font-black text-[clamp(2rem,5.5cqw,6rem)] leading-none px-[1cqw] py-[0.5cqw] transition-colors duration-300 delay-[400ms]' id='text-2'>tariffs after shredding global</div>\n    </div>\n    <div class='relative overflow-hidden inline-block'>\n      <div id='hl-3' class='absolute inset-0 bg-yellow-400 z-0 -translate-x-full transition-transform duration-[600ms] ease-out'></div>\n      <div class='relative z-10 text-transparent font-black text-[clamp(2rem,5.5cqw,6rem)] leading-none px-[1cqw] py-[0.5cqw] transition-colors duration-300 delay-[400ms]' id='text-3'>trade agreements</div>\n    </div>\n  </div>\n</div>",
-      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#news-tag').classList.remove('opacity-0', '-translate-y-4'); setTimeout(() => { ctx.root.querySelector('#hl-1').style.transform = 'translateX(0)'; ctx.root.querySelector('#text-1').style.color = '#000'; }, 100); setTimeout(() => { ctx.root.querySelector('#hl-2').style.transform = 'translateX(0)'; ctx.root.querySelector('#text-2').style.color = '#000'; }, 400); setTimeout(() => { ctx.root.querySelector('#hl-3').style.transform = 'translateX(0)'; ctx.root.querySelector('#text-3').style.color = '#000'; }, 700); } } }",
+      "type": "CODE_TERMINAL_UDP_CLIENT",
+      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-mono text-[clamp(1rem,2.5cqmin,2rem)]'>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-pink-400 to-rose-500'></div>\n  <div class='absolute top-[2cqh] right-[5cqw] text-slate-500 text-[1.5cqw]'>client.py (UDP)</div>\n  <div class='z-10 relative max-w-[80cqw] mx-auto w-full bg-[#0a0a0a] border border-slate-800 p-[3cqw] rounded-lg shadow-[0_0_30px_rgba(236,72,153,0.2)]'>\n    <div id='hl-box' class='absolute left-[-1cqw] w-[102%] h-[1.5em] bg-pink-900/30 border-l-[4px] border-pink-500 opacity-0 transition-all duration-300 ease-out z-0 rounded-r'></div>\n    <div class='relative z-10 text-slate-300 leading-[1.8]'>\n      <div id='l1' class='opacity-0'>client = socket.<span class='text-blue-400'>socket</span>(socket.AF_INET, socket.<span class='text-pink-400'>SOCK_DGRAM</span>)</div>\n      <div id='l2' class='opacity-0 mt-[2cqh]'>client.<span class='text-red-400 font-bold'>sendto</span>(<span class='text-orange-300'>b\"Hello Server\"</span>, (<span class='text-orange-300'>\"127.0.0.1\"</span>, <span class='text-yellow-300'>5001</span>))</div>\n      <div id='l3' class='opacity-0 mt-[2cqh]'>data, addr = client.<span class='text-blue-400'>recvfrom</span>(<span class='text-yellow-300'>1024</span>)</div>\n      <div id='l4' class='opacity-0 mt-[1cqh]'>print(<span class='text-orange-300'>\"Server says:\"</span>, data.<span class='text-blue-400'>decode</span>())</div>\n    </div>\n    <div class='absolute right-[2cqw] top-[2cqw] text-red-500 font-bold text-[1.5cqw] opacity-0 transition-all duration-500' id='stamp'>NO CONNECT()<br>JUST FIRE</div>\n  </div>\n</div>",
+      "script": "(ctx) => { const hl = (idx) => { const el = ctx.root.querySelector(`#l${idx}`); const box = ctx.root.querySelector('#hl-box'); el.classList.remove('opacity-0'); box.classList.remove('opacity-0'); box.style.top = `${el.offsetTop}px`; box.style.height = `${el.offsetHeight}px`; }; return { s1: () => hl(1), s2: () => { hl(2); ctx.root.querySelector('#stamp').classList.remove('opacity-0'); }, s3: () => { hl(3); setTimeout(()=>hl(4), 500); } } }",
       "steps": [
         {
-          "narration": "Governments have realized this danger.",
-          "actions": []
+          "narration": "The client is equally blunt.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
         },
         {
-          "narration": "Overnight, the supply chain has been weaponized. Export bans are now tearing up global trade.",
+          "narration": "There is no 'connect' function. The client simply calls 'sendto', fires the packet into the void of the network, and hopes the server is listening.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
+            }
+          ]
+        },
+        {
+          "narration": "It can optionally wait for a reply, but the operating system does not guarantee the original message ever arrived.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s3()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "COMPARISON_MATRIX",
+      "html": "<div class='w-full h-full bg-[#020617] p-[5cqw] flex flex-col items-center justify-center relative overflow-hidden font-sans text-white'>\n  <h1 class='text-[clamp(2rem,4cqw,5rem)] font-bold mb-[4cqh] text-slate-300'>Architectural Trade-offs</h1>\n  <div class='w-[80cqw] border border-slate-700 rounded-xl bg-slate-900/50 backdrop-blur-md overflow-hidden shadow-2xl'>\n    <div class='grid grid-cols-3 bg-slate-800 p-[2cqw] text-[clamp(1rem,1.5cqw,2rem)] font-bold text-slate-400 border-b border-slate-700'>\n      <div>Feature</div>\n      <div class='text-blue-400'>TCP</div>\n      <div class='text-pink-400'>UDP</div>\n    </div>\n    <div class='grid grid-cols-3 p-[2cqw] border-b border-slate-800 text-[clamp(1rem,1.5cqw,2rem)] opacity-0 -translate-y-2 transition-all duration-300' id='r1'>\n      <div class='text-slate-300'>Connection</div>\n      <div class='text-blue-300'>Required (Handshake)</div>\n      <div class='text-pink-300'>Connectionless</div>\n    </div>\n    <div class='grid grid-cols-3 p-[2cqw] border-b border-slate-800 text-[clamp(1rem,1.5cqw,2rem)] opacity-0 -translate-y-2 transition-all duration-300 delay-100' id='r2'>\n      <div class='text-slate-300'>Reliability</div>\n      <div class='text-blue-300'>Guaranteed Delivery</div>\n      <div class='text-pink-300'>Best Effort (Fire & Forget)</div>\n    </div>\n    <div class='grid grid-cols-3 p-[2cqw] border-b border-slate-800 text-[clamp(1rem,1.5cqw,2rem)] opacity-0 -translate-y-2 transition-all duration-300 delay-200' id='r3'>\n      <div class='text-slate-300'>Ordering</div>\n      <div class='text-blue-300'>Strictly Sequential</div>\n      <div class='text-pink-300'>No Ordering</div>\n    </div>\n    <div class='grid grid-cols-3 p-[2cqw] text-[clamp(1rem,1.5cqw,2rem)] opacity-0 -translate-y-2 transition-all duration-300 delay-300' id='r4'>\n      <div class='text-slate-300'>Speed / Overhead</div>\n      <div class='text-blue-300'>Slower / Heavy</div>\n      <div class='text-pink-300 font-bold'>Extremely Fast / Light</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ['r1','r2','r3','r4'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', '-translate-y-2')); } } }",
+      "steps": [
+        {
+          "narration": "So, how do system architects choose between them? It comes down to trade-offs.",
           "actions": [
             {
               "type": "custom",
               "fn": "Engine.state.activeScript.reveal()"
             }
           ]
+        },
+        {
+          "narration": "T C P guarantees delivery and strict order, but sacrifices speed. U D P provides maximum speed, but sacrifices reliability. Let us look at where they are used in the wild.",
+          "actions": []
         }
       ]
     },
     {
-      "type": "SWARM_AI",
-      "html": "<div class='w-full h-full bg-[#0c0a09] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-swarm' class='absolute inset-0 w-full h-full'></div>\n  <div class='z-10 text-center font-mono text-stone-400'>NEURAL NETWORKS</div>\n</div>",
-      "script": "(ctx) => { const sketch = p => { let flock = []; let target; class Boid { constructor() { this.pos = p.createVector(p.random(p.width), p.random(p.height)); this.vel = p5.Vector.random2D(); this.vel.setMag(p.random(2, 4)); this.acc = p.createVector(); this.maxForce = 0.2; this.maxSpeed = 4; } edges() { if(this.pos.x > p.width) this.pos.x=0; else if (this.pos.x < 0) this.pos.x=p.width; if(this.pos.y > p.height) this.pos.y=0; else if(this.pos.y < 0) this.pos.y=p.height;} flock(boids) { let alignment = p.createVector(); let cohesion = p.createVector(); let separation = p.createVector(); let total = 0; for (let other of boids) { let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y); if (other != this && d < 50) { alignment.add(other.vel); cohesion.add(other.pos); let diff = p5.Vector.sub(this.pos, other.pos); diff.div(d*d); separation.add(diff); total++; } } if(total > 0) { alignment.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); cohesion.div(total).sub(this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); separation.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); } this.acc.add(alignment); this.acc.add(cohesion); this.acc.add(separation.mult(1.5)); } update() { this.pos.add(this.vel); this.vel.add(this.acc); this.vel.limit(this.maxSpeed); this.acc.mult(0); } show() { p.stroke('#10b981'); p.strokeWeight(4); p.point(this.pos.x, this.pos.y); } seek(target) { if(target){ let force = p5.Vector.sub(target, this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce*2); this.acc.add(force); }} } p.setup = () => { const container = ctx.root.querySelector('#p5-swarm'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<150; i++) flock.push(new Boid()); }; p.draw = () => { p.clear(); for (let boid of flock) { boid.edges(); boid.flock(flock); boid.seek(target); boid.update(); boid.show(); } }; p.setTarget = (x,y) => target = p.createVector(x,y); p.windowResized = () => { const container = ctx.root.querySelector('#p5-swarm'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-swarm'); return { remove: () => myP5.remove(), directSwarm: () => myP5.setTarget(ctx.root.clientWidth / 2, ctx.root.clientHeight / 2) }; }",
+      "type": "USE_CASE_TCP_WEB",
+      "html": "<div class='w-full h-full bg-[#020617] flex items-center justify-center relative overflow-hidden font-sans text-white p-[5cqw]'>\n  <div class='absolute inset-0 bg-blue-900/10'></div>\n  <div class='w-[60cqw] bg-white rounded-lg overflow-hidden shadow-[0_20px_60px_rgba(59,130,246,0.3)] relative z-10'>\n    <div class='bg-slate-200 p-[1cqw] flex items-center gap-[1cqw]'>\n      <div class='w-[1cqw] h-[1cqw] rounded-full bg-red-400'></div><div class='w-[1cqw] h-[1cqw] rounded-full bg-yellow-400'></div><div class='w-[1cqw] h-[1cqw] rounded-full bg-emerald-400'></div>\n      <div class='bg-white text-slate-500 text-[1cqw] px-[2cqw] py-[0.5cqw] rounded w-full ml-[2cqw] font-mono'>https://example.com/image.jpg</div>\n    </div>\n    <div class='p-[4cqw] flex flex-col items-center justify-center bg-slate-100 h-[40cqh] relative'>\n      <img src='https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1000' class='w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-[2s] ease-in' id='img-full'>\n      <div class='w-[80%] h-[2cqh] bg-slate-300 rounded-full overflow-hidden relative z-10' id='loader'>\n        <div class='w-0 h-full bg-blue-500 transition-all duration-[2s] ease-linear' id='bar'></div>\n      </div>\n      <div class='text-blue-600 font-bold mt-[2cqh] text-[1.5cqw] z-10' id='status'>Downloading (TCP)... 100% Reliability Required</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { load: () => { ctx.root.querySelector('#bar').style.width = '100%'; setTimeout(() => { ctx.root.querySelector('#img-full').style.opacity = '1'; ctx.root.querySelector('#loader').style.opacity = '0'; ctx.root.querySelector('#status').style.opacity = '0'; }, 2000); } } }",
       "steps": [
         {
-          "narration": "What is the end game? We use these chips to train Artificial Intelligence.",
+          "narration": "For traditional web traffic, H T T P, and file transfers, we rely exclusively on T C P.",
+          "actions": []
+        },
+        {
+          "narration": "If you are downloading a photo or an executable file, every single bit must be perfect. If even one packet is dropped or out of order, the entire file is corrupted.",
           "actions": [
             {
               "type": "custom",
-              "fn": "Engine.state.activeScript.directSwarm()"
+              "fn": "Engine.state.activeScript.load()"
             }
           ]
         }
       ]
     },
     {
-      "type": "MATRIX_RAIN",
-      "html": "<div class='w-full h-full bg-[#051005] relative'><div id='p5-matrix' class='absolute inset-0 w-full h-full z-0'></div><div class='absolute inset-0 flex items-center justify-center z-10 pointer-events-none'><h1 class='text-white text-[8cqw] font-black tracking-tighter mix-blend-overlay opacity-80'>RECURSION</h1></div></div>",
-      "script": "(ctx) => { const sketch = p => { let streams = []; const symbolSize = 20; class Symbol { constructor(x, y, speed, first) { this.x = x; this.y = y; this.value; this.speed = speed; this.first = first; this.switchInterval = p.round(p.random(2, 20)); } setToRandomSymbol() { if (p.frameCount % this.switchInterval == 0) this.value = String.fromCharCode(0x30A0 + p.round(p.random(0, 96))); } rain() { this.y = (this.y >= p.height) ? 0 : this.y + this.speed; } } class Stream { constructor() { this.symbols = []; this.totalSymbols = p.round(p.random(5, 30)); this.speed = p.random(3, 8); } generateSymbols(x, y) { let first = p.round(p.random(0, 4)) == 1; for (let i=0; i<=this.totalSymbols; i++) { let symbol = new Symbol(x, y, this.speed, first); symbol.setToRandomSymbol(); this.symbols.push(symbol); y -= symbolSize; first = false; } } render() { this.symbols.forEach(symbol => { if (symbol.first) p.fill(180, 255, 180); else p.fill(0, 255, 70); p.text(symbol.value, symbol.x, symbol.y); symbol.rain(); symbol.setToRandomSymbol(); }); } } p.setup = () => { const container = ctx.root.querySelector('#p5-matrix'); p.createCanvas(container.clientWidth, container.clientHeight); let x = 0; for (let i = 0; i <= p.width / symbolSize; i++) { let stream = new Stream(); stream.generateSymbols(x, p.random(-1000, 0)); streams.push(stream); x += symbolSize; } p.textFont('monospace'); p.textSize(symbolSize); }; p.draw = () => { p.background(5, 20, 5, 180); streams.forEach(stream => stream.render()); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-matrix'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-matrix'); return { remove: () => myP5.remove() }; }",
+      "type": "USE_CASE_UDP_GAMING",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex flex-col items-center justify-center relative overflow-hidden font-mono text-white p-[5cqw]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2670\")] bg-cover bg-center opacity-30 mix-blend-luminosity'></div>\n  <div class='absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]'></div>\n  \n  <div class='z-10 w-[70cqw] border-4 border-pink-500/50 bg-black/60 backdrop-blur-sm p-[2cqw] rounded-xl relative shadow-[0_0_50px_rgba(236,72,153,0.3)]'>\n    <div class='flex justify-between text-pink-400 text-[1.5cqw] font-bold mb-[2cqh] border-b border-pink-500/30 pb-[1cqh]'>\n      <span>MULTIPLAYER SYNC</span><span>UDP PORT: 27015</span>\n    </div>\n    <div class='flex gap-[1cqw] h-[10cqh] items-end' id='frames'>\n      <!-- Javascript will populate bars -->\n    </div>\n    <div class='text-center mt-[3cqh] text-slate-300 text-[1.2cqw] max-w-[50cqw] mx-auto' id='msg'>\n      Player position updating 60 times per second. Packet loss detected. Ignoring lost packet and rendering newest frame.\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { const container = ctx.root.querySelector('#frames'); return { simulate: () => { let html = ''; for(let i=0; i<30; i++) { let height = Math.random() * 80 + 20; let dropped = Math.random() < 0.1; let color = dropped ? 'bg-red-500' : 'bg-pink-500'; let hStyle = dropped ? '20%' : `${height}%`; html += `<div class='flex-1 ${color} opacity-80' style='height: ${hStyle}; transition: height 0.2s;'></div>`; } container.innerHTML = html; setInterval(() => { const bars = container.children; for(let i=0; i<bars.length-1; i++) { bars[i].className = bars[i+1].className; bars[i].style.height = bars[i+1].style.height; } let height = Math.random() * 80 + 20; let dropped = Math.random() < 0.15; let color = dropped ? 'bg-red-600' : 'bg-pink-500'; let hStyle = dropped ? '10%' : `${height}%`; bars[bars.length-1].className = `flex-1 ${color} opacity-80`; bars[bars.length-1].style.height = hStyle; }, 100); } } }",
       "steps": [
         {
-          "narration": "To design the next generation of chips. A perfect recursive loop of intelligence building intelligence.",
+          "narration": "But consider an online multiplayer game, or a live video call.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.simulate()"
+            }
+          ]
+        },
+        {
+          "narration": "If a packet containing your player's position is lost, you don't want the game to freeze, request the old packet, and wait for it. You just want the newest position right now. U D P drops the lost frame and moves on instantly.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "USE_CASE_DNS_LOOKUP",
+      "html": "<div class='w-full h-full bg-[#020617] flex items-center justify-center relative overflow-hidden font-sans text-white p-[5cqw]'>\n  <div class='w-[80cqw] h-[60cqh] relative'>\n    <div class='absolute left-0 top-1/2 -translate-y-1/2 w-[15cqw] text-center'>\n      <svg class='w-[8cqw] h-[8cqw] mx-auto text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'></path></svg>\n      <div class='mt-[1cqh] font-mono text-[1.2cqw]'>Browser</div>\n    </div>\n    <div class='absolute right-0 top-1/2 -translate-y-1/2 w-[15cqw] text-center'>\n      <svg class='w-[8cqw] h-[8cqw] mx-auto text-purple-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'></path></svg>\n      <div class='mt-[1cqh] font-mono text-[1.2cqw] text-purple-400'>DNS Server</div>\n    </div>\n    \n    <div class='absolute left-[16cqw] right-[16cqw] top-[40%] h-[2px] bg-slate-800 border-t border-dashed border-slate-600'></div>\n    <div class='absolute left-[16cqw] right-[16cqw] top-[60%] h-[2px] bg-slate-800 border-t border-dashed border-slate-600'></div>\n\n    <div id='req' class='absolute top-[35%] left-[16cqw] bg-pink-500 text-white font-mono text-[1cqw] px-[1cqw] py-[0.5cqw] rounded-full opacity-0 transition-transform duration-[400ms] ease-linear z-10'>UDP: Who is google.com?</div>\n    <div id='res' class='absolute top-[55%] right-[16cqw] bg-blue-500 text-white font-mono text-[1cqw] px-[1cqw] py-[0.5cqw] rounded-full opacity-0 transition-transform duration-[400ms] ease-linear z-10'>142.250.190.46</div>\n    \n    <div class='absolute bottom-0 w-full text-center text-slate-400 text-[1.5cqw] opacity-0 transition-opacity duration-500' id='caption'>Total Time: 15ms (No Handshake Required)</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { fire: () => { const req = ctx.root.querySelector('#req'); req.classList.remove('opacity-0'); setTimeout(() => { req.style.transform = 'translateX(35cqw)'; }, 100); setTimeout(() => { const res = ctx.root.querySelector('#res'); res.classList.remove('opacity-0'); req.classList.add('opacity-0'); setTimeout(() => { res.style.transform = 'translateX(-35cqw)'; }, 100); setTimeout(() => { ctx.root.querySelector('#caption').classList.remove('opacity-0'); }, 500); }, 600); } } }",
+      "steps": [
+        {
+          "narration": "Even the Domain Name System, the address book of the internet, uses U D P.",
+          "actions": []
+        },
+        {
+          "narration": "When you type a URL, your computer sends a single quick question to the DNS server, and gets a single quick answer. A T C P handshake here would double the latency of every website you visit.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.fire()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "HEAD_OF_LINE_BLOCKING",
+      "html": "<div class='w-full h-full bg-[#1e0f14] flex flex-col items-center justify-center relative overflow-hidden font-mono text-white p-[5cqw]'>\n  <h1 class='text-[clamp(2rem,3cqw,4rem)] text-red-500 mb-[1cqh]'>The TCP Traffic Jam</h1>\n  <p class='text-slate-400 text-[1.5cqw] mb-[5cqh]'>Head-of-Line Blocking</p>\n  <div class='w-[80cqw] h-[20cqh] border-y-4 border-slate-700 relative flex items-center'>\n    <div class='absolute right-0 h-full w-[10cqw] bg-slate-800 border-l-4 border-slate-600 flex items-center justify-center text-[2cqw] z-20'>App</div>\n    <div class='flex gap-[1cqw] absolute left-[5cqw]' id='packets'>\n      <div class='w-[6cqw] h-[6cqw] bg-blue-500 rounded flex items-center justify-center font-bold text-[2cqw] shadow-lg'>4</div>\n      <div class='w-[6cqw] h-[6cqw] bg-blue-500 rounded flex items-center justify-center font-bold text-[2cqw] shadow-lg'>3</div>\n      <div class='w-[6cqw] h-[6cqw] bg-red-600 rounded flex items-center justify-center font-bold text-[2cqw] shadow-lg border-2 border-red-300 animate-pulse' id='lost'>X</div>\n      <div class='w-[6cqw] h-[6cqw] bg-blue-500 rounded flex items-center justify-center font-bold text-[2cqw] shadow-lg'>1</div>\n    </div>\n    <div class='absolute bottom-[-4cqh] right-[15cqw] text-red-400 text-[1.2cqw] opacity-0 transition-opacity' id='err'>Packets 3 and 4 must wait for packet 2 to be re-transmitted!</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { move: () => { const p = ctx.root.querySelector('#packets'); p.style.transition = 'transform 2s linear'; p.style.transform = 'translateX(40cqw)'; setTimeout(() => { ctx.root.querySelector('#err').classList.remove('opacity-0'); }, 2000); } } }",
+      "steps": [
+        {
+          "narration": "But T C P has a critical flaw for the modern, high-speed web. It is called Head-of-line blocking.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.move()"
+            }
+          ]
+        },
+        {
+          "narration": "Because T C P guarantees absolute order, if a single packet is lost in transit, the entire stream freezes. All subsequent packets must wait in a queue until the lost packet is re-requested and arrives.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "THE_QUIC_REVOLUTION",
+      "html": "<div class='w-full h-full bg-[#0f172a] relative overflow-hidden flex items-center justify-center p-[5cqw] font-sans'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.1)_0%,transparent_70%)]'></div>\n  <div class='z-10 text-center'>\n    <div class='text-slate-400 font-mono tracking-widest text-[clamp(1rem,1.5cqw,2rem)] mb-[2cqh] uppercase opacity-0 translate-y-4 transition-all duration-700' id='t1'>Google Engineers Realized...</div>\n    <div class='text-white font-black text-[clamp(2.5rem,5cqw,7rem)] leading-tight mb-[2cqh] opacity-0 translate-y-4 transition-all duration-700 delay-300' id='t2'>TCP is too deeply embedded<br>to change.</div>\n    <div class='inline-block bg-emerald-500/20 border border-emerald-500 px-[3cqw] py-[1.5cqh] rounded-full mt-[4cqh] opacity-0 scale-50 transition-all duration-[1s] ease-out delay-700 shadow-[0_0_50px_rgba(16,185,129,0.4)]' id='btn'>\n      <span class='text-emerald-400 font-black tracking-widest text-[clamp(2rem,4cqw,5rem)]'>ENTER QUIC</span>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#t1').classList.remove('opacity-0', 'translate-y-4'); setTimeout(() => ctx.root.querySelector('#t2').classList.remove('opacity-0', 'translate-y-4'), 500); setTimeout(() => ctx.root.querySelector('#btn').classList.remove('opacity-0', 'scale-50'), 1500); } } }",
+      "steps": [
+        {
+          "narration": "This brings us to the modern era. Engineers at Google realized that T C P was becoming a bottleneck for the modern web.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        },
+        {
+          "narration": "But T C P is baked into the hardware of middleboxes and routers globally. You cannot just rewrite it. So, they built a bypass. They called it QUIC.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "HTTP3_STACK_DIAGRAM",
+      "html": "<div class='w-full h-full bg-[#020617] flex items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <div class='flex gap-[10cqw] items-end h-[60cqh]'>\n    \n    <div class='flex flex-col items-center w-[25cqw] relative'>\n      <div class='text-slate-400 text-[1.5cqw] mb-[2cqh] uppercase tracking-widest'>The Old Web</div>\n      <div class='w-full bg-blue-500 border-2 border-black p-[2cqh] text-center text-white font-bold text-[2cqw]'>HTTP/2</div>\n      <div class='w-full bg-blue-600 border-2 border-black p-[2cqh] text-center text-white font-bold text-[2cqw]'>TLS 1.2 (Security)</div>\n      <div class='w-full bg-blue-800 border-2 border-black p-[4cqh] text-center text-blue-200 font-black text-[3cqw]'>TCP</div>\n      <div class='w-full bg-slate-800 border-2 border-black p-[2cqh] text-center text-slate-400 font-bold text-[1.5cqw]'>IP</div>\n    </div>\n\n    <div class='flex flex-col items-center w-[25cqw] relative opacity-0 translate-y-10 transition-all duration-1000' id='new-stack'>\n      <div class='text-emerald-400 text-[1.5cqw] mb-[2cqh] uppercase tracking-widest font-bold'>The Modern Web</div>\n      <div class='w-full bg-emerald-500 border-2 border-black p-[2cqh] text-center text-black font-black text-[2cqw] shadow-[0_0_30px_rgba(16,185,129,0.5)]'>HTTP/3</div>\n      <div class='w-full bg-emerald-800 border-2 border-black p-[4cqh] text-center text-emerald-200 font-black text-[2.5cqw] flex flex-col'>\n        QUIC\n        <span class='text-[1cqw] font-normal mt-[1cqh]'>(Reliability + TLS 1.3 built-in)</span>\n      </div>\n      <div class='w-full bg-pink-600 border-2 border-black p-[2cqh] text-center text-white font-black text-[3cqw] shadow-[0_0_30px_rgba(236,72,153,0.5)]'>UDP</div>\n      <div class='w-full bg-slate-800 border-2 border-black p-[2cqh] text-center text-slate-400 font-bold text-[1.5cqw]'>IP</div>\n    </div>\n\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#new-stack').classList.remove('opacity-0', 'translate-y-10'); } } }",
+      "steps": [
+        {
+          "narration": "QUIC is an entirely new protocol that actually runs on top of U D P.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        },
+        {
+          "narration": "It takes the raw speed of U D P, and implements reliability, ordering, and state-of-the-art encryption directly in the user space. This is the foundation of HTTP 3.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "NETWORK_NODE_EVOLUTION",
+      "html": "<div class='w-full h-full bg-[#050505] relative overflow-hidden flex items-center justify-center font-sans'>\n  <div id='p5-network' class='absolute inset-0 w-full h-full z-0 opacity-50'></div>\n  <div class='z-10 bg-black/60 backdrop-blur-md border border-slate-700 p-[4cqw] rounded-2xl text-center max-w-[80cqw]'>\n    <h1 class='text-white text-[clamp(2rem,4cqw,5rem)] font-bold mb-[2cqh]'>The Speed Demon Matures</h1>\n    <p class='text-slate-300 text-[clamp(1.2rem,2cqw,2.5rem)] leading-relaxed'>By leveraging UDP's speed to bypass legacy network hardware, HTTP/3 has made the internet fundamentally faster and more secure.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let nodes = []; p.setup = () => { const c = ctx.root.querySelector('#p5-network'); p.createCanvas(c.clientWidth, c.clientHeight); for(let i=0; i<80; i++) nodes.push({x: p.random(p.width), y: p.random(p.height), vx: p.random(-1,1), vy: p.random(-1,1)}); }; p.draw = () => { p.clear(); nodes.forEach(n => { n.x += n.vx; n.y += n.vy; if(n.x<0 || n.x>p.width) n.vx *= -1; if(n.y<0 || n.y>p.height) n.vy *= -1; p.fill(16, 185, 129); p.noStroke(); p.circle(n.x, n.y, 4); }); p.stroke(16, 185, 129, 40); p.strokeWeight(1); for(let i=0; i<nodes.length; i++) { for(let j=i+1; j<nodes.length; j++) { let d = p.dist(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y); if(d < 150) p.line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y); } } }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-network'); return { remove: () => myP5.remove() } }",
+      "steps": [
+        {
+          "narration": "Today, major platforms like YouTube and Facebook default to HTTP 3. The web is silently migrating to U D P.",
+          "actions": []
+        },
+        {
+          "narration": "The speed demon has finally learned how to be reliable.",
           "actions": []
         }
       ]
     },
     {
       "type": "OUTRO",
-      "html": "<div class='w-full h-full bg-[#0c0a09] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,_#365314_0%,_#000_100%)] opacity-40'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <h1 id='final' class='text-[clamp(3rem,8cqw,10rem)] leading-none font-black text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-stone-600 tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      THE SILICON BLUEPRINT\n    </h1>\n    <div class='h-[1px] w-0 bg-emerald-500 mx-auto mt-[3cqh] transition-all duration-[1.5s] ease-out' id='final-line'></div>\n    <p class='mt-[2cqh] text-stone-500 tracking-widest uppercase opacity-0 transition-opacity duration-1000 delay-500 font-mono text-[1cqw]' id='final-sub'>Generated by Video-Like Engine</p>\n  </div>\n</div>",
-      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-line').style.width = '60%'; ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); } } }",
+      "html": "<div class='w-full h-full bg-[#020617] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15)_0%,_#020617_100%)]'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <h1 id='final' class='text-[clamp(3rem,8cqw,10rem)] leading-[1] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500 tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      TCP & UDP\n    </h1>\n    <p id='final-sub' class='text-[clamp(1.5rem,2.5cqw,3.5rem)] text-slate-400 font-mono mt-[2cqh] opacity-0 transition-all duration-1000 delay-500'>The Dual Engines of the Internet</p>\n    <div class='h-[1px] w-0 bg-gradient-to-r from-blue-500 to-pink-500 mx-auto mt-[4cqh] transition-all duration-[1.5s] ease-out' id='final-line'></div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); ctx.root.querySelector('#final-line').style.width = '60%'; } } }",
       "steps": [
         {
-          "narration": "The world runs on these veins. And the blood that flows through them, is absolute logic.",
+          "narration": "T C P and U D P. The structured courier and the live broadcast. Two fundamentally different philosophies.",
           "actions": [
             {
               "type": "custom",
               "fn": "Engine.state.activeScript.reveal()"
             }
           ]
+        },
+        {
+          "narration": "Together, their balance of reliability and speed built the entire modern digital world. Thanks for tuning in.",
+          "actions": []
         }
       ]
     }
