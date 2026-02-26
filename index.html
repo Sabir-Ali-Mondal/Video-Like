@@ -835,6 +835,7 @@ Prefer English for on-screen text, as it is most commonly used. However, you may
 Narration must use only the selected language’s script characters — do not mix scripts.
 Add spaces in abbreviations (e.g., “A I”) to ensure accurate TTS pronunciation.
 ${isPodcast ? `\n*   **PODCAST MODE ACTIVE:** Make each scene/narration like one person, next scene or narration other person talking themself and making viewer understand like podcast. You must add \`"podcast": "true"\` in the \`meta\` object.` : `\n*   **STANDARD MODE:** You must add \`"podcast": "false"\` in the \`meta\` object.`}
+No speaker names in narration (TTS can’t skip them): use “So the rules are set.” not “Host: So the rules are set.”
 
 # SCENE REQUIREMENTS
 *   **Scene Count:** >20 Scenes (The video must be long and detailed).
