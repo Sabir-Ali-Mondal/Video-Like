@@ -1,0 +1,475 @@
+{
+  "meta": {
+    "title": "The Architecture of Logic",
+    "audio": "https://res.cloudinary.com/dmttn34te/video/upload/v1763065409/study-110111_at7lye.mp3",
+    "lang": "en-IN",
+    "podcast": "true"
+  },
+  "scenes": [
+    {
+      "type": "INTRO_CINEMATIC",
+      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-[#020617] perspective-[1000px]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=2670\")] bg-cover bg-center opacity-20 scale-110 transition-transform duration-[20s] ease-linear' style='animation: drift 20s infinite alternate;'></div>\n  <style>@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.2); } }</style>\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-indigo-900/40 via-transparent to-emerald-900/40 opacity-80 blur-3xl animate-[spin_40s_linear_infinite]'></div>\n  <div class='z-20 text-center px-[5cqw] relative'>\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.5cqw] py-[0.8cqh] border border-indigo-500/30 rounded-full bg-black/60 backdrop-blur-md text-indigo-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,0.9rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out'>\n        <span class='w-2 h-2 rounded-full bg-indigo-500 animate-pulse'></span> \n        ADVANCED MATHEMATICS\n    </div>\n    <div class='relative'>\n        <h1 class='absolute inset-0 text-[clamp(3rem,9cqw,12rem)] leading-[0.9] font-black text-indigo-500/10 blur-xl select-none'>DISCRETE & CONTINUOUS</h1>\n        <h1 class='text-[clamp(3rem,9cqw,12rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-indigo-200 to-indigo-600 tracking-tighter drop-shadow-2xl opacity-0 scale-95 transition-all duration-[1.5s] ease-out' id='title'>THE LOGIC<br>ARCHITECTURE</h1>\n    </div>\n    <div class='mt-[4cqh] overflow-hidden'>\n        <p id='sub' class='text-[clamp(1rem,2cqw,2rem)] text-indigo-200 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out delay-500'>From infinite series to complex networks.</p>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); setTimeout(() => { ctx.root.querySelector('#title').classList.remove('opacity-0', 'scale-95'); }, 300); ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'); } } }",
+      "steps": [
+        {
+          "narration": "Have you ever wondered what the actual source code of our physical reality looks like?",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.init()"
+            }
+          ]
+        },
+        {
+          "narration": "It is not written in English or code, but in the rigorous language of advanced mathematics. Today, we are tearing down the blueprint.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "CONCEPT_SEQUENCES",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex items-center justify-center p-[5cqw] relative overflow-hidden font-mono'>\n  <div class='absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,#4f46e5_1px,transparent_1px)]' style='background-size: 3cqw 3cqw;'></div>\n  <div class='z-10 bg-black/80 border border-indigo-900/50 p-[4cqw] rounded-2xl shadow-[0_0_50px_rgba(79,70,229,0.15)] backdrop-blur-md max-w-[80cqw]'>\n    <h2 class='text-indigo-500 text-[clamp(1rem,2cqw,2rem)] tracking-widest mb-[2cqh] border-b border-indigo-900 pb-[1cqh]'>1.1 BASIC DEFINITION</h2>\n    <h1 class='text-white text-[clamp(2.5rem,5cqw,5rem)] font-bold mb-[2cqh]'>SEQUENCE</h1>\n    <p class='text-stone-400 text-[clamp(1rem,1.8cqw,2.5rem)] leading-relaxed mb-[4cqh]'>A function whose domain is the set of <span class='text-indigo-400 font-bold'>natural numbers</span>.</p>\n    <div class='flex gap-[1cqw] text-[clamp(1.2rem,2.5cqw,3rem)]' id='seq-container'>\n      <span class='text-stone-600 opacity-0 translate-y-4 transition-all duration-300' id='s1'>a<sub>1</sub>,</span>\n      <span class='text-stone-500 opacity-0 translate-y-4 transition-all duration-300' id='s2'>a<sub>2</sub>,</span>\n      <span class='text-stone-400 opacity-0 translate-y-4 transition-all duration-300' id='s3'>a<sub>3</sub>,</span>\n      <span class='text-indigo-400 opacity-0 translate-y-4 transition-all duration-300' id='s4'>... a<sub>n</sub></span>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealSeq: () => { [1,2,3,4].forEach((i, idx) => { setTimeout(() => { ctx.root.querySelector(`#s${i}`).classList.remove('opacity-0', 'translate-y-4'); }, idx * 300); }); } } }",
+      "steps": [
+        {
+          "narration": "Let us start at the very foundation of mathematical analysis: Sequences and Series.",
+          "actions": []
+        },
+        {
+          "narration": "A sequence is essentially a structured list. Strictly speaking, it is a function where the domain is exclusively the set of natural numbers.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealSeq()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MATH_BOUNDS",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex flex-col items-center justify-center relative overflow-hidden font-sans p-[5cqw]'>\n  <div class='text-center z-10 w-full max-w-[80cqw]'>\n    <h1 class='text-[clamp(2rem,4cqw,4.5rem)] font-black text-white tracking-wide mb-[4cqh]'>BOUNDED VS UNBOUNDED</h1>\n    <div class='flex flex-col gap-[3cqh]'>\n      <div class='bg-stone-900/80 border-l-4 border-emerald-500 p-[3cqw] rounded shadow-lg text-left opacity-0 -translate-x-10 transition-all duration-700' id='box-bounded'>\n        <h2 class='text-emerald-400 font-mono text-[clamp(1rem,1.5cqw,2rem)] mb-[1cqh]'>BOUNDED SEQUENCE</h2>\n        <p class='text-stone-300 text-[clamp(1.2rem,2cqw,2.5rem)]'>Exists real numbers <i class='text-white'>m, M</i> such that:</p>\n        <div class='bg-black p-[2cqw] mt-[2cqh] rounded text-center font-mono text-[clamp(1.5rem,3cqw,4rem)] text-emerald-300 border border-emerald-900'>m ≤ a<sub>n</sub> ≤ M</div>\n      </div>\n      <div class='bg-stone-900/80 border-l-4 border-rose-500 p-[3cqw] rounded shadow-lg text-left opacity-0 translate-x-10 transition-all duration-700 delay-300' id='box-unbounded'>\n        <h2 class='text-rose-400 font-mono text-[clamp(1rem,1.5cqw,2rem)] mb-[1cqh]'>UNBOUNDED SEQUENCE</h2>\n        <p class='text-stone-300 text-[clamp(1.2rem,2cqw,2.5rem)]'>A sequence is unbounded if it is not bounded by finite limits.</p>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#box-bounded').classList.remove('opacity-0', '-translate-x-10'); ctx.root.querySelector('#box-unbounded').classList.remove('opacity-0', 'translate-x-10'); } } }",
+      "steps": [
+        {
+          "narration": "Now, not all sequences behave the same way. We categorize them by how they grow or shrink.",
+          "actions": []
+        },
+        {
+          "narration": "A sequence is bounded if it is trapped between two finite real numbers, small m and capital M. If it escapes these constraints, it is unbounded.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CHART_CONVERGENCE",
+      "html": "<div class='w-full h-full bg-[#050505] flex flex-col p-[5cqw] relative overflow-hidden font-mono text-white'>\n  <div class='z-10 mb-[2cqh]'>\n    <h2 class='text-blue-500 text-[clamp(1rem,1.5cqw,2rem)] tracking-widest'>SEQUENCE BEHAVIOR</h2>\n    <h1 class='text-[clamp(2rem,4cqw,5rem)] font-bold' id='chart-title'>CONVERGENT SEQUENCE</h1>\n    <div class='text-stone-400 text-[clamp(1rem,1.5cqw,2rem)] mt-2' id='limit-eq'>lim (n→∞) a<sub>n</sub> = L (Finite)</div>\n  </div>\n  <div class='flex-1 relative w-full border border-stone-800 rounded-xl bg-stone-900/30 p-[2cqw]'>\n    <canvas id='seq-chart'></canvas>\n  </div>\n</div>",
+      "script": "(ctx) => { const getConvergent = () => Array.from({length: 30}, (_, i) => 5 + 10 * Math.exp(-0.2 * i) * Math.cos(i)); const getDivergent = () => Array.from({length: 30}, (_, i) => Math.pow(1.15, i)); const chart = ctx.chart('#seq-chart', { type: 'line', data: { labels: Array.from({length:30}, (_,i)=>i+1), datasets: [{ label: 'a_n', data: getConvergent(), borderColor: '#3b82f6', backgroundColor: '#3b82f6', pointRadius: 4, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { grid: { color: '#333' } }, x: { grid: { color: '#333' } } }, plugins: { legend: { display: false } } } }); return { showDivergent: () => { chart.data.datasets[0].data = getDivergent(); chart.data.datasets[0].borderColor = '#ef4444'; chart.data.datasets[0].backgroundColor = '#ef4444'; chart.update(); ctx.root.querySelector('#chart-title').innerText = 'DIVERGENT SEQUENCE'; ctx.root.querySelector('#chart-title').classList.replace('text-white', 'text-rose-500'); ctx.root.querySelector('#limit-eq').innerText = 'Limit does not exist or is infinite'; }, remove: () => chart.destroy() } }",
+      "steps": [
+        {
+          "narration": "If we map a sequence towards infinity, what happens? If it approaches a specific, finite real number L, we call it convergent.",
+          "actions": []
+        },
+        {
+          "narration": "But if that limit does not exist, or if it shoots off into infinity, it is a divergent sequence. It completely escapes calculation.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.showDivergent()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "OSCILLATORY_ANIMATION",
+      "html": "<div class='w-full h-full bg-[#111827] flex flex-col items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <div class='absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none'>\n    <div class='w-full h-[1px] bg-white absolute top-1/2'></div>\n    <div class='h-full w-[1px] bg-white absolute left-1/2'></div>\n  </div>\n  <div class='z-10 text-center mb-[5cqh]'>\n    <h1 class='text-yellow-400 text-[clamp(2.5rem,4.5cqw,5rem)] font-bold mb-[1cqh]'>OSCILLATORY SEQUENCE</h1>\n    <p class='text-stone-300 text-[clamp(1.2rem,1.8cqw,2.5rem)]'>Bounded, but limit does not exist.</p>\n  </div>\n  <div class='z-10 bg-black/60 p-[3cqw] rounded-xl border border-yellow-500/30 flex items-center justify-center gap-[4cqw]'>\n    <div class='text-white text-[clamp(2rem,4cqw,5rem)]'>a<sub>n</sub> = (-1)<sup>n</sup></div>\n    <div class='flex flex-col text-[clamp(2rem,4cqw,5rem)] font-bold'>\n      <span class='text-emerald-400 transition-all duration-300' id='val-pos'>+1</span>\n      <span class='text-rose-400 transition-all duration-300 opacity-20' id='val-neg'>-1</span>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { let toggle = true; let interval; return { startOscillate: () => { interval = setInterval(() => { const pos = ctx.root.querySelector('#val-pos'); const neg = ctx.root.querySelector('#val-neg'); if(toggle) { pos.classList.replace('opacity-100', 'opacity-20'); neg.classList.replace('opacity-20', 'opacity-100'); } else { pos.classList.replace('opacity-20', 'opacity-100'); neg.classList.replace('opacity-100', 'opacity-20'); } toggle = !toggle; }, 800); }, remove: () => clearInterval(interval) } }",
+      "steps": [
+        {
+          "narration": "And then there is the peculiar case of oscillatory sequences.",
+          "actions": []
+        },
+        {
+          "narration": "Take negative one to the power of n. It is bounded between negative one and positive one, but because it constantly flips, it never actually settles on a limit.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.startOscillate()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MACLAURIN_SERIES",
+      "html": "<div class='w-full h-full bg-[#050505] flex items-center justify-center p-[5cqw] relative overflow-hidden font-sans text-white'>\n  <div class='absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-blue-600 to-purple-600'></div>\n  <div class='max-w-[85cqw] w-full'>\n    <h2 class='text-blue-400 font-mono tracking-widest text-[clamp(1rem,1.5cqw,2rem)] mb-[2cqh]'>1.2 SERIES EXPANSION</h2>\n    <h1 class='text-[clamp(3rem,5cqw,6rem)] font-black mb-[4cqh]'>MACLAURIN SERIES</h1>\n    <div class='bg-stone-900 border border-stone-700 p-[4cqw] rounded-xl shadow-2xl relative overflow-hidden'>\n      <div class='text-[clamp(1.5rem,3cqw,4rem)] font-mono text-center tracking-wide leading-[2]'>\n        <span class='text-stone-300'>log(1 + x) = </span>\n        <span class='text-emerald-400 opacity-0 transition-opacity duration-500' id='t1'>x </span>\n        <span class='text-emerald-400 opacity-0 transition-opacity duration-500 delay-200' id='t2'>- x<sup>2</sup>/2 </span>\n        <span class='text-emerald-400 opacity-0 transition-opacity duration-500 delay-400' id='t3'>+ x<sup>3</sup>/3 </span>\n        <span class='text-emerald-400 opacity-0 transition-opacity duration-500 delay-600' id='t4'>- ...</span>\n      </div>\n      <div class='mt-[4cqh] text-center border-t border-stone-700 pt-[2cqh] opacity-0 translate-y-4 transition-all duration-700' id='region'>\n        <div class='text-stone-400 text-[clamp(1rem,1.5cqw,2rem)] font-mono mb-2'>REGION OF EXPANSION</div>\n        <div class='text-purple-400 font-mono text-[clamp(1.5rem,2.5cqw,3rem)] font-bold'>-1 < x ≤ 1</div>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealTerms: () => { [1,2,3,4].forEach(i => ctx.root.querySelector(`#t${i}`).classList.remove('opacity-0')); setTimeout(() => { ctx.root.querySelector('#region').classList.remove('opacity-0', 'translate-y-4'); }, 1200); } } }",
+      "steps": [
+        {
+          "narration": "Moving from sequences to series, we can represent complex functions as infinite sums of polynomials.",
+          "actions": []
+        },
+        {
+          "narration": "For example, the Maclaurin Series for log of one plus x expands infinitely. However, this expansion is only valid mathematically within a specific region: x strictly greater than negative one, and less than or equal to one.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealTerms()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CONVERGENCE_TESTS",
+      "html": "<div class='w-full h-full bg-[#1c1917] flex flex-col justify-center p-[5cqw] relative overflow-hidden font-sans text-white'>\n  <h1 class='text-[clamp(2.5rem,4.5cqw,6rem)] font-black text-stone-200 mb-[4cqh] text-center'>1.4 CONVERGENCE TESTS</h1>\n  <div class='grid grid-cols-2 gap-[3cqw] w-full max-w-[90cqw] mx-auto h-[60cqh]'>\n    <div class='bg-stone-800 border-t-4 border-amber-500 p-[3cqw] rounded-lg shadow-xl flex flex-col justify-center opacity-0 scale-95 transition-all duration-500' id='card-1'>\n      <h2 class='text-amber-400 font-bold text-[clamp(1.5rem,2.5cqw,3rem)] mb-[2cqh]'>D'Alembert's Ratio Test</h2>\n      <p class='font-mono text-[clamp(1.2rem,1.8cqw,2.5rem)] text-stone-300'>lim | a<sub>n+1</sub> / a<sub>n</sub> | = L</p>\n    </div>\n    <div class='bg-stone-800 border-t-4 border-cyan-500 p-[3cqw] rounded-lg shadow-xl flex flex-col justify-center opacity-0 scale-95 transition-all duration-500 delay-200' id='card-2'>\n      <h2 class='text-cyan-400 font-bold text-[clamp(1.5rem,2.5cqw,3rem)] mb-[2cqh]'>Cauchy's Root Test</h2>\n      <p class='font-mono text-[clamp(1.2rem,1.8cqw,2.5rem)] text-stone-300'>lim <sup>n</sup>√|a<sub>n</sub>| = L</p>\n    </div>\n    <div class='col-span-2 bg-stone-800 border-t-4 border-emerald-500 p-[3cqw] rounded-lg shadow-xl flex flex-col justify-center items-center opacity-0 scale-95 transition-all duration-500 delay-400' id='card-3'>\n      <h2 class='text-emerald-400 font-bold text-[clamp(1.5rem,2.5cqw,3rem)] mb-[2cqh]'>Decision Matrix</h2>\n      <div class='flex gap-[4cqw] font-mono text-[clamp(1.2rem,1.8cqw,2.5rem)]'>\n        <span class='text-emerald-300'>L < 1 : Convergent</span>\n        <span class='text-rose-400'>L > 1 : Divergent</span>\n        <span class='text-stone-400'>L = 1 : Inconclusive</span>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { showAll: () => { ['card-1', 'card-2', 'card-3'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'scale-95')); } } }",
+      "steps": [
+        {
+          "narration": "To determine if an infinite series converges, mathematicians developed rigorous tests.",
+          "actions": []
+        },
+        {
+          "narration": "D'Alembert's Ratio Test looks at the limit of the ratio of consecutive terms. Cauchy's Root Test takes the nth root. In both cases, if the resulting limit L is less than one, the series converges safely.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.showAll()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "FOURIER_CONDITIONS",
+      "html": "<div class='w-full h-full bg-[#020617] flex items-center justify-between p-[6cqw] relative overflow-hidden font-sans'>\n  <div id='p5-wave' class='absolute inset-0 z-0 opacity-40'></div>\n  <div class='z-10 w-full max-w-[50cqw] bg-black/50 p-[3cqw] backdrop-blur-md border border-indigo-500/30 rounded-2xl'>\n    <h1 class='text-indigo-400 font-black text-[clamp(2.5rem,4cqw,5rem)] mb-[1cqh]'>FOURIER SERIES</h1>\n    <p class='text-stone-300 text-[clamp(1rem,1.5cqw,2rem)] mb-[3cqh]'>Expansion Conditions (Dirichlet's)</p>\n    <ul class='space-y-[2cqh] font-mono text-[clamp(1.2rem,1.8cqw,2.5rem)] text-stone-200'>\n      <li class='flex items-center gap-4 opacity-0 translate-x-4 transition-all duration-300' id='f1'><span class='w-3 h-3 bg-indigo-500 rounded-full'></span> It is single-valued</li>\n      <li class='flex items-center gap-4 opacity-0 translate-x-4 transition-all duration-300' id='f2'><span class='w-3 h-3 bg-indigo-500 rounded-full'></span> It is finite</li>\n      <li class='flex items-center gap-4 opacity-0 translate-x-4 transition-all duration-300' id='f3'><span class='w-3 h-3 bg-indigo-500 rounded-full'></span> Finite number of discontinuities</li>\n      <li class='flex items-center gap-4 opacity-0 translate-x-4 transition-all duration-300' id='f4'><span class='w-3 h-3 bg-indigo-500 rounded-full'></span> Finite maxima and minima</li>\n    </ul>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let angle = 0; p.setup = () => { const c = ctx.root.querySelector('#p5-wave'); p.createCanvas(c.clientWidth, c.clientHeight); }; p.draw = () => { p.clear(); p.translate(p.width/2 + 200, p.height/2); p.stroke(99, 102, 241, 150); p.noFill(); p.beginShape(); for(let i=-500; i<500; i+=10) { let y = 100 * p.sin(i * 0.02 + angle) + 50 * p.sin(i * 0.05 + angle*1.5); p.vertex(i, y); } p.endShape(); angle += 0.05; }; p.windowResized = () => { const c = ctx.root.querySelector('#p5-wave'); p.resizeCanvas(c.clientWidth, c.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-wave'); return { revealList: () => { [1,2,3,4].forEach((i, idx) => { setTimeout(() => { ctx.root.querySelector(`#f${i}`).classList.remove('opacity-0', 'translate-x-4'); }, idx * 400); }); }, remove: () => myP5.remove() } }",
+      "steps": [
+        {
+          "narration": "What if we want to represent complex periodic waveforms, like a sound wave? We use a Fourier Series.",
+          "actions": []
+        },
+        {
+          "narration": "But not every function can be expanded this way. It must be single-valued, finite, and have a finite number of discontinuities and extrema.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealList()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MULTIVARIABLE_INTRO",
+      "html": "<div class='w-full h-full bg-[#050505] flex items-center justify-center p-[5cqw] relative overflow-hidden font-sans perspective-[1500px]'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,#10b98120_0%,transparent_70%)]'></div>\n  <div class='relative z-10 text-center flex flex-col items-center transform rotateX(20deg)'>\n    <div class='border border-emerald-500/50 bg-emerald-900/20 text-emerald-400 font-mono px-[2cqw] py-[1cqw] rounded-full text-[clamp(1rem,1.5cqw,2rem)] tracking-[0.3em] mb-[4cqh]'>MODULE 02</div>\n    <h1 class='text-[clamp(4rem,7cqw,9rem)] font-black text-white drop-shadow-[0_20px_50px_rgba(16,185,129,0.5)] tracking-tighter'>MULTIVARIABLE<br><span class='text-stone-500'>CALCULUS</span></h1>\n    <p class='mt-[3cqh] text-stone-400 font-mono text-[clamp(1.2rem,2cqw,3rem)] max-w-[60cqw]'>Expanding mathematics beyond a single dimension into planar and spatial regions.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return {} }",
+      "steps": [
+        {
+          "narration": "Until now, we have assumed functions operate on a single variable. But the real world is three-dimensional.",
+          "actions": []
+        },
+        {
+          "narration": "Welcome to Multivariable Calculus, where we track continuous change across multiple dimensions simultaneously.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "LIMITS_2D",
+      "html": "<div class='w-full h-full bg-[#111827] flex items-center justify-center p-[5cqw] relative overflow-hidden font-sans text-white'>\n  <div class='w-full max-w-[85cqw] grid grid-cols-2 gap-[5cqw] items-center h-[70cqh]'>\n    <div class='bg-stone-800 p-[4cqw] rounded-xl border-l-4 border-blue-500 h-full flex flex-col justify-center shadow-xl opacity-0 translate-y-8 transition-all duration-700' id='sim-limit'>\n      <h2 class='text-blue-400 font-bold text-[clamp(1.5rem,2.5cqw,3.5rem)] mb-[2cqh]'>Simultaneous Limit</h2>\n      <p class='font-mono text-[clamp(1.2rem,1.5cqw,2rem)] text-stone-300 mb-[2cqh]'>lim (x,y)→(a,b) f(x,y)</p>\n      <p class='text-[clamp(1rem,1.5cqw,2rem)] text-stone-400'>Exists only if the limit value is the <span class='text-white font-bold'>same for all paths</span> approaching the point.</p>\n    </div>\n    <div class='bg-stone-800 p-[4cqw] rounded-xl border-l-4 border-purple-500 h-full flex flex-col justify-center shadow-xl opacity-0 translate-y-8 transition-all duration-700 delay-300' id='rep-limit'>\n      <h2 class='text-purple-400 font-bold text-[clamp(1.5rem,2.5cqw,3.5rem)] mb-[2cqh]'>Repeated Limit</h2>\n      <p class='font-mono text-[clamp(1.2rem,1.5cqw,2rem)] text-stone-300 mb-[2cqh]'>lim x→a (lim y→b f(x,y))</p>\n      <p class='text-[clamp(1rem,1.5cqw,2rem)] text-stone-400'>Evaluated sequentially. A repeated limit may exist even when a simultaneous limit does not.</p>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#sim-limit').classList.remove('opacity-0', 'translate-y-8'); ctx.root.querySelector('#rep-limit').classList.remove('opacity-0', 'translate-y-8'); } } }",
+      "steps": [
+        {
+          "narration": "In two dimensions, calculating a limit becomes a delicate operation.",
+          "actions": []
+        },
+        {
+          "narration": "A simultaneous, or double limit, only exists if the value approaches the same number regardless of which geometric path you take to get there. Repeated limits evaluate one axis at a time.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "VECTOR_FIELDS",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex flex-col p-[5cqw] relative overflow-hidden font-sans text-white'>\n  <h1 class='text-[clamp(2.5rem,4cqw,5rem)] font-black text-center mb-[4cqh] z-10'>2.2 VECTOR FIELDS</h1>\n  <div class='flex-1 grid grid-cols-2 gap-[4cqw] z-10 relative'>\n    <div class='bg-black/80 border border-rose-900 rounded-xl p-[3cqw] flex flex-col items-center justify-center text-center backdrop-blur-md opacity-0 scale-95 transition-all duration-700' id='v-irrotational'>\n      <h2 class='text-rose-500 font-black text-[clamp(2rem,3cqw,4rem)] mb-[2cqh]'>IRROTATIONAL</h2>\n      <div class='text-rose-300 font-mono text-[clamp(1.5rem,2.5cqw,3.5rem)] bg-rose-900/30 px-[2cqw] py-[1cqh] rounded mb-[2cqh]'>∇ × A = 0</div>\n      <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)]'>Curl is zero. Meaning: <b class='text-white'>No circulation</b>.</p>\n    </div>\n    <div class='bg-black/80 border border-cyan-900 rounded-xl p-[3cqw] flex flex-col items-center justify-center text-center backdrop-blur-md opacity-0 scale-95 transition-all duration-700 delay-300' id='v-solenoidal'>\n      <h2 class='text-cyan-500 font-black text-[clamp(2rem,3cqw,4rem)] mb-[2cqh]'>SOLENOIDAL</h2>\n      <div class='text-cyan-300 font-mono text-[clamp(1.5rem,2.5cqw,3.5rem)] bg-cyan-900/30 px-[2cqw] py-[1cqh] rounded mb-[2cqh]'>∇ · A = 0</div>\n      <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)]'>Divergence is zero. Meaning: <b class='text-white'>No source or sink</b>.</p>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealFields: () => { ctx.root.querySelector('#v-irrotational').classList.remove('opacity-0', 'scale-95'); ctx.root.querySelector('#v-solenoidal').classList.remove('opacity-0', 'scale-95'); } } }",
+      "steps": [
+        {
+          "narration": "When dealing with vector fields, like fluid flow or electromagnetism, two fundamental properties emerge.",
+          "actions": []
+        },
+        {
+          "narration": "If a field is irrotational, its curl is zero, meaning there is no circulation or whirlpool effect. If it is solenoidal, its divergence is zero, meaning nothing is being created or destroyed; there are no sources or sinks.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealFields()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "STATIONARY_EXTREME_POINTS",
+      "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <div class='absolute right-0 top-0 w-[50cqw] h-[100cqh] bg-stone-800 opacity-50 transform skew-x-12 translate-x-[20cqw]'></div>\n  <div class='z-10 w-full max-w-[80cqw]'>\n    <h1 class='text-white text-[clamp(3rem,5cqw,6rem)] font-black mb-[2cqh] leading-none'>STATIONARY &<br><span class='text-emerald-500'>EXTREME POINTS</span></h1>\n    <div class='bg-black/60 p-[3cqw] border-l-4 border-emerald-500 rounded my-[3cqh]'>\n      <p class='text-emerald-300 text-[clamp(1.5rem,2.5cqw,3rem)]'>Necessary Condition: f<sub>x</sub> = 0, f<sub>y</sub> = 0</p>\n    </div>\n    <div class='grid grid-cols-1 gap-[2cqh] opacity-0 transition-opacity duration-1000' id='conditions'>\n      <div class='text-stone-300 text-[clamp(1.2rem,1.8cqw,2.5rem)]'>Calculate <span class='text-white bg-stone-700 px-2 rounded'>D = f<sub>xx</sub>f<sub>yy</sub> - (f<sub>xy</sub>)<sup>2</sup></span></div>\n      <div class='flex items-center gap-[2cqw] mt-[2cqh] text-[clamp(1.2rem,1.8cqw,2.5rem)] text-white'>\n         <div class='w-4 h-4 rounded-full bg-blue-500'></div> D > 0, f<sub>xx</sub> > 0 : <span class='font-bold text-blue-400'>MINIMUM</span>\n      </div>\n      <div class='flex items-center gap-[2cqw] text-[clamp(1.2rem,1.8cqw,2.5rem)] text-white'>\n         <div class='w-4 h-4 rounded-full bg-rose-500'></div> D > 0, f<sub>xx</sub> < 0 : <span class='font-bold text-rose-400'>MAXIMUM</span>\n      </div>\n      <div class='flex items-center gap-[2cqw] text-[clamp(1.2rem,1.8cqw,2.5rem)] text-white'>\n         <div class='w-4 h-4 rounded-full bg-yellow-500'></div> D < 0 : <span class='font-bold text-yellow-400'>SADDLE POINT</span>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealDerivatives: () => { ctx.root.querySelector('#conditions').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "To find the peaks and valleys of a three-dimensional surface, we look for stationary points where the first partial derivatives are exactly zero.",
+          "actions": []
+        },
+        {
+          "narration": "Using the second derivative test, or the discriminant D, we can classify these points as local minimums, maximums, or a saddle point—where it curves up in one direction and down in the other.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealDerivatives()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "INTEGRAL_THEOREMS",
+      "html": "<div class='w-full h-full bg-[#050505] flex flex-col items-center justify-center relative overflow-hidden font-sans p-[5cqw]'>\n  <h1 class='text-stone-500 text-[clamp(1.5rem,2.5cqw,3rem)] tracking-[0.5em] mb-[4cqh] font-bold'>INTEGRAL THEOREMS</h1>\n  <div class='w-full flex gap-[2cqw] justify-center h-[50cqh]'>\n    <div class='flex-1 bg-gradient-to-b from-stone-800 to-black border border-stone-700 p-[3cqw] flex flex-col justify-center items-center text-center opacity-0 translate-y-10 transition-all duration-700' id='th-green'>\n      <h2 class='text-emerald-400 font-bold text-[clamp(1.5rem,2.5cqw,3.5rem)] mb-[2cqh]'>GREEN'S<br>THEOREM</h2>\n      <p class='text-stone-300 text-[clamp(1rem,1.2cqw,2rem)] leading-relaxed'>Relates a line integral around a boundary to a double integral over the enclosed plane region.</p>\n    </div>\n    <div class='flex-1 bg-gradient-to-b from-stone-800 to-black border border-stone-700 p-[3cqw] flex flex-col justify-center items-center text-center opacity-0 translate-y-10 transition-all duration-700 delay-200' id='th-gauss'>\n      <h2 class='text-cyan-400 font-bold text-[clamp(1.5rem,2.5cqw,3.5rem)] mb-[2cqh]'>GAUSS'S<br>DIVERGENCE</h2>\n      <p class='text-stone-300 text-[clamp(1rem,1.2cqw,2rem)] leading-relaxed'>Flux through a closed surface equals the volume integral of divergence inside it.</p>\n    </div>\n    <div class='flex-1 bg-gradient-to-b from-stone-800 to-black border border-stone-700 p-[3cqw] flex flex-col justify-center items-center text-center opacity-0 translate-y-10 transition-all duration-700 delay-400' id='th-stokes'>\n      <h2 class='text-purple-400 font-bold text-[clamp(1.5rem,2.5cqw,3.5rem)] mb-[2cqh]'>STOKES'<br>THEOREM</h2>\n      <p class='text-stone-300 text-[clamp(1rem,1.2cqw,2rem)] leading-relaxed'>Surface integral of curl over a surface equals the line integral around its boundary.</p>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealTheorems: () => { ['th-green', 'th-gauss', 'th-stokes'].forEach(id => ctx.root.querySelector(`#${id}`).classList.remove('opacity-0', 'translate-y-10')); } } }",
+      "steps": [
+        {
+          "narration": "Multivariable calculus culminates in three monumental theorems that bridge dimensions.",
+          "actions": []
+        },
+        {
+          "narration": "Green's Theorem connects 1D boundaries to 2D areas. Gauss's Theorem links 2D surfaces to 3D volumes. And Stokes' Theorem translates the curl across a surface to the path around its edge. It is beautiful symmetry.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealTheorems()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DIFF_EQ_INTRO",
+      "html": "<div class='w-full h-full bg-[#1e1b4b] flex items-center justify-center relative overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/black-scales.png\")] opacity-20 mix-blend-overlay'></div>\n  <div class='z-10 text-center flex flex-col items-center p-[5cqw]'>\n    <div class='border border-indigo-400 bg-indigo-900/30 text-indigo-300 font-mono px-[2cqw] py-[1cqw] rounded-full text-[clamp(1rem,1.5cqw,2rem)] tracking-[0.3em] mb-[4cqh]'>MODULE 03</div>\n    <h1 class='text-[clamp(4rem,7cqw,9rem)] font-black text-white drop-shadow-2xl tracking-tighter leading-[0.9] mb-[2cqh]'>DIFFERENTIAL<br>EQUATIONS</h1>\n    <p class='text-indigo-200 text-[clamp(1.2rem,2cqw,3rem)] max-w-[70cqw]'>The mathematical language of continuous change and dynamic systems.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return {} }",
+      "steps": [
+        {
+          "narration": "But knowing how to measure an area isn't enough to describe a universe in motion.",
+          "actions": []
+        },
+        {
+          "narration": "For that, we need Differential Equations—the mathematical language used to model everything from planetary orbits to population growth.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "CLAIRAUTS_EQ",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex items-center justify-center p-[5cqw] relative overflow-hidden font-mono'>\n  <div class='w-full max-w-[80cqw] bg-stone-900 border border-stone-700 rounded-xl shadow-2xl p-[5cqw]'>\n    <h2 class='text-stone-500 text-[clamp(1.2rem,1.5cqw,2rem)] tracking-widest mb-[1cqh]'>3.1 GENERAL FORM</h2>\n    <h1 class='text-indigo-400 text-[clamp(2.5rem,4cqw,5rem)] font-bold mb-[4cqh]'>CLAIRAUT'S EQUATION</h1>\n    <div class='bg-black p-[3cqw] rounded border border-indigo-900/50 flex flex-col gap-[2cqh]'>\n      <div class='text-white text-[clamp(2.5rem,4.5cqw,6rem)] font-bold tracking-widest'>y = px + f(p)</div>\n      <div class='text-stone-400 text-[clamp(1.2rem,1.8cqw,2.5rem)] opacity-0 transition-opacity duration-700' id='p-def'>where <span class='text-emerald-400 font-bold'>p = dy / dx</span></div>\n    </div>\n    <div class='mt-[4cqh] flex gap-[4cqw] opacity-0 translate-y-4 transition-all duration-700 delay-300' id='solutions'>\n      <div class='flex-1 border-l-2 border-stone-600 pl-[2cqw]'>\n        <h3 class='text-white font-bold text-[clamp(1.5rem,2cqw,2.5rem)]'>General Solution</h3>\n        <p class='text-stone-400 text-[clamp(1rem,1.2cqw,1.8rem)] mt-1'>Contains arbitrary constant.</p>\n      </div>\n      <div class='flex-1 border-l-2 border-rose-600 pl-[2cqw]'>\n        <h3 class='text-white font-bold text-[clamp(1.5rem,2cqw,2.5rem)]'>Singular Solution</h3>\n        <p class='text-stone-400 text-[clamp(1rem,1.2cqw,1.8rem)] mt-1'>Obtained by eliminating the constant from the general solution.</p>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealDefs: () => { ctx.root.querySelector('#p-def').classList.remove('opacity-0'); ctx.root.querySelector('#solutions').classList.remove('opacity-0', 'translate-y-4'); } } }",
+      "steps": [
+        {
+          "narration": "A fascinating class of these is Clairaut's Equation, structured as y equals px plus a function of p.",
+          "actions": []
+        },
+        {
+          "narration": "Here, p represents the derivative, dy by dx. Solving it yields a general solution with a constant, and a unique singular solution derived by eliminating that very constant.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealDefs()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "INTEGRATING_FACTOR",
+      "html": "<div class='w-full h-full bg-[#111827] flex items-center justify-center relative overflow-hidden font-sans p-[5cqw]'>\n  <div class='w-full max-w-[80cqw] text-center'>\n    <h1 class='text-white text-[clamp(3rem,5cqw,6rem)] font-black mb-[2cqh]'>THE INTEGRATING FACTOR</h1>\n    <div class='w-full h-[2px] bg-emerald-500 mb-[4cqh] scale-x-0 transition-transform duration-1000' id='line-anim'></div>\n    <div class='flex items-center justify-center gap-[3cqw] mb-[4cqh]'>\n       <div class='bg-stone-800 p-[3cqw] rounded-lg border border-rose-500/50 text-rose-400 font-mono text-[clamp(1.5rem,2.5cqw,3rem)] opacity-0 -translate-x-8 transition-all duration-700' id='box-non'>NON-EXACT<br>EQUATION</div>\n       <div class='text-emerald-500 text-[clamp(2rem,4cqw,5rem)] opacity-0 transition-opacity duration-500 delay-500' id='arrow'>➔</div>\n       <div class='bg-stone-800 p-[3cqw] rounded-lg border border-emerald-500/50 text-emerald-400 font-mono text-[clamp(1.5rem,2.5cqw,3rem)] opacity-0 translate-x-8 transition-all duration-700 delay-700' id='box-exact'>EXACT<br>EQUATION</div>\n    </div>\n    <p class='text-stone-300 text-[clamp(1.2rem,2cqw,3rem)] opacity-0 transition-opacity duration-700 delay-1000' id='desc'>By multiplying both sides, it converts an unsolvable equation into a solvable one.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return { runConversion: () => { ctx.root.querySelector('#line-anim').style.transform = 'scaleX(1)'; ctx.root.querySelector('#box-non').classList.remove('opacity-0', '-translate-x-8'); ctx.root.querySelector('#arrow').classList.remove('opacity-0'); ctx.root.querySelector('#box-exact').classList.remove('opacity-0', 'translate-x-8'); ctx.root.querySelector('#desc').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "But what happens when a differential equation is stubborn? When it is considered non-exact?",
+          "actions": []
+        },
+        {
+          "narration": "We use a mathematical master key: the Integrating Factor. By multiplying it across the entire equation, it forces a non-exact equation into an exact, solvable format.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.runConversion()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "GRAPH_THEORY_INTRO",
+      "html": "<div class='w-full h-full bg-[#050505] flex items-center justify-center relative overflow-hidden font-sans perspective-[1500px]'>\n  <div id='p5-nodes' class='absolute inset-0 z-0 opacity-60'></div>\n  <div class='relative z-10 text-center flex flex-col items-center bg-black/40 p-[5cqw] rounded-3xl backdrop-blur-sm border border-stone-800'>\n    <div class='border border-orange-500/50 bg-orange-900/20 text-orange-400 font-mono px-[2cqw] py-[1cqw] rounded-full text-[clamp(1rem,1.5cqw,2rem)] tracking-[0.3em] mb-[4cqh]'>MODULE 04</div>\n    <h1 class='text-[clamp(4rem,7cqw,9rem)] font-black text-white drop-shadow-2xl tracking-tighter leading-none'>GRAPH THEORY<br><span class='text-stone-400'>& TREES</span></h1>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let nodes = []; p.setup = () => { const c = ctx.root.querySelector('#p5-nodes'); p.createCanvas(c.clientWidth, c.clientHeight); for(let i=0; i<40; i++) { nodes.push({x: p.random(p.width), y: p.random(p.height), vx: p.random(-1,1), vy: p.random(-1,1)}); } }; p.draw = () => { p.clear(); p.stroke(249, 115, 22, 100); p.strokeWeight(1); nodes.forEach(n => { n.x += n.vx; n.y += n.vy; if(n.x<0||n.x>p.width) n.vx*=-1; if(n.y<0||n.y>p.height) n.vy*=-1; nodes.forEach(other => { let d = p.dist(n.x, n.y, other.x, other.y); if(d < 150) p.line(n.x, n.y, other.x, other.y); }); }); p.fill(249, 115, 22); p.noStroke(); nodes.forEach(n => p.circle(n.x, n.y, 6)); }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-nodes'); return { remove: () => myP5.remove() } }",
+      "steps": [
+        {
+          "narration": "Finally, we transition from the continuous to the discrete.",
+          "actions": []
+        },
+        {
+          "narration": "Graph Theory. The mathematics of relationships, networks, and routing. From the internet to artificial neural networks, this is how everything connects.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "GRAPH_DEFINITIONS",
+      "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <div class='w-full max-w-[90cqw]'>\n    <h1 class='text-orange-500 font-black text-[clamp(2.5rem,4cqw,5rem)] mb-[4cqh]'>4.1 BASIC GRAPH DEFINITIONS</h1>\n    <div class='grid grid-cols-2 gap-[4cqw]'>\n      <div class='border-l-4 border-stone-500 pl-[2cqw] opacity-0 translate-x-4 transition-all duration-500' id='d1'>\n        <h2 class='text-white text-[clamp(1.5rem,2.5cqw,3rem)] font-bold'>WALK</h2>\n        <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)] mt-2'>A sequence of vertices. Repetition is allowed.</p>\n      </div>\n      <div class='border-l-4 border-stone-500 pl-[2cqw] opacity-0 translate-x-4 transition-all duration-500 delay-200' id='d2'>\n        <h2 class='text-white text-[clamp(1.5rem,2.5cqw,3rem)] font-bold'>PATH</h2>\n        <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)] mt-2'>A walk with NO repeated vertices.</p>\n      </div>\n      <div class='border-l-4 border-stone-500 pl-[2cqw] opacity-0 translate-x-4 transition-all duration-500 delay-400 mt-[2cqh]' id='d3'>\n        <h2 class='text-white text-[clamp(1.5rem,2.5cqw,3rem)] font-bold'>CIRCUIT</h2>\n        <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)] mt-2'>A closed walk.</p>\n      </div>\n      <div class='border-l-4 border-stone-500 pl-[2cqw] opacity-0 translate-x-4 transition-all duration-500 delay-600 mt-[2cqh]' id='d4'>\n        <h2 class='text-white text-[clamp(1.5rem,2.5cqw,3rem)] font-bold'>CYCLE</h2>\n        <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)] mt-2'>A closed path.</p>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealItems: () => { [1,2,3,4].forEach(i => ctx.root.querySelector(`#d${i}`).classList.remove('opacity-0', 'translate-x-4')); } } }",
+      "steps": [
+        {
+          "narration": "To navigate a graph, we must define the rules of movement.",
+          "actions": []
+        },
+        {
+          "narration": "A 'Walk' lets you revisit vertices. A 'Path' forbids repetition. A 'Circuit' is a walk that returns to its start, and a 'Cycle' is a path that loops back.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealItems()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SPECIAL_GRAPHS",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex items-center justify-center relative overflow-hidden font-sans p-[5cqw]'>\n  <div class='w-full max-w-[85cqw] text-center'>\n    <h1 class='text-stone-300 font-bold text-[clamp(2.5rem,4cqw,5rem)] mb-[6cqh]'>SPECIAL GRAPHS</h1>\n    <div class='flex gap-[4cqw]'>\n      <div class='flex-1 bg-stone-900 border border-stone-700 p-[4cqw] rounded-xl opacity-0 scale-90 transition-all duration-700' id='sg1'>\n        <h2 class='text-orange-400 font-black text-[clamp(2rem,3cqw,4rem)] mb-[2cqh]'>EULERIAN</h2>\n        <p class='text-white text-[clamp(1.2rem,1.5cqw,2.5rem)] mb-[2cqh]'>A graph containing a trail that uses <span class='text-orange-300 border-b border-orange-500'>every edge exactly once</span>.</p>\n      </div>\n      <div class='flex-1 bg-stone-900 border border-stone-700 p-[4cqw] rounded-xl opacity-0 scale-90 transition-all duration-700 delay-300' id='sg2'>\n        <h2 class='text-blue-400 font-black text-[clamp(2rem,3cqw,4rem)] mb-[2cqh]'>HAMILTONIAN</h2>\n        <p class='text-white text-[clamp(1.2rem,1.5cqw,2.5rem)] mb-[2cqh]'>A graph containing a cycle that visits <span class='text-blue-300 border-b border-blue-500'>every vertex exactly once</span>.</p>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#sg1').classList.remove('opacity-0', 'scale-90'); ctx.root.querySelector('#sg2').classList.remove('opacity-0', 'scale-90'); } } }",
+      "steps": [
+        {
+          "narration": "Some networks possess perfect symmetry.",
+          "actions": []
+        },
+        {
+          "narration": "An Eulerian graph allows you to traverse every single edge exactly once without lifting your pen. A Hamiltonian graph demands you visit every vertex exactly once. Similar concepts, fundamentally different routing.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "HANDSHAKING_LEMMA",
+      "html": "<div class='w-full h-full bg-[#111827] flex flex-col items-center justify-center relative overflow-hidden font-mono p-[5cqw]'>\n  <h2 class='text-stone-400 tracking-[0.3em] text-[clamp(1rem,1.5cqw,2rem)] mb-[2cqh]'>4.4 THEOREM</h2>\n  <h1 class='text-white font-bold text-[clamp(3rem,5cqw,6rem)] mb-[4cqh]'>HANDSHAKING LEMMA</h1>\n  <div class='bg-black/80 border border-emerald-500/50 p-[4cqw] rounded-2xl shadow-[0_0_40px_rgba(16,185,129,0.2)] text-center w-full max-w-[60cqw] transform scale-95 opacity-0 transition-all duration-700' id='lemma-box'>\n    <div class='text-emerald-400 text-[clamp(2.5rem,4.5cqw,6rem)] font-black mb-[2cqh]'>∑ deg(v) = 2E</div>\n    <p class='text-stone-300 text-[clamp(1.2rem,1.8cqw,2.5rem)] leading-relaxed'>The sum of degrees of all vertices is exactly twice the number of edges.</p>\n    <p class='text-emerald-200 text-[clamp(1rem,1.2cqw,1.5rem)] mt-[4cqh] uppercase tracking-wider opacity-0 transition-opacity duration-1000' id='odd-rule'>Therefore: The number of odd degree vertices is always even.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealFormula: () => { ctx.root.querySelector('#lemma-box').classList.remove('opacity-0', 'scale-95'); setTimeout(() => ctx.root.querySelector('#odd-rule').classList.remove('opacity-0'), 1500); } } }",
+      "steps": [
+        {
+          "narration": "One of the most elegant proofs in Graph theory is the Handshaking Lemma.",
+          "actions": []
+        },
+        {
+          "narration": "It states that the sum of the degrees of all vertices equals twice the number of edges. Because every edge connects two vertices, the number of vertices with an odd degree must always be even.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealFormula()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TREES_DEF",
+      "html": "<div class='w-full h-full bg-[#050505] flex items-center justify-center relative overflow-hidden font-sans p-[5cqw]'>\n  <div class='w-full max-w-[80cqw] grid grid-cols-2 items-center gap-[5cqw]'>\n    <div>\n      <h1 class='text-white font-black text-[clamp(3rem,5cqw,6rem)] mb-[2cqh]'>TREES</h1>\n      <p class='text-stone-400 text-[clamp(1.5rem,2cqw,3rem)] mb-[4cqh] opacity-0 translate-y-4 transition-all duration-500' id='t1'>A connected graph with <span class='text-orange-500 font-bold'>no cycles</span>.</p>\n      <div class='bg-stone-900 border-l-4 border-orange-500 p-[3cqw] opacity-0 translate-y-4 transition-all duration-500 delay-300' id='t2'>\n        <h3 class='text-orange-400 font-mono text-[clamp(1.2rem,1.8cqw,2.5rem)] mb-2'>Edges in a Tree</h3>\n        <p class='text-white text-[clamp(1.2rem,1.5cqw,2rem)]'>A tree with <i class='font-serif'>n</i> vertices has exactly <span class='bg-black px-2 py-1 rounded border border-stone-700'>n - 1 edges</span>.</p>\n      </div>\n    </div>\n    <div class='flex items-center justify-center opacity-0 scale-90 transition-all duration-1000' id='tree-svg'>\n      <svg viewBox='0 0 100 100' class='w-full max-w-[30cqw]'>\n        <circle cx='50' cy='10' r='5' fill='#f97316' />\n        <circle cx='30' cy='40' r='5' fill='#f97316' />\n        <circle cx='70' cy='40' r='5' fill='#f97316' />\n        <circle cx='15' cy='70' r='5' fill='#f97316' />\n        <circle cx='45' cy='70' r='5' fill='#f97316' />\n        <circle cx='85' cy='70' r='5' fill='#f97316' />\n        <line x1='50' y1='10' x2='30' y2='40' stroke='#57534e' stroke-width='2' />\n        <line x1='50' y1='10' x2='70' y2='40' stroke='#57534e' stroke-width='2' />\n        <line x1='30' y1='40' x2='15' y2='70' stroke='#57534e' stroke-width='2' />\n        <line x1='30' y1='40' x2='45' y2='70' stroke='#57534e' stroke-width='2' />\n        <line x1='70' y1='40' x2='85' y2='70' stroke='#57534e' stroke-width='2' />\n      </svg>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealTree: () => { ctx.root.querySelector('#t1').classList.remove('opacity-0', 'translate-y-4'); ctx.root.querySelector('#t2').classList.remove('opacity-0', 'translate-y-4'); ctx.root.querySelector('#tree-svg').classList.remove('opacity-0', 'scale-90'); } } }",
+      "steps": [
+        {
+          "narration": "A special subset of graphs forms the backbone of computer science data structures: Trees.",
+          "actions": []
+        },
+        {
+          "narration": "A tree is simply a connected graph with absolutely no cycles. By definition, if a tree has n vertices, it must have exactly n minus one edges to remain perfectly connected without looping.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealTree()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ALGORITHMS_GRAPH",
+      "html": "<div class='w-full h-full bg-[#1c1917] flex flex-col justify-center p-[5cqw] relative overflow-hidden font-sans'>\n  <h2 class='text-stone-400 font-mono tracking-widest text-[clamp(1.2rem,1.8cqw,2.5rem)] mb-[1cqh]'>4.6 ALGORITHMS</h2>\n  <h1 class='text-white font-black text-[clamp(3rem,4.5cqw,6rem)] mb-[4cqh]'>PATH & SPANNING</h1>\n  <div class='flex flex-col gap-[3cqh] w-full max-w-[80cqw]'>\n    <div class='bg-stone-800 p-[3cqw] rounded-lg border-l-4 border-emerald-500 opacity-0 translate-x-10 transition-all duration-500' id='a1'>\n      <h3 class='text-emerald-400 font-bold text-[clamp(1.8rem,2.5cqw,3.5rem)]'>Kruskal's Algorithm</h3>\n      <p class='text-stone-300 text-[clamp(1.2rem,1.5cqw,2rem)] mt-1 font-mono'>Sorts edges, adds the smallest edge without forming a cycle.</p>\n    </div>\n    <div class='bg-stone-800 p-[3cqw] rounded-lg border-l-4 border-blue-500 opacity-0 translate-x-10 transition-all duration-500 delay-200' id='a2'>\n      <h3 class='text-blue-400 font-bold text-[clamp(1.8rem,2.5cqw,3.5rem)]'>Prim's Algorithm</h3>\n      <p class='text-stone-300 text-[clamp(1.2rem,1.5cqw,2rem)] mt-1 font-mono'>Starts from a vertex, continuously adds the smallest connecting edge.</p>\n    </div>\n    <div class='bg-stone-800 p-[3cqw] rounded-lg border-l-4 border-purple-500 opacity-0 translate-x-10 transition-all duration-500 delay-400' id='a3'>\n      <h3 class='text-purple-400 font-bold text-[clamp(1.8rem,2.5cqw,3.5rem)]'>Dijkstra's Algorithm</h3>\n      <p class='text-stone-300 text-[clamp(1.2rem,1.5cqw,2rem)] mt-1 font-mono'>Uses a greedy approach to find the absolute shortest path from a source node.</p>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealAlgos: () => { [1,2,3].forEach(i => ctx.root.querySelector(`#a${i}`).classList.remove('opacity-0', 'translate-x-10')); } } }",
+      "steps": [
+        {
+          "narration": "To process these networks, we use specific traversal algorithms.",
+          "actions": []
+        },
+        {
+          "narration": "Kruskal's and Prim's algorithms are used to find Minimal Spanning Trees. Dijkstra's algorithm uses a greedy approach to map the shortest path from a source vertex. These run behind your GPS routing every day.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealAlgos()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "MATRIX_REPRESENTATION",
+      "html": "<div class='w-full h-full bg-[#050505] flex items-center justify-center p-[5cqw] relative overflow-hidden font-mono text-white'>\n  <div class='absolute top-[10cqh] w-full text-center z-20'>\n    <h1 class='text-[clamp(2.5rem,4cqw,5rem)] font-bold tracking-widest text-stone-300'>4.7 MATRIX REPRESENTATION</h1>\n  </div>\n  <div class='w-full max-w-[90cqw] grid grid-cols-2 gap-[5cqw] mt-[10cqh]'>\n    <div class='bg-stone-900 border border-stone-700 p-[4cqw] rounded shadow-2xl relative overflow-hidden group'>\n      <div class='absolute inset-0 bg-emerald-900/20 opacity-0 group-hover:opacity-100 transition-opacity'></div>\n      <h2 class='text-emerald-400 text-[clamp(1.5rem,2.5cqw,3rem)] font-bold mb-[2cqh]'>ADJACENCY MATRIX</h2>\n      <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)] mb-[3cqh]'>Shows vertex-to-vertex connection. Usually symmetric for undirected graphs.</p>\n      <div class='grid grid-cols-4 gap-1 text-center text-[clamp(1rem,1.5cqw,2rem)] font-bold opacity-0 scale-90 transition-all duration-500' id='mat-adj'>\n         <div class='bg-black p-2'>0</div><div class='bg-emerald-900/50 p-2'>1</div><div class='bg-black p-2'>0</div><div class='bg-emerald-900/50 p-2'>1</div>\n         <div class='bg-emerald-900/50 p-2'>1</div><div class='bg-black p-2'>0</div><div class='bg-emerald-900/50 p-2'>1</div><div class='bg-black p-2'>0</div>\n      </div>\n    </div>\n    <div class='bg-stone-900 border border-stone-700 p-[4cqw] rounded shadow-2xl relative overflow-hidden group'>\n      <div class='absolute inset-0 bg-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity'></div>\n      <h2 class='text-blue-400 text-[clamp(1.5rem,2.5cqw,3rem)] font-bold mb-[2cqh]'>INCIDENCE MATRIX</h2>\n      <p class='text-stone-400 text-[clamp(1.2rem,1.5cqw,2rem)] mb-[3cqh]'>Shows relation directly between vertices and edges.</p>\n      <div class='grid grid-cols-4 gap-1 text-center text-[clamp(1rem,1.5cqw,2rem)] font-bold opacity-0 scale-90 transition-all duration-500 delay-300' id='mat-inc'>\n         <div class='bg-blue-900/50 p-2'>1</div><div class='bg-black p-2'>0</div><div class='bg-blue-900/50 p-2'>1</div><div class='bg-black p-2'>0</div>\n         <div class='bg-black p-2'>0</div><div class='bg-blue-900/50 p-2'>1</div><div class='bg-blue-900/50 p-2'>1</div><div class='bg-black p-2'>0</div>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { revealMatrix: () => { ctx.root.querySelector('#mat-adj').classList.remove('opacity-0', 'scale-90'); ctx.root.querySelector('#mat-inc').classList.remove('opacity-0', 'scale-90'); } } }",
+      "steps": [
+        {
+          "narration": "But algorithms don't read shapes. Computers process graphs as matrices.",
+          "actions": []
+        },
+        {
+          "narration": "An Adjacency Matrix maps vertices to other vertices, plotting ones where edges connect. An Incidence Matrix maps vertices directly to edges. This converts geometry back into pure linear algebra.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.revealMatrix()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "OUTRO",
+      "html": "<div class='w-full h-full bg-[#020617] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,_#4338ca_0%,_#000_100%)] opacity-30'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <h1 id='final' class='text-[clamp(3rem,6cqw,8rem)] leading-none font-black text-transparent bg-clip-text bg-gradient-to-br from-indigo-400 to-white tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      THE SYNTHESIS COMPLETE\n    </h1>\n    <div class='h-[2px] w-0 bg-indigo-500 mx-auto mt-[4cqh] transition-all duration-[1.5s] ease-out' id='final-line'></div>\n    <p class='mt-[3cqh] text-indigo-200 tracking-widest opacity-0 transition-opacity duration-1000 delay-500 font-mono text-[clamp(1.2rem,1.8cqw,2.5rem)]' id='final-sub'>Continuous limits. Discrete structures. Absolute logic.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return { finish: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-line').style.width = '70%'; ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "From the infinite expansions of Maclaurin series to the discrete edges of a spanning tree.",
+          "actions": []
+        },
+        {
+          "narration": "Mathematics proves that whether the system is continuous or discrete, everything is bound by absolute logic. The blueprint is perfect.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.finish()"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
