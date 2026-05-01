@@ -1,0 +1,619 @@
+{
+  "meta": {
+    "title": "The Invisible Empire",
+    "audio": "",
+    "lang": "hi-in",
+    "podcast": "true"
+  },
+  "scenes": [
+    {
+      "type": "INTRO_CINEMATIC",
+      "html": "<div class='w-full h-full relative flex flex-col items-center justify-center overflow-hidden font-sans bg-[#020617] perspective-[1000px]'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564\")] bg-cover bg-center opacity-30 scale-110' style='animation: drift 20s infinite alternate linear;'></div>\n  <style>@keyframes drift { from { transform: scale(1.05) translateY(0); } to { transform: scale(1.15) translateY(-2%); } }</style>\n  <div class='absolute inset-[-50%] bg-gradient-to-tr from-blue-900/40 via-transparent to-emerald-900/40 opacity-80 blur-3xl animate-[spin_40s_linear_infinite]'></div>\n  <div class='z-20 text-center px-[5cqw] relative'>\n    <div id='badge' class='inline-flex items-center gap-2 px-[1.5cqw] py-[0.8cqh] border border-blue-500/30 rounded-full bg-black/60 backdrop-blur-md text-blue-400 font-mono tracking-[0.2em] text-[clamp(0.6rem,1.2cqmin,1rem)] mb-[4cqh] opacity-0 translate-y-[-10px] transition-all duration-1000 ease-out'>\n        <span class='w-2 h-2 rounded-full bg-blue-500 animate-pulse'></span> \n        MICROBIAL WORLD\n    </div>\n    <div class='relative'>\n        <h1 class='text-[clamp(3rem,10cqw,12rem)] leading-[0.9] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-600 tracking-tighter drop-shadow-2xl opacity-0 scale-90 blur-sm transition-all duration-1500 ease-out' id='title'>THE INVISIBLE<br>EMPIRE</h1>\n    </div>\n    <p id='sub' class='text-[clamp(1rem,2.5cqw,2.5rem)] text-slate-400 font-serif italic tracking-wide opacity-0 translate-y-full transition-all duration-1000 ease-out mt-[3cqh]'>We are not alone.</p>\n  </div>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_10%,#000_120%)] pointer-events-none'></div>\n</div>",
+      "script": "(ctx) => { return { init: () => { ctx.root.querySelector('#badge').classList.remove('opacity-0', 'translate-y-[-10px]'); setTimeout(() => ctx.root.querySelector('#title').classList.remove('opacity-0', 'scale-90', 'blur-sm'), 400); setTimeout(() => ctx.root.querySelector('#sub').classList.remove('opacity-0', 'translate-y-full'), 1000); } } }",
+      "steps": [
+        {
+          "narration": "आज हम एक ऐसे साम्राज्य की बात करेंगे, जो पूरी तरह से अदृश्य है। माइक्रोब्स की दुनिया।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.init()"
+            }
+          ]
+        },
+        {
+          "narration": "बिलकुल। हम इंसान खुद को इस धरती का राजा समझते हैं, लेकिन असलियत में असली हक़दार कोई और है।",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "DATA_RATIO_CHART",
+      "html": "<div class='w-full h-full bg-[#050505] p-[5cqw] flex flex-col justify-center relative overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_top_right,#1e3a8a20_0%,transparent_60%)]'></div>\n  <div class='z-10 relative max-w-[80cqw] mx-auto w-full'>\n    <h2 class='text-slate-400 text-[clamp(1rem,2cqw,2rem)] tracking-widest uppercase mb-[2cqh]'>The Great Myth</h2>\n    <div class='flex gap-[4cqw] items-end mb-[4cqh]'>\n      <div id='human-box' class='flex flex-col items-center opacity-0 translate-y-8 transition-all duration-700'>\n        <div class='text-blue-500 text-[clamp(3rem,8cqw,8rem)] font-black leading-none'>30</div>\n        <div class='text-slate-300 text-[clamp(1rem,1.5cqw,2rem)] mt-2'>Trillion Human Cells</div>\n      </div>\n      <div id='vs' class='text-slate-600 text-[clamp(2rem,4cqw,4rem)] font-black pb-[2cqh] opacity-0'>VS</div>\n      <div id='bacteria-box' class='flex flex-col items-center opacity-0 translate-y-8 transition-all duration-700 delay-300'>\n        <div class='text-emerald-500 text-[clamp(3rem,8cqw,8rem)] font-black leading-none'>38</div>\n        <div class='text-slate-300 text-[clamp(1rem,1.5cqw,2rem)] mt-2'>Trillion Bacteria</div>\n      </div>\n    </div>\n    <div class='h-[2cqh] w-full bg-slate-800 rounded-full overflow-hidden flex opacity-0 transition-opacity duration-1000' id='bar-wrap'>\n       <div class='h-full bg-blue-500 w-[44%]'></div>\n       <div class='h-full bg-emerald-500 w-[56%]'></div>\n    </div>\n    <div id='result' class='text-white text-[clamp(1.5rem,3cqw,3rem)] mt-[4cqh] font-bold opacity-0 transition-opacity duration-1000 delay-500'>Ratio ≈ 1.3 : 1</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal1: () => { ctx.root.querySelector('#human-box').classList.remove('opacity-0', 'translate-y-8'); }, reveal2: () => { ctx.root.querySelector('#vs').classList.remove('opacity-0'); ctx.root.querySelector('#bacteria-box').classList.remove('opacity-0', 'translate-y-8'); }, reveal3: () => { ctx.root.querySelector('#bar-wrap').classList.remove('opacity-0'); ctx.root.querySelector('#result').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "बचपन से हमने सुना है कि हमारे शरीर में दस गुना ज़्यादा बैक्टीरिया हैं। लेकिन साइंस ने इस मिथक को तोड़ दिया है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal1()"
+            }
+          ]
+        },
+        {
+          "narration": "सही कहा। असली आँकड़े बताते हैं कि हमारे शरीर में तीस ट्रिलियन इंसान के सेल्स हैं, और अड़तीस ट्रिलियन बैक्टीरिया हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal2()"
+            }
+          ]
+        },
+        {
+          "narration": "यानी तकनीकी रूप से, हम आधे इंसान हैं और आधे माइक्रोब।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal3()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TIMELINE_SCROLL",
+      "html": "<div class='w-full h-full bg-[#0c0a09] relative flex items-center overflow-hidden font-mono text-white'>\n  <div class='absolute inset-0 opacity-20' style='background-image: linear-gradient(90deg, #333 1px, transparent 1px); background-size: 50px 100%;'></div>\n  <div class='absolute top-[10cqh] w-full text-center text-slate-500 tracking-widest text-[1.5cqw]'>EVOLUTIONARY TIMELINE</div>\n  <div id='timeline' class='flex items-center whitespace-nowrap h-full transition-transform duration-[4000ms] ease-in-out px-[50cqw]' style='transform: translateX(0);'>\n    <div class='inline-block w-[30cqw] text-center opacity-30'>\n      <div class='text-[4cqw] font-bold text-slate-400'>200,000 YRS</div>\n      <div class='text-emerald-500 mt-2 text-[1.5cqw]'>HOMO SAPIENS</div>\n      <div class='h-4 w-4 bg-emerald-500 rounded-full mx-auto mt-4'></div>\n    </div>\n    <div class='inline-block w-[60cqw] h-[2px] bg-slate-700 relative'></div>\n    <div class='inline-block w-[30cqw] text-center opacity-30'>\n      <div class='text-[4cqw] font-bold text-slate-400'>65 MILLION YRS</div>\n      <div class='text-amber-500 mt-2 text-[1.5cqw]'>DINOSAUR EXTINCTION</div>\n      <div class='h-4 w-4 bg-amber-500 rounded-full mx-auto mt-4'></div>\n    </div>\n    <div class='inline-block w-[100cqw] h-[2px] bg-slate-700 relative'></div>\n    <div class='inline-block w-[40cqw] text-center transform scale-125'>\n      <div class='text-[6cqw] font-black text-rose-500'>3.5 BILLION YRS</div>\n      <div class='text-rose-300 mt-2 text-[2cqw] bg-rose-900/40 inline-block px-4 py-2 rounded'>FIRST BACTERIA</div>\n      <div class='h-6 w-6 bg-rose-500 rounded-full mx-auto mt-4 shadow-[0_0_30px_#f43f5e]'></div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { scroll: () => { ctx.root.querySelector('#timeline').style.transform = 'translateX(-180cqw)'; } } }",
+      "steps": [
+        {
+          "narration": "अगर हम समय में पीछे जाएँ, तो इंसानों की उम्र इस धरती पर कुछ भी नहीं है।",
+          "actions": []
+        },
+        {
+          "narration": "बिल्कुल। डायनासोर भी काफी बाद में आए। बैक्टीरिया इस ग्रह पर साढ़े तीन सौ करोड़ साल पहले से मौजूद हैं। उन्होंने ही जीवन की शुरुआत की थी।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.scroll()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DOUGHNUT_HOLO",
+      "html": "<div class='w-full h-full bg-[#1c1917] flex items-center justify-center p-[5cqw] relative overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,#10b98115_0%,transparent_60%)]'></div>\n  <div class='absolute top-[5cqh] left-[5cqw] z-20'>\n     <h1 class='text-white text-[3cqw] font-bold'>The 1% Myth</h1>\n     <p class='text-slate-400 text-[1.5cqw]'>Pathogens vs Benefactors</p>\n  </div>\n  <div class='relative w-[60cqmin] h-[60cqmin] z-10 perspective-[1000px]'>\n    <div class='absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none'>\n      <div class='text-white text-[clamp(2rem,6cqw,6rem)] font-black italic drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]'>99%</div>\n      <div class='text-emerald-400 text-[1.5cqw] tracking-widest uppercase font-bold bg-black/50 px-3 py-1 rounded'>HARMLESS / BENEFICIAL</div>\n    </div>\n    <div id='holo-container' class='w-full h-full drop-shadow-[0_0_40px_rgba(16,185,129,0.2)] opacity-0 scale-90 transition-all duration-1000'>\n      <div class='w-full h-full relative'><canvas id='chart-doughnut'></canvas></div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { const chart = ctx.chart('#chart-doughnut', { type: 'doughnut', data: { labels: ['Harmless/Helpful', 'Pathogens (Disease)'], datasets: [{ data: [99, 1], backgroundColor: ['#10b981', '#ef4444'], borderWidth: 2, borderColor: '#1c1917', cutout: '80%' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, animation: { animateRotate: true, duration: 2500, easing: 'easeOutQuart' } } }); const container = ctx.root.querySelector('#holo-container'); let rotation = 0; let frameId; const spin = () => { rotation += 0.15; if(container) { container.style.transform = `rotateX(30deg) rotateZ(${rotation}deg) scale(1)`; } frameId = window.requestAnimationFrame(spin); }; return { reveal: () => { container.classList.remove('opacity-0', 'scale-90'); spin(); }, remove: () => { window.cancelAnimationFrame(frameId); chart.destroy(); } }; }",
+      "steps": [
+        {
+          "narration": "हम अक्सर सोचते हैं कि सारे बैक्टीरिया हमें बीमार करते हैं। लेकिन यह एक बहुत बड़ा झूठ है।",
+          "actions": []
+        },
+        {
+          "narration": "सच तो ये है कि दुनिया के निन्यानवे प्रतिशत बैक्टीरिया हमारे लिए फ़ायदेमंद हैं। सिर्फ एक प्रतिशत से भी कम बीमारियाँ फैलाते हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "EXTREME_SPLIT",
+      "html": "<div class='w-full h-full flex flex-row relative overflow-hidden font-sans text-white'>\n  <div id='left-side' class='w-1/2 h-full bg-[url(\"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000\")] bg-cover bg-center relative border-r-4 border-black/50 grayscale transition-all duration-1000'>\n    <div class='absolute inset-0 bg-blue-900/60 mix-blend-multiply'></div>\n    <div class='absolute bottom-[10cqh] left-[5cqw] z-10'>\n      <div class='text-blue-300 font-mono text-[1.2cqw]'>MARIANA TRENCH</div>\n      <div class='text-[3cqw] font-bold'>FREEZING PRESSURES</div>\n    </div>\n  </div>\n  <div id='right-side' class='w-1/2 h-full bg-[url(\"https://images.unsplash.com/photo-1542382025-50e50bde0f63?q=80&w=2000\")] bg-cover bg-center relative grayscale transition-all duration-1000'>\n    <div class='absolute inset-0 bg-orange-900/60 mix-blend-multiply'></div>\n    <div class='absolute bottom-[10cqh] right-[5cqw] z-10 text-right'>\n      <div class='text-orange-300 font-mono text-[1.2cqw]'>HYDROTHERMAL VENTS</div>\n      <div class='text-[3cqw] font-bold'>400°C BOILING ACID</div>\n    </div>\n  </div>\n  <div class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black px-[2cqw] py-[1cqh] rounded border border-white/20 shadow-2xl opacity-0 scale-50 transition-all duration-700' id='center-badge'>\n    <h2 class='text-[2cqw] font-black tracking-widest'>EXTREMOPHILES</h2>\n  </div>\n</div>",
+      "script": "(ctx) => { return { activate: () => { ctx.root.querySelector('#left-side').classList.remove('grayscale'); ctx.root.querySelector('#right-side').classList.remove('grayscale'); ctx.root.querySelector('#center-badge').classList.remove('opacity-0', 'scale-50'); } } }",
+      "steps": [
+        {
+          "narration": "इनकी सबसे बड़ी खूबी है इनका सर्वाइवल। ये ऐसी जगहों पर ज़िंदा रह सकते हैं जहाँ जीवन की कल्पना भी नहीं की जा सकती।",
+          "actions": []
+        },
+        {
+          "narration": "बिल्कुल। मारियाना ट्रेंच के ठंडे और दबाव वाले अँधेरे से लेकर, समुद्र के नीचे उबलते हुए ज्वालामुखी तक। इन्हें एक्सट्रीमोफाइल्स कहा जाता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.activate()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SWARM_AI",
+      "html": "<div class='w-full h-full bg-[#051005] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-swarm' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 text-center bg-black/50 p-[3cqw] rounded-xl backdrop-blur-sm border border-emerald-500/30 opacity-0 translate-y-10 transition-all duration-1000' id='text-box'>\n    <h1 class='font-mono text-emerald-400 text-[1.5cqw] tracking-widest mb-2'>THE BACTERIAL INTERNET</h1>\n    <h2 class='text-white text-[3cqw] font-bold'>QUORUM SENSING</h2>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let flock = []; let target; class Boid { constructor() { this.pos = p.createVector(p.random(p.width), p.random(p.height)); this.vel = p5.Vector.random2D(); this.vel.setMag(p.random(2, 4)); this.acc = p.createVector(); this.maxForce = 0.2; this.maxSpeed = 4; this.color = p.color(16, 185, 129, 150); } edges() { if(this.pos.x > p.width) this.pos.x=0; else if (this.pos.x < 0) this.pos.x=p.width; if(this.pos.y > p.height) this.pos.y=0; else if(this.pos.y < 0) this.pos.y=p.height;} flock(boids) { let alignment = p.createVector(); let cohesion = p.createVector(); let separation = p.createVector(); let total = 0; for (let other of boids) { let d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y); if (other != this && d < 60) { alignment.add(other.vel); cohesion.add(other.pos); let diff = p5.Vector.sub(this.pos, other.pos); diff.div(d*d); separation.add(diff); total++; p.stroke(16, 185, 129, 20); p.line(this.pos.x, this.pos.y, other.pos.x, other.pos.y); } } if(total > 0) { alignment.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); cohesion.div(total).sub(this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); separation.div(total).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce); this.color = p.color(52, 211, 153, 255); } else { this.color = p.color(16, 185, 129, 100); } this.acc.add(alignment); this.acc.add(cohesion); this.acc.add(separation.mult(1.5)); } update() { this.pos.add(this.vel); this.vel.add(this.acc); this.vel.limit(this.maxSpeed); this.acc.mult(0); } show() { p.stroke(this.color); p.strokeWeight(6); p.point(this.pos.x, this.pos.y); } seek(target) { if(target){ let force = p5.Vector.sub(target, this.pos).setMag(this.maxSpeed).sub(this.vel).limit(this.maxForce*2); this.acc.add(force); }} } p.setup = () => { const container = ctx.root.querySelector('#p5-swarm'); p.createCanvas(container.clientWidth, container.clientHeight); for(let i=0; i<100; i++) flock.push(new Boid()); }; p.draw = () => { p.clear(); p.background(5, 16, 5, 200); for (let boid of flock) { boid.edges(); boid.flock(flock); boid.seek(target); boid.update(); boid.show(); } }; p.setTarget = (x,y) => target = p.createVector(x,y); p.windowResized = () => { const container = ctx.root.querySelector('#p5-swarm'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-swarm'); return { remove: () => myP5.remove(), reveal: () => { ctx.root.querySelector('#text-box').classList.remove('opacity-0', 'translate-y-10'); myP5.setTarget(ctx.root.clientWidth / 2, ctx.root.clientHeight / 2); } }; }",
+      "steps": [
+        {
+          "narration": "बैक्टीरिया कोई बेवकूफ जीव नहीं हैं। इनका अपना एक संचार तंत्र है, एक तरह का इंटरनेट।",
+          "actions": []
+        },
+        {
+          "narration": "इसे कोरम सेंसिंग कहते हैं। ये केमिकल्स के ज़रिए एक दूसरे से बात करते हैं, और तय करते हैं कि कब हमला करना है और कब बचाव।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CONJUGATION_SVG",
+      "html": "<div class='w-full h-full bg-[#171717] relative flex items-center justify-center overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[radial-gradient(ellipse_at_center,#333_0%,#000_100%)]'></div>\n  <div class='text-center absolute top-[10cqh] w-full z-20'>\n     <h2 class='text-amber-500 font-mono tracking-widest text-[1.5cqw]'>HORIZONTAL GENE TRANSFER</h2>\n     <h1 class='text-white text-[3cqw] font-bold'>The Data Exchange</h1>\n  </div>\n  <svg class='w-full h-full absolute inset-0 z-10' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid meet'>\n    <rect id='cell-1' x='20' y='40' width='15' height='20' rx='7.5' fill='#10b981' class='transition-all duration-1000' />\n    <rect id='cell-2' x='65' y='40' width='15' height='20' rx='7.5' fill='#4b5563' class='transition-all duration-1000' />\n    <line id='bridge' x1='35' y1='50' x2='65' y2='50' stroke='#f59e0b' stroke-width='1.5' stroke-dasharray='30' stroke-dashoffset='30' class='transition-all duration-[1500ms] ease-in-out' />\n    <circle id='plasmid' cx='35' cy='50' r='2' fill='#fbbf24' class='opacity-0 transition-all duration-[2000ms] ease-linear' />\n  </svg>\n</div>",
+      "script": "(ctx) => { return { connect: () => { ctx.root.querySelector('#bridge').style.strokeDashoffset = '0'; setTimeout(() => { const plasmid = ctx.root.querySelector('#plasmid'); plasmid.classList.remove('opacity-0'); plasmid.style.transform = 'translateX(30px)'; }, 1500); setTimeout(() => { ctx.root.querySelector('#cell-2').setAttribute('fill', '#10b981'); }, 3000); } } }",
+      "steps": [
+        {
+          "narration": "इंसानों को नई खूबियाँ इवोल्यूशन के ज़रिए लाखों सालों में मिलती हैं। लेकिन बैक्टीरिया के पास एक शॉर्टकट है।",
+          "actions": []
+        },
+        {
+          "narration": "हाँ, वे आपस में जुड़कर अपना डी एन ए शेयर कर सकते हैं। जैसे कोई पेन ड्राइव से डेटा कॉपी कर रहा हो। एक बैक्टीरिया अपनी सुपरपॉवर दूसरे को मिनटों में दे सकता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.connect()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "BIOFILM_CITY",
+      "html": "<div class='w-full h-full bg-[#0f172a] relative overflow-hidden flex items-center justify-center perspective-[1500px] text-white'>\n  <div class='absolute inset-0 bg-blue-900/10 mix-blend-screen'></div>\n  <div class='z-20 absolute left-[5cqw] top-[20cqh] max-w-[30cqw]'>\n    <h1 class='text-[4cqw] font-black text-cyan-400 drop-shadow-[0_0_15px_#22d3ee] mb-2'>BIOFILMS</h1>\n    <p class='text-slate-300 text-[1.5cqw] opacity-0 translate-y-4 transition-all duration-700' id='subtext'>A fortress of slime. Up to 1000x more resistant to antibiotics.</p>\n  </div>\n  <div id='city' class='relative w-[40cqw] h-[40cqw] transition-transform duration-[3s] ease-[cubic-bezier(0.25,1,0.5,1)] origin-center ml-[20cqw]' style='transform-style: preserve-3d; transform: rotateX(70deg) rotateZ(0deg);'>\n    <div class='absolute inset-0 bg-cyan-900/40 border border-cyan-500/50 backdrop-blur-sm rounded-full' style='transform: translateZ(0px)'></div>\n    <div class='absolute inset-4 bg-cyan-800/50 border border-cyan-400/60 backdrop-blur-md rounded-full shadow-[0_0_30px_#0891b2] transition-all duration-[2s]' id='layer-1' style='transform: translateZ(0px)'></div>\n    <div class='absolute inset-8 bg-cyan-600/60 border border-cyan-300/70 backdrop-blur-lg rounded-full shadow-[0_0_40px_#06b6d4] transition-all duration-[2s] delay-300' id='layer-2' style='transform: translateZ(0px)'></div>\n    <div class='absolute inset-12 bg-cyan-400/80 border border-white backdrop-blur-xl rounded-full shadow-[0_0_50px_#22d3ee] transition-all duration-[2s] delay-600 flex items-center justify-center' id='layer-3' style='transform: translateZ(0px)'><div class='text-white font-black text-[2cqw] transform -rotateX(70deg)'>1000x RESISTANCE</div></div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { build: () => { ctx.root.querySelector('#city').style.transform = 'rotateX(60deg) rotateZ(45deg)'; ctx.root.querySelector('#layer-1').style.transform = 'translateZ(40px)'; ctx.root.querySelector('#layer-2').style.transform = 'translateZ(80px)'; ctx.root.querySelector('#layer-3').style.transform = 'translateZ(120px)'; ctx.root.querySelector('#subtext').classList.remove('opacity-0', 'translate-y-4'); } } }",
+      "steps": [
+        {
+          "narration": "बैक्टीरिया कभी भी अकेले लड़ना पसंद नहीं करते। वे अपनी सुरक्षा के लिए एक पूरा शहर बनाते हैं।",
+          "actions": []
+        },
+        {
+          "narration": "इस शहर को बायोफिल्म कहते हैं। यह एक जेली जैसा कवच होता है, जिसे भेद पाना एंटीबायोटिक्स के लिए लगभग नामुमकिन होता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.build()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "OXYGEN_REVOLUTION",
+      "html": "<div class='w-full h-full relative overflow-hidden flex items-center justify-center font-sans transition-colors duration-[3000ms]' id='bg-canvas' style='background-color: #450a0a;'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1518558406542-92f7027bc916?q=80&w=2670\")] bg-cover opacity-20 mix-blend-overlay'></div>\n  <div class='z-20 text-center'>\n    <h2 class='text-[1.5cqw] text-slate-300 tracking-widest uppercase mb-4'>2.5 Billion Years Ago</h2>\n    <h1 class='text-[5cqw] font-black text-white drop-shadow-2xl' id='main-title'>THE GREAT OXIDATION</h1>\n    <p class='text-[2cqw] text-cyan-200 mt-4 opacity-0 transition-opacity duration-1000' id='subtext'>Cyanobacteria invented photosynthesis.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return { breathe: () => { ctx.root.querySelector('#bg-canvas').style.backgroundColor = '#082f49'; ctx.root.querySelector('#subtext').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "और यह मत भूलिए कि आज हम जिस हवा में साँस ले रहे हैं, वो भी इन्हीं की बदौलत है।",
+          "actions": []
+        },
+        {
+          "narration": "ढाई सौ करोड़ साल पहले, सायनोबैक्टीरिया ने पहली बार फोटोसिंथेसिस किया और धरती के वायुमंडल को ऑक्सीजन से भर दिया। उन्होंने ही जीवन का रास्ता खोला।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.breathe()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "VIRUS_INTRO",
+      "html": "<div class='w-full h-full bg-black relative flex flex-col justify-center items-center font-mono overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/carbon-fibre.png\")] opacity-30'></div>\n  <div class='absolute w-full h-[2px] bg-rose-600 top-1/2 -translate-y-1/2 opacity-20 shadow-[0_0_20px_#e11d48] z-0'></div>\n  <div class='z-10 bg-black/80 border border-rose-900 p-[4cqw] max-w-[60cqw] w-full text-left'>\n    <div class='text-rose-500 text-[1.5cqw] mb-4'>$ system_analysis --target virus</div>\n    <div class='text-slate-400 text-[2cqw] leading-relaxed'>\n      <span class='text-white'>STATUS:</span> NOT ALIVE<br>\n      <span class='text-white'>METABOLISM:</span> NULL<br>\n      <span class='text-white'>PAYLOAD:</span> GENETIC CODE<br>\n      <div id='typewriter' class='text-rose-400 mt-4 font-bold text-[2.5cqw] h-[3cqw] overflow-hidden whitespace-nowrap border-r-4 border-rose-500' style='width: 0;'>BIOLOGICAL MALWARE DETECTED</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { type: () => { ctx.root.querySelector('#typewriter').style.transition = 'width 2s steps(30, end)'; ctx.root.querySelector('#typewriter').style.width = '100%'; } } }",
+      "steps": [
+        {
+          "narration": "लेकिन बैक्टीरिया का भी एक खतरनाक दुश्मन है... वायरस। जो तकनीकी रूप से ज़िंदा ही नहीं है।",
+          "actions": []
+        },
+        {
+          "narration": "इसे आप प्रकृति का कंप्यूटर वायरस या मैलवेयर समझ सकते हैं। इसके पास अपनी कोई ऊर्जा नहीं होती, सिर्फ एक जेनेटिक कोड होता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.type()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "VIRAL_REPLICATION_P5",
+      "html": "<div class='w-full h-full bg-[#111] relative overflow-hidden flex items-center justify-center'>\n  <div id='p5-virus' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='z-10 absolute bottom-[10cqh] text-center w-full'>\n    <h1 class='text-rose-500 font-bold text-[3cqw] tracking-widest bg-black/50 inline-block px-4 py-2 rounded'>CELLULAR HIJACK</h1>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let cell; let viruses = []; let exploded = false; p.setup = () => { const container = ctx.root.querySelector('#p5-virus'); p.createCanvas(container.clientWidth, container.clientHeight); cell = {x: p.width/2, y: p.height/2, r: p.height*0.3}; }; p.draw = () => { p.background(17, 17, 17, 100); if(!exploded) { p.fill(16, 185, 129, 50); p.stroke(16, 185, 129); p.strokeWeight(4); p.circle(cell.x, cell.y, cell.r*2); p.fill(225, 29, 72); p.noStroke(); p.circle(cell.x, cell.y, cell.r*0.2 + p.sin(p.frameCount*0.1)*5); } else { viruses.forEach(v => { v.x += v.vx; v.y += v.vy; p.fill(225, 29, 72); p.noStroke(); p.circle(v.x, v.y, 8); }); } }; p.explode = () => { exploded = true; for(let i=0; i<200; i++) { viruses.push({x: cell.x, y: cell.y, vx: p.random(-10,10), vy: p.random(-10,10)}); } }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-virus'); p.resizeCanvas(container.clientWidth, container.clientHeight); cell = {x: p.width/2, y: p.height/2, r: p.height*0.3}; }; }; const myP5 = ctx.p5(sketch, '#p5-virus'); return { remove: () => myP5.remove(), explode: () => myP5.explode() }; }",
+      "steps": [
+        {
+          "narration": "वायरस जब किसी सेल के संपर्क में आता है, तो वो अपना कोड सेल के अंदर डाल देता है।",
+          "actions": []
+        },
+        {
+          "narration": "और फिर वो सेल अपना असली काम छोड़कर, सिर्फ नए वायरस बनाने की फैक्ट्री बन जाता है, जब तक कि वो फट ना जाए।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.explode()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DNA_HELIX_VIRAL",
+      "html": "<div class='w-full h-full bg-[#050505] relative overflow-hidden flex flex-col items-center justify-center font-sans'>\n  <div class='absolute inset-0 bg-[radial-gradient(ellipse_at_center,#1e1b4b_0%,#000_80%)]'></div>\n  <div id='p5-dna' class='absolute inset-0 z-0'></div>\n  <div class='z-10 bg-black/60 backdrop-blur-sm border border-indigo-500/30 p-[3cqw] rounded-xl text-center shadow-[0_0_30px_rgba(79,70,229,0.2)] mt-[25cqh]'>\n    <div class='text-indigo-400 text-[1.5cqw] tracking-widest mb-2 font-mono'>HUMAN GENOME</div>\n    <div class='text-[4cqw] font-black text-white'>8% <span class='text-rose-500'>VIRAL DNA</span></div>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let angle = 0; p.setup = () => { const c = ctx.root.querySelector('#p5-dna'); p.createCanvas(c.clientWidth, c.clientHeight, p.WEBGL); }; p.draw = () => { p.clear(); p.rotateY(angle); angle += 0.02; p.translate(0, -p.height/3, 0); for(let i=0; i<30; i++) { p.push(); p.translate(0, i*15, 0); p.rotateY(i*0.3); let isViral = i > 12 && i < 16; p.stroke(isViral ? p.color(225,29,72) : p.color(79,70,229)); p.strokeWeight(2); p.line(-50, 0, 50, 0); p.push(); p.translate(-50, 0, 0); p.fill(isViral ? p.color(225,29,72) : p.color(167,139,250)); p.noStroke(); p.sphere(4); p.pop(); p.push(); p.translate(50, 0, 0); p.fill(isViral ? p.color(225,29,72) : p.color(167,139,250)); p.noStroke(); p.sphere(4); p.pop(); p.pop(); } }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); }; const myP5 = ctx.p5(sketch, '#p5-dna'); return { remove: () => myP5.remove() }; }",
+      "steps": [
+        {
+          "narration": "लेकिन हर वायरस खतरनाक नहीं होता। क्या आप जानते हैं कि आपके डी एन ए का आठ प्रतिशत हिस्सा असल में वायरस है?",
+          "actions": []
+        },
+        {
+          "narration": "बिल्कुल, लाखों सालों के इवोल्यूशन में ये रेट्रो-वायरस हमारे जेनेटिक्स का हिस्सा बन गए हैं। और शायद इन्ही की वजह से मैमल्स का विकास हुआ।",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "PANDORAVIRUS_SCALE",
+      "html": "<div class='w-full h-full bg-[#171717] relative flex items-center justify-center p-[5cqw] font-sans overflow-hidden'>\n  <div class='absolute top-[5cqh] left-[5cqw]'>\n    <h2 class='text-slate-400 text-[1.5cqw] tracking-widest'>SIZE COMPARISON</h2>\n  </div>\n  <div class='flex items-end justify-center gap-[5cqw] w-full h-[50cqh] border-b border-slate-700 pb-4 relative'>\n    <div class='flex flex-col items-center justify-end h-full'>\n      <div class='w-[2cqw] h-[2cqw] bg-slate-400 rounded-full mb-2'></div>\n      <div class='text-slate-400 text-[1cqw]'>Polio Virus</div>\n    </div>\n    <div class='flex flex-col items-center justify-end h-full'>\n      <div class='w-[5cqw] h-[5cqw] bg-emerald-500 rounded-full mb-2'></div>\n      <div class='text-emerald-400 text-[1cqw]'>E. Coli Bacteria</div>\n    </div>\n    <div class='flex flex-col items-center justify-end h-full relative'>\n      <div id='giant' class='w-[5cqw] h-[5cqw] bg-rose-600 rounded-[30%] mb-2 transition-all duration-[2000ms] ease-out flex items-center justify-center overflow-hidden'>\n        <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/stardust.png\")] opacity-50 mix-blend-overlay'></div>\n      </div>\n      <div class='text-rose-400 text-[1.5cqw] font-bold'>Pandoravirus</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { grow: () => { const g = ctx.root.querySelector('#giant'); g.style.width = '35cqw'; g.style.height = '45cqw'; } } }",
+      "steps": [
+        {
+          "narration": "वैसे तो वायरस बैक्टीरिया से बहुत छोटे होते हैं। लेकिन कुछ अपवाद भी हैं।",
+          "actions": []
+        },
+        {
+          "narration": "जैसे पेंडोरा वायरस। यह इतना बड़ा है कि कुछ बैक्टीरिया से भी विशाल दिखता है। इसके ज़्यादातर जीन्स धरती के किसी भी जीव से मैच नहीं करते।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.grow()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "GUT_BRAIN_AXIS",
+      "html": "<div class='w-full h-full bg-[#050505] relative flex items-center justify-center overflow-hidden'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,#4c1d9530_0%,transparent_70%)]'></div>\n  <div class='relative flex flex-col items-center justify-between h-[80cqh] w-[30cqw] z-10'>\n    <div id='brain' class='w-[15cqw] h-[10cqw] bg-purple-900 rounded-full blur-md opacity-80 flex items-center justify-center transition-all duration-1000 shadow-[0_0_50px_#7c3aed]'></div>\n    <div class='text-purple-300 font-bold text-[2cqw] absolute top-[-5cqh]'>THE BRAIN</div>\n    \n    <div class='flex-1 w-[4px] relative my-[2cqh]'>\n      <div class='absolute inset-0 bg-slate-800 rounded'></div>\n      <div id='nerve-pulse' class='absolute top-0 w-full h-[20%] bg-cyan-400 shadow-[0_0_20px_#22d3ee] rounded opacity-0'></div>\n    </div>\n    <div class='absolute left-full top-1/2 -translate-y-1/2 ml-[2cqw] text-cyan-400 font-mono text-[1.2cqw] w-[15cqw]'>VAGUS NERVE <br><span class='text-slate-500 text-[1cqw]'>Data Superhighway</span></div>\n\n    <div id='gut' class='w-[20cqw] h-[15cqw] bg-emerald-900 rounded-full blur-md opacity-80 flex items-center justify-center transition-all duration-1000 shadow-[0_0_50px_#10b981]'></div>\n    <div class='text-emerald-400 font-bold text-[2cqw] absolute bottom-[-5cqh]'>THE GUT (Microbiome)</div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { pulse: () => { const p = ctx.root.querySelector('#nerve-pulse'); p.style.transition = 'all 1.5s ease-in-out'; p.classList.remove('opacity-0'); p.style.top = '100%'; setTimeout(() => { ctx.root.querySelector('#brain').classList.replace('bg-purple-900', 'bg-emerald-700'); ctx.root.querySelector('#brain').style.boxShadow = '0 0 80px #10b981'; p.style.opacity = '0'; }, 1500); } } }",
+      "steps": [
+        {
+          "narration": "अब वापस हमारे शरीर पर आते हैं। हमारे पेट में मौजूद बैक्टीरिया सिर्फ खाना नहीं पचाते, वो सीधे हमारे दिमाग से बात करते हैं।",
+          "actions": []
+        },
+        {
+          "narration": "इसे गट-ब्रेन एक्सिस कहते हैं। ये बातचीत वेगस नर्व के ज़रिए होती है। यानी आपकी उदासी और खुशी, दोनों आपके पेट के बैक्टीरिया तय कर सकते हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.pulse()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "PSYCHOBIOTICS_UI",
+      "html": "<div class='w-full h-full bg-[#1e293b] flex items-center justify-center p-[5cqw] font-sans relative overflow-hidden'>\n  <div class='bg-slate-900 border border-slate-700 rounded-2xl p-[4cqw] w-full max-w-[60cqw] shadow-2xl relative z-10'>\n    <h1 class='text-white font-bold text-[2.5cqw] border-b border-slate-700 pb-4 mb-4'>Clinical Observation</h1>\n    <div class='flex justify-between items-center mb-6'>\n      <div class='text-slate-400 text-[1.5cqw]'>Subject: <span class='text-white font-mono'>Germ-Free Mouse</span></div>\n      <div id='stress-badge' class='bg-rose-500/20 text-rose-500 px-4 py-1 rounded font-bold border border-rose-500/50 text-[1.2cqw] transition-all duration-500'>HIGH STRESS</div>\n    </div>\n    <div class='space-y-4'>\n      <div>\n        <div class='flex justify-between text-sm mb-1'><span class='text-slate-400 text-[1cqw]'>Cortisol (Stress Hormone)</span> <span id='c-val' class='text-rose-400 text-[1cqw]'>Elevated</span></div>\n        <div class='w-full bg-slate-800 rounded h-2'><div id='c-bar' class='bg-rose-500 h-2 rounded transition-all duration-1000' style='width: 85%'></div></div>\n      </div>\n      <div>\n        <div class='flex justify-between text-sm mb-1'><span class='text-slate-400 text-[1cqw]'>GABA (Calming Neurotransmitter)</span> <span id='g-val' class='text-slate-500 text-[1cqw]'>Depleted</span></div>\n        <div class='w-full bg-slate-800 rounded h-2'><div id='g-bar' class='bg-slate-600 h-2 rounded transition-all duration-1000' style='width: 15%'></div></div>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { dose: () => { ctx.root.querySelector('#c-bar').style.width = '30%'; ctx.root.querySelector('#c-bar').classList.replace('bg-rose-500', 'bg-emerald-500'); ctx.root.querySelector('#c-val').innerText = 'Normal'; ctx.root.querySelector('#c-val').classList.replace('text-rose-400', 'text-emerald-400'); ctx.root.querySelector('#g-bar').style.width = '75%'; ctx.root.querySelector('#g-bar').classList.replace('bg-slate-600', 'bg-emerald-500'); ctx.root.querySelector('#g-val').innerText = 'Optimal'; ctx.root.querySelector('#g-val').classList.replace('text-slate-500', 'text-emerald-400'); const badge = ctx.root.querySelector('#stress-badge'); badge.innerText = 'CALM / RESILIENT'; badge.className = 'bg-emerald-500/20 text-emerald-400 px-4 py-1 rounded font-bold border border-emerald-500/50 text-[1.2cqw] transition-all duration-500'; } } }",
+      "steps": [
+        {
+          "narration": "जब लैब में चूहों को एकदम स्टेरिल या बिना बैक्टीरिया के पाला गया, तो उनका स्ट्रेस लेवल और घबराहट बहुत ज़्यादा थी।",
+          "actions": []
+        },
+        {
+          "narration": "लेकिन जैसे ही उन्हें कुछ खास बैक्टीरिया दिए गए, उनका स्ट्रेस एकदम नॉर्मल हो गया। इन्हीं बैक्टीरिया को अब 'साइकोबायोटिक्स' कहा जाता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.dose()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "FMT_PROCESS",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] text-white p-[5cqw] font-sans relative overflow-hidden flex flex-col items-center justify-center'>\n  <h1 class='text-[3cqw] font-bold text-center mb-[5cqh] text-amber-500 tracking-wide'>Fecal Microbiota Transplantation (FMT)</h1>\n  <div class='flex items-center justify-center gap-[4cqw] w-full max-w-[80cqw]'>\n    <div class='flex flex-col items-center opacity-0 translate-x-[-20px] transition-all duration-700' id='step1'>\n      <div class='w-[12cqw] h-[12cqw] bg-slate-800 rounded-full border-4 border-emerald-500 flex items-center justify-center mb-4'><span class='text-[4cqw]'>🧬</span></div>\n      <div class='text-center'><div class='font-bold text-[1.5cqw]'>Healthy Donor</div><div class='text-slate-400 text-[1cqw]'>Diverse Microbiome</div></div>\n    </div>\n    <div class='flex-1 h-[4px] bg-slate-700 relative opacity-0' id='line1'>\n      <div class='absolute inset-0 bg-amber-500 w-0 transition-all duration-1000 ease-linear' id='line-fill'></div>\n    </div>\n    <div class='flex flex-col items-center opacity-0 translate-x-[20px] transition-all duration-700 delay-500' id='step2'>\n      <div class='w-[12cqw] h-[12cqw] bg-slate-800 rounded-full border-4 border-rose-500 flex items-center justify-center mb-4 transition-colors duration-1000' id='patient-circle'><span class='text-[4cqw]'>🤒</span></div>\n      <div class='text-center'><div class='font-bold text-[1.5cqw]'>Patient</div><div class='text-slate-400 text-[1cqw]'>Dysbiosis (C. diff)</div></div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { show1: () => { ctx.root.querySelector('#step1').classList.remove('opacity-0', 'translate-x-[-20px]'); ctx.root.querySelector('#step2').classList.remove('opacity-0', 'translate-x-[20px]'); ctx.root.querySelector('#line1').classList.remove('opacity-0'); }, transfer: () => { ctx.root.querySelector('#line-fill').style.width = '100%'; setTimeout(() => { const p = ctx.root.querySelector('#patient-circle'); p.classList.replace('border-rose-500', 'border-emerald-500'); p.innerHTML = \"<span class='text-[4cqw]'>😌</span>\"; }, 1000); } } }",
+      "steps": [
+        {
+          "narration": "मेडिकल साइंस ने इस दिशा में एक चमत्कारी कदम उठाया है, जिसे फेकल ट्रांसप्लांट कहा जाता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.show1()"
+            }
+          ]
+        },
+        {
+          "narration": "इसमें एक स्वस्थ इंसान के अच्छे बैक्टीरिया को किसी बीमार इंसान के शरीर में डाला जाता है। यह सी-डिफ जैसी जानलेवा बीमारियों को ठीक कर रहा है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.transfer()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "GOLDEN_AGE_ANTIBIOTICS",
+      "html": "<div class='w-full h-full relative bg-[#fef3c7] flex flex-col items-center justify-center overflow-hidden font-serif'>\n  <div class='absolute inset-0 bg-[url(\"https://www.transparenttextures.com/patterns/old-wall.png\")] opacity-50 mix-blend-multiply'></div>\n  <div class='absolute inset-0 bg-[#d97706] mix-blend-overlay opacity-30'></div>\n  <div class='z-10 text-center border-4 border-[#92400e] p-[4cqw] bg-[#fffbeb]/80 backdrop-blur-sm shadow-2xl sepia-[0.3]'>\n    <h2 class='text-[#92400e] text-[2cqw] tracking-[0.3em] uppercase mb-4'>1928</h2>\n    <h1 class='text-[5cqw] font-black text-[#78350f] mb-6'>THE MIRACLE CURE</h1>\n    <div class='w-[15cqw] h-[15cqw] mx-auto bg-white rounded-full border-4 border-[#b45309] flex items-center justify-center mb-4 overflow-hidden relative'>\n      <img src='https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=2000' class='w-full h-full object-cover opacity-80'>\n    </div>\n    <p class='text-[#92400e] text-[1.5cqw] italic font-bold'>Penicillin: The weapon that won the war on germs.</p>\n  </div>\n  <div id='dark-overlay' class='absolute inset-0 bg-black opacity-0 transition-opacity duration-[2000ms] pointer-events-none z-20'></div>\n</div>",
+      "script": "(ctx) => { return { fadeOut: () => { ctx.root.querySelector('#dark-overlay').style.opacity = '0.85'; } } }",
+      "steps": [
+        {
+          "narration": "उन्नीस सौ अट्ठाइस में पेनिसिलिन की खोज ने मेडिकल साइंस का चेहरा बदल दिया। एंटीबायोटिक्स ने करोड़ों जानें बचाईं।",
+          "actions": []
+        },
+        {
+          "narration": "पर हमारी ये जीत ज़्यादा देर नहीं टिक पाई। क्योंकि बैक्टीरिया हार नहीं मानते।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.fadeOut()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "AMR_CRISIS_CRASH",
+      "html": "<div class='w-full h-full bg-[#050505] flex flex-col p-[5cqw] relative overflow-hidden font-sans'>\n  <div class='z-10 flex flex-col items-start mb-[4cqh] border-b border-rose-900/50 pb-4'>\n    <h1 class='text-white text-[3cqw] font-bold tracking-tight'>Antimicrobial Resistance (AMR)</h1>\n    <h2 class='text-rose-500 text-[1.5cqw] mt-1'>A Slow-Motion Pandemic</h2>\n  </div>\n  <div class='flex-1 relative bg-black/50 border border-slate-800 rounded-xl p-4'>\n     <div class='absolute inset-0 flex items-center justify-center z-0'>\n       <div class='text-slate-800 text-[10cqw] font-black opacity-20'>DEATH TOLL</div>\n     </div>\n     <canvas id='chart-amr' class='relative z-10'></canvas>\n  </div>\n  <div id='projection' class='absolute right-[8cqw] bottom-[15cqh] bg-rose-900/80 backdrop-blur-md p-[2cqw] border border-rose-500 rounded opacity-0 translate-y-4 transition-all duration-700 z-20 shadow-[0_0_40px_rgba(225,29,72,0.4)]'>\n    <div class='text-rose-200 text-[1.2cqw]'>PROJECTED BY 2050</div>\n    <div class='text-white text-[4cqw] font-black'>10,000,000</div>\n    <div class='text-rose-300 text-[1cqw]'>DEATHS PER YEAR</div>\n  </div>\n</div>",
+      "script": "(ctx) => { const chart = ctx.chart('#chart-amr', { type: 'bar', data: { labels: ['2019 (Actual)', '2025 (Est)', '2030 (Est)', '2050 (Proj)'], datasets: [{ label: 'Global Deaths', data: [1.27, 1.8, 2.5, 2.5], backgroundColor: ['#e11d48', '#be123c', '#9f1239', '#4c0519'] }] }, options: { maintainAspectRatio: false, scales: { y: { display: false } }, plugins: { legend: {display:false} } } }); return { update: () => { chart.data.datasets[0].data = [1.27, 1.8, 3.5, 10.0]; chart.update(); ctx.root.querySelector('#projection').classList.remove('opacity-0', 'translate-y-4'); } } }",
+      "steps": [
+        {
+          "narration": "आज हम एक बड़े संकट में हैं, जिसे ए एम आर क्राइसिस कहते हैं। दो हज़ार उन्नीस में एंटीबायोटिक रेजिस्टेंस से लगभग बारह लाख लोग मारे गए।",
+          "actions": []
+        },
+        {
+          "narration": "और यह आँकड़ा तेज़ी से बढ़ रहा है। अनुमान है कि दो हज़ार पचास तक हर साल एक करोड़ लोगों की जान जा सकती है, जो कैंसर से भी ज़्यादा है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.update()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TRAGEDY_OF_COMMONS",
+      "html": "<div class='w-full h-full bg-[#1e293b] flex flex-col items-center justify-center p-[5cqw] font-sans relative text-white'>\n  <h2 class='text-[2cqw] text-slate-400 mb-[4cqh] tracking-widest'>THE TRAGEDY OF THE COMMONS</h2>\n  <div class='w-full max-w-[70cqw] bg-slate-800 rounded-full h-[4cqh] relative border-2 border-slate-600 overflow-hidden mb-[2cqh]'>\n    <div id='progress' class='h-full bg-blue-500 w-0 transition-all duration-[2000ms] ease-linear rounded-r-full'></div>\n    <div class='absolute inset-0 flex items-center justify-between px-4 text-[1cqw] font-bold mix-blend-difference'>\n      <span>DAY 1</span> <span>DAY 7 (COMPLETE)</span>\n    </div>\n  </div>\n  <p class='text-[1.5cqw] text-slate-300 text-center max-w-[60cqw]' id='desc'>When you start feeling better on Day 4...</p>\n  <div id='alert' class='mt-[5cqh] bg-rose-500/20 text-rose-400 border border-rose-500 px-[3cqw] py-[1.5cqh] rounded font-bold text-[2cqw] opacity-0 scale-90 transition-all duration-500'>\n    WARNING: STRONGEST BACTERIA SURVIVE\n  </div>\n</div>",
+      "script": "(ctx) => { return { start: () => { ctx.root.querySelector('#progress').style.width = '60%'; setTimeout(() => { ctx.root.querySelector('#progress').classList.replace('bg-blue-500', 'bg-rose-500'); ctx.root.querySelector('#alert').classList.remove('opacity-0', 'scale-90'); ctx.root.querySelector('#desc').innerText = '...and stop taking the pills. You just bred a Superbug.'; }, 2200); } } }",
+      "steps": [
+        {
+          "narration": "ऐसा क्यों हुआ? हमारी अपनी गलती से। जब डॉक्टर आपको सात दिन की दवा देता है, और आप चौथे दिन बेहतर महसूस करके दवा छोड़ देते हैं...",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.start()"
+            }
+          ]
+        },
+        {
+          "narration": "तो असल में आप कमज़ोर बैक्टीरिया को तो मार देते हैं, लेकिन सबसे ताकतवर बैक्टीरिया बच जाते हैं। और वही सुपरबग बन जाते हैं।",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "AGRICULTURE_STATS",
+      "html": "<div class='w-full h-full bg-[#111827] flex items-center justify-center font-sans text-white p-[5cqw]'>\n  <div class='grid grid-cols-2 gap-[5cqw] w-full max-w-[80cqw]'>\n    <div class='border-r border-slate-700 pr-[5cqw] flex flex-col justify-center opacity-0 -translate-x-4 transition-all duration-700' id='col-1'>\n      <div class='text-[5cqw]'>💊</div>\n      <h1 class='text-[3cqw] font-black text-blue-400'>30%</h1>\n      <p class='text-slate-400 text-[1.5cqw]'>Human Healthcare</p>\n    </div>\n    <div class='flex flex-col justify-center opacity-0 translate-x-4 transition-all duration-700 delay-300' id='col-2'>\n      <div class='text-[5cqw]'>🐄</div>\n      <h1 class='text-[4cqw] font-black text-rose-500'>70%</h1>\n      <p class='text-slate-400 text-[1.5cqw]'>Livestock & Agriculture</p>\n      <p class='mt-4 text-rose-400/80 text-[1cqw] p-2 bg-rose-900/30 rounded border border-rose-800/50'>Creating a massive reservoir of resistance.</p>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#col-1').classList.remove('opacity-0', '-translate-x-4'); ctx.root.querySelector('#col-2').classList.remove('opacity-0', 'translate-x-4'); } } }",
+      "steps": [
+        {
+          "narration": "और गलती सिर्फ अस्पतालों की नहीं है। दुनिया के सत्तर प्रतिशत एंटीबायोटिक्स तो जानवरों की खेती में इस्तेमाल हो रहे हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        },
+        {
+          "narration": "बिल्कुल, ताकि जानवर बीमार ना पड़ें। लेकिन इससे म्यूटेशन होता है और वो सुपरबग हमारे खाने के ज़रिए हम तक पहुँच जाते हैं।",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "PHAGE_INTRO",
+      "html": "<div class='w-full h-full bg-[#020617] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_top,#1d4ed830_0%,transparent_60%)]'></div>\n  <div class='z-20 text-center w-full'>\n    <h2 class='text-blue-400 text-[1.5cqw] tracking-[0.3em] font-mono mb-4'>NATURE'S ASSASSINS</h2>\n    <h1 class='text-[5cqw] font-black drop-shadow-lg mb-[5cqh]'>BACTERIOPHAGES</h1>\n  </div>\n  <div id='phage-svg' class='w-[20cqw] h-[25cqw] relative z-10 transform -translate-y-[10cqh] transition-transform duration-[2000ms] ease-out'>\n    <svg viewBox='0 0 100 120' fill='none' stroke='#3b82f6' stroke-width='3' class='w-full h-full drop-shadow-[0_0_15px_#3b82f6]'>\n      <polygon points='50,10 70,25 70,45 50,60 30,45 30,25' fill='#1e3a8a' />\n      <line x1='50' y1='60' x2='50' y2='90' />\n      <line x1='50' y1='65' x2='20' y2='110' />\n      <line x1='50' y1='65' x2='80' y2='110' />\n      <line x1='50' y1='75' x2='30' y2='120' />\n      <line x1='50' y1='75' x2='70' y2='120' />\n    </svg>\n  </div>\n  <div id='bacteria-ground' class='absolute bottom-0 w-full h-[20cqh] bg-emerald-900 border-t-4 border-emerald-500 opacity-50 z-0'></div>\n</div>",
+      "script": "(ctx) => { return { dock: () => { const p = ctx.root.querySelector('#phage-svg'); p.style.transform = 'translateY(15cqh)'; } } }",
+      "steps": [
+        {
+          "narration": "लेकिन प्रकृति ने हमें एक उम्मीद दी है। बैक्टीरियो-फेज।",
+          "actions": []
+        },
+        {
+          "narration": "ये वो वायरस हैं जो इंसानों को नहीं, बल्कि सिर्फ और सिर्फ बैक्टीरिया का शिकार करते हैं। इनका आकार किसी एलियन या मून-लैंडर जैसा होता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.dock()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SNIPER_VS_BOMB",
+      "html": "<div class='w-full h-full flex flex-col bg-[#050505] text-white font-sans relative overflow-hidden p-[5cqw]'>\n  <h1 class='text-center text-[2cqw] text-slate-400 tracking-widest mb-[4cqh]'>THE DIFFERENCE</h1>\n  <div class='flex-1 flex gap-[4cqw]'>\n    <div class='w-1/2 bg-slate-900 border border-slate-700 rounded-xl p-[3cqw] relative overflow-hidden'>\n      <div class='absolute inset-0 bg-rose-900/20'></div>\n      <h2 class='text-[2cqw] font-bold text-rose-400 mb-2 relative z-10'>ANTIBIOTICS</h2>\n      <p class='text-[1.2cqw] text-slate-300 relative z-10'>The Carpet Bomb</p>\n      <div id='bomb-fx' class='mt-[4cqh] flex gap-2 flex-wrap relative z-10'>\n         <div class='w-8 h-8 rounded-full bg-emerald-500 transition-all duration-300'></div>\n         <div class='w-8 h-8 rounded-full bg-rose-500 transition-all duration-300'></div>\n         <div class='w-8 h-8 rounded-full bg-emerald-500 transition-all duration-300'></div>\n         <div class='w-8 h-8 rounded-full bg-blue-500 transition-all duration-300'></div>\n      </div>\n    </div>\n    <div class='w-1/2 bg-slate-900 border border-slate-700 rounded-xl p-[3cqw] relative overflow-hidden'>\n      <div class='absolute inset-0 bg-blue-900/20'></div>\n      <h2 class='text-[2cqw] font-bold text-blue-400 mb-2 relative z-10'>PHAGE THERAPY</h2>\n      <p class='text-[1.2cqw] text-slate-300 relative z-10'>The Sniper</p>\n      <div id='sniper-fx' class='mt-[4cqh] flex gap-2 flex-wrap relative z-10'>\n         <div class='w-8 h-8 rounded-full bg-emerald-500 transition-all duration-300'></div>\n         <div class='w-8 h-8 rounded-full bg-rose-500 transition-all duration-300 relative'><div class='absolute inset-0 border-2 border-white rounded-full opacity-0' id='crosshair'></div></div>\n         <div class='w-8 h-8 rounded-full bg-emerald-500 transition-all duration-300'></div>\n         <div class='w-8 h-8 rounded-full bg-blue-500 transition-all duration-300'></div>\n      </div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { execute: () => { const b = ctx.root.querySelector('#bomb-fx').children; for(let el of b) { el.style.backgroundColor = '#333'; } const s = ctx.root.querySelector('#sniper-fx').children; ctx.root.querySelector('#crosshair').style.opacity = '1'; setTimeout(() => { s[1].style.backgroundColor = '#333'; ctx.root.querySelector('#crosshair').style.opacity = '0'; }, 1000); } } }",
+      "steps": [
+        {
+          "narration": "एंटीबायोटिक एक कारपेट बॉम्ब की तरह है। वो शरीर में जाकर अच्छे और बुरे, दोनों तरह के बैक्टीरिया को मार देता है।",
+          "actions": []
+        },
+        {
+          "narration": "जबकि फेजेस एक स्नाइपर की तरह होते हैं। वे सिर्फ और सिर्फ उस बुरे बैक्टीरिया को पहचान कर मारते हैं, और बाकी शरीर को नुकसान नहीं पहुँचाते।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.execute()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CLINICAL_TRIAL_STATS",
+      "html": "<div class='w-full h-full bg-[#0a0a0a] flex items-center justify-center font-sans p-[5cqw] relative overflow-hidden'>\n  <div class='absolute top-[5cqh] w-full text-center'>\n    <h1 class='text-white text-[2.5cqw] font-bold'>2025: The diSArm Trial</h1>\n    <h2 class='text-slate-400 text-[1.5cqw]'>Intravenous Phage Therapy</h2>\n  </div>\n  <div class='grid grid-cols-2 gap-[4cqw] w-full max-w-[70cqw] mt-[10cqh]'>\n    <div class='bg-slate-900 border border-slate-700 p-[3cqw] rounded-xl text-center opacity-0 scale-90 transition-all duration-700' id='stat1'>\n      <div class='text-[4cqw] font-black text-emerald-400 mb-2'>88%</div>\n      <div class='text-white text-[1.5cqw]'>Clinical Cure Rate</div>\n      <div class='text-slate-500 text-[1cqw] mt-2'>vs 58% in Placebo</div>\n    </div>\n    <div class='bg-slate-900 border border-slate-700 p-[3cqw] rounded-xl text-center opacity-0 scale-90 transition-all duration-700 delay-300' id='stat2'>\n      <div class='text-[4cqw] font-black text-blue-400 mb-2'>0%</div>\n      <div class='text-white text-[1.5cqw]'>Relapse Rate</div>\n      <div class='text-slate-500 text-[1cqw] mt-2'>Total Eradication</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#stat1').classList.remove('opacity-0', 'scale-90'); ctx.root.querySelector('#stat2').classList.remove('opacity-0', 'scale-90'); } } }",
+      "steps": [
+        {
+          "narration": "हाल ही में हुए क्लिनिकल ट्रायल में इसके नतीजे चौंकाने वाले रहे हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        },
+        {
+          "narration": "जिन मरीजों पर कोई एंटीबायोटिक असर नहीं कर रही थी, उनमें फेजेस ने अठासी प्रतिशत की सफलता दर दिखाई। और सबसे बड़ी बात, बीमारी दोबारा लौट कर नहीं आई।",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "HISTORY_MAP",
+      "html": "<div class='w-full h-full bg-[#1c1917] relative overflow-hidden font-sans border-4 border-[#3f3f46]'>\n  <div id='map-container' class='absolute inset-0 z-0 opacity-50 grayscale mix-blend-screen'></div>\n  <div class='absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10'></div>\n  <div class='z-20 relative p-[8cqw] w-[60cqw] h-full flex flex-col justify-center'>\n    <h2 class='text-amber-500 text-[1.5cqw] tracking-widest font-mono mb-2 opacity-0 -translate-x-4 transition-all duration-500' id='t1'>THE SOVIET SECRET</h2>\n    <h1 class='text-white text-[4cqw] font-bold mb-4 opacity-0 -translate-x-4 transition-all duration-500 delay-200' id='t2'>Eliava Institute</h1>\n    <p class='text-slate-300 text-[1.5cqw] opacity-0 -translate-x-4 transition-all duration-500 delay-400' id='t3'>Tbilisi, Georgia (Est. 1923)<br>While the West relied on antibiotics, the Soviet bloc perfected phage therapy.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { const map = ctx.map('#map-container', { center: [41.7151, 44.8271], zoom: 3, zoomControl: false, attributionControl: false }); L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map); setTimeout(()=>map.invalidateSize(), 200); return { fly: () => { map.flyTo([41.7151, 44.8271], 6, {duration: 3}); ctx.root.querySelector('#t1').classList.remove('opacity-0', '-translate-x-4'); ctx.root.querySelector('#t2').classList.remove('opacity-0', '-translate-x-4'); ctx.root.querySelector('#t3').classList.remove('opacity-0', '-translate-x-4'); } } }",
+      "steps": [
+        {
+          "narration": "लेकिन ये कोई नई खोज नहीं है। पश्चिमी देशों ने एंटीबायोटिक्स पर फोकस किया, लेकिन सोवियत यूनियन ने फेजेस को चुना।",
+          "actions": []
+        },
+        {
+          "narration": "जॉर्जिया देश के एलियावा इंस्टिट्यूट में लगभग सौ सालों से फेजेस पर काम हो रहा है। और अब पूरी दुनिया वहाँ से सीख रही है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.fly()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "HYDROTHERMAL_VENTS",
+      "html": "<div class='w-full h-full bg-[#020617] relative flex items-center justify-center font-sans overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1542382025-50e50bde0f63?q=80&w=2000\")] bg-cover opacity-30 mix-blend-luminosity grayscale'></div>\n  <div id='smoke' class='absolute inset-0 bg-gradient-to-t from-[#7f1d1d] via-transparent to-transparent opacity-0 transition-opacity duration-[3s]'></div>\n  <div class='z-10 text-center bg-black/60 backdrop-blur-md p-[3cqw] border border-red-500/30 rounded-xl'>\n    <h2 class='text-red-400 font-mono tracking-widest text-[1.5cqw] mb-2'>CHEMOSYNTHESIS</h2>\n    <h1 class='text-white text-[4cqw] font-bold'>Life Without the Sun</h1>\n  </div>\n</div>",
+      "script": "(ctx) => { return { erupt: () => { ctx.root.querySelector('#smoke').style.opacity = '0.8'; } } }",
+      "steps": [
+        {
+          "narration": "जीवन कितना जिद्दी हो सकता है, यह हमें समुद्र की गहराइयों में मिलता है।",
+          "actions": []
+        },
+        {
+          "narration": "हाइड्रोथर्मल वेंट्स। यहाँ सूरज की रोशनी नहीं पहुँचती, पानी का तापमान चार सौ डिग्री होता है, फिर भी कुछ बैक्टीरिया बिना सूरज के सिर्फ केमिकल एनर्जी से ज़िंदा रहते हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.erupt()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "RADIATION_GLITCH",
+      "html": "<div class='w-full h-full bg-black relative flex flex-col items-center justify-center font-mono text-white overflow-hidden'>\n  <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1610419356399-52d3a241e176?q=80&w=2000\")] bg-cover opacity-20 sepia'></div>\n  <div class='z-10 text-center relative'>\n    <div class='text-[6cqw] mb-4 text-yellow-500 animate-pulse'>☢️</div>\n    <h1 id='glitch-text' class='text-[4cqw] font-black tracking-tighter text-yellow-500 drop-shadow-[0_0_10px_#eab308]'>DEINOCOCCUS RADIODURANS</h1>\n    <p class='text-slate-400 text-[1.5cqw] mt-4'>The Chernobyl Survivor</p>\n  </div>\n  <style>\n    .glitch-anim { animation: glitch 0.2s linear infinite; }\n    @keyframes glitch { 0% { transform: translate(2px, 2px); } 20% { transform: translate(-2px, -2px); color: white; } 40% { transform: translate(2px, -2px); } 60% { transform: translate(-2px, 2px); color: red; } 80% { transform: translate(2px, 2px); } 100% { transform: translate(0, 0); } }\n  </style>\n</div>",
+      "script": "(ctx) => { return { glitch: () => { const t = ctx.root.querySelector('#glitch-text'); t.classList.add('glitch-anim'); setTimeout(() => t.classList.remove('glitch-anim'), 1000); } } }",
+      "steps": [
+        {
+          "narration": "और यह तो कुछ भी नहीं। चेरनोबिल की न्यूक्लियर तबाही के मलबे में भी वैज्ञानिकों को एक बैक्टीरिया मिला।",
+          "actions": []
+        },
+        {
+          "narration": "रेडिएशन से हमारा डी एन ए टूट जाता है, लेकिन यह बैक्टीरिया कुछ ही घंटों में अपना डी एन ए वापस जोड़ लेता है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.glitch()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "CRISPR_SCISSORS",
+      "html": "<div class='w-full h-full bg-[#0c4a6e] relative flex items-center justify-center font-sans overflow-hidden'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,#0284c7_0%,transparent_70%)]'></div>\n  <div class='z-10 text-center'>\n    <div class='text-cyan-200 font-mono tracking-widest text-[1.5cqw] mb-4'>BACTERIAL IMMUNE SYSTEM</div>\n    <div class='flex items-center justify-center gap-4 text-[4cqw] font-black text-white relative'>\n      <span class='tracking-widest'>DNA_SE</span>\n      <span id='cut-point' class='border-l-4 border-rose-500 h-[5cqw] mx-2 transition-all duration-300'></span>\n      <span class='tracking-widest'>QUENCE</span>\n      <div id='scissor' class='absolute left-1/2 -translate-x-1/2 top-full mt-4 text-[3cqw] opacity-0 -translate-y-8 transition-all duration-500'>✂️</div>\n    </div>\n    <h1 class='text-[6cqw] font-black text-cyan-400 mt-[5cqh] drop-shadow-[0_0_20px_#22d3ee]'>C R I S P R</h1>\n  </div>\n</div>",
+      "script": "(ctx) => { return { cut: () => { ctx.root.querySelector('#scissor').classList.remove('opacity-0', '-translate-y-8'); setTimeout(() => { ctx.root.querySelector('#cut-point').style.height = '0'; ctx.root.querySelector('#cut-point').style.borderLeftColor = 'transparent'; }, 600); } } }",
+      "steps": [
+        {
+          "narration": "बैक्टीरिया और वायरस की इस करोड़ों साल की जंग ने हमें मेडिकल साइंस का सबसे बड़ा हथियार दिया है... क्रिस्पर (C R I S P R)।",
+          "actions": []
+        },
+        {
+          "narration": "असल में क्रिस्पर बैक्टीरिया का अपना इम्यून सिस्टम है, जो वायरस के डी एन ए को कैंची की तरह काट देता है। अब हम इसे जीन एडिटिंग के लिए इस्तेमाल कर रहे हैं।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.cut()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SYNTHETIC_BIOLOGY",
+      "html": "<div class='w-full h-full bg-[#051005] relative'><div id='p5-matrix' class='absolute inset-0 w-full h-full z-0'></div><div class='absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none bg-black/40 backdrop-blur-sm'>\n  <h2 class='text-emerald-400 font-mono tracking-[0.4em] text-[1.5cqw] mb-2'>AI-ENGINEERED PHAGES</h2>\n  <h1 class='text-white text-[5cqw] font-black tracking-tighter drop-shadow-2xl'>PROGRAMMABLE MEDICINE</h1>\n</div></div>",
+      "script": "(ctx) => { const sketch = p => { let streams = []; const symbolSize = 24; class Symbol { constructor(x, y, speed, first) { this.x = x; this.y = y; this.value; this.speed = speed; this.first = first; this.switchInterval = p.round(p.random(2, 20)); } setToRandomSymbol() { if (p.frameCount % this.switchInterval == 0) { const chars = ['A', 'C', 'T', 'G', '1', '0']; this.value = p.random(chars); } } rain() { this.y = (this.y >= p.height) ? 0 : this.y + this.speed; } } class Stream { constructor() { this.symbols = []; this.totalSymbols = p.round(p.random(5, 20)); this.speed = p.random(2, 6); } generateSymbols(x, y) { let first = p.round(p.random(0, 4)) == 1; for (let i=0; i<=this.totalSymbols; i++) { let symbol = new Symbol(x, y, this.speed, first); symbol.setToRandomSymbol(); this.symbols.push(symbol); y -= symbolSize; first = false; } } render() { this.symbols.forEach(symbol => { if (symbol.first) p.fill(167, 243, 208); else p.fill(16, 185, 129); p.text(symbol.value, symbol.x, symbol.y); symbol.rain(); symbol.setToRandomSymbol(); }); } } p.setup = () => { const container = ctx.root.querySelector('#p5-matrix'); p.createCanvas(container.clientWidth, container.clientHeight); let x = 0; for (let i = 0; i <= p.width / symbolSize; i++) { let stream = new Stream(); stream.generateSymbols(x, p.random(-1000, 0)); streams.push(stream); x += symbolSize; } p.textFont('monospace'); p.textSize(symbolSize); }; p.draw = () => { p.background(5, 16, 5, 180); streams.forEach(stream => stream.render()); }; p.windowResized = () => { const container = ctx.root.querySelector('#p5-matrix'); p.resizeCanvas(container.clientWidth, container.clientHeight); }; }; const myP5 = ctx.p5(sketch, '#p5-matrix'); return { remove: () => myP5.remove() }; }",
+      "steps": [
+        {
+          "narration": "और अब ए आई की मदद से हम खुद के वायरस डिज़ाइन कर रहे हैं जो उन सुपरबग्स को खत्म कर सकें।",
+          "actions": []
+        },
+        {
+          "narration": "हम बायोलॉजी को सिर्फ समझ नहीं रहे हैं, बल्कि किसी सॉफ्टवेयर की तरह उसे प्रोग्राम कर रहे हैं।",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "ENDOSYMBIOSIS",
+      "html": "<div class='w-full h-full bg-[#1e1b4b] relative flex items-center justify-center font-sans overflow-hidden'>\n  <div class='absolute inset-0 bg-[radial-gradient(ellipse_at_center,#312e81_0%,#000_100%)]'></div>\n  <div class='z-20 absolute top-[10cqh] text-center w-full'>\n    <h1 class='text-white text-[3cqw] font-bold'>The Greatest Negotiation</h1>\n    <h2 class='text-indigo-300 text-[1.5cqw] mt-2'>1.5 Billion Years Ago</h2>\n  </div>\n  <div class='relative flex items-center justify-center h-full w-full'>\n    <div id='cell-host' class='w-[30cqw] h-[30cqw] rounded-full bg-indigo-900/50 border border-indigo-500 flex items-center justify-center relative transition-all duration-[2000ms] shadow-[0_0_50px_rgba(79,70,229,0.3)]'>\n       <div class='text-indigo-300 font-mono text-[1.5cqw] absolute top-4'>ARCHAEAL HOST</div>\n    </div>\n    <div id='cell-mito' class='absolute w-[8cqw] h-[8cqw] rounded-full bg-rose-500 border-2 border-rose-300 flex items-center justify-center transform translate-x-[25cqw] transition-all duration-[2000ms] ease-in-out shadow-[0_0_30px_#e11d48]'>\n       <div class='text-white font-black text-[1cqw]'>BACTERIA</div>\n    </div>\n  </div>\n</div>",
+      "script": "(ctx) => { return { merge: () => { const mito = ctx.root.querySelector('#cell-mito'); mito.style.transform = 'translateX(0)'; setTimeout(() => { mito.innerHTML = \"<div class='text-white font-black text-[0.8cqw]'>MITOCHONDRIA</div>\"; mito.classList.replace('bg-rose-500', 'bg-orange-500'); mito.classList.replace('border-rose-300', 'border-orange-300'); mito.style.boxShadow = '0 0 40px #f97316'; }, 2000); } } }",
+      "steps": [
+        {
+          "narration": "लेकिन यह कहानी सिर्फ जंग की नहीं है। यह सहयोग की भी कहानी है।",
+          "actions": []
+        },
+        {
+          "narration": "आपके शरीर की हर सेल को ऊर्जा देने वाला माइटोकॉन्ड्रिया भी किसी ज़माने में एक आज़ाद बैक्टीरिया था। उसने हमारी सेल्स के साथ समझौता किया और अंदर ही बस गया।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.merge()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "OUTRO",
+      "html": "<div class='w-full h-full bg-[#050505] relative flex flex-col items-center justify-center overflow-hidden font-sans text-white'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_center,_#0284c720_0%,_#000_100%)] opacity-80'></div>\n  <div class='z-10 text-center px-[5cqw]'>\n    <div class='w-[15cqw] h-[15cqw] mx-auto rounded-full bg-black border-4 border-blue-500 flex items-center justify-center mb-6 relative overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.5)]'>\n       <div class='absolute inset-0 bg-[url(\"https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2000\")] bg-cover opacity-50 mix-blend-screen'></div>\n       <span class='text-[5cqw] relative z-10'>👤</span>\n    </div>\n    <h1 id='final' class='text-[clamp(2.5rem,6cqw,8rem)] leading-none font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 tracking-tighter opacity-0 translate-y-10 transition-all duration-1000'>\n      THE SUPERORGANISM\n    </h1>\n    <div class='h-[2px] w-0 bg-blue-500 mx-auto mt-[3cqh] transition-all duration-[1.5s] ease-out' id='final-line'></div>\n    <p class='mt-[3cqh] text-slate-400 tracking-wide opacity-0 transition-opacity duration-1000 delay-500 font-serif italic text-[1.5cqw]' id='final-sub'>You are not an individual. You are an ecosystem.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { return { reveal: () => { ctx.root.querySelector('#final').classList.remove('opacity-0', 'translate-y-10'); ctx.root.querySelector('#final-line').style.width = '40%'; ctx.root.querySelector('#final-sub').classList.remove('opacity-0'); } } }",
+      "steps": [
+        {
+          "narration": "तो अगली बार जब आप आईने में खुद को देखें, तो याद रखिएगा...",
+          "actions": []
+        },
+        {
+          "narration": "आप एक अकेले इंसान नहीं हैं, बल्कि एक पूरा इकोसिस्टम हैं। द इनविज़िबल एम्पायर में आपका स्वागत है।",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.reveal()"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
