@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "title": "3D Render Engine: Sports Physics & Biomechanics",
+    "audio": "https://res.cloudinary.com/dmttn34te/video/upload/v1763065409/study-110111_at7lye.mp3",
+    "lang": "en-in",
+    "podcast": "false"
+  },
+  "scenes": [
+    {
+      "type": "SIMULATION_MASTER_SCENE",
+      "html": "<div class='w-full h-full bg-[#030305] relative flex items-center justify-center overflow-hidden font-sans'>\n  <div id='p5-master-sim' class='absolute inset-0 w-full h-full z-0'></div>\n  <div class='absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_center,transparent_30%,#000_120%)]'></div>\n  \n  <div class='z-20 text-center px-[5cqw] absolute inset-0 flex flex-col items-center justify-center pointer-events-none'>\n    <div class='overflow-hidden'>\n      <h1 id='title-main' class='text-[clamp(3rem,8cqw,10rem)] leading-[1] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-600 tracking-tighter drop-shadow-2xl opacity-0 translate-y-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.2,1,0.3,1)]'>THE VOID</h1>\n    </div>\n    <p id='title-sub' class='text-[clamp(1rem,1.8cqw,2.5rem)] text-stone-400 font-serif italic tracking-wide opacity-0 transition-opacity duration-1000 mt-[2cqh]'>Initializing mathematical space.</p>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let state = 0; let cam = { x: 0, y: -1500, z: 0, lx: 0, ly: 0, lz: 0 }; let tCam = { x: 0, y: -800, z: 800, lx: 0, ly: 0, lz: 0 }; let ball = { x: 0, y: -20, z: -300 }; let batAngle = 0; let particles = []; let buildProgress = 0; class Particle { constructor(x,y,z) { this.pos = p.createVector(x,y,z); this.vel = p5.Vector.random3D().mult(p.random(5, 25)); this.vel.y -= p.random(5, 15); this.life = 255; this.size = p.random(2, 8); this.color = p.random(1) > 0.5 ? p.color(255) : p.color(200, 100, 50); } update() { this.pos.add(this.vel); this.vel.mult(0.95); this.vel.y += 0.5; this.life -= 4; } show() { p.push(); p.translate(this.pos.x, this.pos.y, this.pos.z); p.noStroke(); p.fill(p.red(this.color), p.green(this.color), p.blue(this.color), this.life); p.box(this.size); p.pop(); } } p.setup = () => { const c = ctx.root.querySelector('#p5-master-sim'); p.createCanvas(c.clientWidth, c.clientHeight, p.WEBGL); p.setAttributes('antialias', true); }; p.draw = () => { p.background(3, 3, 5); cam.x = p.lerp(cam.x, tCam.x, 0.02); cam.y = p.lerp(cam.y, tCam.y, 0.02); cam.z = p.lerp(cam.z, tCam.z, 0.02); cam.lx = p.lerp(cam.lx, tCam.lx, 0.02); cam.ly = p.lerp(cam.ly, tCam.ly, 0.02); cam.lz = p.lerp(cam.lz, tCam.lz, 0.02); p.camera(cam.x, cam.y, cam.z, cam.lx, cam.ly, cam.lz, 0, 1, 0); p.ambientLight(60); p.directionalLight(255, 255, 255, -1, 1, -1); if (state === 0) { p.stroke(255, 255, 255, 30); p.strokeWeight(1); for (let i = -1000; i <= 1000; i += 100) { p.line(i, 0, -1000, i, 0, 1000); p.line(-1000, 0, i, 1000, 0, i); } } if (state >= 1) { buildProgress = p.lerp(buildProgress, 1, 0.03); p.noStroke(); p.fill(15, 60, 25); p.push(); p.rotateX(p.HALF_PI); p.plane(1500 * buildProgress, 1500 * buildProgress); p.fill(80, 50, 30); p.translate(0, 0, 1); p.rotateZ(p.PI/4); p.rectMode(p.CENTER); p.rect(0, 0, 200 * buildProgress, 200 * buildProgress); p.pop(); p.fill(20, 25, 35); for (let r = 500; r <= 900; r += 100) { let h = (r - 400); p.push(); p.translate(0, -h/2 * buildProgress, 0); p.rotateX(p.HALF_PI); p.torus(r * buildProgress, 30, 64, 4); p.pop(); } } if (state >= 2) { p.fill(200, 50, 50); p.push(); p.translate(0, -30, -300); p.box(20, 60, 20); p.pop(); p.fill(50, 100, 250); p.push(); p.translate(0, -30, 300); p.box(20, 60, 20); p.translate(15, 10, 0); p.rotateX(batAngle); p.fill(200, 180, 140); p.cylinder(3, 60); p.pop(); } if (state >= 3) { if (state === 3) { ball.z += 15; ball.y = -20 + p.sin(p.frameCount * 0.1) * 5; if (ball.z > 280) { state = 4; for(let i=0; i<150; i++) particles.push(new Particle(ball.x, ball.y, ball.z)); tCam = {x: 100, y: -100, z: 400, lx: 0, ly: -30, lz: 300}; } } else if (state === 4) { batAngle = p.lerp(batAngle, p.PI/1.5, 0.2); ball.z -= 8; ball.y -= 5; ball.x -= 2; for (let i = particles.length - 1; i >= 0; i--) { particles[i].update(); particles[i].show(); if(particles[i].life < 0) particles.splice(i, 1); } tCam.x = p.lerp(tCam.x, ball.x + 100, 0.05); tCam.y = p.lerp(tCam.y, ball.y - 50, 0.05); tCam.z = p.lerp(tCam.z, ball.z + 100, 0.05); tCam.lx = ball.x; tCam.ly = ball.y; tCam.lz = ball.z; } p.push(); p.translate(ball.x, ball.y, ball.z); p.fill(255); p.noStroke(); p.sphere(4); p.pop(); } }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); p.setState = (s, cx, cy, cz, lx, ly, lz) => { state = s; if(cx!==undefined) tCam = {x:cx, y:cy, z:cz, lx:lx, ly:ly, lz:lz}; }; }; const myP5 = ctx.p5(sketch, '#p5-master-sim'); const updateTitle = (main, sub) => { const elMain = ctx.root.querySelector('#title-main'); const elSub = ctx.root.querySelector('#title-sub'); elMain.classList.add('opacity-0', 'translate-y-full'); elSub.classList.add('opacity-0'); setTimeout(() => { elMain.innerText = main; elSub.innerText = sub; elMain.classList.remove('opacity-0', 'translate-y-full'); elSub.classList.remove('opacity-0'); }, 800); }; return { s0: () => { ctx.root.querySelector('#title-main').classList.remove('opacity-0', 'translate-y-full'); ctx.root.querySelector('#title-sub').classList.remove('opacity-0'); }, s1: () => { myP5.setState(1, 0, -600, 800, 0, 0, 0); updateTitle('GEOMETRY', 'Generating stadium mesh and spatial boundaries.'); }, s2: () => { myP5.setState(2, 300, -200, 400, 0, -30, 0); updateTitle('KINEMATICS', 'Injecting skeletal rigs and physical constraints.'); }, s3: () => { updateTitle('PHYSICS', 'Initiating dynamic trajectory calculation.'); setTimeout(() => { myP5.setState(3, -100, -50, -100, 0, -30, 300); ctx.root.querySelector('#title-main').style.opacity = '0'; ctx.root.querySelector('#title-sub').style.opacity = '0'; }, 2000); }, remove: () => myP5.remove() }; }",
+      "steps": [
+        {
+          "narration": "To simulate a real world sporting event, we begin with an empty mathematical void.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s0()"
+            }
+          ]
+        },
+        {
+          "narration": "First, we generate the foundational geometry. The stadium mesh is constructed using radial arrays and procedural generation.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
+        },
+        {
+          "narration": "Next, we introduce the human element. Simplified kinematic rigs act as our pitcher and batter, bound by exact physical constraints.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
+            }
+          ]
+        },
+        {
+          "narration": "We initialize the sequence. The pitch is delivered at ninety eight miles per hour.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s3()"
+            }
+          ]
+        },
+        {
+          "narration": "Upon impact, the physics engine calculates exact collision vectors, shattering the scene into raw data.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "BIOMECHANICS_ANALYSIS",
+      "html": "<div class='w-full h-full bg-[#0a0a0f] relative flex items-center justify-between p-[6cqw] overflow-hidden font-sans'>\n  <div class='absolute inset-0 bg-[radial-gradient(circle_at_right,rgba(59,130,246,0.1)_0%,transparent_60%)]'></div>\n  \n  <div class='z-20 w-[40cqw] flex flex-col gap-[4cqh]'>\n    <div>\n      <div class='text-blue-500 font-mono text-[1.2cqw] tracking-widest mb-2 border-l-2 border-blue-500 pl-3'>KINETIC CHAIN ISOLATION</div>\n      <h1 class='text-white text-[clamp(2.5rem,5cqw,5rem)] font-black leading-none drop-shadow-lg'>BIOMECHANICS</h1>\n      <p class='text-stone-400 text-[1.1cqw] mt-4 leading-relaxed'>Power generation relies on sequential body rotation, transferring energy from the ground up.</p>\n    </div>\n    \n    <div class='flex flex-col gap-[2cqh]'>\n      <div id='bio-1' class='bg-[#111827]/80 border border-stone-800 p-[2cqw] rounded-xl transition-all duration-500'>\n        <h3 class='text-white font-bold text-[1.4cqw]'>1. Ground Force</h3>\n        <p class='text-stone-500 text-[0.9cqw] mt-1'>Legs initiate the sequence, pushing against the earth.</p>\n      </div>\n      <div id='bio-2' class='bg-[#111827]/80 border border-stone-800 p-[2cqw] rounded-xl transition-all duration-500'>\n        <h3 class='text-white font-bold text-[1.4cqw]'>2. Torso Rotation</h3>\n        <p class='text-stone-500 text-[0.9cqw] mt-1'>Hips clear, allowing the core to whip around with massive torque.</p>\n      </div>\n      <div id='bio-3' class='bg-[#111827]/80 border border-stone-800 p-[2cqw] rounded-xl transition-all duration-500'>\n        <h3 class='text-white font-bold text-[1.4cqw]'>3. Pendulum Extension</h3>\n        <p class='text-stone-500 text-[0.9cqw] mt-1'>The bat acts as the final lever, striking the object at maximum velocity.</p>\n      </div>\n    </div>\n  </div>\n\n  <div class='absolute right-0 top-0 w-[60cqw] h-full z-10' id='p5-skeleton'></div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let state = 0; let angleY = -p.PI/4; p.setup = () => { const c = ctx.root.querySelector('#p5-skeleton'); p.createCanvas(c.clientWidth, c.clientHeight, p.WEBGL); }; const drawBone = (p1, p2, color, weight=4) => { p.stroke(color); p.strokeWeight(weight); p.beginShape(p.LINES); p.vertex(p1.x, p1.y, p1.z); p.vertex(p2.x, p2.y, p2.z); p.endShape(); p.push(); p.translate(p1.x, p1.y, p1.z); p.noStroke(); p.fill(255); p.sphere(3); p.pop(); }; p.draw = () => { p.clear(); p.rotateY(angleY); angleY += 0.005; p.translate(0, 50, 0); const head = {x: 0, y: -120, z: 0}; const neck = {x: 0, y: -100, z: 0}; const lShoulder = {x: -30, y: -100, z: 10}; const rShoulder = {x: 30, y: -100, z: -10}; const pelvis = {x: 0, y: -20, z: 0}; const lHip = {x: -15, y: -20, z: 10}; const rHip = {x: 15, y: -20, z: -10}; const lKnee = {x: -25, y: 40, z: 20}; const rKnee = {x: 25, y: 40, z: 0}; const lFoot = {x: -30, y: 100, z: 25}; const rFoot = {x: 30, y: 100, z: 5}; const lElbow = {x: -40, y: -50, z: 40}; const rElbow = {x: 40, y: -60, z: 20}; const hands = {x: 0, y: -30, z: 60}; const batEnd = {x: -80, y: -10, z: 120}; let cDefault = p.color(100, 100, 120, 150); let cLegs = state === 1 ? p.color(59, 130, 246) : cDefault; let cTorso = state === 2 ? p.color(59, 130, 246) : cDefault; let cArms = state === 3 ? p.color(59, 130, 246) : cDefault; drawBone(neck, head, cDefault); drawBone(neck, lShoulder, cTorso); drawBone(neck, rShoulder, cTorso); drawBone(neck, pelvis, cTorso); drawBone(pelvis, lHip, cTorso); drawBone(pelvis, rHip, cTorso); drawBone(lHip, lKnee, cLegs); drawBone(lKnee, lFoot, cLegs); drawBone(rHip, rKnee, cLegs); drawBone(rKnee, rFoot, cLegs); drawBone(lShoulder, lElbow, cArms); drawBone(lElbow, hands, cArms); drawBone(rShoulder, rElbow, cArms); drawBone(rElbow, hands, cArms); p.stroke(state === 3 ? p.color(250, 204, 21) : p.color(150, 150, 100)); p.strokeWeight(8); p.beginShape(p.LINES); p.vertex(hands.x, hands.y, hands.z); p.vertex(batEnd.x, batEnd.y, batEnd.z); p.endShape(); if(state === 1) { p.push(); p.translate(lFoot.x, lFoot.y, lFoot.z); p.rotateX(p.HALF_PI); p.noFill(); p.stroke(59, 130, 246, 100); p.circle(0,0, 50 + p.sin(p.frameCount*0.1)*10); p.pop(); } if(state === 2) { p.push(); p.translate(pelvis.x, pelvis.y, pelvis.z); p.rotateX(p.HALF_PI); p.noFill(); p.stroke(59, 130, 246, 150); p.arc(0,0, 80, 80, 0, p.PI + p.sin(p.frameCount*0.1)*p.HALF_PI); p.pop(); } }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); p.setState = (s) => state = s; }; const myP5 = ctx.p5(sketch, '#p5-skeleton'); const highlight = (idx) => { [1,2,3].forEach(i => { const el = ctx.root.querySelector(`#bio-${i}`); if(i === idx) { el.classList.replace('border-stone-800', 'border-blue-500'); el.classList.add('bg-blue-900/20', 'shadow-[0_0_30px_rgba(59,130,246,0.2)]'); el.querySelector('h3').classList.replace('text-white', 'text-blue-400'); } else { el.classList.replace('border-blue-500', 'border-stone-800'); el.classList.remove('bg-blue-900/20', 'shadow-[0_0_30px_rgba(59,130,246,0.2)]'); el.querySelector('h3').classList.replace('text-blue-400', 'text-white'); } }); }; return { s1: () => { myP5.setState(1); highlight(1); }, s2: () => { myP5.setState(2); highlight(2); }, s3: () => { myP5.setState(3); highlight(3); }, remove: () => myP5.remove() }; }",
+      "steps": [
+        {
+          "narration": "Let us slow down time and look at the biomechanics of that swing. To render realistic motion, we analyze the structural skeleton.",
+          "actions": []
+        },
+        {
+          "narration": "Power does not start in the arms. It originates in the ground, travelling up the kinetic chain through the legs.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s1()"
+            }
+          ]
+        },
+        {
+          "narration": "This rotational energy is transferred through the torso, multiplying the force as the hips clear the zone.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s2()"
+            }
+          ]
+        },
+        {
+          "narration": "Finally, the bat acts as a pendulum, whipping through the strike zone to transfer maximum kinetic energy to the ball.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.s3()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "AERODYNAMICS_TRAJECTORY",
+      "html": "<div class='w-full h-full bg-[#030508] relative flex flex-col items-center justify-end overflow-hidden font-sans pb-[5cqh]'>\n  <div id='p5-aero' class='absolute inset-0 w-full h-[60%] z-0'></div>\n  \n  <div class='absolute top-[5cqh] left-[5cqw] z-20'>\n    <div class='text-emerald-500 font-mono text-[1cqw] tracking-widest mb-1 border-l-2 border-emerald-500 pl-3'>FLIGHT PATH SIMULATION</div>\n    <h1 class='text-white text-[clamp(2rem,3.5cqw,4rem)] font-black leading-none'>AERODYNAMICS</h1>\n  </div>\n\n  <div class='z-10 w-[90cqw] h-[35cqh] bg-[#0a0f16]/90 border border-stone-800 rounded-2xl p-[2cqw] backdrop-blur-xl shadow-2xl relative flex flex-col'>\n    <div class='flex justify-between items-center mb-[2cqh]'>\n      <div class='text-stone-400 font-mono text-[1cqw]'>TRAJECTORY CURVE <span id='traj-status' class='text-stone-600 ml-2'>(STANDARD GRAVITY)</span></div>\n      <div class='text-white font-mono text-[1.2cqw]'>DIST: <span id='dist-val' class='text-emerald-400'>280 FT</span></div>\n    </div>\n    <div class='flex-1 relative w-full'><canvas id='chart-trajectory'></canvas></div>\n  </div>\n</div>",
+      "script": "(ctx) => { let chartData = { standard: [0, 50, 90, 110, 115, 105, 80, 40, 0, 0, 0], magnus: [0, 55, 105, 140, 160, 165, 155, 130, 95, 50, 0] }; const chart = ctx.chart('#chart-trajectory', { type: 'line', data: { labels: ['0','1','2','3','4','5','6','7','8','9','10'], datasets: [{ data: chartData.standard, borderColor: '#57534e', borderWidth: 3, borderDash: [5, 5], tension: 0.4, fill: true, backgroundColor: 'rgba(87,83,78,0.1)' }] }, options: { maintainAspectRatio: false, scales: { x: { display: false }, y: { display: false, min: 0, max: 200 } }, plugins: { legend: { display: false } }, animation: { duration: 1500, easing: 'easeOutQuart' } } }); const sketch = p => { let state = 0; let lines = []; p.setup = () => { const c = ctx.root.querySelector('#p5-aero'); p.createCanvas(c.clientWidth, c.clientHeight, p.WEBGL); for(let i=0; i<40; i++) lines.push({x: p.random(-400, 400), y: p.random(-150, 150), z: p.random(-200, 200), speed: p.random(10, 25)}); }; p.draw = () => { p.clear(); p.ambientLight(150); p.directionalLight(255, 255, 255, 0.5, 0.5, -1); p.push(); p.rotateX(p.frameCount * 0.05); p.rotateY(p.frameCount * 0.02); p.noStroke(); p.fill(240); p.sphere(40, 32, 32); p.stroke(220, 50, 50); p.strokeWeight(2); p.noFill(); p.rotateX(p.PI/4); p.torus(41, 1, 32, 16); p.rotateY(p.PI/2); p.torus(41, 1, 32, 16); p.pop(); if(state === 1) { p.stroke(16, 185, 129, 150); p.strokeWeight(2); lines.forEach(l => { p.push(); p.translate(l.x, l.y, l.z); let curve = p.map(p.dist(l.x, l.y, 0, 0), 0, 200, 40, 0); curve = Math.max(0, curve); p.line(0, 0, -40, curve); p.pop(); l.x -= l.speed; if(l.x < -400) l.x = 400; }); } }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); p.setState = s => state = s; }; const myP5 = ctx.p5(sketch, '#p5-aero'); return { lift: () => { myP5.setState(1); chart.data.datasets[0].data = chartData.magnus; chart.data.datasets[0].borderColor = '#10b981'; chart.data.datasets[0].backgroundColor = 'rgba(16,185,129,0.1)'; chart.data.datasets[0].borderDash = []; chart.update(); ctx.root.querySelector('#traj-status').innerText = '(MAGNUS EFFECT APPLIED)'; ctx.root.querySelector('#traj-status').classList.replace('text-stone-600', 'text-emerald-500'); ctx.root.querySelector('#dist-val').innerText = '415 FT'; }, remove: () => { chart.destroy(); myP5.remove(); } }; }",
+      "steps": [
+        {
+          "narration": "Once the ball leaves the bat, it becomes a slave to aerodynamics. In a vacuum, gravity pulls it down in a standard parabolic arc.",
+          "actions": []
+        },
+        {
+          "narration": "But the rapid backspin of the ball creates high pressure underneath it. This is known as the Magnus effect.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.lift()"
+            }
+          ]
+        },
+        {
+          "narration": "This invisible force defies gravity, altering the trajectory and carrying the ball completely over the boundary line.",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "type": "LIGHTING_CROWD_FINALE",
+      "html": "<div class='w-full h-full bg-[#020203] relative flex items-center justify-center overflow-hidden font-sans'>\n  <div id='p5-finale' class='absolute inset-0 w-full h-full z-0'></div>\n  \n  <div class='z-20 text-center px-[5cqw] pointer-events-none'>\n    <h1 id='outro-title' class='text-[clamp(3rem,8cqw,10rem)] leading-none font-black text-white tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-0 scale-110 transition-all duration-[2s] ease-out'>\n      PROGRAMMED<br>REALITY\n    </h1>\n    <div id='outro-line' class='h-[2px] w-0 bg-yellow-500 mx-auto mt-[4cqh] transition-all duration-[1.5s] ease-in-out shadow-[0_0_20px_#eab308]'></div>\n  </div>\n</div>",
+      "script": "(ctx) => { const sketch = p => { let crowd = []; let lightIntensity = 0; let angle = 0; p.setup = () => { const c = ctx.root.querySelector('#p5-finale'); p.createCanvas(c.clientWidth, c.clientHeight, p.WEBGL); p.setAttributes('antialias', true); for(let r = 500; r <= 1000; r += 50) { let h = (r - 400) * 0.8; let count = p.map(r, 500, 1000, 100, 300); for(let i=0; i<count; i++) { let theta = p.random(p.TWO_PI); crowd.push({ r: r, theta: theta, y: -h + p.random(-10, 10), offset: p.random(1000), color: p.color(p.random(150,255), p.random(150,255), p.random(200,255)) }); } } }; p.draw = () => { p.background(2, 2, 3); p.camera(p.cos(angle)*1200, -600, p.sin(angle)*1200, 0, -200, 0, 0, 1, 0); angle += 0.002; p.ambientLight(lightIntensity * 0.3); p.directionalLight(255, 240, 200, -1, 1, -1); p.pointLight(255, 255, 255, 0, -1000, 0); p.noStroke(); p.fill(15, 40, 20); p.push(); p.rotateX(p.HALF_PI); p.plane(1500, 1500); p.pop(); p.strokeWeight(3); p.beginShape(p.POINTS); crowd.forEach(c => { if(p.random() < lightIntensity * 0.01) { p.stroke(255); } else { p.stroke(c.color); } let x = c.r * p.cos(c.theta); let z = c.r * p.sin(c.theta); let y = c.y + p.sin(p.frameCount*0.05 + c.offset)*2; p.vertex(x, y, z); }); p.endShape(); }; p.windowResized = () => p.resizeCanvas(ctx.root.clientWidth, ctx.root.clientHeight); p.turnOnLights = () => { let interval = setInterval(() => { lightIntensity += 5; if(lightIntensity >= 255) clearInterval(interval); }, 50); }; }; const myP5 = ctx.p5(sketch, '#p5-finale'); return { lights: () => { myP5.turnOnLights(); }, text: () => { ctx.root.querySelector('#outro-title').classList.remove('opacity-0', 'scale-110'); setTimeout(() => ctx.root.querySelector('#outro-line').style.width = '40%', 1000); }, remove: () => myP5.remove() }; }",
+      "steps": [
+        {
+          "narration": "To make this simulation completely believable, we must compute how light interacts with every surface in the environment.",
+          "actions": []
+        },
+        {
+          "narration": "Global illumination calculations bounce light off the grass, the dirt, and the stadium architecture.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.lights()"
+            }
+          ]
+        },
+        {
+          "narration": "Finally, we add the observers. Tens of thousands of individual points, reacting to the event in real time. This is the power of automated rendering. A perfect, programmable reality.",
+          "actions": [
+            {
+              "type": "custom",
+              "fn": "Engine.state.activeScript.text()"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
